@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Login - Gerenciador de Tarefas</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"
+        defer></script>
+
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
+    
+    <link rel="shortcut icon" href="../assets/circle-check-regular.svg" type="image/x-icon">
+
+    <script src="https://kit.fontawesome.com/232e2c38d5.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <a href="https://arnia.com.br/" target="_blank"><img src="../assets/logo.png" alt="Logo Arnia"></a>
+    </header>
+
+    <main class="container">
+               
+        <div id="welcomeImage" class="col-6">
+
+            <div id="welcomeImageSide">
+                <img id="peopleImg" src="../assets/people.svg" width="50%" alt="People">
+                <img id="welcomeBanner" src="../assets/bannerWelcome.svg" width="40%" alt="welcome-banner">
+            </div>
+
+            <div id="welcomeScreen" class="col-6">
+                <div>
+                    <h1 id="h1Div">Gerenciador de Tarefas</h1>
+                </div>
+                <div class="text-center">
+                    <h4 id="subtitle"><i class="fa-regular fa-square-check"></i> Acesse sua conta ou crie uma nova conta:</h4>
+                </div>
+                <div id="welcome-buttons">
+                    <button onclick="openModal('modalLogin')">Fazer Login</button>
+                    <button onclick="openModal('modalRegistration')">Nova Conta</button>
+                </div>
+                <div id="welcomeComunication">
+                    <h4 id="title-comunication"> Por que usar um <em>Gerenciador de Tarefas</em>?</h4>
+                    <ul id="ul-div">
+                        <div>
+                            <img class="mb-2" src="../assets/checkboard.svg" alt="checklist" width="40px">
+                            <li><i class="fa-solid fa-check"></i> Rotina mais organizada;</li>
+                        </div>
+                        <div>
+                            <img class="mb-2" src="../assets/clock.svg" alt="clock" width="40px">
+                            <li><i class="fa-solid fa-check"></i> Melhor entrega de prazos;</li>
+                        </div>
+                        <div>
+                            <img class="mb-1" src="../assets/smile.svg" alt="smile" width="40px">
+                            <li><i class="fa-solid fa-check"></i> Aumento da produtividade;</li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div id="modalLogin">
+                <div id="modalLoginContent" class="downToUpAnimation">
+                    <div id="closeDiv" class="closeButton" onclick="closeModal('modalLogin')">&times;</div>
+                    <h3>Que bom te ver de novo!</h3>
+                    <form id="formLogin">
+                        <div>
+                            <label for="login">Login</label>
+                            <input id="nameLogin" name="nameLogin" type="text">
+                        </div>
+                        <div>
+                            <label for="password">Senha</label>
+                            <input id="passwordLogin" name="passwordLogin" type="password">
+                        </div>
+                        <div>
+                            <input type="checkbox" name="singIn" id="singIn" value="signIn">
+                            <label for="singIn"> Continuar conectado?</label>
+                        </div>
+                        <div>
+                            <button type="submit">Entrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- fim do modal-login -->
+    
+            <div id="modalRegistration">
+                <div id="modalRegistrationContent" class="downToUpAnimation">
+                    <span class="closeButton" onclick="closeModal('modalRegistration')">&times;</span>
+                    <h3>Crie sua conta!</h3>
+                    <form id="formReg">
+                        <div class="divSpecial mt-3">
+                            <label for="name">Qual o seu nome?</label>
+                            <input id="name" name="name" type="text">
+                        </div>
+                        <div class="divSpecial mt-3">
+                            <label for="city">Qual a sua cidade?</label>
+                            <input id="city" name="city" type="text">
+                        </div>
+                        <div class="divSpecial mt-3">
+                            <label for="login">Qual o login?</label>
+                            <input id="login" name="login" type="text">
+                        </div>
+                        <div class="divSpecial mt-3">
+                            <label for="password">Qual a senha?</label>
+                            <input id="password" name="password" type="password">
+                        </div>
+                        <div class="divSpecial">
+                            <button type="submit" class="mt-3">Criar</button>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- fim do modal-registration -->
+    
+            <div id="modalInfo" class="upToDownAnimation">
+                <div id="modalInfoContent"><!-- mudar o conte[udo com js -->
+                    <div>
+                        <h3 class="modalTitle">Sua conta foi criada com sucesso!</h3>
+                    </div>
+                    <div>
+                        <h4>Pode efetuar o login 😁</h4>
+                    </div>
+                    <div onclick="closeModal('modalInfo')" class="closeButton">&times;</div>
+                </div>
+            </div>
+    
+            <div id="modalError" class="upToDownAnimation">
+                <div id="modalErrorContent">
+                    <div>
+                        <h3 class="modalTitle">Ocorreu um erro!</h3>
+                    </div>
+                    <div>
+                        <h4 id="modalErrorTxt" >Login ou senha errados ❌</h4>
+                    </div>
+                    <div onclick="closeModal('modalError')" class="closeButton">&times;</div>
+                </div>
+            </div>
+        </main>
+    <footer>
+    </footer>
+</body>
+    
+</html>
