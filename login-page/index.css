@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+  }
+
+:root{
+    --purple: #68519D;
+    --yellow: #f8b04e;
+    --indigo: #2C2661;
+    --lightpurple: #D7CAE5;
+    --ice: #FBF0E2;
+    --background: #F5F5F5;
+    --cancelButton: #828282;
+    --greenStatus: #27AE60;
+    --orangeStatus: #F8B04E;
+    --redStatus: #EB5757;
+    --blueStatus: #011379;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    background-image: url(../assets/background.svg);
+    background-position: center;
+    background-size: cover;
+}
+
+header{
+    width: 100vw;
+    height: 80px;
+    padding: 20px 25px;
+    background-color: var(--purple);
+    border-bottom: 4px solid var(--yellow);
+}
+
+main{
+    background-color: var(--lightpurple);
+    width: 65vw;
+    height: 79vh;
+    margin: 20px auto;
+
+    display: flex;
+    flex-direction: row;
+
+    border-radius: 25px;
+    box-shadow: 0px 2px 7px black;
+
+    position: relative;
+}
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    height: 15px;
+    padding: 7px;
+    background-color: var(--yellow);
+}
+
+#peopleImg{
+    position: absolute;
+    top: 70px;
+    left: -20px;
+}
+
+#welcomeBanner{
+    position: absolute;
+    bottom: -20px;
+    left: 65px;
+}
+
+#welcomeScreen{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+
+    padding: 40px 40px 15px;
+
+    box-shadow: 0px 1px 7px grey;
+
+    background-color: var(--background);
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#title-comunication{
+    font-size: 17px;
+    text-align: center;
+}
+
+#h1Div{
+    width: 100%;
+    font-weight: 700;
+    border-bottom: 3px solid var(--greenStatus);
+}
+
+
+#welcomeComunication{
+    width: 100%;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    background-color: var(--purple);
+    color: white;
+    padding: 10px 10px 0px;
+    border-radius: 35px;
+
+    box-shadow: -2px 2px 2px grey;
+}
+
+#ul-div{
+    width: 100%;
+    list-style-type: none;
+    text-align: center;
+    display: flex;
+}
+
+i{
+    color: var(--greenStatus)
+}
+
+#subtitle{
+    text-align: center;
+    width: 100%;
+    font-weight: 600;
+    font-size: 21px;
+}
+
+#welcome-buttons{
+    width: 80%;
+    padding: 0px 30px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+#welcome-images{
+    width: 100%;
+    color: var(--greenStatus);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#modalLogin{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+}
+#modalLoginContent{
+    background-color: var(--background);
+    color: var(--purple);
+    width: 25%;
+    height: 35%;
+    padding: 10px;
+    margin: 180px auto;
+    border-radius: 10px;
+    border: 5px solid var(--yellow);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+
+    position: relative;
+}
+#formLogin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+#modalRegistration{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+}
+#modalRegistrationContent{
+    background-color: var(--background);
+    color: var(--purple);
+    width: 20%;
+    height: 55%;
+    padding: 10px;
+    margin: 80px auto;
+    border-radius: 10px;
+    border: 5px solid var(--yellow);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    position: relative;
+}
+#formRegistration{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+button{
+    border: 1px solid var(--purple);
+    color: var(--purple);
+    font-size: 18px;
+    padding: 7px 25px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+button:hover{
+    background-color: var(--purple);
+    color: var(--background) !important;
+}
+/* .fakeButton{
+    border: 1px solid var(--purple);
+    color: var(--purple);
+    font-size: 18px;
+    padding: 7px 25px;
+    border-radius: 7px;
+    text-decoration: none;
+    cursor: pointer;
+} */
+/* a{
+    text-decoration: none;
+} */
+/* .fakeButton:hover{
+    background-color: var(--purple);
+    color: var(--background);
+} */
+label{
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--purple);
+}
+input{
+    width: 250px;
+    padding: 7px;
+    border-radius: 7px;
+    border: 1px solid gray;
+}
+#singIn{
+    width: unset;
+}
+label [for="conected"]{
+    font-size: 26px;
+}
+.divSpecial{
+    display: flex;
+    flex-direction: column;
+}
+
+.closeButton{
+    transform: scale(2, 2);
+    cursor: pointer;
+    position: absolute;
+    right: -22px;
+    top: -25px;
+    margin: 10%;
+    
+}
+.closeButton:hover{
+    transform: scale(2.1, 2.1);
+    color: var(--indigo);
+}
+
+.downToUpAnimation{
+    animation: downToUp 0.5s running 1;
+}
+@keyframes downToUp{
+    0%{transform: translateY(-300px);}
+    100%{transform: translateY(0px);}
+}
+
+#modalInfo{
+    display: none;
+    position: fixed;
+    width: 25%;
+    height: 15%;
+    z-index: 1;
+    bottom: 0;
+    right: 0;
+    background-color: var(--background);
+    border: 5px solid var(--yellow);
+}
+#modalInfoContent{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+#modalError{
+    display: none;
+    position: fixed;
+    width: 25%;
+    height: 15%;
+    z-index: 1;
+    bottom: 0;
+    right: 0;
+    background-color: var(--background);
+    border: 5px solid var(--yellow);
+}
+#modalErrorContent{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 10px;
+}
+.modalTitle{
+    font-weight: 600;
+}
+#modalErrorTxt{
+    margin-left: 20px;
+}
