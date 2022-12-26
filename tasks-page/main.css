@@ -1,0 +1,575 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* BIG SELECTORS */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+  }
+
+:root{
+    --purple: #68519D;
+    --yellow: #f8b04e;
+    --indigo: #2C2661;
+    --lightpurple: #D7CAE5;
+    --ice: #FBF0E2;
+    --cancelButton: #828282;
+
+    /* background colors */
+    --background: #F5F5F5;
+    --darkBackground: #161616;
+
+    /* status colors */
+    --greenStatus: #27AE60;
+    --orangeStatus: #F8B04E;
+    --redStatus: #EB5757;
+    --blueStatus: #1034ff;
+    /* color from figma #011379 - blue status */
+    
+    /* Arnia Website Palet */
+    --darkpurple: #1A1132;
+    --darkblue: #0E1327;
+    --orange: #F7AF4E;
+    --purpleple: #5F4579;
+    --greypurple: #AB9EA2;
+
+    --darkorange: #c77b17;
+}
+
+body{
+    display: flex;
+    flex-direction: row;
+}
+
+/* SELECTORS BY TAG NAME */
+
+span{
+    margin-left: 5px;
+}
+input{
+    width: 100%;
+    padding: 7px;
+    border-radius: 7px;
+    border: 1px solid gray;
+    background-color: unset;
+}
+select{
+    margin: 5px 0px;
+    width: 50%;
+    padding: 7px;
+    border-radius: 7px;
+}
+label{
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--purple);
+}
+button{
+    border: 1px solid var(--purple);
+    color: var(--purple);
+    font-size: 13px !important;
+    padding: 7px 25px;
+    border-radius: 12px !important;
+}
+button:hover{
+    background-color: var(--purple);
+    color: var(--background);
+}
+input[type="date"]{
+    width: 50%;
+    text-align: center;
+}
+small { 
+    color: red;
+    font-size: 9px;
+}
+/* MODALS */
+
+.modal{
+    display: none;
+    background-color: rgba(0,0,0,0.5);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    position: fixed;
+}
+#modalContent{
+    border-radius: 10px;
+    width: 40%;
+    height: 80%;
+    padding: 40px 40px;
+    margin: 60px auto;
+    position: relative;
+}
+#modalEditContent{
+    width: 25vw;
+    height: 300px;
+    margin: 200px auto;
+    padding: 15px;
+    background-color: var(--background);
+    border: 2px solid var(--yellow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+#modalInfo{
+    display: none;
+    position: fixed;
+    width: 30vw;
+    height: 25vh;
+    z-index: 1;
+    bottom: 0;
+    right: 0;
+    background-color: var(--background);
+    border: 5px solid var(--yellow);
+}
+#modalInfoContent{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 10px;
+}
+#modalHelpContent{
+    background-color: var(--background);
+    color: var(--purple);
+
+    text-align: center;
+
+    width: 25%;
+    height: 50%;
+    padding: 10px;
+    margin: 100px auto;
+    border-radius: 10px;
+    border: 3px solid var(--yellow);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+}
+#modalConfirmationContent{
+    width: 25vw;
+    height: 220px;
+    margin: 200px auto;
+    padding: 15px;
+    background-color: var(--background);
+    border: 2px solid var(--yellow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+#passConfirm{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+}
+#passConfirmContent{
+    width: 25vw;
+    height: 200px;
+    margin: 200px auto;
+    padding: 15px;
+    background-color: var(--background);
+    border: 2px solid var(--yellow);/* could i put these colors in the body? */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+/* BACKGROUND */
+
+.container{
+    display: relative;
+    width: 100%;
+    height: 100%;
+}
+#content{
+    position: absolute;
+    width: 65%;
+    top: 300px;
+    left: 100px;
+    font-size: 14px;
+    max-height: 50%;
+    margin-top: 40px;
+}
+.div-purple{
+    background-color: var(--purple);
+    height: 100vh;
+    width: 3vw;
+}
+.div-grey{
+    background-color: var(--lightpurple);
+    height: 100vh;
+    width: 0.5vw;
+}
+.div-white{
+    background-color: var(--background);
+    height: 100vh;
+    width: 96.5vw;
+}
+.div-orange{
+    position: fixed;
+    background-color: var(--yellow);
+    height: 100vh;
+    width: 10vw;
+    transform: rotate(25deg);
+    right: 0;
+    top: 90px;
+}
+
+/* PSEUDO BOOTSTRAP CLASSES */
+
+.text-purple{
+    color: var(--purple) !important;
+}
+.text-white{
+    color: var(--background) !important;
+}
+.color-orange{
+    color: var(--yellow);
+}
+.color-white{
+    color: var(--background) !important;
+}
+.success{
+    border-color: var(--greenStatus);
+}
+.error{
+    border-color: var(--redStatus);
+}
+.h5style{
+    color: var(--purple);
+    font-weight: 800;
+    font-size: 20px;
+}
+.disabled{
+    cursor: not-allowed;
+}
+/* ANIMATIONS */
+
+.downToUpAnimation{
+    animation: downToUp 0.5s running 1;;
+}
+@keyframes downToUp{
+    0%{transform: translateY(-300px);}
+    100%{transform: translateY(0px);}
+}
+.upToDownAnimation{
+    animation: upToDown 0.5s running 1;
+}
+@keyframes upToDown{
+    0%{transform: translateY(300px);}
+    100%{transform: translateY(0px);}
+}
+
+/* SWITCH MODE */
+
+.light-button{
+    border: 1px solid var(--purple);
+    color: var(--purple);
+    font-size: 13px !important;
+    padding: 7px 25px;
+    border-radius: 12px !important;
+}
+.light-button:hover{
+    background-color: var(--purple);
+    color: var(--background);
+}
+.dark-button{
+    border: 1px solid var(--purple);
+    background-color: var(--darkBackground);
+    color: var(--background) !important;
+    font-size: 13px !important;
+    padding: 7px 25px;
+    border-radius: 12px !important;
+}
+.dark-button:hover{
+    background-color: var(--darkpurple);
+    border: 1px solid var(--darkpurple);
+    color: var(--background);
+}
+.modalBack-light{
+    background-color: var(--background) !important;
+}
+.modalBack-dark{
+    background-color: var(--darkblue) !important;
+}
+.dark-footer{
+    background-color: var(--darkorange) !important;
+    color: var(--indigo);
+    font-weight: 400;
+}
+#darkMode{
+    position: absolute;
+    margin: 16px;
+    top: 0;
+    right: 0;
+}
+#darkModeContent{
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    padding: 7px;
+    cursor: pointer;
+
+    background-color: var(--purple);
+}
+#darkModeContent:hover{
+    border-radius: 7px;
+}
+/* STATUS COLORS */
+
+.Concluído{
+    color: var(--greenStatus) !important;
+}
+.Em-progresso{
+    color: var(--orangeStatus) !important;
+}
+.Em-pausa{
+    color: var(--blueStatus) !important;
+}
+.Atrasado{
+    color: var(--redStatus) !important;
+}
+
+/* HEADER ELEMENTS */
+#logo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 70px 50px;
+}
+#logo>img{
+    width: 150px;
+}
+#page-title{
+    position: absolute;
+    top: 100px;
+    margin: 50px 40px;
+    font-weight: 800;
+    color: var(--purple);
+}
+#logoutButton{
+    border-radius: 19px; 
+    font-size: 13px; 
+    margin-left: 9px; 
+    position: absolute; 
+    top: 10px;
+}
+/* QUITE COMMON HERE - MOSTLY RANDOM BUTTONS */
+.iconTable:hover{
+    cursor: pointer;
+    color: var(--darkorange);
+}
+#modal-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.submitButton{
+    border-radius: 19px;  
+    font-size: 13px;
+}
+#cancelButton{
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    background-color: white;
+    font-size: 12px;
+    color: var(--cancelButton);
+}
+#cancelButton:hover{
+    background-color: white;
+    color: var(--cancelButton);
+    text-decoration: underline;
+}
+#closeButton{
+    cursor: pointer;
+    position: absolute;
+    top: 34%;
+    right: 39%;
+}
+.closeButton{
+    transform: scale(2, 2);
+    cursor: pointer;
+    position: absolute;
+    right: -22px;
+    top: -25px;
+    margin: 10%;
+}
+.closeButton:hover{
+    transform: scale(2.1, 2.1);
+    color: var(--indigo);
+}
+.closeButtonDelete{
+    transform: scale(2, 2);
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+.closeButtonDelete:hover{
+    transform: scale(2.1, 2.1);
+    color: var(--indigo);
+}
+#buttonsConfirmation{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+#confirm>h3{
+    font-size: 18px;
+    margin-top: 70px;
+}
+/* WEATHER ELEMENTS */
+
+#weather{
+    position: absolute;
+    top: 50px;
+    right: 180px;
+    width: fit-content;
+    height: 20vh;
+    padding: 1px;
+    color: var(--purple);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 18px;
+}
+#firstLine{
+    font-size: 50px;
+    font-weight: 650;
+    color: var(--purple);
+    text-align: center;
+}
+#secondLine{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+/* TABLE HEADER ELEMENTS */
+
+#tableHeader{
+    width: 70%;
+    height: 50px;
+    border: none;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+
+    margin: 33px 0px 33px;
+
+    position: absolute;
+    top: 240px;
+    left: 100px;
+}
+#buttonsFilter{
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+}
+#buttonsFilter>button{
+    color: var(--purple);
+    font-size: 11px;
+    padding: 5px 18px;
+}
+#buttonsFilter>button:hover{
+    color: white;
+}
+#searchTasks{
+    width: 300px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: 1px solid gray;
+    border-radius: 7px;
+}
+#magnifyingGlass{
+    width: fit-content;
+    height: 33px;
+    line-height: 33px;
+    padding: 1px 7px;
+    border-radius: 7px;
+    background-color: var(--yellow);
+}
+#searchField{
+    width: 264px;
+    height: 32px;
+    color: var(--purple);
+    font-size: 10px;
+    padding: 7px;
+    border: none;
+}
+#searchField:focus{
+    outline: none;
+}
+
+/* MAIN/TABLE/CONTENT FOOTER */
+
+#buttonsPaging{
+    width: 65%;
+    height: 35px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+
+    position: absolute;
+    bottom: 0;
+    left: 100px;
+}
+.pagingButtons{
+    cursor: pointer;
+    padding: 5px;
+    font-weight: 500;
+}
+.pagingButtons:hover{
+    color: var(--darkorange);
+}
+#pagesNum{
+    font-weight: 500;
+}
+#footerHelp{
+    background-color: var(--yellow);
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    height: 30px;
+    padding: 5px;
+    margin-left: 5px;
+    font-size: 13px;
+    border-top-left-radius: 6px;
+}
+#footerHelp:hover{
+    background-color: var(--indigo) !important;
+    color: white;
+    cursor: pointer;
+}
+
+
+
