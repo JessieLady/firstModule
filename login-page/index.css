@@ -338,3 +338,7 @@ label [for="conected"]{
 #modalErrorTxt{
     margin-left: 20px;
 }
+
+.color-orange{
+    color: var(--yellow)!important;
+}

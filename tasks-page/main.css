@@ -87,7 +87,7 @@ small {
 }
 /* MODALS */
 
-.modal{
+.modalMain{
     display: none;
     background-color: rgba(0,0,0,0.5);
     width: 100vw;
@@ -97,10 +97,10 @@ small {
     z-index: 1;
     position: fixed;
 }
-#modalContent{
+#modalNewTaskContent{
     border-radius: 10px;
     width: 40%;
-    height: 80%;
+    height: 60%;
     padding: 40px 40px;
     margin: 60px auto;
     position: relative;
@@ -169,7 +169,7 @@ small {
     justify-content: space-between;
     position: relative;
 }
-#passConfirm{
+#passConfirm{ /* I need to see what is this 'cause i don't remember */
     display: none;
     position: fixed;
     z-index: 1;
@@ -369,9 +369,10 @@ small {
 #logoutButton{
     border-radius: 19px; 
     font-size: 13px; 
-    margin-left: 9px; 
+    margin-right: 65px; 
     position: absolute; 
-    top: 10px;
+    top: 16px;
+    right: 0;
 }
 /* QUITE COMMON HERE - MOSTLY RANDOM BUTTONS */
 .iconTable:hover{
