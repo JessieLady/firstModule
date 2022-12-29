@@ -4,8 +4,10 @@ const form = document.getElementById('form')
 const button = document.getElementById('submitButton')
 
 let contraste = false
+
 let currentTask = null
-let currentUser = 1// carol Account
+let currentUser = 1// Jessica Account
+let currentPage = 1
 
 const NUM_EMPTY = 'Insira um número.'
 const DESCRIPTION_EMPTY = 'Insira uma descrição.'
@@ -109,7 +111,7 @@ const renderTasks = (tasks) => {
           </span>
         </td>
       </tr>`
-
+        //how to limit the foreach to fit the screen?
     })
 }
 
@@ -200,8 +202,28 @@ const tasksPagesTotal = async () => {
     pagesLength.innerHTML = pagesTotal
 }
 
+const loadPage = async (pageNum) => {
+    const tasksResponse = await fetch(`http://localhost:3000/tasks?_limit=13&_page=${pageNum}`)//
+    const tasks = await tasksResponse.json()
+    renderTasks(tasks)
+}
+
+const nextPage = async () => {
+    const tasksResponse = await fetch('http://localhost:3000/tasks')//
+    const tasks = await tasksResponse.json()
+    let pagesTotal = Math.ceil(tasks.length / 13)
+
+    currentPage = currentPage + 1 > pagesTotal ? currentPage : currentPage + 1
+    loadPage(currentPage)
+  }
+  
+const previousPage = async () => {
+    currentPage = currentPage - 1 < 1 ? currentPage : currentPage - 1
+    loadPage(currentPage)
+  }
+
 form.addEventListener('submit', (event) => {
-    event.preventDefault()//This controls the form' submiting
+    event.preventDefault()
 
     const number = form.elements['number'].value
     const description = form.elements['description'].value
@@ -430,7 +452,7 @@ const weatherInfo = async () => {
 }
 
 const filterTasks = async (status) => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks')
+    const tasksResponse = await fetch('http://localhost:3000/tasks?_limit=13')
     const tasks = await tasksResponse.json()
     const filterTasks = tasks.filter((valor) => {
         if(valor.status === status) return true
@@ -440,15 +462,13 @@ const filterTasks = async (status) => {
 }
 
 const lateTasks = async () => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks')
+    const tasksResponse = await fetch('http://localhost:3000/tasks?_limit=13')
     const tasks = await tasksResponse.json()
 
     const tasksLate = tasks.filter((task) => {      
         if(task.date < inToday && task.status !== 'Concluído') return true
         return false
     })
-    /* const tasksContent = document.getElementById('tbody-content')
-    tasksContent.innerHTML = '' */
     renderTasks(tasksLate)
 }
 
@@ -458,7 +478,7 @@ const warningLateTask = () => {
 }
 
 const todayTasks = async () => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks')
+    const tasksResponse = await fetch('http://localhost:3000/tasks?_limit=13')
     const tasks = await tasksResponse.json()
 
     const tasksToday = tasks.filter((task) => {      
