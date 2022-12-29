@@ -52,10 +52,16 @@ const newUser = async (user) => {
 }
 
 class User {
-    constructor(name, city, login, password) {
+    name
+    city
+    login
+    email
+    password
+    constructor(name, city, login, email, password) {
         this.name = name
         this.city = city
         this.login = login
+        this.email = email
         this.password = password
     }
 }
@@ -66,11 +72,11 @@ formReg.addEventListener("submit", (event) => {
     let name = formReg.elements['name'].value
     let city = formReg.elements['city'].value
     let login = formReg.elements['login'].value
+    let email = formReg.elements['email'].value
     let password = formReg.elements['password'].value
     
-    let user = new User(name, city, login, password)
+    let user = new User(name, city, login, email, password)
     newUser(user)
-
 })
 
 /* Making Login Possible */
@@ -108,7 +114,8 @@ formLogin.addEventListener('submit', (event) => {
 const NAME_REQUIRED = 'Por favor, insira o seu nome'
 const CITY_REQUIRED = 'Por favor, insira o sua cidade'
 const LOGIN_REQUIRED = 'Por favor, insira um login'
-const PASS_REQUIRED = 'Por favor insira o seu nome'
+const EMAIL_REQUIRED = 'Por favor, insira um email'
+const PASS_REQUIRED = 'Por favor insira sua senha'
 
 //requisitions that i will need in the main.html
 
@@ -116,17 +123,6 @@ const deleteUser = async (id) => {//also put this function in the modal help 'de
     await fetch(`http://localhost:3000/users/${id}`, {//how could i know which user is logged? Maybe sessionStorage?
     method: 'DELETE'
 })
-}
-
-const editUser = async (id) => {
-    await fetch(`http://localhost:3000/tasks/${id}`, {//use the modalReg from the index.html
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json, text/plain, */*',//verification with password
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(task)
-    })
 }
 
 //Can I send to the json tasks an array --- post inside the index 0 all the tasks from user number one?

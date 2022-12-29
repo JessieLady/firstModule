@@ -64,6 +64,7 @@ const weatherDate = document.getElementById('weatherDate')
 const inDate = new Date()
 const inDay = inDate.toLocaleDateString("pt-BR")
 const inTime = inDate.toTimeString()
+const inToday = `${inDate.getFullYear()}-${(inDate.getMonth())+1}-${inDate.getDate()}`
 
 const buttons = document.querySelectorAll("button");
 
@@ -91,6 +92,9 @@ const renderTasks = (tasks) => {
 
         if(task.status === 'Concluído'){
             task.description = `<del>${task.description}</del>`
+        } else if(task.date < inToday && task.status !== 'Concluído'){
+            task.status = 'Atrasado'
+            warningLateTask()
         }
         
         tasksContent.innerHTML = tasksContent.innerHTML + `<tr class='text-purple' id='trTable'>
@@ -126,13 +130,7 @@ const confirmDelete = (idTask) =>{
 }
 
 const getTasks = async () => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks?_limit=5')
-    const tasks = await tasksResponse.json()
-    renderTasks(tasks)
-}
-
-const orderTasks = async () => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks?_limit=5')
+    const tasksResponse = await fetch('http://localhost:3000/tasks?_limit=13')//
     const tasks = await tasksResponse.json()
     renderTasks(tasks)
 }
@@ -140,7 +138,7 @@ const orderTasks = async () => {
 const getTask = async (id) => {
     const taskResponse = await fetch(`http://localhost:3000/tasks/${id}`)
     const task = await taskResponse.json()
-    return task// It will return an object
+    return task
 }
 const newTask = async (task) => {
     await fetch('http://localhost:3000/tasks', {
@@ -192,7 +190,15 @@ const deleteTask = async (id) => {
     })
 }
 
-//how too put the last tasks on the top of the table?
+const tasksPagesTotal = async () => {
+    const pagesLength = document.getElementById('pagesLength')
+
+    const tasksResponse = await fetch('http://localhost:3000/tasks')//
+    const tasks = await tasksResponse.json()
+    let pagesTotal = Math.ceil(tasks.length / 13)
+    
+    pagesLength.innerHTML = pagesTotal
+}
 
 form.addEventListener('submit', (event) => {
     event.preventDefault()//This controls the form' submiting
@@ -201,9 +207,7 @@ form.addEventListener('submit', (event) => {
     const description = form.elements['description'].value
     const date = form.elements['date'].value
     const status = form.elements['status'].value
-    const task = {// this will gather task' info to the function that will send to the api 
-        number, description, date, status
-    }
+    const task = new Task(number, description, date, status)
     saveTask(task)
 })
 
@@ -259,7 +263,7 @@ const orderDate = () => {
 function OrderMaking() {
 
     let numeros = []
-for (let i = 0;i<3;i++){
+    for (let i = 0;i<3;i++){
     let num = 0
     io.write("Digite um número...:")
     num = io.readInt();
@@ -275,6 +279,19 @@ numeros[1] = aux
 }
 
 //super IMPORTANT! Create a class for tasks too.
+
+class Task {
+    number
+    description
+    date
+    status
+    constructor(number, description, date, status) {
+        this.number = number
+        this.description = description
+        this.date = date
+        this.status = status
+    }
+}
 
 const lightMode = () => {
     background.style.backgroundColor = 'var(--background)'
@@ -339,9 +356,9 @@ const darkMode = () => {//pay attention because the darkmode resets
     modalEditUser.className = 'modalBack-dark text-purple downToUpAnimation'
     modalInfoConf.className = 'modalBack-dark text-purple downToUpAnimation'
 
-    for(let iterador = 0; iterador < buttons.length; iterador++){
+    /* for(let iterador = 0; iterador < buttons.length; iterador++){
         buttons[iterador].style.backgroundColor = 'red'
-    }
+    } */
 }
 
 const switchMode = () =>{
@@ -353,6 +370,8 @@ const switchMode = () =>{
         contraste = true
     }
 }
+
+
 
 //DON'T FORGET TO STUDY THIS!
 
@@ -393,11 +412,10 @@ const weatherSearch = async (user) => {
     return conditions
 }
 
-const weatherInfo = async () => {//use the id as a parameter
-
+const weatherInfo = async () => {
     const user = await getUsers()
     const userIndex = user.findIndex((valor) => {
-        if(valor.id === currentUser) return true//tá funcionando certinhoooooo!
+        if(valor.id === currentUser) return true
     })    
     const userCity = user[userIndex].city
     const userInfoWeather = await weatherSearch(userCity)
@@ -421,30 +439,128 @@ const filterTasks = async (status) => {
     renderTasks(filterTasks)
 }
 
-const lateTask = async () => {
-    const dateNumber = inDay
+const lateTasks = async () => {
     const tasksResponse = await fetch('http://localhost:3000/tasks')
     const tasks = await tasksResponse.json()
 
-    const filterLateTasks = tasks.filter((valor) => {
-        let dateD = valor.date
-        if(valor.date) console.log(dateD.toLocaleDateString("pt-BR"), inDay)//acertar o atrasado
+    const tasksLate = tasks.filter((task) => {      
+        if(task.date < inToday && task.status !== 'Concluído') return true
         return false
-        
     })
-    console.log(filterLateTasks)
+    /* const tasksContent = document.getElementById('tbody-content')
+    tasksContent.innerHTML = '' */
+    renderTasks(tasksLate)
+}
+
+const warningLateTask = () => {
+    const button = document.getElementById('btnLate')
+    button.className = 'lateTask'
+}
+
+const todayTasks = async () => {
+    const tasksResponse = await fetch('http://localhost:3000/tasks')
+    const tasks = await tasksResponse.json()
+
+    const tasksToday = tasks.filter((task) => {      
+        if(task.date === inToday && task.status !== 'Concluído') return true
+        return false
+    })
+    renderTasks(tasksToday)
 }
 
 
-//para fazer o editUser
-//function onclinck com parametro "opção clicada pelo user"
-// um modal para tudo
-//mudar dinamicamente com js
-//input simples talvez?
-//verificação de senha para fazer a alteração
-//modal info para avisar se as alterações foram concretizadas
+const getUser = async () => {
+    const userResponse = await fetch(`http://localhost:3000/users/${currentUser}`)
+    const user = await userResponse.json()
+    return user
+}
 
-//TIVE UMA IDEIA PARA DIMINUIR O DARK E LIGHT MODE!
-// maybe we should put a class in the body with all the configs
-//for each way
-//Doable?
+const updateUser = async (id, user) => {
+    await fetch(`http://localhost:3000/users/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+}
+
+const confirmEditUser = async () => {//how i'm going to make this function work?
+
+    const editButton = document.getElementById('editButton')
+    const msgModalInfo = document.getElementById('textModalInfo') 
+
+    const currentUserObj = await getUser(currentUser)
+    editButton.addEventListener('click', () => {
+        if(confirmInput.value !== currentUserObj.password){
+            openModal('modalInfo')
+            msgModalInfo.innerHTML = 'Ocorreu um erro'
+        }else{
+            closeModal('modalEditConfirm')
+            editUser(currentUser)
+            editInput.value = ''
+        }
+    })
+}
+
+//vou parar isso um pouquinho. Cabeça on fire
+
+const editUser = async (id) => {
+    openModal('modalEditInfo')
+    const currentUserObj = await getUser(id)
+
+    const name = document.getElementById('name')
+    const city = document.getElementById('city')
+    const login = document.getElementById('login')
+    const email = document.getElementById('email')
+    const password = document.getElementById('password')
+
+    name.value = currentUserObj.name
+    city.value = currentUserObj.city
+    login.value = currentUserObj.login
+    email.value = currentUserObj.email
+    password.value = currentUserObj.password
+
+    await updateUser(id, currentUserObj)
+    openModal('modalInfo')
+    closeModal('modalEditInfo')
+}
+const confirmDeleteUser = async () =>{
+    closeModal('modalHelp')
+    openModal('modalDeleteConfirm')
+
+    const button = document.getElementById('deleteButton')
+    const passwordInput = document.getElementById('passConfirmDelete')
+    const msg = passwordInput.parentNode.querySelector('small')
+    
+    const currentUserObj = await getUser(currentUser)
+
+    const deleteUser = async (id) => {
+        await fetch(`http://localhost:3000/users/${id}`, {
+        method: 'DELETE'
+    })
+    }
+
+    passwordInput.addEventListener('input', () => {
+    if(passwordInput.value.trim() !== currentUserObj.password){
+        msg.innerHTML = 'Senha incorreta'
+        passwordInput.className = 'error'
+    }else{
+        passwordInput.className = ''
+        msg.innerHTML = ''
+    }
+    button.addEventListener('click', () => {
+        if(passwordInput.value.trim() === currentUserObj.password){
+            deleteUser(currentUser)
+            window.location.href = '../login-page/index.html'
+        }else{
+            msg.innerHTML = 'Preencha esse campo corretamente'
+            passwordInput.className = 'error'
+            console.log('erro')
+        }
+    })
+    //how to delete all the tasks from the user account?
+})
+}
+

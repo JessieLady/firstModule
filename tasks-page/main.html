@@ -34,7 +34,7 @@
 
   </head>
 
-  <body onload="getTasks(); weatherInfo()">
+  <body onload="getTasks(); weatherInfo(); tasksPagesTotal()"><!-- How to make the darkmode stay turned on?switchMode() -->
     <div class="div-purple" id="div-purple"></div>
     <div class="div-grey" id="div-grey"></div>
 
@@ -84,11 +84,11 @@
 
         <div id="buttonsFilter">
           <button onclick="getTasks()" id="btnAll">Todas</button>
-          <button id="btnToday">Hoje</button>
+          <button id="btnToday" onclick="todayTasks()">Hoje</button>
           <button onclick="filterTasks('Em progresso')" id="btnRunning">Em Progresso</button>
           <button onclick="filterTasks('Em pausa')" id="btnPause">Em Pausa</button>
           <button onclick="filterTasks('Concluído')" id="btnFinished">Concluído</button>
-          <button id="btnLate" onclick="lateTask()">Atrasado</button>
+          <button id="btnLate" onclick="lateTasks()">Atrasado</button>
         </div>
 
         <div id="searchTasks">
@@ -100,21 +100,17 @@
       </div>
 
       <div id="content">
-        <table class="table table-striped table-hover table-responsive" id="table"><!-- Study table proprieties. Sorry! I'm sleepy -->
+        <table class="table table-responsive" id="table"><!-- Study table proprieties. Sorry! I'm sleepy table-striped table-hover-->
           <thead id="tHead" class="font-weight-bold">
-            <!-- put a warning that there is a late task -->
-
-            <!-- put this in the lateTask function -- table-success -->
             <tr>
               <th scope="col">Núm<i class="fa-solid fa-caret-down"></i></th><!-- add button sort -->
               <th scope="col">Descrição<i class="fa-solid fa-caret-down"></i></th>
               <th scope="col">Data de Entrega</th>
               <th scope="col">Status</th>
               <th scope="col">Ação</th>
-              <!-- maybe put a red line under the late button filter -->
             </tr>
           </thead>
-          <tbody id="tbody-content" class="text-white">
+          <tbody id="tbody-content">
           </tbody>
         </table>
       </div><!-- content ending -->
@@ -124,7 +120,7 @@
           <i class="fa-solid fa-chevron-left"></i> Anterior 
         </div>
         <div id="pagesNum">
-          <span id="currentPage">1 </span>/<span id="pagesLenght">4</span>
+          <span id="currentPage">1 </span>/<span id="pagesLength">4</span>
         </div>
         <div id="nextPage" class="pagingButtons">
           Próximo <i class="fa-solid fa-chevron-right"></i>
@@ -136,13 +132,13 @@
 
     <!-- MODALS SECTION -->
     
-      <div id="modalNewTask" class="modalMain"><!-- mudar o id desse modal -->
+      <div id="modalNewTask" class="modalMain">
         <div id="modalNewTaskContent" class="modalBack-light downToUpAnimation">
           <h5 class="mb-3 h5style">Adicionar nova tarefa</h5>
 
           <div class="closeButton" onclick="closeModal('modalNewTask')">&times;</div>
 
-          <form id="form"><!-- field validation ---novalidate -->
+          <form id="form">
             <div>
               <label for="number">Número</label><br />
               <input type="number" min="0" id="number" name="number"/>
@@ -207,20 +203,11 @@
           </div>
 
           <div id="helpBody">
-          <div><!-- make a function - editUser(thingChanged) -->
-            <button class="mb-3" onclick="openModal('modalEdit'); closeModal('modalHelp')">Nome</button>
+          <div>
+            <button class="mb-3" onclick="openModal('modalEditConfirm');closeModal('modalHelp')">Dados da minha conta</button>
           </div>
           <div>
-            <button class="mb-3">Cidade</button>
-          </div>
-          <div>
-            <button class="mb-3">Login</button>
-          </div>
-          <div>
-            <button class="mb-3">Senha</button>
-          </div>
-          <div>
-            <button class="mb-3">Excluir minha conta</button>
+            <button class="mb-3 deleteAccount" onclick="confirmDeleteUser()">Excluir minha conta</button>
           </div>          
         </div>
         <span class="closeButton" onclick="closeModal('modalHelp')">&times;</span>
@@ -228,25 +215,67 @@
         
       </div><!-- final do modalHelp -->
 
-      <div id="modalEdit" class="modalMain"><!-- don't forget to close the helpModal -->
-        <div id="modalEditContent" class="downToUpAnimation">
-          <span class="closeButton" onclick="closeModal('modalEdit')">&times;</span>
-          <h4>Alteração de Conta:</h4>
-          <label class="mb-2" id="editUserLabel" for="editUserInput">*info modificada*</label>
-          <input id="editUserInput" name="editUserInput">
+      <div id="modalEditConfirm" class="modalMain"><!-- don't forget to close the helpModal -->
+        <div id="modalEditConfirmContent" class="downToUpAnimation">
+          <span class="closeButton" onclick="closeModal('modalEditConfirm')">&times;</span>
+          <h4 class="mt-4">Alteração de Informação da Conta:</h4>
+          <label class="mb-2" id="passwordConfirm" for="passwordConfirm">Por favor, insira sua senha</label>
+          <input id="passwordConfirm" name="passwordConfirm" type="password">
           <small>&nbsp;</small>
-          <label class="mb-2" id="passwordConfirme" for="passwordConfirme">Sua senha atual</label>
-          <input id="passwordConfirme" name="passwordConfirme" type="password">
+          <button id="editButton">Alterar</button>
+        </div>
+      </div>
+
+      <div id="modalEditInfo" class="modalMain">
+        <div id="modalEditInfoContent" class="downToUpAnimation">
+            <span class="closeButton" onclick="closeModal('modalEditInfo')">&times;</span>
+            <form id="formEdit">
+                <div class="d-flex flex-column mt-3">
+                    <label for="name">Nome</label>
+                    <input id="name" name="name" type="text">
+                </div>
+                <div class="d-flex flex-column mt-3">
+                    <label for="city">Cidade</label>
+                    <input id="city" name="city" type="text">
+                </div>
+                <div class="d-flex flex-column mt-3">
+                    <label for="login">Login</label>
+                    <input id="login" name="login" type="text">
+                </div>
+                <div class="d-flex flex-column mt-3">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email">
+                </div>
+                <div class="d-flex flex-column mt-3">
+                    <label for="password">Senha</label>
+                    <input id="password" name="password" type="password">
+                </div>
+                <div class="d-flex flex-column">
+                    <button type="submit" class="mt-3">Alterar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+      <div id="modalDeleteConfirm" class="modalMain">
+        <div id="modalDeleteConfirmContent" class="downToUpAnimation">
+          <span class="closeButton" onclick="closeModal('modalDeleteConfirm')">&times;</span>
+          <h2><strong>Ah! mas você já vai?</strong></h2>
+          <h4>Isso irá deletar suas tarefas e seus dados</h4>
+          <h5>Por favor, insira sua senha para <br> confirmar a exclusão da sua conta</h5>
+          <label class="mb-2" for="passConfirmDelete">Sua senha</label>
+          <input id="passConfirmDelete" name="passConfirmDelete" type="password">
           <small>&nbsp;</small>
-          <button onclick="openModal('modalInfo'); closeModal('modalEdit')">Alterar</button>
-          <!-- add an eventlistener to catch and ask for password confirmation -- make a function for that-->
+          <button id="deleteButton">Confirmar Exclusão</button>
+          <button onclick="closeModal('modalDeleteConfirm')">Cancelar</button>
+          
         </div>
       </div>
 
       <div id="modalInfo" class="upToDownAnimation">
         <div id="modalInfoContent">
           <span class="closeButton" onclick="closeModal('modalInfo')">&times;</span>
-            <h3>Alteração realizada com sucesso!</h3>
+            <h3 id="textModalInfo">Alteração realizada com sucesso!</h3>
         </div>
       </div>
 

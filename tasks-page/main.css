@@ -105,7 +105,7 @@ small {
     margin: 60px auto;
     position: relative;
 }
-#modalEditContent{
+#modalEditConfirmContent{
     width: 25vw;
     height: 300px;
     margin: 200px auto;
@@ -122,7 +122,7 @@ small {
     display: none;
     position: fixed;
     width: 30vw;
-    height: 25vh;
+    height: 20vh;
     z-index: 1;
     bottom: 0;
     right: 0;
@@ -133,8 +133,7 @@ small {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    gap: 10px;
+    justify-content: center;
 }
 #modalHelpContent{
     background-color: var(--background);
@@ -143,9 +142,9 @@ small {
     text-align: center;
 
     width: 25%;
-    height: 50%;
+    height: 30%;
     padding: 10px;
-    margin: 100px auto;
+    margin: 200px auto;
     border-radius: 10px;
     border: 3px solid var(--yellow);
 
@@ -169,29 +168,46 @@ small {
     justify-content: space-between;
     position: relative;
 }
-#passConfirm{ /* I need to see what is this 'cause i don't remember */
-    display: none;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0,0,0,0.5);
-}
-#passConfirmContent{
-    width: 25vw;
-    height: 200px;
-    margin: 200px auto;
-    padding: 15px;
+#modalDeleteConfirmContent{
     background-color: var(--background);
-    border: 2px solid var(--yellow);/* could i put these colors in the body? */
+    color: var(--purple);
+
+    text-align: center;
+
+    width: 25%;
+    height: 50%;
+    padding: 10px;
+    margin: 200px auto;
+    border-radius: 10px;
+    border: 3px solid var(--yellow);
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 10px;
     position: relative;
 }
+#modalEditInfoContent{
+    background-color: var(--background);
+    color: var(--purple);
+    width: 20%;
+    height: 65%;
+    padding: 10px;
+    margin: 80px auto;
+    border-radius: 10px;
+    border: 5px solid var(--yellow);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    position: relative;
+}
+
+
 /* BACKGROUND */
 
 .container{
@@ -231,6 +247,7 @@ small {
     transform: rotate(25deg);
     right: 0;
     top: 90px;
+    color: #f18b8b;
 }
 
 /* PSEUDO BOOTSTRAP CLASSES */
@@ -242,7 +259,7 @@ small {
     color: var(--background) !important;
 }
 .color-orange{
-    color: var(--yellow);
+    color: var(--yellow) !important;
 }
 .color-white{
     color: var(--background) !important;
@@ -260,6 +277,22 @@ small {
 }
 .disabled{
     cursor: not-allowed;
+}
+.lateTask{
+    color: #f18b8b !important;
+    border-color: #f18b8b;
+}
+.lateTask:hover{
+    color: var(--purple) !important;
+    background-color: #f18b8b;
+}
+.deleteAccount{
+    color: #f18b8b !important;
+    border-color: #f18b8b;
+}
+.deleteAccount:hover{
+    color: var(--purple) !important;
+    background-color: #f18b8b;
 }
 /* ANIMATIONS */
 
