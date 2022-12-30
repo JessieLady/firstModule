@@ -296,6 +296,9 @@ small {
     color: var(--purple) !important;
     background-color: #f18b8b;
 }
+.classModal{
+    background-color: var(--background);
+}
 /* ANIMATIONS */
 
 .downToUpAnimation{

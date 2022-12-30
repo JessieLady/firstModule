@@ -130,13 +130,13 @@
 
     <!-- MODALS SECTION -->
     
-      <div id="modalNewTask" class="modalMain">
+      <div id="modalNewTask" class="classModal modalMain">
         <div id="modalNewTaskContent" class="modalBack-light downToUpAnimation">
           <h5 class="mb-3 h5style">Adicionar nova tarefa</h5>
 
           <div class="closeButton" onclick="closeModal('modalNewTask')">&times;</div>
 
-          <form id="form">
+          <form id="formNewTask">
             <div>
               <label for="number">Número</label><br />
               <input type="number" min="0" id="number" name="number"/>
@@ -172,14 +172,14 @@
             <br>
             <div id="modal-footer">
               <button id="cancelButton" type="reset" onclick="closeModal('modalNewTask')">Cancelar</button>
-              <button id="submitButton" type="submit" >Salvar</button>
+              <button type="submit" >Salvar</button><!-- id="submitButton" -->
           </div>
           </form>
         </div>
       </div><!-- Modal ending -->
 
       <div id="modalConfirmation" class="modalMain">
-        <div id="modalConfirmationContent" class="downToUpAnimation">
+        <div id="modalConfirmationContent" class="classModal modalBack-light downToUpAnimation">
 
         <div class="closeButtonDelete" onclick="closeModal('modalConfirmation')">&times;</div>
 
@@ -213,18 +213,18 @@
         
       </div><!-- final do modalHelp -->
 
-      <div id="modalEditConfirm" class="modalMain"><!-- don't forget to close the helpModal -->
+      <div id="modalEditConfirm" class="classModal modalMain"><!-- don't forget to close the helpModal -->
         <div id="modalEditConfirmContent" class="downToUpAnimation">
           <span class="closeButton" onclick="closeModal('modalEditConfirm')">&times;</span>
           <h4 class="mt-4">Alteração de Informação da Conta:</h4>
           <label class="mb-2" id="passwordConfirm" for="passwordConfirm">Por favor, insira sua senha</label>
           <input id="passwordConfirm" name="passwordConfirm" type="password">
           <small>&nbsp;</small>
-          <button id="editButton">Alterar</button>
+          <button id="editButton" onclick="openModal('modalEditInfo')">Alterar</button>
         </div>
       </div>
 
-      <div id="modalEditInfo" class="modalMain">
+      <div id="modalEditInfo" class="classModal modalMain">
         <div id="modalEditInfoContent" class="downToUpAnimation">
             <span class="closeButton" onclick="closeModal('modalEditInfo')">&times;</span>
             <form id="formEdit">
@@ -255,7 +255,7 @@
         </div>
     </div>
 
-      <div id="modalDeleteConfirm" class="modalMain">
+      <div id="modalDeleteConfirm" class="classModal modalMain">
         <div id="modalDeleteConfirmContent" class="downToUpAnimation">
           <span class="closeButton" onclick="closeModal('modalDeleteConfirm')">&times;</span>
           <h2><strong>Ah! mas você já vai?</strong></h2>

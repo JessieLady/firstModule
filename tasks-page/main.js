@@ -1,7 +1,7 @@
+/* Global consts */
 
 const content = document.getElementById('content')
-const form = document.getElementById('form')
-const button = document.getElementById('submitButton')
+const formNewTask = document.getElementById('formNewTask')
 
 let contraste = false
 
@@ -14,11 +14,7 @@ const DESCRIPTION_EMPTY = 'Insira uma descrição.'
 const DATE_EMPTY = 'Escolha uma data.'
 const STATUS_EMPTY= 'Escolha um status.'
 
-const numberField = document.getElementById('number')
-const descriptionField = document.getElementById('description')
-const dateField = document.getElementById('date')
-const statusField = document.getElementById('status')
-
+const modalHelp = document.getElementById('footerHelp')
 const modalNewTask = document.getElementById('modalNewTaskContent')
 const modalHelpUser = document.getElementById('modalHelpContent')
 const modalEditUser = document.getElementById('modalEditContent')
@@ -26,35 +22,9 @@ const modalInfoConf = document.getElementById('modalInfoContent')
 
 const searchInput = document.getElementById('searchField')
 
-const modalHelp = document.getElementById('footerHelp')
-
-
-
-
-const weather = document.getElementById('weather')
-const hello = document.getElementById('firstLine')
-
-const iconButton = document.getElementById('iconMode')
-const buttonBack = document.getElementById('darkModeContent')
-const logo = document.getElementById('logoArnia')
-
-const tableBody = document.getElementById('tbody-content')
-
-const weatherName = document.getElementById('weatherName')
-const weatherCity = document.getElementById('weatherCity')
-const weatherTemp = document.getElementById('weatherTemp')
-const weatherCond = document.getElementById('weatherCond')
-const weatherHour = document.getElementById('weatherHour')
-const weatherDate = document.getElementById('weatherDate')
-
 const inDate = new Date()
 const inDay = inDate.toLocaleDateString("pt-BR")
-const inTime = inDate.toTimeString()
 const inToday = `${inDate.getFullYear()}-${(inDate.getMonth())+1}-${inDate.getDate()}`
-
-
-
-//diminuir a quantidade de variaveis globais
 
 /* MODAL'S FUNCTIONS */
 
@@ -163,6 +133,12 @@ const updateTask = async (id, task) => {
     })
 }
 const editTask = async (id) => {
+
+    const numberField = document.getElementById('number')
+    const descriptionField = document.getElementById('description')
+    const dateField = document.getElementById('date')
+    const statusField = document.getElementById('status')
+
     currentTask = await getTask(id) 
 
     openModal('modalNewTask')
@@ -222,8 +198,9 @@ const previousPage = async () => {
     spanPage.innerHTML = `${page}`
 }
 
+//const button = document.getElementById('submitButton')
 
-form.addEventListener('submit', (event) => {
+formNewTask.addEventListener('submit', (event) => {
     event.preventDefault()
 
     const number = form.elements['number'].value
@@ -317,15 +294,22 @@ class Task {
 }
 
 const lightMode = () => {
+    searchInput.style.backgroundColor = ''
+
     const background = document.getElementById('div-white')
     background.style.backgroundColor = 'var(--background)'
 
+    const iconButton = document.getElementById('iconMode')
+    const buttonBack = document.getElementById('darkModeContent')
     iconButton.src = "../assets/moon.svg"
     buttonBack.style.backgroundColor = 'var(--purple)'
     
+    const logo = document.getElementById('logoArnia')
     logo.src = '../assets/logo-purple.svg'
     
+    const tableBody = document.getElementById('tbody-content')
     tableBody.className = 'table-light text-purple'
+    
     tHead.style.color = 'var(--darkpurple)'
     tHead.className = 'font-weight-bold table-light'    
     
@@ -344,14 +328,15 @@ const lightMode = () => {
         buttons[iterador].className = 'light-button'
     }
     
-    searchInput.style.backgroundColor = ''
-
     const buttonsPaging = document.getElementById('buttonsPaging')
     buttonsPaging.style.color = 'var(--indigo)'
     
     modalHelp.className = 'modalMain'
 
-    modalNewTask.className = 'modalBack-light downToUpAnimation'
+    const modals = document.getElementsByClassName('classModal')
+
+    modalNewTask.className = 'classModal modalBack-light downToUpAnimation'
+    //that's how the modal must look like
     modalHelpUser.className = 'modalBack-light downToUpAnimation'
     modalEditUser.className = 'modalBack-light downToUpAnimation'
     modalInfoConf.className = 'modalBack-light downToUpAnimation'
@@ -409,78 +394,6 @@ const switchMode = () =>{
     }
 }
 
-/* const lightMode = () => {
-    background.style.backgroundColor = 'var(--background)'
-
-    iconButton.src = "../assets/moon.svg"
-    buttonBack.style.backgroundColor = 'var(--purple)'
-    
-    document.body.style.color = 'var(--indigo)'
-    table.style.color = 'var(--purple)'
-    logo.src = '../assets/logo-purple.svg'
-    
-    tableBody.className = 'table-light text-purple'
-    tHead.style.color = 'var(--darkpurple)'
-    tHead.className = 'font-weight-bold table-light'
-    logoutButton.className = 'light-button'
-    weather.style.color = 'var(--purple)'
-    hello.style.color = 'var(--purple)'
-    newTaskButton.className = 'light-button mt-3'
-    pageTitle.style.color = 'var(--purple)'
-    divPurple.style.backgroundColor = 'var(--purple)'
-    divGray.style.backgroundColor = 'var(--lightpurple)'
-    divOrange.style.backgroundColor = 'var(--yellow)'
-    btnToday.className = 'light-button'
-    btnRunning.className = 'light-button'
-    btnPause.className = 'light-button'
-    btnFinished.className = 'light-button'
-    btnLate.className = 'light-button'
-    searchInput.style.backgroundColor = ''
-    modalHelp.className = ''
-    buttonsPaging.style.color = 'var(--indigo)'
-    modalNewTask.className = 'modalBack-light downToUpAnimation'
-    modalHelpUser.className = 'modalBack-light downToUpAnimation'
-    modalEditUser.className = 'modalBack-light downToUpAnimation'
-    modalInfoConf.className = 'modalBack-light downToUpAnimation'
-}
-
-const darkMode = () => {
-    background.style.backgroundColor = 'var(--darkBackground)'
-
-    iconButton.src = "../assets/sun.svg"
-    buttonBack.style.backgroundColor = 'var(--darkorange)'
-    
-    logo.src = '../assets/logo.png'
-    tableBody.className = 'table-dark text-white'
-    tHead.style.color = 'var(--purple)'
-    tHead.className = 'font-weight-bold table-dark'
-    logoutButton.className = 'dark-button'
-    weather.style.color = 'var(--background)'
-    hello.style.color = 'var(--background)'
-    newTaskButton.className = 'dark-button mt-3'
-    
-    pageTitle.style.color = 'var(--background)'
-    divPurple.style.backgroundColor = 'var(--darkpurple)'
-    divGray.style.backgroundColor = 'var(--purpleple)'
-    divOrange.style.backgroundColor = 'var(--darkorange)'
-    btnToday.className = 'dark-button'
-    btnRunning.className = 'dark-button'
-    btnPause.className = 'dark-button'
-    btnFinished.className = 'dark-button'
-    btnLate.className = 'dark-button'
-    searchInput.style.backgroundColor = 'var(--darkpurple)'
-    modalHelp.className = 'dark-footer'
-    buttonsPaging.style.color = 'var(--background)'
-    modalNewTask.className = 'modalBack-dark text-purple downToUpAnimation'
-    modalHelpUser.className = 'modalBack-dark text-purple downToUpAnimation'
-    modalEditUser.className = 'modalBack-dark text-purple downToUpAnimation'
-    modalInfoConf.className = 'modalBack-dark text-purple downToUpAnimation'
-
-    for(let iterador = 0; iterador < buttons.length; iterador++){
-        buttons[iterador].style.backgroundColor = 'red'
-    }
-}
-*/
 
 //DON'T FORGET TO STUDY THIS!
 
@@ -522,6 +435,12 @@ const weatherSearch = async (user) => {
 }
 
 const weatherInfo = async () => {
+
+    const weatherName = document.getElementById('weatherName')
+    const weatherCity = document.getElementById('weatherCity')
+    const weatherTemp = document.getElementById('weatherTemp')
+    const weatherCond = document.getElementById('weatherCond')
+
     const user = await getUsers()
     const userIndex = user.findIndex((valor) => {
         if(valor.id === currentUser) return true
@@ -533,8 +452,6 @@ const weatherInfo = async () => {
     weatherCity.innerHTML = `${userCity}`
     weatherTemp.innerHTML = `${userInfoWeather[0].Temperature.Metric.Value}°C`
     weatherCond.innerHTML = `${userInfoWeather[0].WeatherText}`
-    //weatherHour.innerHTML = `${inTime.getHours().toLocaleDateString('pt-BR')}`
-    //weatherDate.innerHTML = `${inTime.getDate().toLocaleDateString('pt-BR')}`
 
 }
 
