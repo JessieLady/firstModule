@@ -1,4 +1,4 @@
-const modal = document.getElementById('modal')
+
 const content = document.getElementById('content')
 const form = document.getElementById('form')
 const button = document.getElementById('submitButton')
@@ -24,37 +24,21 @@ const modalHelpUser = document.getElementById('modalHelpContent')
 const modalEditUser = document.getElementById('modalEditContent')
 const modalInfoConf = document.getElementById('modalInfoContent')
 
-const divPurple = document.getElementById('div-purple')
-const divGray = document.getElementById('div-grey')
-const divOrange = document.getElementById('div-orange')
-
-const logoutButton = document.getElementById('logoutButton')
-const btnToday = document.getElementById('btnToday')
-const btnRunning = document.getElementById('btnRunning')
-const btnPause = document.getElementById('btnPause')
-const btnFinished = document.getElementById('btnFinished')
-const btnLate = document.getElementById('btnLate')
-
 const searchInput = document.getElementById('searchField')
 
 const modalHelp = document.getElementById('footerHelp')
 
-const trTable = document.getElementById('trTable')
-const pageTitle = document.getElementById('page-title')
-const tHead = document.getElementById('tHead')
-const buttonsPaging = document.getElementById('buttonsPaging')
+
+
 
 const weather = document.getElementById('weather')
 const hello = document.getElementById('firstLine')
 
 const iconButton = document.getElementById('iconMode')
 const buttonBack = document.getElementById('darkModeContent')
-const background = document.getElementById('div-white')
 const logo = document.getElementById('logoArnia')
 
 const tableBody = document.getElementById('tbody-content')
-
-const newTaskButton = document.getElementById('newTaskButton')
 
 const weatherName = document.getElementById('weatherName')
 const weatherCity = document.getElementById('weatherCity')
@@ -68,7 +52,7 @@ const inDay = inDate.toLocaleDateString("pt-BR")
 const inTime = inDate.toTimeString()
 const inToday = `${inDate.getFullYear()}-${(inDate.getMonth())+1}-${inDate.getDate()}`
 
-const buttons = document.querySelectorAll("button");
+
 
 //diminuir a quantidade de variaveis globais
 
@@ -99,7 +83,7 @@ const renderTasks = (tasks) => {
             warningLateTask()
         }
         
-        tasksContent.innerHTML = tasksContent.innerHTML + `<tr class='text-purple' id='trTable'>
+        tasksContent.innerHTML = tasksContent.innerHTML + `<tr id='trTable'>
         <td scope="row">${task.number}</td>
         <td>${task.description}</td>
         <td>${dateFormated}</td>
@@ -131,10 +115,16 @@ const confirmDelete = (idTask) =>{
 })
 }
 
-const getTasks = async () => {
+const getTasksRender = async () => {
     const tasksResponse = await fetch('http://localhost:3000/tasks?_limit=13')//
     const tasks = await tasksResponse.json()
     renderTasks(tasks)
+}
+
+const getTasksReturn = async () => {// decrease the number of API requests with this function
+    const tasksResponse = await fetch('http://localhost:3000/tasks')//
+    const tasks = await tasksResponse.json()
+    return tasks
 }
 
 const getTask = async (id) => {
@@ -214,13 +204,24 @@ const nextPage = async () => {
     let pagesTotal = Math.ceil(tasks.length / 13)
 
     currentPage = currentPage + 1 > pagesTotal ? currentPage : currentPage + 1
+    
+    currentPageNum(currentPage)
     loadPage(currentPage)
   }
   
+  
 const previousPage = async () => {
     currentPage = currentPage - 1 < 1 ? currentPage : currentPage - 1
+    
+    currentPageNum(currentPage)
     loadPage(currentPage)
   }
+
+  const currentPageNum = (page) => {
+    const spanPage = document.getElementById('currentPage')
+    spanPage.innerHTML = `${page}`
+}
+
 
 form.addEventListener('submit', (event) => {
     event.preventDefault()
@@ -316,9 +317,104 @@ class Task {
 }
 
 const lightMode = () => {
+    const background = document.getElementById('div-white')
     background.style.backgroundColor = 'var(--background)'
+
     iconButton.src = "../assets/moon.svg"
     buttonBack.style.backgroundColor = 'var(--purple)'
+    
+    logo.src = '../assets/logo-purple.svg'
+    
+    tableBody.className = 'table-light text-purple'
+    tHead.style.color = 'var(--darkpurple)'
+    tHead.className = 'font-weight-bold table-light'    
+    
+    const header = document.getElementById('header')
+    header.style.color = 'var(--purple)'
+
+    const divPurple = document.getElementById('div-purple')
+    const divGray = document.getElementById('div-grey')
+    const divOrange = document.getElementById('div-orange')
+    divPurple.style.backgroundColor = 'var(--purple)'
+    divGray.style.backgroundColor = 'var(--lightpurple)'
+    divOrange.style.backgroundColor = 'var(--yellow)'
+    
+    const buttons = document.querySelectorAll("button");
+    for(let iterador = 0; iterador < buttons.length; iterador++){
+        buttons[iterador].className = 'light-button'
+    }
+    
+    searchInput.style.backgroundColor = ''
+
+    const buttonsPaging = document.getElementById('buttonsPaging')
+    buttonsPaging.style.color = 'var(--indigo)'
+    
+    modalHelp.className = 'modalMain'
+
+    modalNewTask.className = 'modalBack-light downToUpAnimation'
+    modalHelpUser.className = 'modalBack-light downToUpAnimation'
+    modalEditUser.className = 'modalBack-light downToUpAnimation'
+    modalInfoConf.className = 'modalBack-light downToUpAnimation'
+}
+
+const darkMode = () => {
+    background.style.backgroundColor = 'var(--darkBackground)'
+
+    iconButton.src = "../assets/sun.svg"
+    buttonBack.style.backgroundColor = 'var(--darkorange)'
+    
+    logo.src = '../assets/logo.png'
+    
+    tableBody.className = 'table-dark text-white'
+    tHead.style.color = 'white'
+    tHead.className = 'font-weight-bold table-dark'
+    
+    weather.style.color = 'var(--background)'
+    hello.style.color = 'var(--background)'
+    pageTitle.style.color = 'var(--background)'
+    
+    divPurple.style.backgroundColor = 'var(--darkpurple)'
+    divGray.style.backgroundColor = 'var(--purpleple)'
+    divOrange.style.backgroundColor = 'var(--darkorange)'
+    
+    newTaskButton.className = 'dark-button mt-3'
+    logoutButton.className = 'dark-button'
+    btnToday.className = 'dark-button'
+    btnRunning.className = 'dark-button'
+    btnPause.className = 'dark-button'
+    btnFinished.className = 'dark-button'
+    btnLate.className = 'dark-button'
+    
+    searchInput.style.backgroundColor = 'var(--darkpurple)'
+    modalHelp.className = 'dark-footer'
+    buttonsPaging.style.color = 'var(--background)'
+    
+    modalNewTask.className = 'modalBack-dark text-purple downToUpAnimation'
+    modalHelpUser.className = 'modalBack-dark text-purple downToUpAnimation'
+    modalEditUser.className = 'modalBack-dark text-purple downToUpAnimation'
+    modalInfoConf.className = 'modalBack-dark text-purple downToUpAnimation'
+
+    /* for(let iterador = 0; iterador < buttons.length; iterador++){
+        buttons[iterador].style.backgroundColor = 'red'
+    } */
+}
+
+const switchMode = () =>{
+    if (contraste) {
+        lightMode()
+        contraste = false
+    } else {
+        darkMode()
+        contraste = true
+    }
+}
+
+/* const lightMode = () => {
+    background.style.backgroundColor = 'var(--background)'
+
+    iconButton.src = "../assets/moon.svg"
+    buttonBack.style.backgroundColor = 'var(--purple)'
+    
     document.body.style.color = 'var(--indigo)'
     table.style.color = 'var(--purple)'
     logo.src = '../assets/logo-purple.svg'
@@ -348,11 +444,13 @@ const lightMode = () => {
     modalInfoConf.className = 'modalBack-light downToUpAnimation'
 }
 
-const darkMode = () => {//pay attention because the darkmode resets
+const darkMode = () => {
     background.style.backgroundColor = 'var(--darkBackground)'
+
     iconButton.src = "../assets/sun.svg"
     buttonBack.style.backgroundColor = 'var(--darkorange)'
-    logo.src = '../assets/logo.png'//get an svg to this version of Arnia's Logo
+    
+    logo.src = '../assets/logo.png'
     tableBody.className = 'table-dark text-white'
     tHead.style.color = 'var(--purple)'
     tHead.className = 'font-weight-bold table-dark'
@@ -378,22 +476,11 @@ const darkMode = () => {//pay attention because the darkmode resets
     modalEditUser.className = 'modalBack-dark text-purple downToUpAnimation'
     modalInfoConf.className = 'modalBack-dark text-purple downToUpAnimation'
 
-    /* for(let iterador = 0; iterador < buttons.length; iterador++){
+    for(let iterador = 0; iterador < buttons.length; iterador++){
         buttons[iterador].style.backgroundColor = 'red'
-    } */
-}
-
-const switchMode = () =>{
-    if (contraste) {
-        lightMode()
-        contraste = false
-    } else {
-        darkMode()
-        contraste = true
     }
 }
-
-
+*/
 
 //DON'T FORGET TO STUDY THIS!
 
@@ -452,7 +539,7 @@ const weatherInfo = async () => {
 }
 
 const filterTasks = async (status) => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks?_limit=13')
+    const tasksResponse = await fetch('http://localhost:3000/tasks')
     const tasks = await tasksResponse.json()
     const filterTasks = tasks.filter((valor) => {
         if(valor.status === status) return true
@@ -462,7 +549,7 @@ const filterTasks = async (status) => {
 }
 
 const lateTasks = async () => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks?_limit=13')
+    const tasksResponse = await fetch('http://localhost:3000/tasks')
     const tasks = await tasksResponse.json()
 
     const tasksLate = tasks.filter((task) => {      
@@ -478,7 +565,7 @@ const warningLateTask = () => {
 }
 
 const todayTasks = async () => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks?_limit=13')
+    const tasksResponse = await fetch('http://localhost:3000/tasks')
     const tasks = await tasksResponse.json()
 
     const tasksToday = tasks.filter((task) => {      
@@ -487,6 +574,21 @@ const todayTasks = async () => {
     })
     renderTasks(tasksToday)
 }
+
+    searchInput.addEventListener('input', async () => {
+        const tasks = await getTasksReturn()
+        const input = searchInput.value.toUpperCase();
+        let tasksFound = []
+
+        let taskSearch = tasks.filter((task) => {
+            let search = task.description.toUpperCase()
+            if(search.includes(input)) return true
+            return false
+        })
+        renderTasks(taskSearch)
+    })
+
+
 
 
 const getUser = async () => {
