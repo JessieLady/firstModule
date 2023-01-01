@@ -11,228 +11,53 @@
   ],
   "tasks": [
     {
-      "number": "7",
-      "description": "Consertar Ar condicionado",
-      "date": "2022-12-10",
-      "status": "Concluído",
-      "id": 6
-    },
-    {
-      "number": "10",
-      "description": "Brincar com o cachorro",
-      "date": "2022-12-31",
-      "status": "Em progresso",
-      "id": 9
-    },
-    {
-      "number": "11",
-      "description": "Arrumar meus batons",
-      "date": "2023-01-11",
-      "status": "Em progresso",
-      "id": 10
-    },
-    {
-      "number": "12",
-      "description": "Arrumar os arquivos",
-      "date": "2023-01-06",
-      "status": "Concluído",
-      "id": 11
-    },
-    {
-      "number": "15",
-      "description": "Desmontar a árvore",
-      "date": "2023-01-06",
-      "status": "Em progresso",
-      "id": 14
-    },
-    {
-      "number": "16",
-      "description": "Falar com Júnior",
-      "date": "2023-01-06",
-      "status": "Em progresso",
-      "id": 15
-    },
-    {
-      "number": "333",
+      "number": "1",
       "description": "Go to the mall",
-      "date": "2022-12-30",
-      "status": "Concluído",
-      "id": 16
+      "date": "2023-01-25",
+      "status": "Em progresso",
+      "id": 1
+    },
+    {
+      "number": "3",
+      "description": "Consertar Ar condicionado",
+      "date": "2023-01-02",
+      "status": "Em progresso",
+      "id": 3
     },
     {
       "number": "4",
-      "description": "Ver se o atrasado funciona",
-      "date": "2022-12-29",
-      "status": "Escolha uma opção",
-      "id": 18
-    },
-    {
-      "number": "45",
-      "description": "Jogar My Little Pony",
-      "date": "2022-12-30",
-      "status": "Concluído",
-      "id": 19
-    },
-    {
-      "number": "5",
-      "description": "Abraçar a Isabelle",
-      "date": "2023-01-07",
-      "status": "Em pausa",
-      "id": 20
-    },
-    {
-      "number": "65",
-      "description": "Alisar o cabelo",
-      "date": "2023-01-05",
+      "description": "Jogar Resident Evil",
+      "date": "2023-01-09",
       "status": "Em progresso",
-      "id": 21
-    },
-    {
-      "number": "888",
-      "description": "Aprender 'Objetos da cozinha' em libras",
-      "date": "2023-01-04",
-      "status": "Em progresso",
-      "id": 22
-    },
-    {
-      "number": "54",
-      "description": "Brincar com o John Snow",
-      "date": "2023-01-18",
-      "status": "Em progresso",
-      "id": 23
-    },
-    {
-      "number": "4",
-      "description": "Jogar LOL",
-      "date": "2023-01-06",
-      "status": "Em pausa",
-      "id": 24
-    },
-    {
-      "number": "4",
-      "description": "Lavar roupa",
-      "date": "2023-01-19",
-      "status": "Em progresso",
-      "id": 25
-    },
-    {
-      "number": "7",
-      "description": "Fazer panetones",
-      "date": "2022-12-31",
-      "status": "Em progresso",
-      "id": 26
+      "id": 4
     },
     {
       "number": "8",
-      "description": "Arrumar o quarto",
-      "date": "2023-01-26",
+      "description": "Ver o portão",
+      "date": "2023-01-06",
       "status": "Em progresso",
-      "id": 27
+      "id": 5
     },
     {
-      "number": "9",
-      "description": "Deixar os textos prontos",
-      "date": "2023-01-18",
+      "number": "6",
+      "description": "Desmontar a árvore",
+      "date": "2023-01-06",
       "status": "Em progresso",
-      "id": 28
-    },
-    {
-      "number": "65",
-      "description": "Assistir Abracadabra 2",
-      "date": "2023-01-27",
-      "status": "Em progresso",
-      "id": 29
+      "id": 6
     },
     {
       "number": "7",
-      "description": "Comentar o debate",
-      "date": "2023-01-26",
+      "description": "Ver se o atrasado funciona",
+      "date": "2023-01-01",
       "status": "Em progresso",
-      "id": 30
-    },
-    {
-      "number": "3",
-      "description": "Responder Marcos Antônio",
-      "date": "2023-01-18",
-      "status": "Em progresso",
-      "id": 31
-    },
-    {
-      "number": "54",
-      "description": "Limpar o notion",
-      "date": "2023-01-13",
-      "status": "Em progresso",
-      "id": 32
+      "id": 7
     },
     {
       "number": "2",
-      "description": "Quantas tarefas têm essa criatura?",
-      "date": "2023-01-20",
-      "status": "Em pausa",
-      "id": 33
-    },
-    {
-      "number": "5",
-      "description": "Arrumar o github",
-      "date": "2023-01-06",
-      "status": "Em progresso",
-      "id": 34
-    },
-    {
-      "number": "5",
-      "description": "Comprar travesseiros",
-      "date": "2023-01-11",
-      "status": "Em progresso",
-      "id": 35
-    },
-    {
-      "number": "1",
-      "description": "Entregar o projeto",
-      "date": "2023-01-16",
-      "status": "Em progresso",
-      "id": 36
-    },
-    {
-      "number": "55",
-      "description": "Ligar pra mãe",
+      "description": "Ouvir Linkin Park",
       "date": "2023-01-05",
       "status": "Em pausa",
-      "id": 37
-    },
-    {
-      "number": "1",
-      "description": "----------",
-      "date": "2022-12-30",
-      "status": "Em progresso",
-      "id": 38
-    },
-    {
-      "number": "2",
-      "description": "Fazer o campo de busca funfar",
-      "date": "2022-12-30",
-      "status": "Em progresso",
-      "id": 39
-    },
-    {
-      "number": "3",
-      "description": "Consertar o dark mode",
-      "date": "2022-12-30",
-      "status": "Em progresso",
-      "id": 40
-    },
-    {
-      "number": "4",
-      "description": "Fazer o season storage",
-      "date": "2022-12-30",
-      "status": "Em progresso",
-      "id": 41
-    },
-    {
-      "number": "5",
-      "description": "Fazer a ordem dos num e des",
-      "date": "2022-12-30",
-      "status": "Em progresso",
-      "id": 42
+      "id": 8
     }
   ]
 }

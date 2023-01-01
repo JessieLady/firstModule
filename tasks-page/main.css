@@ -25,7 +25,7 @@
     --greenStatus: #27AE60;
     --orangeStatus: #F8B04E;
     --redStatus: #EB5757;
-    --blueStatus: #1034ff;
+    --blueStatus: #6e83fc;
     /* color from figma #011379 - blue status */
     
     /* Arnia Website Palet */
@@ -55,7 +55,10 @@ input{
     padding: 7px;
     border-radius: 7px;
     border: 1px solid gray;
-    background-color: unset;
+    /* background-color: unset; */
+}
+input:focus{
+    outline: none;
 }
 select{
     margin: 5px 0px;
@@ -301,17 +304,17 @@ small {
 }
 /* ANIMATIONS */
 
-.downToUpAnimation{
-    animation: downToUp 0.5s running 1;;
+.upToDownAnimation{
+    animation: upToDown 0.5s running 1;;
 }
-@keyframes downToUp{
+@keyframes upToDown{
     0%{transform: translateY(-300px);}
     100%{transform: translateY(0px);}
 }
-.upToDownAnimation{
-    animation: upToDown 0.5s running 1;
+.downToUpAnimation{
+    animation: downToUp 0.5s running 1;
 }
-@keyframes upToDown{
+@keyframes downToUp{
     0%{transform: translateY(300px);}
     100%{transform: translateY(0px);}
 }
@@ -480,6 +483,13 @@ small {
     font-size: 18px;
     margin-top: 70px;
 }
+
+#helpBody{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 /* WEATHER ELEMENTS */
 
 #weather{
@@ -511,14 +521,13 @@ small {
 /* TABLE HEADER ELEMENTS */
 
 #tableHeader{
-    width: 70%;
+    width: 65%;
     height: 50px;
-    border: none;
 
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 30px;
+    gap: 10px;
 
     margin: 33px 0px 33px;
 
