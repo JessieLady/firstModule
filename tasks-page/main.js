@@ -2,7 +2,9 @@
 
 const formNewTask = document.getElementById('formNewTask')
 
-let contraste = false
+let ordering = true
+
+let contrast = localStorage.getItem("contrast")
 
 let currentTask = null
 let currentPage = null
@@ -64,7 +66,6 @@ const renderTasks = (tasks) => {
           </span>
         </td>
       </tr>`
-        //how to limit the foreach to fit the screen?
     })
 }
 
@@ -118,6 +119,19 @@ const newTask = async (task) => {
     })
 }
 
+const clearModalNewTask = () => {
+    const numberField = document.getElementById('number')
+    const descriptionField = document.getElementById('description')
+    const dateField = document.getElementById('date')
+    const select = document.querySelector('#selectStatus');
+
+    numberField.value = ''
+    descriptionField.value = ''
+    dateField.value = ''
+
+    select.options[0].selected = true
+}
+
 const saveTask = async (task) => {
     if(currentTask === null){
         await newTask(task)
@@ -142,7 +156,6 @@ const editTask = async (id) => {
     const numberField = document.getElementById('number')
     const descriptionField = document.getElementById('description')
     const dateField = document.getElementById('date')
-    const statusField = document.getElementById('status')
 
     currentTask = await getTask(id) 
 
@@ -151,10 +164,18 @@ const editTask = async (id) => {
     numberField.value = currentTask.number
     descriptionField.value = currentTask.description
     dateField.value = currentTask.date
-    statusField.value = currentTask.status
 
+    let text = currentTask.status
+    let select = document.querySelector('#selectStatus');
+
+    for (let counter = 0; counter < select.options.length; counter++) {
+        if (select.options[counter].text === text) {
+            select.options[counter].selected = true
+        }
+    }
+
+    const button = document.getElementById('submitButton')
     button.innerHTML = 'Alterar'
-    button.onclick="updateTask()"
 }
 
 class Task {
@@ -223,7 +244,13 @@ const nextPage = async () => {
     currentPageNum(currentPage)
     loadPage(currentPage)
 }
- 
+
+const nextPageButton = document.getElementById('nextPage')
+
+nextPageButton.addEventListener('click', () => {
+    nextPage()
+})
+
 const previousPage = async () => {
     currentPage = currentPage - 1 < 1 ? currentPage : currentPage - 1
     
@@ -271,29 +298,21 @@ function hasValue(input, message) {
     }
 }
 
-/* SORTING FUNCTIONS */
+/* SORTING FUNCTION */
 
-const orderDate = () => {
-    const table = document.getElementById(`table`)
-    modalInfo.style.display = 'block'
-}
+const orderingTable = async (key) => {
 
-function OrderMaking() {
-
-    let numeros = []
-    for (let i = 0;i<3;i++){
-    let num = 0
-    io.write("Digite um número...:")
-    num = io.readInt();
-    numeros.push(num)
-}
-
-//trocando um número de posição no vetor
-
-let aux = 0
-aux = numeros[2]
-numeros[2] = numeros[1]
-numeros[1] = aux
+    if(ordering) {
+        const ascMode = await fetch(`http://localhost:3000/tasks?_sort=${key}&_order=asc`)
+        const ascTasks = await ascMode.json()
+        renderTasks(ascTasks)
+        ordering = false
+    }else{
+        const descMode = await fetch(`http://localhost:3000/tasks?_sort=${key}&_order=desc`)
+        const descTasks = await descMode.json()
+        renderTasks(descTasks)
+        ordering = true
+    }
 }
 
 /* LIGHT MODE / DARK MODE */
@@ -308,22 +327,30 @@ const divPurple = document.getElementById('div-purple')
 const divGray = document.getElementById('div-grey')
 const divOrange = document.getElementById('div-orange')
 const buttonsPaging = document.getElementById('buttonsPaging')
-const buttons = document.querySelectorAll("button");
+const selectStatus = document.getElementById('selectStatus')
+const buttons = document.querySelectorAll("button")
 const modals = document.getElementsByClassName('classModal')
+const inputs = document.querySelectorAll("input")
 
-const switchMode = () =>{
-    if (contraste) {
+const switchMode = () => {
+    let dark = ''
+    let light = 'light'
+    if(contrast) {
         lightMode()
-        contraste = false
-    } else {
+        contrast = false
+        localStorage.setItem("contrast", light)
+    }else {
         darkMode()
-        contraste = true
+        contrast = true
+        localStorage.setItem("contrast", dark)
     }
 }
 
-const lightMode = () => {
-    searchInput.style.backgroundColor = ''
-    
+buttonBack.addEventListener('click', () => {
+    switchMode()
+})
+
+const lightMode = () => {   
     background.style.backgroundColor = 'var(--background)'
 
     iconButton.src = "../assets/moon.svg"
@@ -346,19 +373,24 @@ const lightMode = () => {
     
     footerHelp.className = ''
     
-    for(let iterador = 0; iterador < buttons.length; iterador++){
-        buttons[iterador].className = 'light-button'
+    for(let counter = 0; counter < buttons.length; counter++){
+        buttons[counter].className = 'light-button'
     }
 
     for (let counter = 0; counter < modals.length; counter++) {
         modals[counter].className = 'classModal modalBack-light downToUpAnimation'  
     }
+
+    for (let counter = 0; counter < modals.length; counter++) {
+        inputs[counter].style.backgroundColor = 'var(--background)'  
+    }
+
+    selectStatus.style.backgroundColor = 'var(--background)'
+
+    searchInput.style.backgroundColor = ''
 }
 
 const darkMode = () => {
-
-    searchInput.style.backgroundColor = 'var(--darkpurple)'
-
     background.style.backgroundColor = 'var(--darkBackground)'
 
     iconButton.src = "../assets/sun.svg"
@@ -381,18 +413,34 @@ const darkMode = () => {
 
     footerHelp.className = 'dark-footer'
     
-    for(let iterador = 0; iterador < buttons.length; iterador++){
-        buttons[iterador].className = 'dark-button'
+    for(let counter = 0; counter < buttons.length; counter++){
+        buttons[counter].className = 'dark-button'
     }
 
     for (let counter = 0; counter < modals.length; counter++) {
         modals[counter].className = 'classModal modalBack-dark text-purple downToUpAnimation'  
     }
+
+    for (let counter = 0; counter < modals.length; counter++) {
+        inputs[counter].style.backgroundColor = 'var(--greypurple)'
+    }
+
+    selectStatus.style.backgroundColor = 'var(--greypurple)'
+
+    searchInput.style.backgroundColor = 'var(--darkpurple)'
 }
 
-/* SEASON STORAGE FUNCTIONS */
+/* SEASON/LOCALE STORAGE FUNCTIONS */
 
-//DON'T FORGET TO STUDY THIS!
+const contrastMode = () => {
+    if(contrast) {
+        lightMode()
+    }else {
+        darkMode()
+    }
+}
+
+
 
 /* https://developer.mozilla.org/pt-BR/docs/Web/API/Window/sessionStorage
 

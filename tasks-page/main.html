@@ -34,7 +34,7 @@
 
   </head>
 
-  <body onload="getTasksRender(); weatherInfo(); tasksPagesTotal(); currentPageNum(1);"><!-- How to make the darkmode stay turned on?switchMode() -->
+  <body onload="getTasksRender(); weatherInfo(); tasksPagesTotal(); currentPageNum(1); contrastMode()"><!-- How to make the darkmode stay turned on?switchMode() -->
     <div class="div-purple" id="div-purple"></div>
     <div class="div-grey" id="div-grey"></div>
 
@@ -53,7 +53,7 @@
         <div id="page-title">
           <i class="fa-regular fa-clipboard fa-xl"></i>
           <span class="mb-3">Gerenciador de Tarefas</span><br />
-          <button id="newTaskButton" onclick="openModal('modalNewTask')">+ Adicionar Nova Tarefa</button>
+          <button id="newTaskButton" onclick="openModal('modalNewTask');clearModalNewTask()">+ Adicionar Nova Tarefa</button>
         </div>
 
         <div id="weather">
@@ -69,7 +69,7 @@
         </div>
 
         <div id="darkMode">
-          <div id="darkModeContent" onclick="switchMode()"><img width="25px" id="iconMode" src="../assets/moon.svg"></div>
+          <div id="darkModeContent"><img width="25px" id="iconMode" src="../assets/moon.svg"></div>
         </div>
 
       </header>
@@ -81,7 +81,7 @@
       <div id="tableHeader"  class="d=flex flex-row justify-content-between flex-nowrap">
 
         <div id="buttonsFilter">
-          <button onclick="getTasksRender()" id="btnAll">Todas</button>
+          <button onclick="getTasksRender()">Todas</button>
           <button id="btnToday" onclick="todayTasks()">Hoje</button>
           <button onclick="filterTasks('Em progresso')" id="btnRunning">Em Progresso</button>
           <button onclick="filterTasks('Em pausa')" id="btnPause">Em Pausa</button>
@@ -101,10 +101,10 @@
         <table class="table table-responsive" id="table"><!-- Study table proprieties. Sorry! I'm sleepy table-striped table-hover-->
           <thead id="tHead" class="font-weight-bold">
             <tr>
-              <th scope="col">Núm<i class="fa-solid fa-caret-down"></i></th><!-- add button sort -->
-              <th scope="col">Descrição<i class="fa-solid fa-caret-down"></i></th>
-              <th scope="col">Data de Entrega</th>
-              <th scope="col">Status</th>
+              <th scope="col">Núm <i onclick="orderingTable('number')" class="fa-solid fa-caret-down"></i></th><!-- add button sort -->
+              <th scope="col">Descrição <i onclick="orderingTable('description')" class="fa-solid fa-caret-down"></i></th>
+              <th scope="col">Data de Entrega <i onclick="orderingTable('date')" class="fa-solid fa-caret-down"></i></th>
+              <th scope="col">Status <i onclick="orderingTable('status')" class="fa-solid fa-caret-down"></i></th>
               <th scope="col">Ação</th>
             </tr>
           </thead>
@@ -139,7 +139,7 @@
           <form id="formNewTask">
             <div>
               <label for="number">Número</label><br />
-              <input type="number" min="0" id="number" name="number"/>
+              <input type="number" min="1" id="number" name="number"/>
               <small>&nbsp;</small>
             </div>
             <br>
@@ -159,24 +159,24 @@
             <div>
               <label for="status">Status</label>
               <br>
-              <select name="status">
+              <select id="selectStatus" name="status">
                 <option disabled selected>
                   Escolha uma opção
                 </option>
-                <option value="Em progresso">Em Progresso</option>
-                <option value="Em pausa">Em Pausa</option>
+                <option value="Em progresso">Em progresso</option>
+                <option value="Em pausa">Em pausa</option>
                 <option value="Concluído">Concluído</option>
               </select>
                 <small id="statusSmall">&nbsp;</small>
             </div>
             <br>
             <div id="modal-footer">
-              <button id="cancelButton" type="reset" onclick="closeModal('modalNewTask')">Cancelar</button>
-              <button type="submit" >Salvar</button><!-- id="submitButton" -->
+              <div id="cancelButton" type="reset" onclick="closeModal('modalNewTask');clearModalNewTask()">Cancelar</div>
+              <button id="submitButton" type="submit">Salvar</button>
           </div>
           </form>
         </div>
-      </div><!-- Modal ending -->
+      </div><!-- ModalNewTask ending -->
 
       <div id="modalConfirmation" class="modalMain">
         <div id="modalConfirmationContent" class="classModal modalBack-light upToDownAnimation">
@@ -202,10 +202,10 @@
 
           <div id="helpBody">
           <div>
-            <button class="mb-3" onclick="openModal('modalEditConfirm');closeModal('modalHelp')">Dados da minha conta</button>
+            <button onclick="openModal('modalEditConfirm');closeModal('modalHelp')">Dados da minha conta</button>
           </div>
           <div>
-            <button class="mb-3 deleteAccount" onclick="confirmDeleteUser();closeModal('modalHelp')">Excluir minha conta</button>
+            <button class="deleteAccount" onclick="confirmDeleteUser();closeModal('modalHelp')">Excluir minha conta</button>
           </div>          
         </div>
         <span class="closeButton" onclick="closeModal('modalHelp')">&times;</span>

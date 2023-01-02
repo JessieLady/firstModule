@@ -11,35 +11,28 @@
   ],
   "tasks": [
     {
-      "number": "1",
-      "description": "Go to the mall",
-      "date": "2023-01-25",
-      "status": "Em progresso",
-      "id": 1
-    },
-    {
       "number": "3",
       "description": "Consertar Ar condicionado",
       "date": "2023-01-02",
-      "status": "Em progresso",
+      "status": "Em pausa",
       "id": 3
     },
     {
       "number": "4",
       "description": "Jogar Resident Evil",
       "date": "2023-01-09",
-      "status": "Em progresso",
+      "status": "Concluído",
       "id": 4
     },
     {
       "number": "8",
       "description": "Ver o portão",
       "date": "2023-01-06",
-      "status": "Em progresso",
+      "status": "Concluído",
       "id": 5
     },
     {
-      "number": "6",
+      "number": "5",
       "description": "Desmontar a árvore",
       "date": "2023-01-06",
       "status": "Em progresso",
@@ -48,7 +41,7 @@
     {
       "number": "7",
       "description": "Ver se o atrasado funciona",
-      "date": "2023-01-01",
+      "date": "2023-01-05",
       "status": "Em progresso",
       "id": 7
     },
@@ -58,6 +51,76 @@
       "date": "2023-01-05",
       "status": "Em pausa",
       "id": 8
+    },
+    {
+      "number": "6",
+      "description": "Go to the zoo",
+      "date": "2023-01-19",
+      "status": "Em pausa",
+      "id": 9
+    },
+    {
+      "number": "9",
+      "description": "Guardar as compras",
+      "date": "2023-01-11",
+      "status": "Concluído",
+      "id": 10
+    },
+    {
+      "number": "10",
+      "description": "Hora de aventura!",
+      "date": "2023-01-17",
+      "status": "Em progresso",
+      "id": 11
+    },
+    {
+      "number": "11",
+      "description": "Abraçar a Isabelle",
+      "date": "2023-01-16",
+      "status": "Em progresso",
+      "id": 12
+    },
+    {
+      "number": "12",
+      "description": "Sair para correr",
+      "date": "2023-01-16",
+      "status": "Em progresso",
+      "id": 13
+    },
+    {
+      "number": "13",
+      "description": "Terminar o dorama",
+      "date": "2023-01-09",
+      "status": "Em pausa",
+      "id": 14
+    },
+    {
+      "number": "15",
+      "description": "Arrumar o github",
+      "date": "2023-01-10",
+      "status": "Em progresso",
+      "id": 15
+    },
+    {
+      "number": "14",
+      "description": "fazer torta",
+      "date": "2023-01-11",
+      "status": "Em progresso",
+      "id": 16
+    },
+    {
+      "number": "1",
+      "description": "Comer bis",
+      "date": "2023-01-13",
+      "status": "Em pausa",
+      "id": 17
+    },
+    {
+      "number": "3",
+      "description": "Go to the mall",
+      "date": "2023-01-11",
+      "status": "Em progresso",
+      "id": 18
     }
   ]
 }
