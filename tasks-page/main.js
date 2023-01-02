@@ -92,7 +92,7 @@ const deleteTask = async (id) => {
 }
 
 const getTasksRender = async () => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks?_limit=13')//
+    const tasksResponse = await fetch('http://localhost:3000/tasks?_limit=10')//
     const tasks = await tasksResponse.json()
     renderTasks(tasks)
 }
@@ -229,15 +229,14 @@ formNewTask.addEventListener('submit', (event) => {
 /* PAGING FUNCTIONS */
 
 const loadPage = async (pageNum) => {
-    const tasksResponse = await fetch(`http://localhost:3000/tasks?_limit=13&_page=${pageNum}`)//
+    const tasksResponse = await fetch(`http://localhost:3000/tasks?_limit=10&_page=${pageNum}`)//
     const tasks = await tasksResponse.json()
     renderTasks(tasks)
 }
 
 const nextPage = async () => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks')//
-    const tasks = await tasksResponse.json()
-    let pagesTotal = Math.ceil(tasks.length / 13)
+    const tasks = await getTasksReturn()
+    let pagesTotal = Math.ceil(tasks.length / 10)
 
     currentPage = currentPage + 1 > pagesTotal ? currentPage : currentPage + 1
     
@@ -266,9 +265,8 @@ spanPage.innerHTML = `${page}`
 const tasksPagesTotal = async () => {
     const pagesLength = document.getElementById('pagesLength')
 
-    const tasksResponse = await fetch('http://localhost:3000/tasks')//
-    const tasks = await tasksResponse.json()
-    let pagesTotal = Math.ceil(tasks.length / 13)
+    const tasks = await getTasksReturn()
+    let pagesTotal = Math.ceil(tasks.length / 10)
     
     pagesLength.innerHTML = pagesTotal
 }
@@ -335,20 +333,24 @@ const inputs = document.querySelectorAll("input")
 const switchMode = () => {
     let dark = ''
     let light = 'light'
+    
     if(contrast) {
         lightMode()
-        contrast = false
+        contrast = dark
         localStorage.setItem("contrast", light)
     }else {
         darkMode()
-        contrast = true
         localStorage.setItem("contrast", dark)
+        console.log('escuro')
+        contrast = light
     }
 }
 
-buttonBack.addEventListener('click', () => {
+contrast = localStorage.getItem("contrast")
+
+/* buttonBack.addEventListener('click', () => {
     switchMode()
-})
+}) *///This is double clicking the switchMode!!! Fix this...
 
 const lightMode = () => {   
     background.style.backgroundColor = 'var(--background)'
@@ -497,8 +499,7 @@ const weatherInfo = async () => {
 /* FILTER TASKS FUNCTIONS */
 
 const filterTasks = async (status) => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks')
-    const tasks = await tasksResponse.json()
+    const tasks = await getTasksReturn()
     const filterTasks = tasks.filter((valor) => {
         if(valor.status === status) return true
         return false
@@ -507,8 +508,7 @@ const filterTasks = async (status) => {
 }
 
 const lateTasks = async () => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks')
-    const tasks = await tasksResponse.json()
+    const tasks = await getTasksReturn()
 
     const tasksLate = tasks.filter((task) => { 
         const date = new Date(task.date)
@@ -525,8 +525,7 @@ const warningLateTask = () => {
 }
 
 const todayTasks = async () => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks')
-    const tasks = await tasksResponse.json()
+    const tasks = await getTasksReturn()
 
     const tasksToday = tasks.filter((task) => { 
         const date = new Date(task.date)

@@ -34,7 +34,7 @@
 
   </head>
 
-  <body onload="getTasksRender(); weatherInfo(); tasksPagesTotal(); currentPageNum(1); contrastMode()"><!-- How to make the darkmode stay turned on?switchMode() -->
+  <body onload="getTasksRender(); weatherInfo(); tasksPagesTotal(); currentPageNum(1); contrastMode()">
     <div class="div-purple" id="div-purple"></div>
     <div class="div-grey" id="div-grey"></div>
 
@@ -47,7 +47,7 @@
         </div>
 
         <div id="logo">
-          <img id="logoArnia" src="../assets/logo-purple.svg" alt="Logo Arnia" />
+          <a href="https://arnia.com.br/" target="_blank"><img width="150px" id="logoArnia" src="../assets/logo-purple.svg" alt="Logo Arnia" /></a>
         </div>
 
         <div id="page-title">
@@ -69,7 +69,7 @@
         </div>
 
         <div id="darkMode">
-          <div id="darkModeContent"><img width="25px" id="iconMode" src="../assets/moon.svg"></div>
+          <div id="darkModeContent" onclick="switchMode()"><img width="25px" id="iconMode" src="../assets/moon.svg"></div><!--   -->
         </div>
 
       </header>
@@ -101,10 +101,10 @@
         <table class="table table-responsive" id="table"><!-- Study table proprieties. Sorry! I'm sleepy table-striped table-hover-->
           <thead id="tHead" class="font-weight-bold">
             <tr>
-              <th scope="col">Núm <i onclick="orderingTable('number')" class="fa-solid fa-caret-down"></i></th><!-- add button sort -->
-              <th scope="col">Descrição <i onclick="orderingTable('description')" class="fa-solid fa-caret-down"></i></th>
-              <th scope="col">Data de Entrega <i onclick="orderingTable('date')" class="fa-solid fa-caret-down"></i></th>
-              <th scope="col">Status <i onclick="orderingTable('status')" class="fa-solid fa-caret-down"></i></th>
+              <th scope="col">Núm <i onclick="orderingTable('number')" class="fa-solid fa-caret-down iconTable"></i></th><!-- add button sort -->
+              <th scope="col">Descrição <i onclick="orderingTable('description')" class="fa-solid fa-caret-down iconTable"></i></th>
+              <th scope="col">Data de Entrega <i onclick="orderingTable('date')" class="fa-solid fa-caret-down iconTable"></i></th>
+              <th scope="col">Status <i onclick="orderingTable('status')" class="fa-solid fa-caret-down iconTable"></i></th>
               <th scope="col">Ação</th>
             </tr>
           </thead>
@@ -112,7 +112,6 @@
           </tbody>
         </table>
       </div><!-- content ending -->
-
       <div id="buttonsPaging">
         <div id="previousPage" class="pagingButtons" onclick="previousPage()">
           <i class="fa-solid fa-chevron-left"></i> Anterior 
@@ -120,10 +119,11 @@
         <div id="pagesNum">
           <span id="currentPage">1 </span>/<span id="pagesLength">4</span>
         </div>
-        <div id="nextPage" class="pagingButtons" onclick="nextPage()">
-          Próximo <i class="fa-solid fa-chevron-right"></i>
+        <div id="nextPage" class="pagingButtons">
+          Próximo <i class="fa-solid fa-chevron-right"></i><!-- onclick="nextPage()" -->
         </div>
       </div>
+
       <div id="footerHelp">
         <p id="footerHelpContent" onclick="openModal('modalHelp')">Tenho um problema com a minha conta!</p>
       </div>
@@ -259,7 +259,7 @@
         <div id="modalDeleteConfirmContent" class="classModal upToDownAnimation">
           <span class="closeButton" onclick="closeModal('modalDeleteConfirm')">&times;</span>
           <h2><strong>Ah! mas você já vai?</strong></h2>
-          <h4>Isso irá deletar suas tarefas e seus dados</h4>
+          <h4>Isso irá deletar suas tarefas e seus dados.</h4>
           <h5>Por favor, insira sua senha para <br> confirmar a exclusão da sua conta</h5>
           <label class="mb-2" for="passConfirmDelete">Sua senha</label>
           <input id="passConfirmDelete" name="passConfirmDelete" type="password">

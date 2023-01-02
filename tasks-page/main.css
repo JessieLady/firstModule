@@ -90,10 +90,7 @@ small {
     color: red;
     font-size: 9px;
 }
-i:hover{
-    color: var(--darkorange);
-    cursor: pointer;
-}
+
 /* MODALS */
 
 .modalMain{
@@ -595,7 +592,7 @@ i:hover{
     gap: 20px;
 
     position: absolute;
-    bottom: 0;
+    bottom: 85px;
     left: 100px;
 }
 .pagingButtons{
@@ -632,4 +629,9 @@ i:hover{
 
 #header{
     color: var(--purple);
+}
+
+.iconTable:hover{
+    color: var(--darkorange);
+    cursor: pointer;
 }

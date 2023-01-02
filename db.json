@@ -7,6 +7,22 @@
       "email": "jessie.moura19@gmail.com",
       "password": "pastel",
       "id": 1
+    },
+    {
+      "name": "Ana Carolina",
+      "city": "Nova Iguaçu",
+      "login": "carol123",
+      "email": "carol123@gmail.com",
+      "password": "123456",
+      "id": 2
+    },
+    {
+      "name": "Isabelle",
+      "city": "Nova Iguaçu",
+      "login": "nhenhe",
+      "email": "isabelle@gmail.com",
+      "password": "123456",
+      "id": 3
     }
   ],
   "tasks": [
@@ -14,7 +30,7 @@
       "number": "3",
       "description": "Consertar Ar condicionado",
       "date": "2023-01-02",
-      "status": "Em pausa",
+      "status": "Em progresso",
       "id": 3
     },
     {
@@ -42,14 +58,14 @@
       "number": "7",
       "description": "Ver se o atrasado funciona",
       "date": "2023-01-05",
-      "status": "Em progresso",
+      "status": "Concluído",
       "id": 7
     },
     {
       "number": "2",
       "description": "Ouvir Linkin Park",
       "date": "2023-01-05",
-      "status": "Em pausa",
+      "status": "Em progresso",
       "id": 8
     },
     {
@@ -121,6 +137,41 @@
       "date": "2023-01-11",
       "status": "Em progresso",
       "id": 18
+    },
+    {
+      "number": "19",
+      "description": "Ir no shopping",
+      "date": "2023-01-10",
+      "status": "Em progresso",
+      "id": 19
+    },
+    {
+      "number": "20",
+      "description": "Cortar os morangos",
+      "date": "2023-01-11",
+      "status": "Em progresso",
+      "id": 20
+    },
+    {
+      "number": "3",
+      "description": "Conversar com Mariana",
+      "date": "2023-01-18",
+      "status": "Em progresso",
+      "id": 21
+    },
+    {
+      "number": "21",
+      "description": "Levar lixo para fora",
+      "date": "2023-01-25",
+      "status": "Em progresso",
+      "id": 22
+    },
+    {
+      "number": "22",
+      "description": "Lavar roupa",
+      "date": "2023-01-11",
+      "status": "Em progresso",
+      "id": 23
     }
   ]
 }
