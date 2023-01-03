@@ -25,7 +25,7 @@
     --greenStatus: #27AE60;
     --orangeStatus: #F8B04E;
     --redStatus: #EB5757;
-    --blueStatus: #1034ff;
+    --blueStatus: #6e83fc;
     /* color from figma #011379 - blue status */
     
     /* Arnia Website Palet */
@@ -36,6 +36,7 @@
     --greypurple: #AB9EA2;
 
     --darkorange: #c77b17;
+    
 }
 
 body{
@@ -43,8 +44,9 @@ body{
     flex-direction: row;
 }
 
-/* SELECTORS BY TAG NAME */
 
+
+/* SELECTORS BY TAG NAME */
 span{
     margin-left: 5px;
 }
@@ -54,6 +56,9 @@ input{
     border-radius: 7px;
     border: 1px solid gray;
     background-color: unset;
+}
+input:focus{
+    outline: none;
 }
 select{
     margin: 5px 0px;
@@ -85,6 +90,7 @@ small {
     color: red;
     font-size: 9px;
 }
+
 /* MODALS */
 
 .modalMain{
@@ -105,7 +111,7 @@ small {
     margin: 60px auto;
     position: relative;
 }
-#modalEditContent{
+#modalEditConfirmContent{
     width: 25vw;
     height: 300px;
     margin: 200px auto;
@@ -122,7 +128,7 @@ small {
     display: none;
     position: fixed;
     width: 30vw;
-    height: 25vh;
+    height: 20vh;
     z-index: 1;
     bottom: 0;
     right: 0;
@@ -133,8 +139,7 @@ small {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    gap: 10px;
+    justify-content: center;
 }
 #modalHelpContent{
     background-color: var(--background);
@@ -143,9 +148,9 @@ small {
     text-align: center;
 
     width: 25%;
-    height: 50%;
+    height: 30%;
     padding: 10px;
-    margin: 100px auto;
+    margin: 200px auto;
     border-radius: 10px;
     border: 3px solid var(--yellow);
 
@@ -169,29 +174,46 @@ small {
     justify-content: space-between;
     position: relative;
 }
-#passConfirm{ /* I need to see what is this 'cause i don't remember */
-    display: none;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0,0,0,0.5);
-}
-#passConfirmContent{
-    width: 25vw;
-    height: 200px;
-    margin: 200px auto;
-    padding: 15px;
+#modalDeleteConfirmContent{
     background-color: var(--background);
-    border: 2px solid var(--yellow);/* could i put these colors in the body? */
+    color: var(--purple);
+
+    text-align: center;
+
+    width: 25%;
+    height: 50%;
+    padding: 10px;
+    margin: 200px auto;
+    border-radius: 10px;
+    border: 3px solid var(--yellow);
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 10px;
     position: relative;
 }
+#modalEditInfoContent{
+    background-color: var(--background);
+    color: var(--purple);
+    width: 22%;
+    height: 65%;
+    padding: 10px;
+    margin: 80px auto;
+    border-radius: 10px;
+    border: 5px solid var(--yellow);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    position: relative;
+}
+
+
 /* BACKGROUND */
 
 .container{
@@ -231,6 +253,7 @@ small {
     transform: rotate(25deg);
     right: 0;
     top: 90px;
+    color: #f18b8b;
 }
 
 /* PSEUDO BOOTSTRAP CLASSES */
@@ -242,7 +265,7 @@ small {
     color: var(--background) !important;
 }
 .color-orange{
-    color: var(--yellow);
+    color: var(--yellow) !important;
 }
 .color-white{
     color: var(--background) !important;
@@ -261,19 +284,38 @@ small {
 .disabled{
     cursor: not-allowed;
 }
+.lateTask{
+    color: #f18b8b !important;
+    border-color: #f18b8b;
+}
+.lateTask:hover{
+    color: var(--purple) !important;
+    background-color: #f18b8b;
+}
+.deleteAccount{
+    color: #f18b8b !important;
+    border-color: #f18b8b;
+}
+.deleteAccount:hover{
+    color: var(--purple) !important;
+    background-color: #f18b8b;
+}
+.classModal{
+    background-color: var(--background);
+}
 /* ANIMATIONS */
 
-.downToUpAnimation{
-    animation: downToUp 0.5s running 1;;
+.upToDownAnimation{
+    animation: upToDown 0.5s running 1;;
 }
-@keyframes downToUp{
+@keyframes upToDown{
     0%{transform: translateY(-300px);}
     100%{transform: translateY(0px);}
 }
-.upToDownAnimation{
-    animation: upToDown 0.5s running 1;
+.downToUpAnimation{
+    animation: downToUp 0.5s running 1;
 }
-@keyframes upToDown{
+@keyframes downToUp{
     0%{transform: translateY(300px);}
     100%{transform: translateY(0px);}
 }
@@ -325,14 +367,14 @@ small {
     text-align: center;
     width: 40px;
     height: 40px;
-    border-radius: 10px;
+    border-radius: 40%;
     padding: 7px;
     cursor: pointer;
 
     background-color: var(--purple);
 }
 #darkModeContent:hover{
-    border-radius: 7px;
+    border-radius: 50%;
 }
 /* STATUS COLORS */
 
@@ -364,7 +406,10 @@ small {
     top: 100px;
     margin: 50px 40px;
     font-weight: 800;
-    color: var(--purple);
+    
+}
+#page-title>button{
+    margin-top: 20px;
 }
 #logoutButton{
     border-radius: 19px; 
@@ -392,12 +437,12 @@ small {
     border: none;
     cursor: pointer;
     padding: 5px;
-    background-color: white;
+    /* background-color: white; */
     font-size: 12px;
     color: var(--cancelButton);
 }
 #cancelButton:hover{
-    background-color: white;
+    /* background-color: white; */
     color: var(--cancelButton);
     text-decoration: underline;
 }
@@ -439,6 +484,13 @@ small {
     font-size: 18px;
     margin-top: 70px;
 }
+
+#helpBody{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 /* WEATHER ELEMENTS */
 
 #weather{
@@ -448,7 +500,7 @@ small {
     width: fit-content;
     height: 20vh;
     padding: 1px;
-    color: var(--purple);
+    /* color: var(--purple); */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -457,7 +509,7 @@ small {
 #firstLine{
     font-size: 50px;
     font-weight: 650;
-    color: var(--purple);
+    /* color: var(--purple); */
     text-align: center;
 }
 #secondLine{
@@ -470,14 +522,13 @@ small {
 /* TABLE HEADER ELEMENTS */
 
 #tableHeader{
-    width: 70%;
+    width: 65%;
     height: 50px;
-    border: none;
 
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 30px;
+    gap: 10px;
 
     margin: 33px 0px 33px;
 
@@ -541,7 +592,7 @@ small {
     gap: 20px;
 
     position: absolute;
-    bottom: 0;
+    bottom: 85px;
     left: 100px;
 }
 .pagingButtons{
@@ -572,5 +623,15 @@ small {
     cursor: pointer;
 }
 
+#content{
+    overflow-y: scroll;
+}
 
+#header{
+    color: var(--purple);
+}
 
+.iconTable:hover{
+    color: var(--darkorange);
+    cursor: pointer;
+}

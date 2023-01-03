@@ -1,73 +1,32 @@
-const modal = document.getElementById('modal')
-const content = document.getElementById('content')
-const form = document.getElementById('form')
-const button = document.getElementById('submitButton')
+/* Global consts */
 
-let contraste = false
+const formNewTask = document.getElementById('formNewTask')
+
+let ordering = true
+
+let contrast = localStorage.getItem("contrast")
+
 let currentTask = null
-let currentUser = 1// carol Account
+let currentPage = null
+let currentUser = 1// Jessica Account
 
 const NUM_EMPTY = 'Insira um número.'
 const DESCRIPTION_EMPTY = 'Insira uma descrição.'
 const DATE_EMPTY = 'Escolha uma data.'
 const STATUS_EMPTY= 'Escolha um status.'
 
-const numberField = document.getElementById('number')
-const descriptionField = document.getElementById('description')
-const dateField = document.getElementById('date')
-const statusField = document.getElementById('status')
+const footerHelp = document.getElementById('footerHelp')
+const modalHelpUser = document.getElementById('modalHelpContent')
 
 const modalNewTask = document.getElementById('modalNewTaskContent')
-const modalHelpUser = document.getElementById('modalHelpContent')
 const modalEditUser = document.getElementById('modalEditContent')
 const modalInfoConf = document.getElementById('modalInfoContent')
 
-const divPurple = document.getElementById('div-purple')
-const divGray = document.getElementById('div-grey')
-const divOrange = document.getElementById('div-orange')
-
-const logoutButton = document.getElementById('logoutButton')
-const btnToday = document.getElementById('btnToday')
-const btnRunning = document.getElementById('btnRunning')
-const btnPause = document.getElementById('btnPause')
-const btnFinished = document.getElementById('btnFinished')
-const btnLate = document.getElementById('btnLate')
-
 const searchInput = document.getElementById('searchField')
-
-const modalHelp = document.getElementById('footerHelp')
-
-const trTable = document.getElementById('trTable')
-const pageTitle = document.getElementById('page-title')
-const tHead = document.getElementById('tHead')
-const buttonsPaging = document.getElementById('buttonsPaging')
-
-const weather = document.getElementById('weather')
-const hello = document.getElementById('firstLine')
-
-const iconButton = document.getElementById('iconMode')
-const buttonBack = document.getElementById('darkModeContent')
-const background = document.getElementById('div-white')
-const logo = document.getElementById('logoArnia')
-
-const tableBody = document.getElementById('tbody-content')
-
-const newTaskButton = document.getElementById('newTaskButton')
-
-const weatherName = document.getElementById('weatherName')
-const weatherCity = document.getElementById('weatherCity')
-const weatherTemp = document.getElementById('weatherTemp')
-const weatherCond = document.getElementById('weatherCond')
-const weatherHour = document.getElementById('weatherHour')
-const weatherDate = document.getElementById('weatherDate')
 
 const inDate = new Date()
 const inDay = inDate.toLocaleDateString("pt-BR")
-const inTime = inDate.toTimeString()
-
-const buttons = document.querySelectorAll("button");
-
-//diminuir a quantidade de variaveis globais
+const inToday = `${inDate.getFullYear()}-${(inDate.getMonth())+1}-${inDate.getDate()}`
 
 /* MODAL'S FUNCTIONS */
 
@@ -81,19 +40,21 @@ const closeModal = (idModal) => {
     modal.style.display = 'none'
 }
 
-
+/* TASKS' FUNCTIONS SECTION */
 const renderTasks = (tasks) => {
     const tasksContent = document.getElementById('tbody-content')
     tasksContent.innerHTML = ''
     tasks.forEach((task) => {
         const date = new Date(task.date)
         const dateFormated = date.toLocaleDateString("pt-BR", {timeZone: 'UTC'})
-
         if(task.status === 'Concluído'){
             task.description = `<del>${task.description}</del>`
+        } else if(inDay > dateFormated && task.status !== 'Concluído'){
+            task.status = 'Atrasado'
+            warningLateTask()
         }
         
-        tasksContent.innerHTML = tasksContent.innerHTML + `<tr class='text-purple' id='trTable'>
+        tasksContent.innerHTML = tasksContent.innerHTML + `<tr id='trTable'>
         <td scope="row">${task.number}</td>
         <td>${task.description}</td>
         <td>${dateFormated}</td>
@@ -105,7 +66,6 @@ const renderTasks = (tasks) => {
           </span>
         </td>
       </tr>`
-
     })
 }
 
@@ -125,22 +85,28 @@ const confirmDelete = (idTask) =>{
 })
 }
 
-const getTasks = async () => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks?_limit=5')
+const deleteTask = async (id) => {
+    await fetch(`http://localhost:3000/tasks/${id}`, {
+    method: 'DELETE'
+})
+}
+
+const getTasksRender = async () => {
+    const tasksResponse = await fetch('http://localhost:3000/tasks?_limit=10')//
     const tasks = await tasksResponse.json()
     renderTasks(tasks)
 }
 
-const orderTasks = async () => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks?_limit=5')
+const getTasksReturn = async () => {// decrease the number of API requests with this function
+    const tasksResponse = await fetch('http://localhost:3000/tasks')//
     const tasks = await tasksResponse.json()
-    renderTasks(tasks)
+    return tasks
 }
 
 const getTask = async (id) => {
     const taskResponse = await fetch(`http://localhost:3000/tasks/${id}`)
     const task = await taskResponse.json()
-    return task// It will return an object
+    return task
 }
 const newTask = async (task) => {
     await fetch('http://localhost:3000/tasks', {
@@ -153,6 +119,19 @@ const newTask = async (task) => {
     })
 }
 
+const clearModalNewTask = () => {
+    const numberField = document.getElementById('number')
+    const descriptionField = document.getElementById('description')
+    const dateField = document.getElementById('date')
+    const select = document.querySelector('#selectStatus');
+
+    numberField.value = ''
+    descriptionField.value = ''
+    dateField.value = ''
+
+    select.options[0].selected = true
+}
+
 const saveTask = async (task) => {
     if(currentTask === null){
         await newTask(task)
@@ -160,7 +139,7 @@ const saveTask = async (task) => {
         await updateTask(currentTask.id, task)
         currentTask = null
     }
-    closeModal('modal')
+    closeModal('modalNewTask')
 }
 const updateTask = async (id, task) => {
     await fetch(`http://localhost:3000/tasks/${id}`, {
@@ -173,6 +152,11 @@ const updateTask = async (id, task) => {
     })
 }
 const editTask = async (id) => {
+
+    const numberField = document.getElementById('number')
+    const descriptionField = document.getElementById('description')
+    const dateField = document.getElementById('date')
+
     currentTask = await getTask(id) 
 
     openModal('modalNewTask')
@@ -180,30 +164,44 @@ const editTask = async (id) => {
     numberField.value = currentTask.number
     descriptionField.value = currentTask.description
     dateField.value = currentTask.date
-    statusField.value = currentTask.status
 
-    button.innerHTML = 'Alterar'
-    button.onclick="updateTask()"
-}
+    let text = currentTask.status
+    let select = document.querySelector('#selectStatus');
 
-const deleteTask = async (id) => {
-    await fetch(`http://localhost:3000/tasks/${id}`, {
-        method: 'DELETE'
-    })
-}
-
-//how too put the last tasks on the top of the table?
-
-form.addEventListener('submit', (event) => {
-    event.preventDefault()//This controls the form' submiting
-
-    const number = form.elements['number'].value
-    const description = form.elements['description'].value
-    const date = form.elements['date'].value
-    const status = form.elements['status'].value
-    const task = {// this will gather task' info to the function that will send to the api 
-        number, description, date, status
+    for (let counter = 0; counter < select.options.length; counter++) {
+        if (select.options[counter].text === text) {
+            select.options[counter].selected = true
+        }
     }
+
+    const button = document.getElementById('submitButton')
+    button.innerHTML = 'Alterar'
+}
+
+class Task {
+    number
+    description
+    date
+    status
+    constructor(number, description, date, status) {
+        this.number = number
+        this.description = description
+        this.date = date
+        this.status = status
+    }
+}
+
+//const button = document.getElementById('submitButton')
+
+formNewTask.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    const number = formNewTask.elements['number'].value
+    const description = formNewTask.elements['description'].value
+    const date = formNewTask.elements['date'].value
+    const status = formNewTask.elements['status'].value
+
+    const task = new Task(number, description, date, status)
     saveTask(task)
 })
 
@@ -228,6 +226,53 @@ form.addEventListener('submit', (event) => {
 })
  */
 
+/* PAGING FUNCTIONS */
+
+const loadPage = async (pageNum) => {
+    const tasksResponse = await fetch(`http://localhost:3000/tasks?_limit=10&_page=${pageNum}`)//
+    const tasks = await tasksResponse.json()
+    renderTasks(tasks)
+}
+
+const nextPage = async () => {
+    const tasks = await getTasksReturn()
+    let pagesTotal = Math.ceil(tasks.length / 10)
+
+    currentPage = currentPage + 1 > pagesTotal ? currentPage : currentPage + 1
+    
+    currentPageNum(currentPage)
+    loadPage(currentPage)
+}
+
+const nextPageButton = document.getElementById('nextPage')
+
+nextPageButton.addEventListener('click', () => {
+    nextPage()
+})
+
+const previousPage = async () => {
+    currentPage = currentPage - 1 < 1 ? currentPage : currentPage - 1
+    
+    currentPageNum(currentPage)
+    loadPage(currentPage)
+}
+
+const currentPageNum = (page) => {
+const spanPage = document.getElementById('currentPage')
+spanPage.innerHTML = `${page}`
+}
+
+const tasksPagesTotal = async () => {
+    const pagesLength = document.getElementById('pagesLength')
+
+    const tasks = await getTasksReturn()
+    let pagesTotal = Math.ceil(tasks.length / 10)
+    
+    pagesLength.innerHTML = pagesTotal
+}
+
+/* FIELDS VERIFICATION FUNCTIONS */
+
 function showMessage(input, message, type) {
     const msg = input.parentNode.querySelector('small')
     msg.innerText = message
@@ -251,110 +296,153 @@ function hasValue(input, message) {
     }
 }
 
-const orderDate = () => {
-    const table = document.getElementById(`table`)
-    modalInfo.style.display = 'block'
+/* SORTING FUNCTION */
+
+const orderingTable = async (key) => {
+
+    if(ordering) {
+        const ascMode = await fetch(`http://localhost:3000/tasks?_sort=${key}&_order=asc`)
+        const ascTasks = await ascMode.json()
+        renderTasks(ascTasks)
+        ordering = false
+    }else{
+        const descMode = await fetch(`http://localhost:3000/tasks?_sort=${key}&_order=desc`)
+        const descTasks = await descMode.json()
+        renderTasks(descTasks)
+        ordering = true
+    }
 }
 
-function OrderMaking() {
+/* LIGHT MODE / DARK MODE */
 
-    let numeros = []
-for (let i = 0;i<3;i++){
-    let num = 0
-    io.write("Digite um número...:")
-    num = io.readInt();
-    numeros.push(num)
+const background = document.getElementById('div-white')
+const iconButton = document.getElementById('iconMode')
+const buttonBack = document.getElementById('darkModeContent')
+const logo = document.getElementById('logoArnia')
+const tableBody = document.getElementById('tbody-content')
+const header = document.getElementById('header')
+const divPurple = document.getElementById('div-purple')
+const divGray = document.getElementById('div-grey')
+const divOrange = document.getElementById('div-orange')
+const buttonsPaging = document.getElementById('buttonsPaging')
+const selectStatus = document.getElementById('selectStatus')
+const buttons = document.querySelectorAll("button")
+const modals = document.getElementsByClassName('classModal')
+const inputs = document.querySelectorAll("input")
+
+const switchMode = () => {
+    let dark = ''
+    let light = 'light'
+    
+    if(contrast) {
+        lightMode()
+        contrast = dark
+        localStorage.setItem("contrast", light)
+    }else {
+        darkMode()
+        localStorage.setItem("contrast", dark)
+        console.log('escuro')
+        contrast = light
+    }
 }
 
-//trocando um número de posição no vetor
+contrast = localStorage.getItem("contrast")
 
-let aux = 0
-aux = numeros[2]
-numeros[2] = numeros[1]
-numeros[1] = aux
-}
+/* buttonBack.addEventListener('click', () => {
+    switchMode()
+}) *///This is double clicking the switchMode!!! Fix this...
 
-//super IMPORTANT! Create a class for tasks too.
-
-const lightMode = () => {
+const lightMode = () => {   
     background.style.backgroundColor = 'var(--background)'
+
     iconButton.src = "../assets/moon.svg"
     buttonBack.style.backgroundColor = 'var(--purple)'
-    document.body.style.color = 'var(--indigo)'
-    table.style.color = 'var(--purple)'
+    
     logo.src = '../assets/logo-purple.svg'
     
     tableBody.className = 'table-light text-purple'
+    
     tHead.style.color = 'var(--darkpurple)'
-    tHead.className = 'font-weight-bold table-light'
-    logoutButton.className = 'light-button'
-    weather.style.color = 'var(--purple)'
-    hello.style.color = 'var(--purple)'
-    newTaskButton.className = 'light-button mt-3'
-    pageTitle.style.color = 'var(--purple)'
+    tHead.className = 'font-weight-bold table-light'    
+    
+    header.style.color = 'var(--purple)'
+
     divPurple.style.backgroundColor = 'var(--purple)'
     divGray.style.backgroundColor = 'var(--lightpurple)'
     divOrange.style.backgroundColor = 'var(--yellow)'
-    btnToday.className = 'light-button'
-    btnRunning.className = 'light-button'
-    btnPause.className = 'light-button'
-    btnFinished.className = 'light-button'
-    btnLate.className = 'light-button'
-    searchInput.style.backgroundColor = ''
-    modalHelp.className = ''
+
     buttonsPaging.style.color = 'var(--indigo)'
-    modalNewTask.className = 'modalBack-light downToUpAnimation'
-    modalHelpUser.className = 'modalBack-light downToUpAnimation'
-    modalEditUser.className = 'modalBack-light downToUpAnimation'
-    modalInfoConf.className = 'modalBack-light downToUpAnimation'
+    
+    footerHelp.className = ''
+    
+    for(let counter = 0; counter < buttons.length; counter++){
+        buttons[counter].className = 'light-button'
+    }
+
+    for (let counter = 0; counter < modals.length; counter++) {
+        modals[counter].className = 'classModal modalBack-light downToUpAnimation'  
+    }
+
+    for (let counter = 0; counter < modals.length; counter++) {
+        inputs[counter].style.backgroundColor = 'var(--background)'  
+    }
+
+    selectStatus.style.backgroundColor = 'var(--background)'
+
+    searchInput.style.backgroundColor = ''
 }
 
-const darkMode = () => {//pay attention because the darkmode resets
+const darkMode = () => {
     background.style.backgroundColor = 'var(--darkBackground)'
+
     iconButton.src = "../assets/sun.svg"
     buttonBack.style.backgroundColor = 'var(--darkorange)'
-    logo.src = '../assets/logo.png'//get an svg to this version of Arnia's Logo
-    tableBody.className = 'table-dark text-white'
-    tHead.style.color = 'var(--purple)'
-    tHead.className = 'font-weight-bold table-dark'
-    logoutButton.className = 'dark-button'
-    weather.style.color = 'var(--background)'
-    hello.style.color = 'var(--background)'
-    newTaskButton.className = 'dark-button mt-3'
     
-    pageTitle.style.color = 'var(--background)'
+    logo.src = '../assets/logo.png'
+    
+    tableBody.className = 'table-dark text-white'
+    
+    tHead.style.color = 'white'
+    tHead.className = 'font-weight-bold table-dark'
+    
+    header.style.color = 'var(--background)'
+    
     divPurple.style.backgroundColor = 'var(--darkpurple)'
     divGray.style.backgroundColor = 'var(--purpleple)'
     divOrange.style.backgroundColor = 'var(--darkorange)'
-    btnToday.className = 'dark-button'
-    btnRunning.className = 'dark-button'
-    btnPause.className = 'dark-button'
-    btnFinished.className = 'dark-button'
-    btnLate.className = 'dark-button'
-    searchInput.style.backgroundColor = 'var(--darkpurple)'
-    modalHelp.className = 'dark-footer'
+
     buttonsPaging.style.color = 'var(--background)'
-    modalNewTask.className = 'modalBack-dark text-purple downToUpAnimation'
-    modalHelpUser.className = 'modalBack-dark text-purple downToUpAnimation'
-    modalEditUser.className = 'modalBack-dark text-purple downToUpAnimation'
-    modalInfoConf.className = 'modalBack-dark text-purple downToUpAnimation'
 
-    for(let iterador = 0; iterador < buttons.length; iterador++){
-        buttons[iterador].style.backgroundColor = 'red'
+    footerHelp.className = 'dark-footer'
+    
+    for(let counter = 0; counter < buttons.length; counter++){
+        buttons[counter].className = 'dark-button'
     }
+
+    for (let counter = 0; counter < modals.length; counter++) {
+        modals[counter].className = 'classModal modalBack-dark text-purple downToUpAnimation'  
+    }
+
+    for (let counter = 0; counter < modals.length; counter++) {
+        inputs[counter].style.backgroundColor = 'var(--greypurple)'
+    }
+
+    selectStatus.style.backgroundColor = 'var(--greypurple)'
+
+    searchInput.style.backgroundColor = 'var(--darkpurple)'
 }
 
-const switchMode = () =>{
-    if (contraste) {
+/* SEASON/LOCALE STORAGE FUNCTIONS */
+
+const contrastMode = () => {
+    if(contrast) {
         lightMode()
-        contraste = false
-    } else {
+    }else {
         darkMode()
-        contraste = true
     }
 }
 
-//DON'T FORGET TO STUDY THIS!
+
 
 /* https://developer.mozilla.org/pt-BR/docs/Web/API/Window/sessionStorage
 
@@ -374,13 +462,7 @@ checkSession está no onload do body da página de login */
 
 /* --------------------------------------------------------- */
 
-const getUsers = async () => {//put this function in the main.html
-    const users = await fetch(`http://localhost:3000/users`)
-    const usersResponse = await users.json()
-    return usersResponse
-}
-
-//Preciso aprender a usar o google translator API
+/* WEATHER FUNCTIONS */
 
 const weatherSearch = async (user) => {
     const locals = []
@@ -393,11 +475,16 @@ const weatherSearch = async (user) => {
     return conditions
 }
 
-const weatherInfo = async () => {//use the id as a parameter
+const weatherInfo = async () => {
+
+    const weatherName = document.getElementById('weatherName')
+    const weatherCity = document.getElementById('weatherCity')
+    const weatherTemp = document.getElementById('weatherTemp')
+    const weatherCond = document.getElementById('weatherCond')
 
     const user = await getUsers()
     const userIndex = user.findIndex((valor) => {
-        if(valor.id === currentUser) return true//tá funcionando certinhoooooo!
+        if(valor.id === currentUser) return true
     })    
     const userCity = user[userIndex].city
     const userInfoWeather = await weatherSearch(userCity)
@@ -406,14 +493,13 @@ const weatherInfo = async () => {//use the id as a parameter
     weatherCity.innerHTML = `${userCity}`
     weatherTemp.innerHTML = `${userInfoWeather[0].Temperature.Metric.Value}°C`
     weatherCond.innerHTML = `${userInfoWeather[0].WeatherText}`
-    //weatherHour.innerHTML = `${inTime.getHours().toLocaleDateString('pt-BR')}`
-    //weatherDate.innerHTML = `${inTime.getDate().toLocaleDateString('pt-BR')}`
 
-}
+}//turn weather.text off
+
+/* FILTER TASKS FUNCTIONS */
 
 const filterTasks = async (status) => {
-    const tasksResponse = await fetch('http://localhost:3000/tasks')
-    const tasks = await tasksResponse.json()
+    const tasks = await getTasksReturn()
     const filterTasks = tasks.filter((valor) => {
         if(valor.status === status) return true
         return false
@@ -421,30 +507,147 @@ const filterTasks = async (status) => {
     renderTasks(filterTasks)
 }
 
-const lateTask = async () => {
-    const dateNumber = inDay
-    const tasksResponse = await fetch('http://localhost:3000/tasks')
-    const tasks = await tasksResponse.json()
+const lateTasks = async () => {
+    const tasks = await getTasksReturn()
 
-    const filterLateTasks = tasks.filter((valor) => {
-        let dateD = valor.date
-        if(valor.date) console.log(dateD.toLocaleDateString("pt-BR"), inDay)//acertar o atrasado
+    const tasksLate = tasks.filter((task) => { 
+        const date = new Date(task.date)
+        const dateFormated = date.toLocaleDateString("pt-BR", {timeZone: 'UTC'})     
+        if(inDay > dateFormated && task.status !== 'Concluído') return true
         return false
-        
     })
-    console.log(filterLateTasks)
+    renderTasks(tasksLate)
 }
 
+const warningLateTask = () => {
+    const button = document.getElementById('btnLate')
+    button.className = 'lateTask'
+}
 
-//para fazer o editUser
-//function onclinck com parametro "opção clicada pelo user"
-// um modal para tudo
-//mudar dinamicamente com js
-//input simples talvez?
-//verificação de senha para fazer a alteração
-//modal info para avisar se as alterações foram concretizadas
+const todayTasks = async () => {
+    const tasks = await getTasksReturn()
 
-//TIVE UMA IDEIA PARA DIMINUIR O DARK E LIGHT MODE!
-// maybe we should put a class in the body with all the configs
-//for each way
-//Doable?
+    const tasksToday = tasks.filter((task) => { 
+        const date = new Date(task.date)
+        const dateFormated = date.toLocaleDateString("pt-BR", {timeZone: 'UTC'})     
+        if(dateFormated === inDay && task.status !== 'Concluído') return true
+        return false
+    })
+    renderTasks(tasksToday)
+}
+
+searchInput.addEventListener('input', async () => {
+    const tasks = await getTasksReturn()
+    const input = searchInput.value.toUpperCase();
+
+    let taskSearch = tasks.filter((task) => {
+        let search = task.description.toUpperCase()
+    if(search.includes(input)) return true
+        return false
+    })
+    renderTasks(taskSearch)
+})
+
+/* USER FUNCTIONS */
+
+const getUsers = async () => {//put this function in the main.html
+    const users = await fetch(`http://localhost:3000/users`)
+    const usersResponse = await users.json()
+    return usersResponse
+}
+
+const getUser = async () => {
+    const userResponse = await fetch(`http://localhost:3000/users/${currentUser}`)
+    const user = await userResponse.json()
+    return user
+}
+
+const updateUser = async (id, user) => {
+    await fetch(`http://localhost:3000/users/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+}
+
+const confirmEditUser = async () => {//how i'm going to make this function work?
+
+    const editButton = document.getElementById('editButton')
+    const msgModalInfo = document.getElementById('textModalInfo') 
+
+    const currentUserObj = await getUser(currentUser)
+    editButton.addEventListener('click', () => {
+        if(confirmInput.value !== currentUserObj.password){
+            openModal('modalInfo')
+            msgModalInfo.innerHTML = 'Ocorreu um erro'
+        }else{
+            closeModal('modalEditConfirm')
+            editUser(currentUser)
+            editInput.value = ''
+        }
+    })
+}
+
+//vou parar isso um pouquinho. Cabeça on fire
+
+const editUser = async (id) => {
+    openModal('modalEditInfo')
+    const currentUserObj = await getUser(id)
+
+    const name = document.getElementById('name')
+    const city = document.getElementById('city')
+    const login = document.getElementById('login')
+    const email = document.getElementById('email')
+    const password = document.getElementById('password')
+
+    name.value = currentUserObj.name
+    city.value = currentUserObj.city
+    login.value = currentUserObj.login
+    email.value = currentUserObj.email
+    password.value = currentUserObj.password
+
+    await updateUser(id, currentUserObj)
+    openModal('modalInfo')
+    closeModal('modalEditInfo')
+}
+
+const confirmDeleteUser = async () =>{
+    closeModal('modalHelp')
+    openModal('modalDeleteConfirm')
+
+    const button = document.getElementById('deleteButton')
+    const passwordInput = document.getElementById('passConfirmDelete')
+    const msg = passwordInput.parentNode.querySelector('small')
+    
+    const currentUserObj = await getUser(currentUser)
+
+    const deleteUser = async (id) => {
+        await fetch(`http://localhost:3000/users/${id}`, {
+        method: 'DELETE'
+    })
+    }
+
+    passwordInput.addEventListener('input', () => {
+    if(passwordInput.value.trim() !== currentUserObj.password){
+        msg.innerHTML = 'Senha incorreta'
+        passwordInput.className = 'error'
+    }else{
+        passwordInput.className = 'success'
+        msg.innerHTML = ''
+    }
+    button.addEventListener('click', () => {
+        if(passwordInput.value.trim() === currentUserObj.password){
+            deleteUser(currentUser)
+            window.location.href = '../login-page/index.html'
+        }else{
+            msg.innerHTML = 'Preencha esse campo corretamente'
+            passwordInput.className = 'error'
+        }
+    })
+    //how to delete all the tasks from the user account?
+})
+}
+

@@ -52,10 +52,16 @@ const newUser = async (user) => {
 }
 
 class User {
-    constructor(name, city, login, password) {
+    name
+    city
+    login
+    email
+    password
+    constructor(name, city, login, email, password) {
         this.name = name
         this.city = city
         this.login = login
+        this.email = email
         this.password = password
     }
 }
@@ -66,11 +72,11 @@ formReg.addEventListener("submit", (event) => {
     let name = formReg.elements['name'].value
     let city = formReg.elements['city'].value
     let login = formReg.elements['login'].value
+    let email = formReg.elements['email'].value
     let password = formReg.elements['password'].value
     
-    let user = new User(name, city, login, password)
+    let user = new User(name, city, login, email, password)
     newUser(user)
-
 })
 
 /* Making Login Possible */
@@ -96,11 +102,25 @@ const loginUser = async (login, password) => {
     }
 }
 
+const setSeason = async (login, password) => {
+    //let checkbox = document.getElementById('signIn').checked
+
+    const users = await getUsers()
+    let userLogged = users.filter((user) => {
+        if(login === user.login && password === user.password) return user
+    })
+    console.log(JSON.stringify(userLogged))
+    /* if(checkbox){
+        localStorage.setItem("userLogged", JSON.stringify(userLogged))
+    } */
+}
+
 formLogin.addEventListener('submit', (event) => {
     event.preventDefault()
     let login = formLogin.elements['nameLogin']
     let password = formLogin.elements['passwordLogin']
     loginUser(login, password)
+    setSeason(login, password)
 })
 
 /* Fields Verification */
@@ -108,43 +128,5 @@ formLogin.addEventListener('submit', (event) => {
 const NAME_REQUIRED = 'Por favor, insira o seu nome'
 const CITY_REQUIRED = 'Por favor, insira o sua cidade'
 const LOGIN_REQUIRED = 'Por favor, insira um login'
-const PASS_REQUIRED = 'Por favor insira o seu nome'
-
-//requisitions that i will need in the main.html
-
-const deleteUser = async (id) => {//also put this function in the modal help 'delete my account'
-    await fetch(`http://localhost:3000/users/${id}`, {//how could i know which user is logged? Maybe sessionStorage?
-    method: 'DELETE'
-})
-}
-
-const editUser = async (id) => {
-    await fetch(`http://localhost:3000/tasks/${id}`, {//use the modalReg from the index.html
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json, text/plain, */*',//verification with password
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(task)
-    })
-}
-
-//Can I send to the json tasks an array --- post inside the index 0 all the tasks from user number one?
-
-//keep working on this
-
-const signIn = () => {
-    const loginInput = document.getElementById('nameLogin').value
-    sessionStorage.setItem("loginInput", loginInput)
-}
-
-const checkUser = () => {
-    if(sessionStorage.getItem("loginInput")){
-        window.location.href = '../tasks-page/main.html'
-    }
-    
-}
-
-loginInput.addEventListener('change', (event) => {
-    sessionStorage.setItem("autosave", loginInput.value)
-})
+const EMAIL_REQUIRED = 'Por favor, insira um email'
+const PASS_REQUIRED = 'Por favor insira sua senha'
