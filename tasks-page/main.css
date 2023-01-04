@@ -216,11 +216,6 @@ small {
 
 /* BACKGROUND */
 
-.container{
-    display: relative;
-    width: 100%;
-    height: 100%;
-}
 #content{
     position: absolute;
     width: 65%;

@@ -84,13 +84,11 @@ body{
 
 main{
     background-color: var(--background) !important;
-    margin: 100px auto;
-    width: 35vw;
-    height: 41vh;
-    border-radius: 30px;
+    border-radius: 10px;
     z-index: 3;
     position: relative;
-    border: 3px solid #fad7a7;
+    border: 5px solid var(--yellow);
+    padding: 30px;
 }
 #contentMain{
     display: flex;
@@ -98,8 +96,6 @@ main{
 }
 
 #headerContent{
-    width: 100%;
-    padding: 10px;
     display: flex;
     justify-content: space-around;
     border-bottom: 3px solid var(--lightpurple);
@@ -111,10 +107,7 @@ main{
     font-weight: bold;
     color: var(--purple);
 }
-
 #buttons{
-    width: 80%;
-    padding: 0px 30px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -125,30 +118,22 @@ main{
   flex-direction: row;
 }
 #infoBodyContent{
-  padding: 50px 10px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  margin-left: 15px;
 }
 .textIcon{
-  margin: 20px auto;
   display: flex;
   flex-direction: row;
   gap: 10px;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1px;
 }
 .textIcon>img{
   width: 100px;
 }
 #interactBodyContent{
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  padding: 10px;
-  width: 50%;
-  height: 33vh;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -156,16 +141,13 @@ main{
   justify-content: center;
   border-left: 3px solid var(--lightpurple);
 }
-#buttons{
-  width: 100%;
-}
+
 button{
-    width: 100%;
     border: 1px solid var(--purple);
     color: var(--purple);
-    font-size: 15px !important;
+    font-size: 14px !important;
     border-radius: 12px !important;
-    padding: 1px 10px;
+    padding: 10px 16px;
 }
 button:hover{
     background-color: var(--purple);
@@ -185,10 +167,8 @@ button:hover{
 #modalLoginContent{
     background-color: var(--background);
     color: var(--purple);
-    width: 25%;
-    height: 35%;
     padding: 10px;
-    margin: 280px auto;
+    margin: 280px auto; 
     border-radius: 10px;
     border: 5px solid var(--yellow);
 
@@ -221,10 +201,8 @@ button:hover{
 #modalRegistrationContent{
     background-color: var(--background);
     color: var(--purple);
-    width: 19%;
-    height: 65%;
     padding: 10px;
-    margin: 150px auto;
+    margin: 150px auto; 
     border-radius: 10px;
     border: 5px solid var(--yellow);
 
@@ -242,27 +220,13 @@ button:hover{
     align-items: center;
     gap: 15px;
 }
-button{
-    width: 100%;
-    border: 1px solid var(--purple);
-    color: var(--purple);
-    font-size: 13px;
-    padding: 7px 25px;
-    cursor: pointer;
-    border-radius: 7px;
-}
-button:hover{
-    background-color: var(--purple);
-    color: var(--background) !important;
-}
 label{
     font-size: 13px;
     font-weight: 600;
     color: var(--purple);
 }
 input{
-    width: 250px;
-    padding: 7px;
+    padding: 7px; 
     border-radius: 7px;
     border: 1px solid gray;
 }
@@ -273,17 +237,34 @@ label [for="conected"]{
     font-size: 26px;
 }
 
+div{
+  color: var(--indigo);
+}
+
 .closeButton{
     transform: scale(2, 2);
     cursor: pointer;
     position: absolute;
-    right: -22px;
-    top: -25px;
-    margin: 10%;  
+    right: 10px;
+    top: 0;
+    margin-left: 10px;
 }
 .closeButton:hover{
     transform: scale(2.1, 2.1);
     color: var(--indigo);
+}
+
+.closeButtonFooter{
+  transform: scale(2, 2);
+  cursor: pointer;
+  position: absolute;
+  right: -10px;
+  top: 0;
+  margin-left: 10px;
+}
+.closeButtonFooter:hover{
+  transform: scale(2.1, 2.1);
+  color: var(--indigo);
 }
 
 .downToUpAnimation{
@@ -295,50 +276,48 @@ label [for="conected"]{
 }
 
 #modalInfo{
-    display: none;
+    display: block;
     position: fixed;
-    width: 25%;
-    height: 20%;
-    z-index: 5;
     bottom: 0;
-    right: 0;
+    /* right: 0;  */
+    z-index: 5;
     background-color: var(--background);
     border: 5px solid var(--yellow);
 }
 #modalInfoContent{
-    padding: 30px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 10px;
+    color: var(--indigo);
+    text-align: center;
+    position: relative;
 }
 #modalError{
-    display: none;
+    display: block;
     position: fixed;
-    width: 25%;
-    height: 15%;
-    z-index: 5;
     bottom: 0;
-    right: 0;
+    /* right: 0;  */
+    z-index: 5;
     background-color: var(--background);
     border: 5px solid var(--yellow);
 }
 #modalErrorContent{
-    padding: 10px;
+    padding: 15px 65px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     gap: 10px;
+    color: var(--indigo);
+    text-align: center;
 }
 .modalTitle{
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 17px;
 }
-#modalErrorTxt{
-    margin-left: 20px;
-}
-
-.color-orange{
-    color: var(--yellow)!important;
+.modalTxt{
+  font-size: 17px;
 }
 .divSpecial{
     display: flex;
@@ -346,3 +325,12 @@ label [for="conected"]{
 }
 /* ------------------------------------------- */
 
+/* @media only screen and (min-width: 600px) {
+    .closeButton{
+      transform: scale(2, 2);
+      cursor: pointer;
+      position: absolute;
+      right: -22px;
+      top: 22px;
+  }
+} */

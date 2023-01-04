@@ -132,6 +132,29 @@ const clearModalNewTask = () => {
     select.options[0].selected = true
 }
 
+//KEEP WORKIN ON THIS FUNCTION
+
+const numberSugestion = async () => {
+    const numberSugestion = document.getElementById('numberSugestion')
+    const tasks = await getTasksReturn()
+    let numbers = []
+    
+    const numTasks = tasks.map((obj) => obj.number)
+    const numbersSorted = numTasks.sort(function(a, b) {
+        return a - b;// use this in the sorting tasks
+      })
+
+    for(let counter = 0; counter < numbersSorted.length; counter++){
+      if(numbersSorted[counter] !== counter) numbers.push(counter)
+    }
+    //numberSugestion.innerHTML = 1
+
+    console.log(numbersSorted)
+    console.log(numbers)
+    //console.log(numbers[0])
+  //note to the future Me: The problem of this function is that it's limited by the array.length, but for my needs right now it will fit =/
+  }
+
 const saveTask = async (task) => {
     if(currentTask === null){
         await newTask(task)
@@ -341,7 +364,6 @@ const switchMode = () => {
     }else {
         darkMode()
         localStorage.setItem("contrast", dark)
-        console.log('escuro')
         contrast = light
     }
 }
@@ -651,3 +673,10 @@ const confirmDeleteUser = async () =>{
 })
 }
 
+const loadBody = () => {
+    getTasksRender(); 
+    weatherInfo(); 
+    tasksPagesTotal(); 
+    currentPageNum(1); 
+    contrastMode()
+}

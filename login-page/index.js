@@ -130,3 +130,9 @@ const CITY_REQUIRED = 'Por favor, insira o sua cidade'
 const LOGIN_REQUIRED = 'Por favor, insira um login'
 const EMAIL_REQUIRED = 'Por favor, insira um email'
 const PASS_REQUIRED = 'Por favor insira sua senha'
+
+const deleteUser = async (id) => {
+    await fetch(`http://localhost:3000/users/${id}`, {
+    method: 'DELETE'
+})
+}
