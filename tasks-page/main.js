@@ -59,7 +59,7 @@ const renderTasks = (tasks) => {
         <td>${task.description}</td>
         <td>${dateFormated}</td>
         <td class="${task.status.replace(" ", "-")}">${task.status}</td>
-        <td class="d-flex mb-3 ">
+        <td>
           <span><i class="fa-solid fa-pen-to-square iconTable fa-xl" onclick="editTask(${task.id})"></i>
           </span>
           <span><i class="fa-solid fa-trash iconTable fa-xl" onclick="confirmDelete(${task.id})"></i>
@@ -70,8 +70,7 @@ const renderTasks = (tasks) => {
 }
 
 const confirmDelete = (idTask) =>{
-    const modal = document.getElementById('modalConfirmation')
-    modal.style.display = 'block'
+    openModal('modalConfirmation')
 
     const deleteTask = async (id) => {
         await fetch(`http://localhost:3000/tasks/${id}`, {
@@ -79,8 +78,7 @@ const confirmDelete = (idTask) =>{
     })
     }
     const button = document.getElementById('buttonYes')
-    button.addEventListener('click', (event) => {
-    event.preventDefault()
+    button.addEventListener('click', () => {
     deleteTask(idTask)
 })
 }
@@ -345,7 +343,7 @@ const iconButton = document.getElementById('iconMode')
 const buttonBack = document.getElementById('darkModeContent')
 const logo = document.getElementById('logoArnia')
 const tableBody = document.getElementById('tbody-content')
-const header = document.getElementById('header')
+const header = document.getElementById('headerSection')
 const divPurple = document.getElementById('div-purple')
 const divGray = document.getElementById('div-grey')
 const divOrange = document.getElementById('div-orange')
@@ -355,6 +353,7 @@ const buttons = document.querySelectorAll("button")
 const modals = document.getElementsByClassName('classModal')
 const inputs = document.querySelectorAll("input")
 const helpTitle = document.getElementById('helpTitle')
+const searchField = document.getElementById('searchField')
 
 const switchMode = () => {
     let dark = ''
@@ -414,7 +413,7 @@ const lightMode = () => {
 
     selectStatus.style.backgroundColor = 'var(--background)'
 
-    searchInput.style.backgroundColor = ''
+    searchField.style.backgroundColor = ''
 
     helpTitle.style.color = 'var(--purple)'
 }
@@ -457,7 +456,7 @@ const darkMode = () => {
 
     selectStatus.style.backgroundColor = 'var(--greypurple)'
 
-    searchInput.style.backgroundColor = 'var(--darkpurple)'
+    searchField.style.backgroundColor = 'var(--darkpurple)'
 
     helpTitle.style.color = 'var(--yellow)'
 }
@@ -510,7 +509,7 @@ const weatherInfo = async () => {
     const weatherName = document.getElementById('weatherName')
     const weatherCity = document.getElementById('weatherCity')
     const weatherTemp = document.getElementById('weatherTemp')
-    const weatherCond = document.getElementById('weatherCond')
+    //const weatherCond = document.getElementById('weatherCond')
 
     const user = await getUsers()
     const userIndex = user.findIndex((valor) => {
@@ -522,7 +521,7 @@ const weatherInfo = async () => {
     weatherName.innerHTML = `${user[userIndex].name}`
     weatherCity.innerHTML = `${userCity}`
     weatherTemp.innerHTML = `${userInfoWeather[0].Temperature.Metric.Value}°C`
-    weatherCond.innerHTML = `${userInfoWeather[0].WeatherText}`
+    //weatherCond.innerHTML = `${userInfoWeather[0].WeatherText}`
 
 }//turn weather.text off
 

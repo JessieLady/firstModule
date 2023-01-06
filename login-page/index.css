@@ -276,7 +276,7 @@ div{
 }
 
 #modalInfo{
-    display: block;
+    display: none;
     position: fixed;
     bottom: 0;
     /* right: 0;  */
@@ -295,7 +295,7 @@ div{
     position: relative;
 }
 #modalError{
-    display: block;
+    display: none;
     position: fixed;
     bottom: 0;
     /* right: 0;  */
