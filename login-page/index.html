@@ -287,20 +287,20 @@
                 <span></span>
             </section>
         
-            <main class="container text-center col-12 col-md-8 col-lg-6">
+            <main class="container text-center col-12 col-md-8 col-lg-6 col-xl-5 col-xxl-5">
                 <div id="contentMain" class="col-12">
         
-                    <div id="headerContent" class="col-12 ">
-                        <div id="logoArnia" class="col-6">
+                    <div id="headerContent" class="col-12 d-flex justify-content-xl-between col-xl-12">
+                        <div id="logoArnia" class="col-6 col-xl-1 col-xxl-6">
                             <a href="https://arnia.com.br/" target="_blank"><img width="120px" src="../assets/logo-purple.svg" alt="logo Arnia"></a>
                         </div>
-                        <div id="titleMain" class="col-6">
+                        <div id="titleMain" class="col-6 col-xl-9 col-xxl-6">
                             <h2>Gerenciador de Tarefas</h2>
                         </div>
                     </div>
                     <div id="bodyContent" class="col-12">
-                        <div id="infoBodyContent" class="col-6">
-                                    <div class="textIcon col-12 ">
+                        <div id="infoBodyContent" class="col-6 d-flex-xl align-items-xl-center mt-xl-4">
+                                    <div class="textIcon col-12 mb-xl-3">
                                         <div>
                                             <img src="../assets/purple-calendar.png" alt="calendar" width="40px">
                                         </div>
@@ -308,7 +308,7 @@
                                             <h6>Organiza a sua rotina; </h6>
                                         </div>
                                     </div>
-                                    <div class="textIcon col-12">
+                                    <div class="textIcon col-12 mb-xl-3">
                                         <div>
                                             <img src="../assets/clock2.png" alt="clock" width="40px">
                                         </div>
@@ -343,7 +343,7 @@
                     </div>
             </main>
            <div id="modalLogin" class="col-12">
-                <div id="modalLoginContent" class="downToUpAnimation col-12 col-md-8 col-lg-5">
+                <div id="modalLoginContent" class="downToUpAnimation col-12 col-md-8 col-lg-5 col-xl-5 col-xxl-5">
                     <div id="closeDiv" class="closeButton" onclick="closeModal('modalLogin')">&times;</div>
                     <h3>Que bom te ver de novo!</h3>
                     <form id="formLogin">
@@ -367,7 +367,7 @@
             </div>
     
             <div id="modalRegistration">
-                <div id="modalRegistrationContent" class="downToUpAnimation col-md-6 col-lg-5">
+                <div id="modalRegistrationContent" class="downToUpAnimation col-md-6 col-lg-5 col-xl-5 col-xxl-5">
                     <span class="closeButton" onclick="closeModal('modalRegistration')">&times;</span>
                     <h3>Crie sua conta!</h3>
                     <form id="formReg">
@@ -398,8 +398,8 @@
                 </div>
             </div> <!-- fim do modal-registration -->
     
-            <div id="modalInfo" class="upToDownAnimation col-12 col-lg-5">
-                <div id="modalInfoContent" class="col-12 col-md-12 col-lg-12">
+            <div id="modalInfo" class="upToDownAnimation col-12 col-lg-5 col-xxl-6">
+                <div id="modalInfoContent" class="col-12 col-md-12 col-lg-12 col-xxl-12">
                     <div>
                         <h3 class="modalTitle">😁 Sua conta foi criada com sucesso!</h3>
                     </div>
@@ -408,10 +408,10 @@
                     </div>
                     <div onclick="closeModal('modalInfo')" class="closeButtonFooter col-1">&times;</div>
                 </div>
-            </div> --><!-- mudar o conte[udo com js -->
+            </div><!-- mudar o conte[udo com js -->
     
-            <div id="modalError" class="upToDownAnimation col-12 col-lg-5">
-                <div id="modalErrorContent" class="col-12 col-md-12 col-lg-12">
+            <div id="modalError" class="upToDownAnimation col-12 col-lg-5 col-xxl-6">
+                <div id="modalErrorContent" class="col-12 col-md-12 col-lg-12 col-xxl-12">
                     <div>
                         <h3 class="modalTitle">❌ Ocorreu um erro!</h3>
                     </div>

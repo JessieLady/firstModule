@@ -7,8 +7,8 @@ let ordering = true
 let contrast = localStorage.getItem("contrast")
 
 let currentTask = null
-let currentPage = null
-let currentUser = 1// Jessica Account
+let currentPage = 1
+let currentUser = 2// Jessica Account
 
 const NUM_EMPTY = 'Insira um número.'
 const DESCRIPTION_EMPTY = 'Insira uma descrição.'
@@ -55,11 +55,11 @@ const renderTasks = (tasks) => {
         }
         
         tasksContent.innerHTML = tasksContent.innerHTML + `<tr id='trTable'>
-        <td scope="row">${task.number}</td>
+        <td>${task.number}</td>
         <td>${task.description}</td>
         <td>${dateFormated}</td>
         <td class="${task.status.replace(" ", "-")}">${task.status}</td>
-        <td>
+        <td class="d-flex mb-3 ">
           <span><i class="fa-solid fa-pen-to-square iconTable fa-xl" onclick="editTask(${task.id})"></i>
           </span>
           <span><i class="fa-solid fa-trash iconTable fa-xl" onclick="confirmDelete(${task.id})"></i>
@@ -224,7 +224,9 @@ formNewTask.addEventListener('submit', (event) => {
     const date = formNewTask.elements['date'].value
     const status = formNewTask.elements['status'].value
 
-    const task = new Task(number, description, date, status)
+    const num = Number(number)
+
+    const task = new Task(num, description, date, status)
     saveTask(task)
 })
 
@@ -324,12 +326,12 @@ function hasValue(input, message) {
 const orderingTable = async (key) => {
 
     if(ordering) {
-        const ascMode = await fetch(`http://localhost:3000/tasks?_sort=${key}&_order=asc`)
+        const ascMode = await fetch(`http://localhost:3000/tasks?_limit=10&_sort=${key}&_order=asc`)
         const ascTasks = await ascMode.json()
         renderTasks(ascTasks)
         ordering = false
     }else{
-        const descMode = await fetch(`http://localhost:3000/tasks?_sort=${key}&_order=desc`)
+        const descMode = await fetch(`http://localhost:3000/tasks?_limit=10&_sort=${key}&_order=desc`)
         const descTasks = await descMode.json()
         renderTasks(descTasks)
         ordering = true
@@ -352,6 +354,7 @@ const selectStatus = document.getElementById('selectStatus')
 const buttons = document.querySelectorAll("button")
 const modals = document.getElementsByClassName('classModal')
 const inputs = document.querySelectorAll("input")
+const helpTitle = document.getElementById('helpTitle')
 
 const switchMode = () => {
     let dark = ''
@@ -412,6 +415,8 @@ const lightMode = () => {
     selectStatus.style.backgroundColor = 'var(--background)'
 
     searchInput.style.backgroundColor = ''
+
+    helpTitle.style.color = 'var(--purple)'
 }
 
 const darkMode = () => {
@@ -427,7 +432,8 @@ const darkMode = () => {
     tHead.style.color = 'white'
     tHead.className = 'font-weight-bold table-dark'
     
-    header.style.color = 'var(--background)'
+    header.style.color = 'var(--darkWhite)'
+    //var(--background)
     
     divPurple.style.backgroundColor = 'var(--darkpurple)'
     divGray.style.backgroundColor = 'var(--purpleple)'
@@ -452,6 +458,8 @@ const darkMode = () => {
     selectStatus.style.backgroundColor = 'var(--greypurple)'
 
     searchInput.style.backgroundColor = 'var(--darkpurple)'
+
+    helpTitle.style.color = 'var(--yellow)'
 }
 
 /* SEASON/LOCALE STORAGE FUNCTIONS */

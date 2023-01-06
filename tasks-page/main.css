@@ -19,7 +19,9 @@
 
     /* background colors */
     --background: #F5F5F5;
-    --darkBackground: #161616;
+    --darkBackground: #110e24;
+
+    --darkWhite: #e2e0e0;
 
     /* status colors */
     --greenStatus: #27AE60;
@@ -76,7 +78,7 @@ button{
     color: var(--purple);
     font-size: 13px !important;
     padding: 7px 25px;
-    border-radius: 12px !important;
+    border-radius: 20px !important;
 }
 button:hover{
     background-color: var(--purple);
@@ -123,6 +125,9 @@ small {
     align-items: center;
     justify-content: space-between;
     position: relative;
+}
+#helpTitle>h6{
+    font-size: 17px;
 }
 #modalInfo{
     display: none;
@@ -322,7 +327,7 @@ small {
     color: var(--purple);
     font-size: 13px !important;
     padding: 7px 25px;
-    border-radius: 12px !important;
+    border-radius: 16px !important;
 }
 .light-button:hover{
     background-color: var(--purple);
@@ -352,12 +357,12 @@ small {
     color: var(--indigo);
     font-weight: 400;
 }
-#darkMode{
+/* #darkMode{
     position: absolute;
     margin: 16px;
     top: 0;
     right: 0;
-}
+} */
 #darkModeContent{
     text-align: center;
     width: 40px;
@@ -387,32 +392,35 @@ small {
 }
 
 /* HEADER ELEMENTS */
+
+
+
 #logo{
-    display: flex;
+    /* display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 70px 50px;
+    margin: 70px 50px; */
 }
 #logo>img{
-    width: 150px;
+    /* width: 150px; */
 }
 #page-title{
-    position: absolute;
+    /* position: absolute;
     top: 100px;
-    margin: 50px 40px;
+    margin: 50px 40px; */
     font-weight: 800;
     
 }
 #page-title>button{
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 #logoutButton{
     border-radius: 19px; 
     font-size: 13px; 
-    margin-right: 65px; 
-    position: absolute; 
+    /* margin-right: 65px;  */
+    /* position: absolute; 
     top: 16px;
-    right: 0;
+    right: 0; */
 }
 /* QUITE COMMON HERE - MOSTLY RANDOM BUTTONS */
 .iconTable:hover{
@@ -432,12 +440,10 @@ small {
     border: none;
     cursor: pointer;
     padding: 5px;
-    /* background-color: white; */
     font-size: 12px;
     color: var(--cancelButton);
 }
 #cancelButton:hover{
-    /* background-color: white; */
     color: var(--cancelButton);
     text-decoration: underline;
 }
@@ -495,7 +501,6 @@ small {
     width: fit-content;
     height: 20vh;
     padding: 1px;
-    /* color: var(--purple); */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -504,7 +509,6 @@ small {
 #firstLine{
     font-size: 50px;
     font-weight: 650;
-    /* color: var(--purple); */
     text-align: center;
 }
 #secondLine{
@@ -523,13 +527,8 @@ small {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
 
     margin: 33px 0px 33px;
-
-    position: absolute;
-    top: 240px;
-    left: 100px;
 }
 #buttonsFilter{
     display: flex;
@@ -545,7 +544,6 @@ small {
     color: white;
 }
 #searchTasks{
-    width: 300px;
     height: 35px;
     display: flex;
     align-items: center;
@@ -554,7 +552,6 @@ small {
     border-radius: 7px;
 }
 #magnifyingGlass{
-    width: fit-content;
     height: 33px;
     line-height: 33px;
     padding: 1px 7px;
@@ -562,7 +559,6 @@ small {
     background-color: var(--yellow);
 }
 #searchField{
-    width: 264px;
     height: 32px;
     color: var(--purple);
     font-size: 10px;
@@ -621,12 +617,109 @@ small {
 #content{
     overflow-y: scroll;
 }
-
+/* ------------------------------------- */
 #header{
     color: var(--purple);
+    border: 2px solid white;
+    display: flex;
+    flex-direction: row;
+    height: 30vh;
 }
 
+#header>div{
+    border: 2px solid purple;
+}
+
+#headerStart{
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#headerStart>button{
+    width: 42%;
+    border-radius: 30px;
+}
+#logoArnia{
+    width: 200px;
+}
+
+#page-title{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: 20px;
+}
+
+#weatherHeaderSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#secondLine>div{
+    font-size: 26px;
+    text-align: center;
+}
+#buttonsHeaderSection{
+    display:flex;
+    justify-content: end;
+}
+#buttonsPageTop{
+    margin-top: 10px;
+    height: 43px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#midSection>div{
+    border: 2px solid rgb(78, 7, 78);
+}
+
+#tableSection{
+    border: 2px solid white;
+    display: flex;
+    flex-direction: row;
+    height: 60vh;
+}
+#tableSection>div{
+    border: 2px solid rgb(175, 90, 175);
+}
 .iconTable:hover{
     color: var(--darkorange);
     cursor: pointer;
+}
+
+table{
+    position: absolute;
+    bottom: 0;
+}
+main{
+    border: 1px solid chartreuse;
+    
+}
+#midSection{
+    border: 2px solid white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 10vh;
+    position: absolute;
+    left: 67px;  
+}
+#tableHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+#tableHeader>div{
+    /* border: 5px solid palevioletred; */
+}
+#tableSection{
+    border: 1px solid blue;
+    position: relative;
+    top: 400px;
 }

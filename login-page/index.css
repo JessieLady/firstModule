@@ -168,7 +168,7 @@ button:hover{
     background-color: var(--background);
     color: var(--purple);
     padding: 10px;
-    margin: 280px auto; 
+    margin: 320px auto; 
     border-radius: 10px;
     border: 5px solid var(--yellow);
 
@@ -202,7 +202,7 @@ button:hover{
     background-color: var(--background);
     color: var(--purple);
     padding: 10px;
-    margin: 150px auto; 
+    margin: 220px auto; 
     border-radius: 10px;
     border: 5px solid var(--yellow);
 
@@ -325,12 +325,39 @@ div{
 }
 /* ------------------------------------------- */
 
-/* @media only screen and (min-width: 600px) {
-    .closeButton{
-      transform: scale(2, 2);
-      cursor: pointer;
-      position: absolute;
-      right: -22px;
-      top: 22px;
+@media only screen and (min-width: 320px) {
+  button{
+    padding: 3px 10px;
   }
-} */
+  #infoBodyContent{
+    font-size: 8px;
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+    main{
+      height: 40vh;
+    }
+    #contentMain{
+      height: 100%;
+    }
+    #headerContent{
+      height: 20%;
+      align-items: center;
+    }
+    #titleMain>h2{
+      font-size: 48px;
+    }
+    #bodyContent{
+      height: 86%;
+    }
+    #infoBodyContent{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    button{
+      padding: 7px 30px;
+    }
+    /* don't forget to fix this responsive breakpoint 4k */
+}
