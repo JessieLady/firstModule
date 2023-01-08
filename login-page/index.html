@@ -16,7 +16,7 @@
         defer></script>
 
     <link rel="stylesheet" href="index.css">
-    <script src="index.js" defer></script>
+    
     
     <link rel="shortcut icon" href="../assets/circle-check-regular.svg" type="image/x-icon">
 
@@ -356,11 +356,11 @@
                             <input id="passwordLogin" name="passwordLogin" type="password">
                         </div>
                         <div>
-                            <input onclick="setSeason()" type="checkbox" value="keepLogin" name="signIn" id="signIn"> <!-- value="keepConected -->
+                            <input type="checkbox" name="signIn" id="signIn"> 
                             <label for="signIn"> Continuar conectado?</label>
                         </div>
                         <div>
-                            <button type="submit">Entrar</button>
+                            <button id="buttonLogin" class="enabled">Entrar</button>
                         </div>
                     </form>
                 </div>
@@ -421,6 +421,7 @@
                     <div onclick="closeModal('modalError')" class="closeButtonFooter col-1">&times;</div>
                 </div>
             </div> 
+        <script src="../app.js" defer></script>
 </body>
     
 </html>

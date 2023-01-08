@@ -28,9 +28,9 @@
       defer
     ></script>
 
-    <script src="https://kit.fontawesome.com/232e2c38d5.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/232e2c38d5.js" crossorigin="anonymous" defer></script>
 
-      <script src="main.js" defer></script>
+      
 
   </head>
 
@@ -40,15 +40,15 @@
 
     <div class="div-white" id="div-white">
 
-      <section id="headerSection" class="container col-12 col-md-12 col-xxl-11"><!--  -->
+      <section id="headerSection" class="container col-12 col-md-12 col-xl-11">
       
-      <div id="headerStart" class="col-12 col-md-5 col-xxl-4 "><!--  -->
+      <div id="headerStart" class="col-12 col-md-5">
 
         <div id="logo">
           <a href="https://arnia.com.br/" target="_blank"><img id="logoArnia" src="../assets/logo-purple.svg" alt="Logo Arnia" /></a>
         </div>
 
-        <div id="page-title" class="">
+        <div id="page-title">
           <div id="titleHeaderStart">
             <i class="fa-regular fa-clipboard fa-xl"></i>
             <span class="mb-3">Gerenciador de Tarefas</span><br>
@@ -59,31 +59,29 @@
 
         </div>
 
-
       </div>
 
-        <div id="weatherHeaderSection" class="col-12 col-md-6 col-xxl-4"><!--  -->
+        <div id="weatherHeaderSection" class="col-12 col-md-6">
 
-            <div id="firstLine" class="col-xxl-12 d-flex gap-2 justify-content-center">
+            <div id="firstLine" class="d-flex gap-2 justify-content-center">
               <div class="col-xxl-3 color-orange text-end">Olá,</div> <div class="col-xxl-8 text-start" id="weatherName">&#32;</div>
             </div>
 
-          <div id="secondLine"  class="col-xxl-12 d-flex justify-content-evenly">
+          <div id="secondLine"  class="d-flex">
             <div id="weatherTemp" class="color-orange col-xxl-3">&#32;</div>
             <div id="weatherCity" class="col-xxl-5 text-start">&#32;</div>
-            <!-- <div id="weatherCond">&#32;</div> -->
           </div>
           
         </div>
 
-      <div id="buttonsHeaderSection" class="col-12 col-md-1 col-xxl-4 d-flex flex-row"><!--  -->
+      <div id="buttonsHeaderSection" class="col-12 col-md-1">
 
-        <div id="buttonsPageTop" class="col-xxl-3 d-flex">
-          <div id="logout" class="col-xxl-8">
+        <div id="buttonsPageTop" class="col-md-2">
+          <div id="logout">
             <a href="../login-page/index.html"><button id="logoutButton">Sair</button></a><!-- put in here the REAL LOGOUT!!! -->
           </div>
 
-          <div id="darkMode" class="col-xxl-4">
+          <div id="darkMode">
             <div id="darkModeContent" onclick="switchMode()"><img width="25px" id="iconMode" src="../assets/moon.svg"></div>
           </div>
         </div>
@@ -108,25 +106,25 @@
           <button id="btnLate" onclick="lateTasks()">Atrasado</button>
         </div>
 
-        <div id="searchTasks" class="col-xxl-3">
-          <div class="col-xxl-2" id="magnifyingGlass"><i class="fa-solid fa-magnifying-glass "></i></div>
-          <div class="col-xxl-9">
+        <div id="searchTasks" class="col-md-3 col-xxl-3">
+          <div class="col-xxl-2 col-md-2" id="magnifyingGlass"><i class="fa-solid fa-magnifying-glass "></i></div>
+          <div class="col-xxl-9 col-md-9">
             <input id="searchField" name="search" type="search" placeholder="Pesquise aqui" >
           </div>
         </div>
       </div>
     </section>
 
-    <section id="tableSection" class="container-fluid col-xxl-11">
-      <div id="tableContent" class="container-fluid">
-        <table id="table" class="col-xxl-9">
+    <section id="tableSection" class="container-fluid col-md-10 col-xxl-11">
+      <div id="tableContent" class="container">
+        <table id="table" class="col-md-10 col-xxl-9">
           <thead id="tHead" class="container col-12 col-xxl-12 font-weight-bold">
             <tr>
-              <th class="col-1 col-xxl-1">Núm <span onclick="orderingTable('number')" class="fa-solid fa-caret-down iconTable"></span></th>
-              <th class="col-3 col-xxl-3">Descrição <span onclick="orderingTable('description')" class="fa-solid fa-caret-down iconTable"></span></th>
-              <th class="col-3 col-xxl-3">Data de Entrega <span onclick="orderingTable('date')" class="fa-solid fa-caret-down iconTable"></span></th>
-              <th class="col-3 col-xxl-3">Status <span onclick="orderingTable('status')" class="fa-solid fa-caret-down iconTable"></span></th>
-              <th class="col-2 col-xxl-2">Ação</th>
+              <th class="col-1 col-md-2 col-xxl-1">Núm <span onclick="orderingTable('number')" class="fa-solid fa-caret-down iconTable"></span></th>
+              <th class="col-3 col-md-3 col-xxl-3">Descrição <span onclick="orderingTable('description')" class="fa-solid fa-caret-down iconTable"></span></th>
+              <th class="col-3 col-md-3 col-xxl-3">Data de Entrega <span onclick="orderingTable('date')" class="fa-solid fa-caret-down iconTable"></span></th>
+              <th class="col-3 col-md-2 col-xxl-3">Status <span onclick="orderingTable('status')" class="fa-solid fa-caret-down iconTable"></span></th>
+              <th class="col-2 col-md-2 col-xxl-2">Ação</th>
             </tr>
           </thead>
           <tbody id="tbody-content" class="table-light text-purple">
@@ -195,8 +193,8 @@
             </div>
             <br>
             <div id="modal-footer">
-              <div id="cancelButton" type="reset" onclick="closeModal('modalNewTask');clearModalNewTask()">Cancelar</div>
-              <button id="submitButton" type="submit">Salvar</button>
+              <div id="cancelButton" onclick="closeModal('modalNewTask');clearModalNewTask()">Cancelar</div>
+              <button id="submitButton" disabled class="disabled">Salvar</button>
           </div>
           </form>
         </div>
@@ -207,7 +205,7 @@
 
         <div class="closeButtonDelete" onclick="closeModal('modalConfirmation')">&times;</div>
 
-        <div><h3>Você deseja excluir esta tarefa?</h3></div>
+        <div><h3 id="confirmText">Você deseja excluir esta tarefa?</h3></div>
 
         <div id="buttonsConfirmation">
           <button id="buttonYes">Sim</button>
@@ -229,7 +227,7 @@
             <button onclick="openModal('modalEditConfirm');closeModal('modalHelp')">Dados da minha conta</button>
           </div>
           <div>
-            <button class="deleteAccount" onclick="confirmDeleteUser();closeModal('modalHelp')">Excluir minha conta</button>
+            <button id="deleteAccountButton" class="deleteAccount" onclick="confirmDeleteUser();closeModal('modalHelp')">Excluir minha conta</button>
           </div>          
         </div>
         <span class="closeButton" onclick="closeModal('modalHelp')">&times;</span>
@@ -255,22 +253,27 @@
                 <div class="d-flex flex-column mt-3">
                     <label for="name">Nome</label>
                     <input id="name" name="name" type="text">
+                    <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
                     <label for="city">Cidade</label>
                     <input id="city" name="city" type="text">
+                    <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
                     <label for="login">Login</label>
                     <input id="login" name="login" type="text">
+                    <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
                     <label for="email">Email</label>
                     <input id="email" name="email" type="email">
+                    <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
                     <label for="password">Senha</label>
                     <input id="password" name="password" type="password">
+                    <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column">
                     <button type="submit" class="mt-3">Alterar</button>
@@ -304,5 +307,6 @@
       
 
     </main>
+    <script src="../app.js" defer></script>
   </body>
 </html>

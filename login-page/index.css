@@ -357,7 +357,25 @@ div{
       align-items: center;
     }
     button{
-      padding: 7px 30px;
+      padding: 11px 40px;
     }
     /* don't forget to fix this responsive breakpoint 4k */
+}
+
+.disabled{
+  background-color: var(--background) !important;
+  color: var(--lightpurple) !important;
+  border-color: var(--lightpurple) !important;
+}
+.disabled:hover{
+  cursor: not-allowed !important;
+}
+.enabled{
+  cursor: pointer !important;
+  background-color: var(--background) !important;
+  color: var(--purple) !important;
+}
+.enabled:hover{
+  background-color: var(--purple) !important;
+  color: var(--background) !important;
 }
