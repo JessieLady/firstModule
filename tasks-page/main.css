@@ -14,6 +14,7 @@
     --yellow: #f8b04e;
     --indigo: #2C2661;
     --lightpurple: #D7CAE5;
+    --lightTr: #e4dcee;
     --ice: #FBF0E2;
     --cancelButton: #828282;
 
@@ -686,6 +687,135 @@ table{
 #pagesNum{
     font-weight: 500;
 }
+@media (min-width: 500px) and (max-width: 501px) {
+    body{
+        max-width: 500px;
+    }
+    #div-white{
+        width: 500px;
+        height: 100vh;
+    }
+    #div-orange{
+        display: none;
+        opacity: 0.5;
+    }
+    #headerSection{
+        display: flex;
+        flex-direction: column; 
+    }
+    #headerStart{
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    #logoArnia{
+        width: 130px;
+    }
+    #firstLine>div{
+        font-size: 21px;
+        margin-top: 20px;
+    }
+    #secondLine>div{
+        font-size: 16px;
+    }
+    #secondLine{
+        margin-left: 60px;
+    }
+    #buttonsPageTop{
+        position: absolute;
+        top: 0;
+        gap: 10px;
+    }
+    #searchTasks{
+        display: none;
+        opacity: 0;
+    }
+    #tableHeader{
+        position: relative;
+        left: -140px;
+        width: 90vw;
+        overflow-x: scroll;
+        margin-bottom: 100px;
+    }
+    #buttonsFilter>button{
+        padding: 2px 11px;
+    }
+    #buttonsPaging{
+        bottom: 23px;
+        font-size: 15px;
+        margin-right: 100px;
+        right: 267px !important;
+    }
+    #midSection{
+        width: 52vw;
+    }
+    #tHead{
+        height: 30px;
+    }
+    th{
+        font-size: 12px;
+    }
+    tr{
+        font-size: 11px;
+    }
+    #footerHelp{
+        width: 100%;
+        text-align: center;
+        margin-right: 260px;
+    }
+    #modalNewTaskContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 63vh;
+    }
+    #modalConfirmationContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 25vh;
+        text-align: center;
+    }
+    #modalHelpContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditConfirmContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditInfoContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalDeleteConfirmContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 65vh;
+    }
+    #modalInfo{
+        margin-top: 40%;
+        width: 100vw;
+        height: 10vh;
+        font-size: 13px;
+    }
+    #textModalInfo{
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    input[type="date"]{
+        width: 70%;
+    }
+    select{
+        width: 70%;
+    }
+    #tableSection{
+        margin-left: 70px;
+    }
+    
+  }
 
 @media only screen and (min-width: 320px) {
     body{
@@ -1165,9 +1295,10 @@ table{
         margin: 0px auto;
     }
     #footerHelp{
-        width: 40%;
+        width: 35%;
         right: 0;
     }
+    
   }
  
   @media (min-width: 1025px) and (max-width:1439px){ /* monitor */
@@ -1198,6 +1329,7 @@ table{
     }
     #buttonsFilter{
         width: fit-content;
+        margin-left: 30px;
     }
     #headerStart{
         gap: 100px;
@@ -1214,7 +1346,8 @@ table{
     }
     #secondLine{
         text-align: center;
-        margin-left: 55px;
+        margin-left: unset;
+        margin-right: 100px;
     }
     #tableHeader{
         position: relative;
@@ -1225,7 +1358,8 @@ table{
     #searchTasks{
         display: flex;
         position: absolute;
-        right: 0;
+        right: 100px;
+        width: 20%;
     }
     #modalNewTaskContent{
         margin-top: 15%;
@@ -1242,19 +1376,19 @@ table{
         margin-top: 30px;
     }
     #modalHelpContent{
-        margin-top: 30%;
-        width: 65vw;
+        margin-top: 18%;
+        width: 35vw;
         height: 35vh;
     }
     #modalEditConfirmContent{
-        margin-top: 30%;
-        width: 50vw;
+        margin-top: 20%;
+        width: 30vw;
         height: 35vh;
         text-align: center;
     }
     #modalEditInfoContent{
-        margin-top: 16%;
-        width: 50vw;
+        margin-top: 9%;
+        width: 25vw;
         height: 68vh;
     }
     #modalDeleteConfirmContent{
@@ -1275,12 +1409,12 @@ table{
     }
     #buttonsPaging{
         bottom: 45px;
-        right: 230px;
-        font-size: 15px;
+        right: 330px;
+        font-size: 17px;
         margin: 0px auto;
     }
     #footerHelp{
-        width: 40%;
+        width: 25%;
         right: 0;
     }
 
@@ -1411,7 +1545,7 @@ table{
         
     }
     #footerHelp{
-        width: 17%;
+        width: 20%;
         right: 0;
     }
 
@@ -1428,7 +1562,7 @@ table{
         margin-left: none;
     }
     .iconTable{
-        font-size: 19px;
+        font-size: 19px !important;
     }
     #buttonsPageTop{
         position: static;
@@ -1449,4 +1583,16 @@ table{
     cursor: pointer !important;
     background-color: var(--purple) !important;
     color: var(--background) !important;
+}
+
+.light-tr:nth-child(even){
+    background-color: var(--lightTr);
+}
+
+.dark-tr:nth-child(even){
+    background-color: var(--darkpurple);
+}
+
+tr:hover{
+    background-color: #a19c9c65;
 }

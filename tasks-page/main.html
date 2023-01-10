@@ -30,7 +30,7 @@
 
     <script src="https://kit.fontawesome.com/232e2c38d5.js" crossorigin="anonymous" defer></script>
 
-      
+    <script src="main.js" defer></script>
 
   </head>
 
@@ -78,7 +78,7 @@
 
         <div id="buttonsPageTop" class="col-md-2">
           <div id="logout">
-            <a href="../login-page/index.html"><button id="logoutButton">Sair</button></a><!-- put in here the REAL LOGOUT!!! -->
+            <button id="logoutButton" onclick="logoutUser()">Sair</button>
           </div>
 
           <div id="darkMode">
@@ -141,7 +141,7 @@
       <div id="pagesNum" class="d-flex">
         <p id="currentPage"></p><p>/</p><p id="pagesLength"></p>
       </div>
-      <div id="nextPage" class="pagingButtons">
+      <div id="nextPage" class="pagingButtons" onclick="nextPage()">
        <p>Próximo </p><!-- <i class="fa-solid fa-chevron-right"></i> -->
       </div>
     </div>
@@ -182,9 +182,7 @@
               <label for="status">Status</label>
               <br>
               <select id="selectStatus" name="status">
-                <option disabled selected>
-                  Escolha uma opção
-                </option>
+                <option disabled selected>Escolha uma opção</option>
                 <option value="Em progresso">Em progresso</option>
                 <option value="Em pausa">Em pausa</option>
                 <option value="Concluído">Concluído</option>
@@ -194,7 +192,7 @@
             <br>
             <div id="modal-footer">
               <div id="cancelButton" onclick="closeModal('modalNewTask');clearModalNewTask()">Cancelar</div>
-              <button id="submitButton" disabled class="disabled">Salvar</button>
+              <button id="submitButton">Salvar</button>
           </div>
           </form>
         </div>
@@ -251,28 +249,28 @@
             <span class="closeButton" onclick="closeModal('modalEditInfo')">&times;</span>
             <form id="formEdit">
                 <div class="d-flex flex-column mt-3">
-                    <label for="name">Nome</label>
-                    <input id="name" name="name" type="text">
+                    <label for="nameEdit">Nome</label>
+                    <input id="nameEdit" name="name" type="text">
                     <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
-                    <label for="city">Cidade</label>
-                    <input id="city" name="city" type="text">
+                    <label for="cityEdit">Cidade</label>
+                    <input id="cityEdit" name="city" type="text">
                     <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
-                    <label for="login">Login</label>
-                    <input id="login" name="login" type="text">
+                    <label for="loginEdit">Login</label>
+                    <input id="loginEdit" name="login" type="text">
                     <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
-                    <label for="email">Email</label>
-                    <input id="email" name="email" type="email">
+                    <label for="emailEdit">Email</label>
+                    <input id="emailEdit" name="email" type="email">
                     <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
-                    <label for="password">Senha</label>
-                    <input id="password" name="password" type="password">
+                    <label for="passwordEdit">Senha</label>
+                    <input id="passwordEdit" name="password" type="password">
                     <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column">
@@ -307,6 +305,6 @@
       
 
     </main>
-    <script src="../app.js" defer></script>
+    
   </body>
 </html>
