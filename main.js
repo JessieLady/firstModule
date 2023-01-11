@@ -97,19 +97,19 @@ const renderTasks = (tasks) => {
 }
 
 const getTasksRender = async () => {
-    const tasksResponse = await fetch(`http://localhost:3000/tasks?owner_like=${currentOwner}&_limit=10`)//
+    const tasksResponse = await fetch(`https://projeto-arnia-jessica-moura.herokuapp.com/tasks?owner_like=${currentOwner}&_limit=10`)//
     const tasks = await tasksResponse.json()
     renderTasks(tasks)
 }
 
 const getTasksReturn = async () => {//try to change all this functions to api fetchs if possible
-    const tasksResponse = await fetch(`http://localhost:3000/tasks?owner_like=${currentOwner}`)
+    const tasksResponse = await fetch(`https://projeto-arnia-jessica-moura.herokuapp.com/tasks?owner_like=${currentOwner}`)
     const tasks = await tasksResponse.json()
     return tasks
 }
 
 const getTask = async (id) => {
-    const taskResponse = await fetch(`http://localhost:3000/tasks/${id}`)
+    const taskResponse = await fetch(`https://projeto-arnia-jessica-moura.herokuapp.com/tasks/${id}`)
     const task = await taskResponse.json()
     return task
 }
@@ -125,7 +125,7 @@ const saveTask = async (task) => {
 }
 
 const newTask = async (task) => {
-    await fetch('http://localhost:3000/tasks', {
+    await fetch('https://projeto-arnia-jessica-moura.herokuapp.com/tasks', {
         method: "POST",
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -136,7 +136,7 @@ const newTask = async (task) => {
 }
 
 const updateTask = async (id, task) => {
-    await fetch(`http://localhost:3000/tasks/${id}`, {
+    await fetch(`https://projeto-arnia-jessica-moura.herokuapp.com/tasks/${id}`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -254,19 +254,19 @@ formNewTask.addEventListener('submit', (event) => {
 /* USERS FUNCTIONS */
 
 const getUsers = async () => {
-    const users = await fetch(`http://localhost:3000/users`)
+    const users = await fetch(`https://projeto-arnia-jessica-moura.herokuapp.com/users`)
     const usersResponse = await users.json()
     return usersResponse
 }
 
 const getUser = async () => {
-    const userResponse = await fetch(`http://localhost:3000/users/${currentUser}`)
+    const userResponse = await fetch(`https://projeto-arnia-jessica-moura.herokuapp.com/users/${currentUser}`)
     const user = await userResponse.json()
     return user
 }
 
 const updateUser = async (id, user) => {
-    await fetch(`http://localhost:3000/users/${id}`, {
+    await fetch(`https://projeto-arnia-jessica-moura.herokuapp.com/users/${id}`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -328,7 +328,7 @@ const confirmDeleteUser = async () =>{
     const currentUserObj = await getUser(currentUser)
 
     const deleteUser = async (id) => {
-        await fetch(`http://localhost:3000/users/${id}`, {
+        await fetch(`https://projeto-arnia-jessica-moura.herokuapp.com/users/${id}`, {
         method: 'DELETE'
     })
     }
@@ -415,7 +415,7 @@ const findTasks = async () => { //try to make this function with the api functio
 /* PAGING FUNCTIONS */
 
 const loadPage = async (pageNum) => {
-    const tasksResponse = await fetch(`http://localhost:3000/tasks?_limit=10&_page=${pageNum}&owner_like=${currentOwner}`)
+    const tasksResponse = await fetch(`https://projeto-arnia-jessica-moura.herokuapp.com/tasks?_limit=10&_page=${pageNum}&owner_like=${currentOwner}`)
     const tasks = await tasksResponse.json()
     renderTasks(tasks)
 }
@@ -481,12 +481,12 @@ function hasValue(input, message) {
 const orderingTable = async (key) => {
 
     if(ordering) {
-        const ascMode = await fetch(`http://localhost:3000/tasks?_limit=10&_sort=${key}&_order=asc`)
+        const ascMode = await fetch(`https://projeto-arnia-jessica-moura.herokuapp.com/tasks?_limit=10&_sort=${key}&_order=asc`)
         const ascTasks = await ascMode.json()
         renderTasks(ascTasks)
         ordering = false
     }else{
-        const descMode = await fetch(`http://localhost:3000/tasks?_limit=10&_sort=${key}&_order=desc`)
+        const descMode = await fetch(`https://projeto-arnia-jessica-moura.herokuapp.com/tasks?_limit=10&_sort=${key}&_order=desc`)
         const descTasks = await descMode.json()
         renderTasks(descTasks)
         ordering = true
