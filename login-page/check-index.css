@@ -361,7 +361,6 @@ div{
     button{
       padding: 11px 40px;
     }
-    /* don't forget to fix this responsive breakpoint 4k */
 }
 
 .disabled{
@@ -381,11 +380,9 @@ div{
   background-color: var(--purple) !important;
   color: var(--background) !important;
 }
-
 .error{
   border: 1px solid var(--redStatus) !important;
 }
-
 .success{
   border: 1px solid var(--greenStatus) !important;
 }
@@ -401,7 +398,3 @@ small{
 .errorSmall{
   color: var(--redStatus) !important;
 }
-
-/* .smallPass{
-  font-size: 11px;
-} */

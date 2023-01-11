@@ -1,0 +1,1598 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* BIG SELECTORS */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+  }
+
+:root{
+    --purple: #68519D;
+    --yellow: #f8b04e;
+    --indigo: #2C2661;
+    --lightpurple: #D7CAE5;
+    --lightTr: #e4dcee;
+    --ice: #FBF0E2;
+    --cancelButton: #828282;
+
+    /* background colors */
+    --background: #F5F5F5;
+    --darkBackground: #110e24;
+
+    --darkWhite: #e2e0e0;
+
+    /* status colors */
+    --greenStatus: #27AE60;
+    --orangeStatus: #F8B04E;
+    --redStatus: #EB5757;
+    --blueStatus: #6e83fc;
+    /* color from figma #011379 - blue status */
+    
+    /* Arnia Website Palet */
+    --darkpurple: #1A1132;
+    --darkblue: #0E1327;
+    --orange: #F7AF4E;
+    --purpleple: #5F4579;
+    --greypurple: #AB9EA2;
+
+    --darkorange: #c77b17;
+    
+}
+
+body{
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+/* SELECTORS BY TAG NAME */
+span{
+    margin-left: 5px;
+}
+input{
+    width: 100%;
+    padding: 7px;
+    border-radius: 7px;
+    border: 1px solid gray;
+    background-color: unset;
+}
+input:focus{
+    outline: none;
+}
+select{
+    margin: 5px 0px;
+    width: 50%;
+    padding: 7px;
+    border-radius: 7px;
+}
+label{
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--purple);
+}
+button{
+    border: 1px solid var(--purple);
+    color: var(--purple);
+    font-size: 13px !important;
+    padding: 7px 25px;
+    border-radius: 20px !important;
+}
+button:hover{
+    background-color: var(--purple);
+    color: var(--background);
+}
+input[type="date"]{
+    width: 50%;
+    text-align: center;
+}
+small { 
+    color: red;
+    font-size: 9px;
+}
+
+/* MODALS */
+
+.modalMain{
+    display: none;
+    background-color: rgba(0,0,0,0.5);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    position: fixed;
+}
+#modalNewTaskContent{
+    border-radius: 10px;
+    width: 40%;
+    height: 60%;
+    padding: 40px 40px;
+    margin: 60px auto;
+    position: relative;
+}
+#modalEditConfirmContent{
+    width: 25vw;
+    height: 300px;
+    margin: 200px auto;
+    padding: 15px;
+    background-color: var(--background);
+    border: 2px solid var(--yellow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+#helpTitle>h6{
+    font-size: 17px;
+}
+#modalInfo{
+    display: none;
+    position: fixed;
+    width: 30vw;
+    height: 20vh;
+    z-index: 1;
+    bottom: 0;
+    right: 0;
+    background-color: var(--background);
+    border: 5px solid var(--yellow);
+}
+#modalInfoContent{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#modalHelpContent{
+    background-color: var(--background);
+    color: var(--purple);
+
+    text-align: center;
+
+    width: 25%;
+    height: 30%;
+    padding: 10px;
+    margin: 200px auto;
+    border-radius: 10px;
+    border: 3px solid var(--yellow);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+}
+#modalConfirmationContent{
+    width: 25vw;
+    height: 220px;
+    margin: 200px auto;
+    padding: 15px;
+    background-color: var(--background);
+    border: 2px solid var(--yellow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+#modalDeleteConfirmContent{
+    background-color: var(--background);
+    color: var(--purple);
+
+    text-align: center;
+
+    width: 25%;
+    height: 50%;
+    padding: 10px;
+    margin: 200px auto;
+    border-radius: 10px;
+    border: 3px solid var(--yellow);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+}
+#modalEditInfoContent{
+    background-color: var(--background);
+    color: var(--purple);
+    width: 22%;
+    height: 65%;
+    padding: 10px;
+    margin: 80px auto;
+    border-radius: 10px;
+    border: 5px solid var(--yellow);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    position: relative;
+}
+
+
+/* BACKGROUND */
+
+#content{
+    position: absolute;
+    width: 65%;
+    top: 300px;
+    left: 100px;
+    font-size: 14px;
+    max-height: 50%;
+    margin-top: 40px;
+}
+.div-purple{
+    background-color: var(--purple);
+    height: 100vh;
+    width: 3vw;
+}
+.div-grey{
+    background-color: var(--lightpurple);
+    height: 100vh;
+    width: 0.5vw;
+}
+.div-white{
+    background-color: var(--background);
+    height: 100vh;
+    width: 96.5vw;
+}
+.div-orange{
+    position: fixed;
+    background-color: var(--yellow);
+    height: 100vh;
+    width: 10vw;
+    transform: rotate(25deg);
+    right: 0;
+    top: 90px;
+    color: #f18b8b;
+}
+
+/* PSEUDO BOOTSTRAP CLASSES */
+
+.text-purple{
+    color: var(--purple) !important;
+}
+.text-white{
+    color: var(--background) !important;
+}
+.color-orange{
+    color: var(--yellow) !important;
+}
+.color-white{
+    color: var(--background) !important;
+}
+.success{
+    border-color: var(--greenStatus);
+}
+.error{
+    border-color: var(--redStatus);
+}
+.h5style{
+    color: var(--purple);
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.lateTask{
+    color: #f18b8b !important;
+    border-color: #f18b8b;
+}
+.lateTask:hover{
+    color: var(--purple) !important;
+    background-color: #f18b8b;
+}
+.deleteAccount{
+    color: #f18b8b !important;
+    border-color: #f18b8b;
+}
+.deleteAccount:hover{
+    color: var(--purple) !important;
+    background-color: #f18b8b;
+}
+.classModal{
+    background-color: var(--background);
+}
+/* ANIMATIONS */
+
+.upToDownAnimation{
+    animation: upToDown 0.5s running 1;;
+}
+@keyframes upToDown{
+    0%{transform: translateY(-300px);}
+    100%{transform: translateY(0px);}
+}
+.downToUpAnimation{
+    animation: downToUp 0.5s running 1;
+}
+@keyframes downToUp{
+    0%{transform: translateY(300px);}
+    100%{transform: translateY(0px);}
+}
+
+/* SWITCH MODE */
+
+.light-button{
+    border: 1px solid var(--purple);
+    color: var(--purple);
+    font-size: 13px !important;
+    padding: 7px 25px;
+    border-radius: 16px !important;
+}
+.light-button:hover{
+    background-color: var(--purple);
+    color: var(--background);
+}
+.dark-button{
+    border: 1px solid var(--purple);
+    background-color: var(--darkBackground);
+    color: var(--background) !important;
+    font-size: 13px !important;
+    padding: 7px 25px;
+    border-radius: 12px !important;
+}
+.dark-button:hover{
+    background-color: var(--darkpurple);
+    border: 1px solid var(--darkpurple);
+    color: var(--background);
+}
+.modalBack-light{
+    background-color: var(--background) !important;
+}
+.modalBack-dark{
+    background-color: var(--darkblue) !important;
+}
+.dark-footer{
+    background-color: var(--darkorange) !important;
+    color: var(--indigo);
+    font-weight: 400;
+}
+#darkModeContent{
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 40%;
+    padding: 7px;
+    cursor: pointer;
+
+    background-color: var(--purple);
+}
+#darkModeContent:hover{
+    border-radius: 50%;
+}
+/* STATUS COLORS */
+
+.Concluído{
+    color: var(--greenStatus) !important;
+}
+.Em-progresso{
+    color: var(--orangeStatus) !important;
+}
+.Em-pausa{
+    color: var(--blueStatus) !important;
+}
+.Atrasado{
+    color: var(--redStatus) !important;
+}
+
+/* HEADER ELEMENTS */
+
+#page-title{
+    font-weight: 800;
+}
+
+#logoutButton{
+    border-radius: 19px; 
+    font-size: 13px; 
+}
+/* QUITE COMMON HERE - MOSTLY RANDOM BUTTONS */
+.iconTable:hover{
+    cursor: pointer;
+    color: var(--darkorange);
+}
+#modal-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.submitButton{
+    border-radius: 19px;  
+    font-size: 13px;
+}
+#cancelButton{
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 12px;
+    color: var(--cancelButton);
+}
+#cancelButton:hover{
+    color: var(--cancelButton);
+    text-decoration: underline;
+}
+#closeButton{
+    cursor: pointer;
+    position: absolute;
+    top: 34%;
+    right: 39%;
+}
+.closeButton{
+    transform: scale(2, 2);
+    cursor: pointer;
+    position: absolute;
+    right: -22px;
+    top: -25px;
+    margin: 10%;
+}
+.closeButton:hover{
+    transform: scale(2.1, 2.1);
+    color: var(--indigo);
+}
+.closeButtonDelete{
+    transform: scale(2, 2);
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+.closeButtonDelete:hover{
+    transform: scale(2.1, 2.1);
+    color: var(--indigo);
+}
+#buttonsConfirmation{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+#confirm>h3{
+    font-size: 18px;
+    margin-top: 70px;
+}
+
+#helpBody{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* WEATHER ELEMENTS */
+
+#weather{
+    position: absolute;
+    top: 50px;
+    right: 180px;
+    width: fit-content;
+    height: 20vh;
+    padding: 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 18px;
+}
+#firstLine{
+    font-size: 50px;
+    font-weight: 650;
+    text-align: center;
+}
+#secondLine{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+/* TABLE HEADER ELEMENTS */
+
+#tableHeader{
+    width: 65%;
+    height: 50px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin: 33px 0px 33px;
+}
+#buttonsFilter{
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+}
+#buttonsFilter>button{
+    color: var(--purple);
+    font-size: 11px;
+    padding: 5px 18px;
+}
+#buttonsFilter>button:hover{
+    color: white;
+}
+#searchTasks{
+    height: 35px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: 1px solid gray;
+    border-radius: 7px;
+}
+#magnifyingGlass{
+    height: 33px;
+    line-height: 33px;
+    padding: 1px 7px;
+    border-radius: 7px;
+    background-color: var(--yellow);
+}
+#searchField{
+    color: var(--purple);
+    font-size: 10px;
+    padding: 7px;
+    border: none;
+}
+#searchField:focus{
+    outline: none;
+}
+
+/* MAIN/TABLE/CONTENT FOOTER */
+
+
+#footerHelp{
+    background-color: var(--yellow);
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    height: 30px;
+    padding: 5px;
+    margin-left: 5px;
+    font-size: 13px;
+    border-top-left-radius: 6px;
+}
+#footerHelp:hover{
+    background-color: var(--indigo) !important;
+    color: white;
+    cursor: pointer;
+}
+
+#content{
+    overflow-y: scroll;
+}
+/* ------------------------------------- */
+#headerSection{
+    color: var(--purple);
+    display: flex;
+    flex-direction: row;
+    height: 30vh;
+    position: relative;
+}
+
+#header>div{
+    border: 2px solid purple;
+}
+
+#headerStart{
+    display: flex;
+    flex-direction: column;
+    gap: 90px;
+}
+#headerStart>button{
+    width: 42%;
+    border-radius: 30px;
+}
+#logoArnia{
+    width: 200px;
+    position: relative;
+    top: 40px;
+}
+
+#page-title{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: 20px;
+}
+
+#weatherHeaderSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#secondLine>div{
+    font-size: 26px;
+    text-align: center;
+    justify-content: space-evenly;
+}
+#buttonsHeaderSection{
+    display:flex;
+    justify-content: end;
+}
+#buttonsPageTop{
+    margin-top: 10px;
+    height: 43px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.iconTable:hover{
+    color: var(--darkorange);
+    cursor: pointer;
+}
+
+table{
+    position: absolute;
+    bottom: 0;
+    border: none;
+}
+#midSection{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 10vh;
+    position: absolute;
+    left: 153px;
+    top: 280px;
+}
+#tableHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#tableSection{
+    position: relative;
+    top: 93px;
+
+    display: flex;
+    flex-direction: row;
+    height: 53.5vh;
+    left: -11px;
+    overflow-y: hidden;
+}
+#table{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#buttonsPaging{
+    height: 35px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+
+    position: absolute;
+    bottom: 30px;
+    left: 152px;
+}
+.pagingButtons{
+    cursor: pointer;
+    padding: 5px;
+    font-weight: 500;
+}
+.pagingButtons:hover{
+    color: var(--darkorange);
+}
+#pagesNum{
+    font-weight: 500;
+}
+@media (min-width: 500px) and (max-width: 501px) {
+    body{
+        max-width: 500px;
+    }
+    #div-white{
+        width: 500px;
+        height: 100vh;
+    }
+    #div-orange{
+        display: none;
+        opacity: 0.5;
+    }
+    #headerSection{
+        display: flex;
+        flex-direction: column; 
+    }
+    #headerStart{
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    #logoArnia{
+        width: 130px;
+    }
+    #firstLine>div{
+        font-size: 21px;
+        margin-top: 20px;
+    }
+    #secondLine>div{
+        font-size: 16px;
+    }
+    #secondLine{
+        margin-left: 60px;
+    }
+    #buttonsPageTop{
+        position: absolute;
+        top: 0;
+        gap: 10px;
+    }
+    #searchTasks{
+        display: none;
+        opacity: 0;
+    }
+    #tableHeader{
+        position: relative;
+        left: -140px;
+        width: 90vw;
+        overflow-x: scroll;
+        margin-bottom: 100px;
+    }
+    #buttonsFilter>button{
+        padding: 2px 11px;
+    }
+    #buttonsPaging{
+        bottom: 23px;
+        font-size: 15px;
+        margin-right: 100px;
+        right: 267px !important;
+    }
+    #midSection{
+        width: 52vw;
+    }
+    #tHead{
+        height: 30px;
+    }
+    th{
+        font-size: 12px;
+    }
+    tr{
+        font-size: 11px;
+    }
+    #footerHelp{
+        width: 100%;
+        text-align: center;
+        margin-right: 260px;
+    }
+    #modalNewTaskContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 63vh;
+    }
+    #modalConfirmationContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 25vh;
+        text-align: center;
+    }
+    #modalHelpContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditConfirmContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditInfoContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalDeleteConfirmContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 65vh;
+    }
+    #modalInfo{
+        margin-top: 40%;
+        width: 100vw;
+        height: 10vh;
+        font-size: 13px;
+    }
+    #textModalInfo{
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    input[type="date"]{
+        width: 70%;
+    }
+    select{
+        width: 70%;
+    }
+    #tableSection{
+        margin-left: 70px;
+    }
+    
+  }
+
+@media only screen and (min-width: 320px) {
+    body{
+        max-width: 425px;
+    }
+    #div-white{
+        width: 425px;
+        height: 100vh;
+    }
+    #div-orange{
+        display: none;
+    }
+    #headerSection{
+        display: flex;
+        flex-direction: column;
+    }
+    #headerStart{
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    #logoArnia{
+        width: 130px;
+    }
+    #firstLine>div{
+        font-size: 21px;
+        margin-top: 20px;
+    }
+    #secondLine>div{
+        font-size: 16px;
+    }
+    #secondLine{
+        margin-left: 60px;
+    }
+    #buttonsPageTop{
+        position: absolute;
+        top: 0;
+        gap: 10px;
+        left: 165px;
+    }
+    #searchTasks{
+        display: none;
+    }
+    #tableHeader{
+        position: relative;
+        left: -140px;
+        width: 90vw;
+        overflow-x: scroll;
+        margin-bottom: 100px;
+    }
+    #buttonsFilter>button{
+        padding: 3px 14px;
+    }
+    #buttonsPaging{
+        bottom: 23px;
+        font-size: 15px;
+        right: 0;
+    }
+    #midSection{
+        width: 52vw;
+    }
+    #tHead{
+        height: 30px;
+    }
+    th{
+        font-size: 12px;
+    }
+    tr{
+        font-size: 11px;
+    }
+    #footerHelp{
+        width: 100%;
+        text-align: center;
+    }
+    #modalNewTaskContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 63vh;
+    }
+    #modalConfirmationContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 25vh;
+        text-align: center;
+    }
+    #modalHelpContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditConfirmContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditInfoContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalDeleteConfirmContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 65vh;
+    }
+    #modalInfo{
+        margin-top: 40%;
+        width: 100vw;
+        height: 10vh;
+        font-size: 13px;
+    }
+    #textModalInfo{
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    input[type="date"]{
+        width: 70%;
+    }
+    select{
+        width: 70%;
+    }
+    
+  }
+
+  @media (min-width: 321px) and (max-width: 425px) { /* cell phone */
+    body{
+        max-width: 425px;
+    }
+    #div-white{
+        width: 425px;
+        height: 100vh;
+    }
+    #div-orange{
+        display: none;
+    }
+
+    #headerStart{
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    #logoArnia{
+        width: 130px;
+    }
+    #firstLine>div{
+        font-size: 21px;
+        margin-top: 20px;
+    }
+    #secondLine>div{
+        font-size: 16px;
+    }
+    #secondLine{
+        margin-left: 100px;
+    }
+    #buttonsPageTop{
+        position: absolute;
+        top: 0;
+        gap: 10px;
+        left: 270px;
+    }
+    #searchTasks{
+        display: none;
+    }
+    #tableHeader{
+        position: relative;
+        left: -140px;
+        width: 90vw;
+        overflow-x: scroll;
+        margin-bottom: 100px;
+    }
+    #buttonsFilter>button{
+        padding: 3px 14px;
+    }
+    #buttonsPaging{
+        bottom: 23px;
+        font-size: 15px;
+        margin: 0px auto;
+    }
+    #midSection{
+        width: 52vw;
+    }
+    #tHead{
+        height: 30px;
+    }
+    
+    #footerHelp{
+        width: 100%;
+        text-align: center;
+    }
+    #modalNewTaskContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 63vh;
+    }
+    #modalConfirmationContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 25vh;
+        text-align: center;
+    }
+    #modalHelpContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditConfirmContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditInfoContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalDeleteConfirmContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 65vh;
+    }
+    #modalInfo{
+        margin-top: 40%;
+        width: 100vw;
+        height: 10vh;
+        font-size: 13px;
+    }
+    #textModalInfo{
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    input[type="date"]{
+        width: 70%;
+    }
+    select{
+        width: 70%;
+    }
+    table{
+        margin-left: 20px;
+    }
+    #tableHeader{
+        position: relative;
+        left: -130px;
+        width: 90vw;
+        overflow-x: scroll;
+        margin-bottom: 100px;
+    }
+
+    th{
+        font-size: 13px;
+    }
+    td{
+        font-size: 12px;
+    }
+  }
+
+  @media (min-width: 426px) and (max-width:768px){ /* tablet */
+    body{
+        max-width: 768px;
+        position: fixed;
+    }
+    #div-white{
+        width: 768px;
+        height: 100vh;
+    }
+    #div-orange{
+        display: block;
+        z-index: 0;
+    }
+    #headerSection{
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+    }
+    #headerStart{
+        gap: 100px;
+    }
+    #logoArnia{
+        width: 180px;
+    }
+    #firstLine>div{
+        font-size: 38px;
+        margin-top: 20px;
+    }
+    #secondLine>div{
+        font-size: 24px;
+    }
+    #secondLine{
+        text-align: center;
+        margin-left: 55px;
+    }
+    #tableHeader{
+        position: relative;
+        left: -120px;
+        width: 90vw;
+        overflow-x: scroll;
+        margin-bottom: 100px;
+    }
+    #searchTasks{
+        display: flex;
+        position: absolute;
+        right: 0;
+    }
+    #modalNewTaskContent{
+        margin-top: 15%;
+        width: 80vw;
+        height: 63vh;
+    }
+    #modalConfirmationContent{
+        margin-top: 30%;
+        width: 60vw;
+        height: 25vh;
+        text-align: center;
+    }
+    #confirmText{
+        margin-top: 30px;
+    }
+    #modalHelpContent{
+        margin-top: 30%;
+        width: 65vw;
+        height: 35vh;
+    }
+    #modalEditConfirmContent{
+        margin-top: 30%;
+        width: 50vw;
+        height: 35vh;
+        text-align: center;
+    }
+    #modalEditInfoContent{
+        margin-top: 16%;
+        width: 50vw;
+        height: 68vh;
+    }
+    #modalDeleteConfirmContent{
+        margin-top: 16%;
+        width: 55vw;
+        height: 65vh;
+    }
+    #buttonsPageTop{
+        position: absolute;
+        top: 0;
+        gap: 10px;
+        left: unset;
+        right: 10px;
+    }
+    th{
+        font-size: 13px;
+    }
+    td{
+        font-size: 13px;
+    }
+    table{
+        padding: 60px;
+    }
+    #tableSection{
+        left: -70px;
+    }
+    #buttonsPaging{
+        bottom: 45px;
+        right: 230px;
+        font-size: 15px;
+        margin: 0px auto;
+    }
+    #footerHelp{
+        width: 40%;
+        right: 0;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width:1024px){ /* laptop */
+    body{
+        max-width: 1024px;
+        position: fixed;
+    }
+    #div-white{
+        width: 100vw;
+        height: 100vh;
+    }
+    
+    #div-orange{
+        display: block;
+        z-index: 0;
+    }
+    #headerSection{
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+    }
+    #buttonsFilter{
+        width: fit-content;
+    }
+    #headerStart{
+        gap: 100px;
+    }
+    #logoArnia{
+        width: 180px;
+    }
+    #firstLine>div{
+        font-size: 38px;
+        margin-top: 20px;
+    }
+    #secondLine>div{
+        font-size: 24px;
+    }
+    #secondLine{
+        text-align: center;
+        margin-left:110px;
+    }
+    #tableHeader{
+        position: relative;
+        left: -100px;
+        overflow-x: scroll;
+        margin-bottom: 100px;
+    }
+    #searchTasks{
+        display: flex;
+        position: absolute;
+        right: 0;
+    }
+    #modalNewTaskContent{
+        margin-top: 15%;
+        width: 80vw;
+        height: 63vh;
+    }
+    #modalConfirmationContent{
+        margin-top: 30%;
+        width: 60vw;
+        height: 25vh;
+        text-align: center;
+    }
+    #confirmText{
+        margin-top: 30px;
+    }
+    #modalHelpContent{
+        margin-top: 30%;
+        width: 65vw;
+        height: 35vh;
+    }
+    #modalEditConfirmContent{
+        margin-top: 30%;
+        width: 50vw;
+        height: 35vh;
+        text-align: center;
+    }
+    #modalEditInfoContent{
+        margin-top: 16%;
+        width: 50vw;
+        height: 68vh;
+    }
+    #modalDeleteConfirmContent{
+        margin-top: 16%;
+        width: 55vw;
+        height: 65vh;
+    }
+    #buttonsPageTop{
+        position: absolute;
+        top: 0;
+        gap: 10px;
+        left: unset;
+        right: 30px;
+        justify-content: center;
+    }
+    th{
+        font-size: 17px;
+    }
+    td{
+        font-size: 15px;
+    }
+    #tableSection{
+        left: -50px;
+    }
+    #buttonsPaging{
+        bottom: 45px;
+        right: 230px;
+        font-size: 15px;
+        margin: 0px auto;
+    }
+    #footerHelp{
+        width: 35%;
+        right: 0;
+    }
+    
+  }
+ 
+  @media (min-width: 1025px) and (max-width:1439px){ /* monitor */
+    body{
+        max-width: 100vw;
+        position: fixed;
+    }
+    #div-white{
+        width: 100vw;
+        height: 100vh;
+    }
+     th{
+        font-size: 19px;
+    }
+    td{
+        font-size: 17px;
+    }
+
+    
+    #div-orange{
+        display: block;
+        z-index: 0;
+    }
+    #headerSection{
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+    }
+    #buttonsFilter{
+        width: fit-content;
+        margin-left: 30px;
+    }
+    #headerStart{
+        gap: 100px;
+    }
+    #logoArnia{
+        width: 180px;
+    }
+    #firstLine>div{
+        font-size: 38px;
+        margin-top: 20px;
+    }
+    #secondLine>div{
+        font-size: 24px;
+    }
+    #secondLine{
+        text-align: center;
+        margin-left: unset;
+        margin-right: 100px;
+    }
+    #tableHeader{
+        position: relative;
+        left: -100px;
+        overflow-x: scroll;
+        margin-bottom: 100px;
+    }
+    #searchTasks{
+        display: flex;
+        position: absolute;
+        right: 100px;
+        width: 20%;
+    }
+    #modalNewTaskContent{
+        margin-top: 15%;
+        width: 40vw;
+        height: 53vh;
+    }
+    #modalConfirmationContent{
+        margin-top: 30%;
+        width: 60vw;
+        height: 25vh;
+        text-align: center;
+    }
+    #confirmText{
+        margin-top: 30px;
+    }
+    #modalHelpContent{
+        margin-top: 18%;
+        width: 35vw;
+        height: 35vh;
+    }
+    #modalEditConfirmContent{
+        margin-top: 20%;
+        width: 30vw;
+        height: 35vh;
+        text-align: center;
+    }
+    #modalEditInfoContent{
+        margin-top: 9%;
+        width: 25vw;
+        height: 68vh;
+    }
+    #modalDeleteConfirmContent{
+        margin-top: 16%;
+        width: 40vw;
+        height: 48vh;
+    }
+    #buttonsPageTop{
+        position: absolute;
+        top: 0;
+        gap: 10px;
+        left: unset;
+        right: 30px;
+    }
+   
+    #tableSection{
+        left: -50px;
+    }
+    #buttonsPaging{
+        bottom: 45px;
+        right: 330px;
+        font-size: 17px;
+        margin: 0px auto;
+    }
+    #footerHelp{
+        width: 25%;
+        right: 0;
+    }
+
+    #buttonsHeaderSection{
+        max-width: 10px;
+        margin-left: 250px;
+    }
+
+    #buttonsPageTop{
+        position: absolute;
+        left: unset;
+        justify-content: unset;
+        
+    }
+  }
+ 
+  @media (min-width: 1440px) and (max-width:2559px){ /* monitor large */
+    body{
+        max-width: 100vw;
+        position: fixed;
+    }
+    #div-white{
+        width: 150vw;
+        height: 100vh;
+    }
+    th{
+        font-size: 21px;
+    }
+    td{
+        font-size: 18px;
+    }
+
+    
+    #div-orange{
+        display: block;
+        z-index: 0;
+    }
+    #headerSection{
+        display: flex;
+        flex-direction: row;
+        margin-left: 40px;
+        margin-right: 40px;
+        width: unset;
+    }
+    #buttonsFilter{
+        width: fit-content;
+        position: absolute;
+        left: 30px;
+    }
+    #weatherSection{
+        position: absolute;
+        top: -500px;
+    }
+    #logoArnia{
+        width: 180px;
+    }
+    #firstLine>div{
+        font-size: 38px;
+        margin-top: 20px;
+    }
+    #secondLine>div{
+        font-size: 24px;
+    }
+    #secondLine{
+        text-align: center;
+        margin-left: 55px;
+    }
+    #tableHeader{
+        position: relative;
+        left: -120px;
+        overflow-x: unset;
+        margin-bottom: 100px;
+    }
+    #searchTasks{
+        display: flex;
+        position: absolute;
+        right: 900px;
+        max-width: 250px;
+    }
+    #modalNewTaskContent{
+        margin-top: unset;
+        margin-top: 10%;
+        width: 30vw;
+        height: 55vh;
+    }
+    #modalConfirmationContent{
+        margin-top: 15%;
+        width: 20vw;
+        height: 25vh;
+        text-align: center;
+    }
+    #confirmText{
+        margin-top: 30px;
+    }
+    #modalHelpContent{
+        margin-top: 14%;
+        width: 25vw;
+        height: 35vh;
+    }
+    #modalEditConfirmContent{
+        margin-top: 15%;
+        width: 20vw;
+        height: 30vh;
+        text-align: center;
+    }
+    #modalEditInfoContent{
+        margin-top: 10%;
+        width: 20vw;
+        height: 68vh;
+    }
+    #modalDeleteConfirmContent{
+        margin-top: 12%;
+        width: 30vw;
+        height: 50vh;
+    }
+    #modalInfo{
+        width: 20%;
+    }
+    
+    #tableSection{
+        left: -50px;
+    }
+    #buttonsPaging{
+        bottom: 180px;
+        right: 900px;
+        font-size: 17px;
+        margin: 0px auto;
+        
+    }
+    #footerHelp{
+        width: 20%;
+        right: 0;
+    }
+
+    #headerStart{
+        gap: 100px;
+        display: flex;
+        flex-direction: column;
+    }
+    #weatherHeaderSection{
+        margin-left: 450px;
+    }
+    #buttonsHeaderSection{
+        max-width: unset;
+        margin-left: none;
+    }
+    .iconTable{
+        font-size: 19px !important;
+    }
+    #buttonsPageTop{
+        position: static;
+        margin-right: 50px;
+        justify-content: unset;
+    }
+  }
+
+.disabled{
+    cursor: not-allowed !important;
+    background-color: var(--background) !important;
+    color: var(--purple) !important;
+}
+.disabled:hover{
+    background-color: none !important;
+}
+.enabled{
+    cursor: pointer !important;
+    background-color: var(--purple) !important;
+    color: var(--background) !important;
+}
+
+.light-tr:nth-child(even){
+    background-color: var(--lightTr);
+}
+
+.dark-tr:nth-child(even){
+    background-color: var(--darkpurple);
+}
+
+tr:hover{
+    background-color: #a19c9c65;
+}

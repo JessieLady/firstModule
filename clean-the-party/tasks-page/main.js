@@ -1,18 +1,5 @@
+/* GLOBAL CONSTS */
 
-const loadBody = () => {
-    getTasksRender(); 
-    weatherInfo(); 
-    tasksPagesTotal(); 
-    currentPageNum(1); 
-    contrastMode()
-}
-
-const logoutUser = () => {
-    sessionStorage.removeItem('user')
-    window.location.href = '../login-page/index.html'
-}
-
-/* Global consts */
 let ordering = true
 let contrast = localStorage.getItem("contrast")
 let currentTask = null
@@ -45,7 +32,17 @@ const passwordInput = document.getElementById('passwordLogin')
 
 const formNewTask = document.getElementById('formNewTask')
 
-/* MODAL'S FUNCTIONS */
+/* LOAD BODY FUNCTION */
+
+const loadBody = () => {
+    getTasksRender(); 
+    weatherInfo(); 
+    tasksPagesTotal(); 
+    currentPageNum(1); 
+    contrastMode()
+}
+
+/* MODALS FUNCTIONS */
 
 const openModal = (idModal) => {
     const modal = document.getElementById(idModal)
@@ -70,7 +67,7 @@ const clearModalNewTask = () => {
     select.options[0].selected = true
 }
 
-/* TASKS' FUNCTIONS SECTION */
+/* TASKS FUNCTIONS*/
 
 const renderTasks = (tasks) => {
     const tasksContent = document.getElementById('tbody-content')
@@ -80,7 +77,7 @@ const renderTasks = (tasks) => {
         const dateFormated = date.toLocaleDateString("pt-BR", {timeZone: 'UTC'})
         if(task.status === 'Concluído'){
             task.description = `<del>${task.description}</del>`
-        } else if(inDay > dateFormated && task.status !== 'Concluído'){
+        } else if(inDay > dateFormated && task.status !== 'Concluído'){//make a function that filter all tha tasks and put the warning in the screen
             task.status = 'Atrasado'
             warningLateTask()
         }
@@ -99,33 +96,13 @@ const renderTasks = (tasks) => {
     })
 }
 
-const confirmDelete = (idTask) =>{
-    openModal('modalConfirmation')
-
-    const deleteTask = async (id) => {
-        await fetch(`http://localhost:3000/tasks/${id}`, {
-        method: 'DELETE'
-    })
-    }
-    const button = document.getElementById('buttonYes')
-    button.addEventListener('click', () => {
-    deleteTask(idTask)
-})
-}
-
-const deleteTask = async (id) => {
-    await fetch(`http://localhost:3000/tasks/${id}`, {
-    method: 'DELETE'
-})
-}
-
 const getTasksRender = async () => {
     const tasksResponse = await fetch(`http://localhost:3000/tasks?owner_like=${currentOwner}&_limit=10`)//
     const tasks = await tasksResponse.json()
     renderTasks(tasks)
 }
 
-const getTasksReturn = async () => {
+const getTasksReturn = async () => {//try to change all this functions to api fetchs if possible
     const tasksResponse = await fetch(`http://localhost:3000/tasks?owner_like=${currentOwner}`)
     const tasks = await tasksResponse.json()
     return tasks
@@ -135,16 +112,6 @@ const getTask = async (id) => {
     const taskResponse = await fetch(`http://localhost:3000/tasks/${id}`)
     const task = await taskResponse.json()
     return task
-}
-const newTask = async (task) => {
-    await fetch('http://localhost:3000/tasks', {
-        method: "POST",
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(task)
-    })
 }
 
 const saveTask = async (task) => {
@@ -156,6 +123,18 @@ const saveTask = async (task) => {
     }
     closeModal('modalNewTask')
 }
+
+const newTask = async (task) => {
+    await fetch('http://localhost:3000/tasks', {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(task)
+    })
+}
+
 const updateTask = async (id, task) => {
     await fetch(`http://localhost:3000/tasks/${id}`, {
         method: 'PUT',
@@ -166,6 +145,7 @@ const updateTask = async (id, task) => {
         body: JSON.stringify(task)
     })
 }
+
 const editTask = async (id) => {
 
     const numberField = document.getElementById('number')
@@ -180,7 +160,7 @@ const editTask = async (id) => {
     descriptionField.value = currentTask.description
     dateField.value = currentTask.date
 
-    let text = currentTask.status
+    let text = currentTask.status//change the text var name
     let select = document.querySelector('#selectStatus');
 
     for (let counter = 0; counter < select.options.length; counter++) {
@@ -191,6 +171,26 @@ const editTask = async (id) => {
 
     const button = document.getElementById('submitButton')
     button.innerHTML = 'Alterar'
+}
+
+const confirmDelete = (idTask) =>{
+    openModal('modalConfirmation')
+
+    const deleteTask = async (id) => { //remove this extra delete function
+        await fetch(`http://localhost:3000/tasks/${id}`, {
+        method: 'DELETE'
+    })
+    }
+    const button = document.getElementById('buttonYes')
+    button.addEventListener('click', () => {
+    deleteTask(idTask)
+})
+}
+
+const deleteTask = async (id) => {
+    await fetch(`http://localhost:3000/tasks/${id}`, {
+    method: 'DELETE'
+})
 }
 
 class Task {
@@ -208,20 +208,9 @@ class Task {
     }
 }
 
-formNewTask.addEventListener('submit', (event) => {
-    event.preventDefault()
+/* It`s missing a function that enables the submit form button */
 
-    const number = formNewTask.elements['number'].value
-    const description = formNewTask.elements['description'].value
-    const date = formNewTask.elements['date'].value
-    const status = formNewTask.elements['status'].value
-    const owner = currentOwner
-
-    const num = Number(number)
-
-    const task = new Task(num, description, date, status, owner)
-    saveTask(task)
-})
+/* get based on this */
 
  /* formNewTask.addEventListener('onchange', (event) => {
     event.preventDefault()
@@ -247,12 +236,186 @@ formNewTask.addEventListener('submit', (event) => {
     }
 }) */
 
+formNewTask.addEventListener('submit', (event) => {
+    event.preventDefault()
 
+    const number = formNewTask.elements['number'].value
+    const description = formNewTask.elements['description'].value
+    const date = formNewTask.elements['date'].value
+    const status = formNewTask.elements['status'].value
+    const owner = currentOwner
+
+    const num = Number(number)
+
+    const task = new Task(num, description, date, status, owner)
+    saveTask(task)
+})
+
+/* USERS FUNCTIONS */
+
+const getUsers = async () => {
+    const users = await fetch(`http://localhost:3000/users`)
+    const usersResponse = await users.json()
+    return usersResponse
+}
+
+const getUser = async () => {
+    const userResponse = await fetch(`http://localhost:3000/users/${currentUser}`)
+    const user = await userResponse.json()
+    return user
+}
+
+const updateUser = async (id, user) => {
+    await fetch(`http://localhost:3000/users/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+}
+
+const confirmEditUser = async () => {//how i'm going to make this function work?
+
+    const editButton = document.getElementById('editButton')
+    const msgModalInfo = document.getElementById('textModalInfo') 
+
+    const currentUserObj = await getUser(currentUser)
+    editButton.addEventListener('click', () => {
+        if(confirmInput.value !== currentUserObj.password){
+            openModal('modalInfo')
+            msgModalInfo.innerHTML = 'Ocorreu um erro'
+        }else{
+            closeModal('modalEditConfirm')
+            editUser(currentUser)//put the function editUser in here!
+            editInput.value = ''
+        }
+    })
+}
+
+//vou parar isso um pouquinho. Cabeça on fire
+
+const editUser = async (id) => {
+    openModal('modalEditInfo')
+    const currentUserObj = await getUser(id)
+
+    const name = document.getElementById('nameEdit')
+    const city = document.getElementById('cityEdit')
+    const login = document.getElementById('loginEdit')
+    const email = document.getElementById('emailEdit')
+    const password = document.getElementById('passwordEdit')
+
+    name.value = currentUserObj.name
+    city.value = currentUserObj.city
+    login.value = currentUserObj.login
+    email.value = currentUserObj.email
+    password.value = currentUserObj.password
+
+    await updateUser(id, currentUserObj)
+    openModal('modalInfo')
+    closeModal('modalEditInfo')
+}
+
+const confirmDeleteUser = async () =>{
+    closeModal('modalHelp')
+    openModal('modalDeleteConfirm')
+
+    const button = document.getElementById('deleteButton')
+    const passwordInput = document.getElementById('passConfirmDelete')
+    const msg = passwordInput.parentNode.querySelector('small')
+    
+    const currentUserObj = await getUser(currentUser)
+
+    const deleteUser = async (id) => {
+        await fetch(`http://localhost:3000/users/${id}`, {
+        method: 'DELETE'
+    })
+    }
+
+    passwordInput.addEventListener('blur', () => {
+    if(passwordInput.value.trim() !== currentUserObj.password){
+        msg.innerHTML = 'Senha incorreta'
+        passwordInput.className = 'error'
+    }else{
+        passwordInput.className = 'success'
+        msg.innerHTML = ''
+    }
+    button.addEventListener('click', () => {
+        if(passwordInput.value.trim() === currentUserObj.password){
+            deleteUser(currentUser)
+            window.location.href = '../login-page/index.html'
+        }else{
+            msg.innerHTML = 'Preencha esse campo corretamente'
+            passwordInput.className = 'error'
+        }
+    })
+    //how to delete all the tasks from the user account?
+})
+}
+
+/* create a function that deletes all the tasks from the user when the user is deleted */
+
+/* FILTER FUNCTIONS */
+
+const filterTasks = async (status) => { // change this
+    const tasks = await getTasksReturn()
+    const filterTasks = tasks.filter((valor) => {
+        if(valor.status === status) return true
+        return false
+    })
+    renderTasks(filterTasks)
+}
+
+const lateTasks = async () => { // You can try change this one too but i dunno how to...
+    const tasks = await getTasksReturn()
+
+    const tasksLate = tasks.filter((task) => { 
+        const date = new Date(task.date)
+        const dateFormated = date.toLocaleDateString("pt-BR", {timeZone: 'UTC'})     
+        if(inDay > dateFormated && task.status !== 'Concluído') return true
+        return false
+    })
+    renderTasks(tasksLate)
+}
+
+const warningLateTask = () => {// Try to implement more this one. Only if the task is in the screen that this button appears. Good, but not enough.
+    const button = document.getElementById('btnLate')
+    button.className = 'lateTask'
+}
+
+const todayTasks = async () => { // and this one too.
+    const tasks = await getTasksReturn()
+
+    const tasksToday = tasks.filter((task) => { 
+        const date = new Date(task.date)
+        const dateFormated = date.toLocaleDateString("pt-BR", {timeZone: 'UTC'})     
+        if(dateFormated === inDay && task.status !== 'Concluído') return true
+        return false
+    })
+    renderTasks(tasksToday)
+}
+
+searchInput.addEventListener('input', async () => { //Maybe this one too, but i love the way that this search input works...
+    const tasks = await getTasksReturn()
+    const input = searchInput.value.toUpperCase();
+
+    let taskSearch = tasks.filter((task) => {
+        let search = task.description.toUpperCase()
+    if(search.includes(input)) return true
+        return false
+    })
+    renderTasks(taskSearch)
+})
+
+const findTasks = async () => { //try to make this function with the api function
+
+}
 
 /* PAGING FUNCTIONS */
 
 const loadPage = async (pageNum) => {
-    const tasksResponse = await fetch(`http://localhost:3000/tasks?_limit=10&_page=${pageNum}&owner_like=${currentOwner}`)//
+    const tasksResponse = await fetch(`http://localhost:3000/tasks?_limit=10&_page=${pageNum}&owner_like=${currentOwner}`)
     const tasks = await tasksResponse.json()
     renderTasks(tasks)
 }
@@ -275,8 +438,8 @@ const previousPage = async () => {
 }
 
 const currentPageNum = (page) => {
-const spanPage = document.getElementById('currentPage')
-spanPage.innerHTML = `${page}`
+    const spanPage = document.getElementById('currentPage')
+    spanPage.innerHTML = `${page}`
 }
 
 const tasksPagesTotal = async () => {
@@ -330,7 +493,50 @@ const orderingTable = async (key) => {
     }
 }
 
-/* LIGHT MODE / DARK MODE */
+/* WEATHER FUNCTIONS */
+
+const weatherSearch = async (user) => {
+    const locals = []
+    const conditions = []
+
+    locals.push(...(await (await fetch(`http://dataservice.accuweather.com/locations/v1/search?q=${user}&apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
+
+    const key = locals[0].Key
+    conditions.push(...(await (await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
+    return conditions
+}
+
+const weatherInfo = async () => {//This function needs to be redone
+
+    const weatherName = document.getElementById('weatherName')
+    const weatherCity = document.getElementById('weatherCity')
+    //const weatherTemp = document.getElementById('weatherTemp')
+
+    const user = await getUsers()
+    const userIndex = user.findIndex((valor) => {
+        if(valor.id === currentUser) return true
+    })    
+    const userCity = user[userIndex].city
+    //const userInfoWeather = await weatherSearch(userCity)
+
+    weatherName.innerHTML = `${user[userIndex].name}`
+    weatherCity.innerHTML = `${userCity}`
+    //weatherTemp.innerHTML = `${userInfoWeather[0].Temperature.Metric.Value}°C`
+}
+
+/* SESSION AND LOCAL STORAGE FUNCTIONS */
+
+const contrastMode = () => {
+    if(contrast) {
+        lightMode()
+    }else {
+        darkMode()
+    }
+}
+
+/* LIGHT THEME AND DARK THEME */
+
+/* easy, but you must redo this logic. It's too messy. */
 
 const background = document.getElementById('div-white')
 const iconButton = document.getElementById('iconMode')
@@ -346,7 +552,7 @@ const selectStatus = document.getElementById('selectStatus')
 const buttons = document.querySelectorAll("button")
 const modals = document.getElementsByClassName('classModal')
 const inputs = document.querySelectorAll("input")
-const trs = document.querySelectorAll("tr")
+const trs = document.querySelectorAll("tr")// this is not working...
 const helpTitle = document.getElementById('helpTitle')
 const searchField = document.getElementById('searchField')
 const deleteAccountBtn = document.getElementById('deleteAccountButton')
@@ -465,204 +671,5 @@ const darkMode = () => {
 
     deleteAccountBtn.className = 'deleteAccount'
     deleteAccountBtn.style.backgroundColor = 'var(--darkblue)'
-}
-
-/* SEASON/LOCALE STORAGE FUNCTIONS */
-
-const contrastMode = () => {
-    if(contrast) {
-        lightMode()
-    }else {
-        darkMode()
-    }
-}
-
-/* FILTER TASKS FUNCTIONS */
-
-const filterTasks = async (status) => {
-    const tasks = await getTasksReturn()
-    const filterTasks = tasks.filter((valor) => {
-        if(valor.status === status) return true
-        return false
-    })
-    renderTasks(filterTasks)
-}
-
-const lateTasks = async () => {
-    const tasks = await getTasksReturn()
-
-    const tasksLate = tasks.filter((task) => { 
-        const date = new Date(task.date)
-        const dateFormated = date.toLocaleDateString("pt-BR", {timeZone: 'UTC'})     
-        if(inDay > dateFormated && task.status !== 'Concluído') return true
-        return false
-    })
-    renderTasks(tasksLate)
-}
-
-const warningLateTask = () => {
-    const button = document.getElementById('btnLate')
-    button.className = 'lateTask'
-}
-
-const todayTasks = async () => {
-    const tasks = await getTasksReturn()
-
-    const tasksToday = tasks.filter((task) => { 
-        const date = new Date(task.date)
-        const dateFormated = date.toLocaleDateString("pt-BR", {timeZone: 'UTC'})     
-        if(dateFormated === inDay && task.status !== 'Concluído') return true
-        return false
-    })
-    renderTasks(tasksToday)
-}
-
-/* searchInput.addEventListener('input', async () => {
-    const tasks = await getTasksReturn()
-    const input = searchInput.value.toUpperCase();
-
-    let taskSearch = tasks.filter((task) => {
-        let search = task.description.toUpperCase()
-    if(search.includes(input)) return true
-        return false
-    })
-    renderTasks(taskSearch)
-}) */
-
-const findTasks = async () => {
-
-}
-
-/* USER FUNCTIONS */
-
-const getUsers = async () => {
-    const users = await fetch(`http://localhost:3000/users`)
-    const usersResponse = await users.json()
-    return usersResponse
-}
-
-const getUser = async () => {
-    const userResponse = await fetch(`http://localhost:3000/users/${currentUser}`)
-    const user = await userResponse.json()
-    return user
-}
-
-const updateUser = async (id, user) => {
-    await fetch(`http://localhost:3000/users/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
-    })
-}
-
-const confirmEditUser = async () => {//how i'm going to make this function work?
-
-    const editButton = document.getElementById('editButton')
-    const msgModalInfo = document.getElementById('textModalInfo') 
-
-    const currentUserObj = await getUser(currentUser)
-    editButton.addEventListener('click', () => {
-        if(confirmInput.value !== currentUserObj.password){
-            openModal('modalInfo')
-            msgModalInfo.innerHTML = 'Ocorreu um erro'
-        }else{
-            closeModal('modalEditConfirm')
-            editUser(currentUser)
-            editInput.value = ''
-        }
-    })
-}
-
-//vou parar isso um pouquinho. Cabeça on fire
-
-const editUser = async (id) => {
-    openModal('modalEditInfo')
-    const currentUserObj = await getUser(id)
-
-    const name = document.getElementById('nameEdit')
-    const city = document.getElementById('cityEdit')
-    const login = document.getElementById('loginEdit')
-    const email = document.getElementById('emailEdit')
-    const password = document.getElementById('passwordEdit')
-
-    name.value = currentUserObj.name
-    city.value = currentUserObj.city
-    login.value = currentUserObj.login
-    email.value = currentUserObj.email
-    password.value = currentUserObj.password
-
-    await updateUser(id, currentUserObj)
-    openModal('modalInfo')
-    closeModal('modalEditInfo')
-}
-
-const confirmDeleteUser = async () =>{
-    closeModal('modalHelp')
-    openModal('modalDeleteConfirm')
-
-    const button = document.getElementById('deleteButton')
-    const passwordInput = document.getElementById('passConfirmDelete')
-    const msg = passwordInput.parentNode.querySelector('small')
-    
-    const currentUserObj = await getUser(currentUser)
-
-    const deleteUser = async (id) => {
-        await fetch(`http://localhost:3000/users/${id}`, {
-        method: 'DELETE'
-    })
-    }
-
-    passwordInput.addEventListener('blur', () => {
-    if(passwordInput.value.trim() !== currentUserObj.password){
-        msg.innerHTML = 'Senha incorreta'
-        passwordInput.className = 'error'
-    }else{
-        passwordInput.className = 'success'
-        msg.innerHTML = ''
-    }
-    button.addEventListener('click', () => {
-        if(passwordInput.value.trim() === currentUserObj.password){
-            deleteUser(currentUser)
-            window.location.href = '../login-page/index.html'
-        }else{
-            msg.innerHTML = 'Preencha esse campo corretamente'
-            passwordInput.className = 'error'
-        }
-    })
-    //how to delete all the tasks from the user account?
-})
-}
-
-/* WEATHER FUNCTIONS */
-const weatherSearch = async (user) => {
-    const locals = []
-    const conditions = []
-
-    locals.push(...(await (await fetch(`http://dataservice.accuweather.com/locations/v1/search?q=${user}&apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
-
-    const key = locals[0].Key
-    conditions.push(...(await (await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
-    return conditions
-}
-
-const weatherInfo = async () => {
-
-    const weatherName = document.getElementById('weatherName')
-    const weatherCity = document.getElementById('weatherCity')
-    //const weatherTemp = document.getElementById('weatherTemp')
-
-    const user = await getUsers()
-    const userIndex = user.findIndex((valor) => {
-        if(valor.id === currentUser) return true
-    })    
-    const userCity = user[userIndex].city
-    //const userInfoWeather = await weatherSearch(userCity)
-
-    weatherName.innerHTML = `${user[userIndex].name}`
-    weatherCity.innerHTML = `${userCity}`
-    //weatherTemp.innerHTML = `${userInfoWeather[0].Temperature.Metric.Value}°C`
 }
 

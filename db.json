@@ -31,6 +31,14 @@
       "email": "anaCarolina@email.com",
       "password": "100476",
       "id": 4
+    },
+    {
+      "name": "Jessica",
+      "city": "Nova Iguaçu",
+      "login": "pastel",
+      "email": "jessie.moura19@gmail.com",
+      "password": "pastel",
+      "id": 5
     }
   ],
   "tasks": [
