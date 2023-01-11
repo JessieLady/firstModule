@@ -344,7 +344,7 @@ const confirmDeleteUser = async () =>{
     button.addEventListener('click', () => {
         if(passwordInput.value.trim() === currentUserObj.password){
             deleteUser(currentUser)
-            window.location.href = '../login-page/index.html'
+            window.location.href = 'index.html'
         }else{
             msg.innerHTML = 'Preencha esse campo corretamente'
             passwordInput.className = 'error'
@@ -499,10 +499,10 @@ const weatherSearch = async (user) => {
     const locals = []
     const conditions = []
 
-    locals.push(...(await (await fetch(`http://dataservice.accuweather.com/locations/v1/search?q=${user}&apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
+    locals.push(...(await (await fetch(`https://dataservice.accuweather.com/locations/v1/search?q=${user}&apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
 
     const key = locals[0].Key
-    conditions.push(...(await (await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
+    conditions.push(...(await (await fetch(`https://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
     return conditions
 }
 
@@ -630,7 +630,7 @@ const darkMode = () => {
     iconButton.src = "../assets/sun.svg"
     buttonBack.style.backgroundColor = 'var(--darkorange)'
     
-    logo.src = '../assets/logo.png'
+    logo.src = '../assets/logo-white.svg'
     
     tableBody.className = 'table-dark text-white'
     
