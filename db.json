@@ -1,0 +1,206 @@
+{
+  "users": [
+    {
+      "name": "Jessica",
+      "city": "Nova Iguaçu",
+      "login": "jessica",
+      "email": "jessie.moura19@gmail.com",
+      "password": "123456",
+      "id": 1
+    },
+    {
+      "name": "yllana",
+      "city": "Nova Iguaçu",
+      "login": "yllana",
+      "email": "jessie.moura19@gmail.com",
+      "password": "290502",
+      "id": 2
+    },
+    {
+      "name": "Isabelle",
+      "city": "Nova Iguaçu",
+      "login": "isabelle",
+      "email": "isabelle@gmail.com",
+      "password": "050404",
+      "id": 3
+    },
+    {
+      "name": "Ana Carolina",
+      "city": "Nova Iguaçu",
+      "login": "anaCarolina",
+      "email": "anaCarolina@email.com",
+      "password": "100476",
+      "id": 4
+    },
+    {
+      "name": "Jessica",
+      "city": "Nova Iguaçu",
+      "login": "pastel",
+      "email": "jessie.moura19@gmail.com",
+      "password": "pastel",
+      "id": 5
+    }
+  ],
+  "tasks": [
+    {
+      "number": 1,
+      "description": "tarefa da jessica 1",
+      "date": "2023-01-11",
+      "status": "Em progresso",
+      "owner": "jessica",
+      "id": 1
+    },
+    {
+      "number": 2,
+      "description": "tarefa da jessica 2",
+      "date": "2023-01-20",
+      "status": "Em pausa",
+      "owner": "jessica",
+      "id": 2
+    },
+    {
+      "number": 3,
+      "description": "tarefa da jessica 3",
+      "date": "2023-01-14",
+      "status": "Concluído",
+      "owner": "jessica",
+      "id": 3
+    },
+    {
+      "number": 4,
+      "description": "tarefa da jessica 4",
+      "date": "2023-01-18",
+      "status": "Em progresso",
+      "owner": "jessica",
+      "id": 4
+    },
+    {
+      "number": 5,
+      "description": "tarefa da jessica 5",
+      "date": "2023-01-20",
+      "status": "Em progresso",
+      "owner": "jessica",
+      "id": 5
+    },
+    {
+      "number": 1,
+      "description": "tarefa da yllana 1",
+      "date": "2023-01-18",
+      "status": "Em progresso",
+      "owner": "yllana",
+      "id": 6
+    },
+    {
+      "number": 2,
+      "description": "tarefa da yllana 2",
+      "date": "2023-01-20",
+      "status": "Em pausa",
+      "owner": "yllana",
+      "id": 7
+    },
+    {
+      "number": 3,
+      "description": "tarefa da yllana 3",
+      "date": "2023-01-26",
+      "status": "Concluído",
+      "owner": "yllana",
+      "id": 8
+    },
+    {
+      "number": 4,
+      "description": "tarefa da yllana 4",
+      "date": "2023-01-14",
+      "status": "Em pausa",
+      "owner": "yllana",
+      "id": 9
+    },
+    {
+      "number": 5,
+      "description": "tarefa da yllana 5",
+      "date": "2023-01-27",
+      "status": "Concluído",
+      "owner": "yllana",
+      "id": 10
+    },
+    {
+      "number": 1,
+      "description": "tarefa da isabelle 1",
+      "date": "2023-01-12",
+      "status": "Em progresso",
+      "owner": "isabelle",
+      "id": 11
+    },
+    {
+      "number": 2,
+      "description": "tarefa da isabelle 2",
+      "date": "2023-01-19",
+      "status": "Em progresso",
+      "owner": "isabelle",
+      "id": 12
+    },
+    {
+      "number": 3,
+      "description": "tarefa da isabelle 3",
+      "date": "2023-01-19",
+      "status": "Concluído",
+      "owner": "isabelle",
+      "id": 13
+    },
+    {
+      "number": 4,
+      "description": "tarefa da isabelle 4",
+      "date": "2023-01-19",
+      "status": "Concluído",
+      "owner": "isabelle",
+      "id": 14
+    },
+    {
+      "number": 5,
+      "description": "tarefa da isabelle 5",
+      "date": "2023-01-08",
+      "status": "Em progresso",
+      "owner": "isabelle",
+      "id": 15
+    },
+    {
+      "number": 1,
+      "description": "tarefa da ana carolina 1",
+      "date": "2023-01-26",
+      "status": "Em pausa",
+      "owner": "anaCarolina",
+      "id": 16
+    },
+    {
+      "number": 2,
+      "description": "tarefa da ana carolina 2",
+      "date": "2023-01-24",
+      "status": "Em progresso",
+      "owner": "anaCarolina",
+      "id": 17
+    },
+    {
+      "number": 3,
+      "description": "tarefa da ana carolina 3",
+      "date": "2023-01-27",
+      "status": "Em progresso",
+      "owner": "anaCarolina",
+      "id": 18
+    },
+    {
+      "number": 4,
+      "description": "tarefa da ana carolina 4",
+      "date": "2023-01-25",
+      "status": "Em progresso",
+      "owner": "anaCarolina",
+      "id": 19
+    },
+    {
+      "number": 5,
+      "description": "tarefa da ana carolina 5",
+      "date": "2023-01-30",
+      "status": "Em pausa",
+      "owner": "anaCarolina",
+      "id": 20
+    }
+  ]
+}
