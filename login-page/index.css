@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+/* MAIN CSS CONFIGS */
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: 'Poppins';
-  }
+}
 
-:root{
+:root {
     --purple: #68519D;
     --yellow: #f8b04e;
     --indigo: #2C2661;
@@ -21,156 +23,307 @@
     --blueStatus: #011379;
 }
 
-body{
+/* COOL BACKGROUND */
+
+body {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-
-    background-image: url(../assets/background.svg);
-    background-position: center;
-    background-size: cover;
-}
-
-header{
-    width: 100vw;
-    height: 80px;
-    padding: 20px 25px;
-    background-color: var(--purple);
-    border-bottom: 4px solid var(--yellow);
-}
-
-main{
-    background-color: var(--lightpurple);
-    width: 65vw;
-    height: 79vh;
-    margin: 20px auto;
-
-    display: flex;
-    flex-direction: row;
-
-    border-radius: 25px;
-    box-shadow: 0px 2px 7px black;
-
-    position: relative;
-}
-footer{
-    position: absolute;
-    bottom: 0;
-    width: 100vw;
-    height: 15px;
-    padding: 7px;
-    background-color: var(--yellow);
-}
-
-#peopleImg{
-    position: absolute;
-    top: 70px;
-    left: -20px;
-}
-
-#welcomeBanner{
-    position: absolute;
-    bottom: -20px;
-    left: 65px;
-}
-
-#welcomeScreen{
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-
-    padding: 40px 40px 15px;
-
-    box-shadow: 0px 1px 7px grey;
-
-    background-color: var(--background);
-    border-radius: 20px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-#title-comunication{
-    font-size: 17px;
-    text-align: center;
-}
-
-#h1Div{
-    width: 100%;
-    font-weight: 700;
-    border-bottom: 3px solid var(--greenStatus);
-}
-
-
-#welcomeComunication{
-    width: 100%;
-    font-size: 13px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    justify-content: center;
     align-items: center;
-    background-color: var(--purple);
-    color: white;
-    padding: 10px 10px 0px;
-    border-radius: 35px;
-
-    box-shadow: -2px 2px 2px grey;
+    min-height: 100vh;
+    background: #000;
 }
 
-#ul-div{
-    width: 100%;
-    list-style-type: none;
-    text-align: center;
+section {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    flex-wrap: wrap;
+    overflow: hidden;
 }
 
-i{
-    color: var(--greenStatus)
-}
-
-#subtitle{
-    text-align: center;
+section::before {
+    content: '';
+    position: absolute;
     width: 100%;
-    font-weight: 600;
-    font-size: 21px;
+    height: 100%;
+    background: linear-gradient(#000, #F8B04E, #000);
+    animation: animate 5s linear infinite;
 }
 
-#welcome-buttons{
-    width: 80%;
-    padding: 0px 30px;
+@keyframes animate {
+    0% {
+        transform: translateY(-100%);
+    }
 
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+section span {
+    position: relative;
+    display: block;
+    width: calc(6.25vw - 2px);
+    height: calc(6.25vw - 2px);
+    background: #2C2661;
+    z-index: 2;
+}
+
+@media (max-width: 900px) {
+    section span {
+        width: calc(10vw - 2px);
+        height: calc(10vw - 2px);
+    }
+}
+
+@media (max-width: 600px) {
+    section span {
+        width: calc(20vw - 2px);
+        height: calc(20vw - 2px);
+    }
+}
+
+/* MAIN */
+
+main {
+    background-color: var(--background) !important;
+    border-radius: 10px;
+    z-index: 3;
+    position: relative;
+    border: 5px solid var(--yellow);
+    padding: 30px;
+}
+
+#contentMain {
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER MAIN */
+
+#headerContent {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 3px solid var(--lightpurple);
+}
+
+#logoArnia>img {
+    width: 150px;
+}
+
+#titleMain>h2 {
+    font-weight: bold;
+    color: var(--purple);
+}
+
+/* BODY MAIN */
+
+#bodyContent {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+}
+
+#infoBodyContent {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.textIcon {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.textIcon>img {
+    width: 100px;
+}
+
+#interactBodyContent {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    border-left: 3px solid var(--lightpurple);
+}
+
+#buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     gap: 14px;
 }
 
-#welcome-images{
-    width: 100%;
-    color: var(--greenStatus);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+/* SELECTORS BY TAG NAME */
+
+button {
+    border: 1px solid var(--purple);
+    color: var(--purple);
+    font-size: 18px !important;
+    border-radius: 12px !important;
+    padding: 10px 25px;
 }
-#modalLogin{
+
+button:hover {
+    background-color: var(--purple);
+    color: var(--background);
+}
+
+label [for="conected"] {
+    font-size: 26px;
+}
+
+div {
+    color: var(--indigo);
+}
+
+label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--purple);
+}
+
+input {
+    padding: 7px;
+    border-radius: 7px;
+    border: 1px solid gray;
+}
+
+small {
+    color: var(--redStatus);
+    text-align: center;
+}
+
+/* SELECTORS BY CLASS NAME */
+
+.closeButton {
+    transform: scale(2, 2);
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    margin-left: 10px; /* FIX THIS. TO CLOSE THE BORDER */
+}
+
+.closeButton:hover {
+    transform: scale(2.1, 2.1);
+    color: var(--indigo);
+}
+
+.closeButtonFooter {
+    transform: scale(2, 2);
+    cursor: pointer;
+    position: absolute;
+    right: -10px;
+    top: 0;
+    margin-left: 10px;
+}
+
+.closeButtonFooter:hover {
+    transform: scale(2.1, 2.1);
+    color: var(--indigo);
+}
+
+.divSpecial {
+    display: flex;
+    flex-direction: column;
+}
+
+.modalTitle {
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.modalTxt {
+    font-size: 17px;
+}
+
+.disabled {
+    background-color: var(--background) !important;
+    color: var(--lightpurple) !important;
+    border-color: var(--lightpurple) !important;
+}
+
+.disabled:hover {
+    cursor: not-allowed !important;
+}
+
+.enabled {
+    cursor: pointer !important;
+    background-color: var(--background) !important;
+    color: var(--purple) !important;
+}
+
+.enabled:hover {
+    background-color: var(--purple) !important;
+    color: var(--background) !important;
+}
+
+.error {
+    border: 1px solid var(--redStatus) !important;
+}
+
+.success {
+    border: 1px solid var(--greenStatus) !important;
+}
+
+.successSmall {
+    color: var(--greenStatus) !important;
+}
+
+.errorSmall {
+    color: var(--redStatus) !important;
+}
+
+/* SELECTORS BY ID NAME */
+
+#signIn {
+    width: unset;
+}
+
+/* ANIMATIONS */
+
+.downToUpAnimation {
+    animation: downToUp 0.5s running 1;
+}
+
+@keyframes downToUp {
+    0% {
+        transform: translateY(-300px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* MODALS */
+
+#modalLogin {
+    /* TURN THIS INTO A CLASS MODAL. CAREFUL WITH BOOTSTRAP */
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 4;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.8);
     width: 100vw;
     height: 100vh;
 }
-#modalLoginContent{
+
+#modalLoginContent {
     background-color: var(--background);
     color: var(--purple);
-    width: 25%;
-    height: 35%;
     padding: 10px;
-    margin: 180px auto;
+    margin: 320px auto;
     border-radius: 10px;
     border: 5px solid var(--yellow);
 
@@ -181,32 +334,26 @@ i{
     gap: 30px;
 
     position: relative;
-}
-#formLogin{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+
+    height: 36vh;
 }
 
-#modalRegistration{
+#modalRegistration {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 4;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.8);
     width: 100vw;
     height: 100vh;
 }
-#modalRegistrationContent{
+
+#modalRegistrationContent {
     background-color: var(--background);
     color: var(--purple);
-    width: 20%;
-    height: 55%;
     padding: 10px;
-    margin: 80px auto;
+    margin: 220px auto;
     border-radius: 10px;
     border: 5px solid var(--yellow);
 
@@ -218,123 +365,106 @@ i{
 
     position: relative;
 }
-#formRegistration{
+
+#modalInfo {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    /* right: 0;  */
+    z-index: 5;
+    background-color: var(--background);
+    border: 5px solid var(--yellow);
+}
+
+#modalInfoContent {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    color: var(--indigo);
+    text-align: center;
+    position: relative;
+}
+
+#modalError {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    /* right: 0;  */
+    z-index: 5;
+    background-color: var(--background);
+    border: 5px solid var(--yellow);
+}
+
+#modalErrorContent {
+    padding: 15px 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 10px;
+    color: var(--indigo);
+    text-align: center;
+}
+
+/* FORMS */
+
+#formLogin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+#formRegistration {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 15px;
 }
-button{
-    border: 1px solid var(--purple);
-    color: var(--purple);
-    font-size: 18px;
-    padding: 7px 25px;
-    cursor: pointer;
-    border-radius: 7px;
-}
-button:hover{
-    background-color: var(--purple);
-    color: var(--background) !important;
-}
-/* .fakeButton{
-    border: 1px solid var(--purple);
-    color: var(--purple);
-    font-size: 18px;
-    padding: 7px 25px;
-    border-radius: 7px;
-    text-decoration: none;
-    cursor: pointer;
-} */
-/* a{
-    text-decoration: none;
-} */
-/* .fakeButton:hover{
-    background-color: var(--purple);
-    color: var(--background);
-} */
-label{
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--purple);
-}
-input{
-    width: 250px;
-    padding: 7px;
-    border-radius: 7px;
-    border: 1px solid gray;
-}
-#singIn{
-    width: unset;
-}
-label [for="conected"]{
-    font-size: 26px;
-}
-.divSpecial{
-    display: flex;
-    flex-direction: column;
+
+/* RESPONSIVENESS */
+
+@media only screen and (min-width: 320px) {
+    button {
+        padding: 3px 10px;
+    }
+
+    #infoBodyContent {
+        font-size: 8px;
+    }
 }
 
-.closeButton{
-    transform: scale(2, 2);
-    cursor: pointer;
-    position: absolute;
-    right: -22px;
-    top: -25px;
-    margin: 10%;
-    
-}
-.closeButton:hover{
-    transform: scale(2.1, 2.1);
-    color: var(--indigo);
-}
+@media only screen and (min-width: 2560px) {
+    main {
+        height: 40vh;
+    }
 
-.downToUpAnimation{
-    animation: downToUp 0.5s running 1;
-}
-@keyframes downToUp{
-    0%{transform: translateY(-300px);}
-    100%{transform: translateY(0px);}
-}
+    #contentMain {
+        height: 100%;
+    }
 
-#modalInfo{
-    display: none;
-    position: fixed;
-    width: 25%;
-    height: 15%;
-    z-index: 1;
-    bottom: 0;
-    right: 0;
-    background-color: var(--background);
-    border: 5px solid var(--yellow);
-}
-#modalInfoContent{
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-}
-#modalError{
-    display: none;
-    position: fixed;
-    width: 25%;
-    height: 15%;
-    z-index: 1;
-    bottom: 0;
-    right: 0;
-    background-color: var(--background);
-    border: 5px solid var(--yellow);
-}
-#modalErrorContent{
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 10px;
-}
-.modalTitle{
-    font-weight: 600;
-}
-#modalErrorTxt{
-    margin-left: 20px;
+    #headerContent {
+        height: 20%;
+        align-items: center;
+    }
+
+    #titleMain>h2 {
+        font-size: 48px;
+    }
+
+    #bodyContent {
+        height: 86%;
+    }
+
+    #infoBodyContent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        padding: 11px 40px;
+    }
 }
