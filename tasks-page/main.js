@@ -630,7 +630,7 @@ const darkMode = () => {
     iconButton.src = "../assets/sun.svg"
     buttonBack.style.backgroundColor = 'var(--darkorange)'
     
-    logo.src = '../assets/logo.png'
+    logo.src = '../assets/logo-white.png'
     
     tableBody.className = 'table-dark text-white'
     
