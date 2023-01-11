@@ -39,6 +39,14 @@
       "email": "jessie.moura19@gmail.com",
       "password": "pastel",
       "id": 5
+    },
+    {
+      "name": "Rapunzel",
+      "city": "Vila dos magos",
+      "login": "pascal",
+      "email": "rapunzel@legal.com",
+      "password": "123456",
+      "id": 6
     }
   ],
   "tasks": [

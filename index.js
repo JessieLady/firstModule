@@ -87,7 +87,7 @@ const validateCity = async (input, required, invalid) => {
     
     if (!hasValue(input, required)) return false
     
-    locals.push(...(await (await fetch(`http://dataservice.accuweather.com/locations/v1/search?q=${city}&apikey=RTILAUMEASKAhXMGkVLeNniVv3gNmk0k`)).json()))
+    locals.push(...(await (await fetch(`https://dataservice.accuweather.com/locations/v1/search?q=${city}&apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
 
     const cityFound = locals[0]
     
@@ -99,13 +99,13 @@ const validateCity = async (input, required, invalid) => {
 /* USER'S FUNCTIONS */
 
 const getUsers = async () => {
-    const users = await fetch(`https://projeto-arnia-jessica-moura.vercel.app/users`)
+    const users = await fetch(`https://vercel-json-server-bice.vercel.app/users`)
     const usersResponse = await users.json()
     return usersResponse
 }
 
 const newUser = async (user) => {
-    await fetch('http://localhost:3000/users', {
+    await fetch('https://vercel-json-server-bice.vercel.app/users', {
         method: "POST",
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -141,7 +141,7 @@ class User {
 }
 
 const deleteUser = async (id) => {
-    await fetch(`https://projeto-arnia-jessica-moura.vercel.app/users/${id}`, {
+    await fetch(`https://vercel-json-server-bice.vercel.app/users/${id}`, {
     method: 'DELETE'
 })
 }
