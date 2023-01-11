@@ -99,7 +99,7 @@ const validateCity = async (input, required, invalid) => {
 /* USER'S FUNCTIONS */
 
 const getUsers = async () => {
-    const users = await fetch(`http://localhost:3000/users`)
+    const users = await fetch(`https://projeto-arnia-jessica-moura.vercel.app/users`)
     const usersResponse = await users.json()
     return usersResponse
 }
@@ -141,7 +141,7 @@ class User {
 }
 
 const deleteUser = async (id) => {
-    await fetch(`http://localhost:3000/users/${id}`, {
+    await fetch(`https://projeto-arnia-jessica-moura.vercel.app/users/${id}`, {
     method: 'DELETE'
 })
 }
@@ -202,7 +202,7 @@ formLogin.addEventListener('submit', async (event) => {
             showError(password, PASS_WRONG)
             modalError.style.display = 'block'
         } else{
-            window.location.href = '../tasks-page/main.html'
+            window.location.href = 'https://projeto-arnia-jessica-moura.vercel.app/main.html'
                 if(checkbox){
                     localStorage.setItem('keepUser', JSON.stringify(userFound))
                     sessionStorage.setItem('user', JSON.stringify(userFound))
