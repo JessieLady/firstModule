@@ -41,8 +41,18 @@ const loadBody = () => {
     minDateToday()
 }
 
+/* SESSION AND LOCAL STORAGE FUNCTIONS */
+const contrastMode = () => {
+    if(contrast) {
+        lightMode()
+    }else {
+        darkMode()
+    }
+}
+
 const userLogout = () => {
-    /* remover o usuario e navegar para index */
+    sessionStorage.removeItem('user')
+    window.location.href = '../login-page/index.html'
 }
 
 /* MODAL'S FUNCTIONS */
@@ -55,226 +65,6 @@ const openModal = (idModal) => {
 const closeModal = (idModal) => {
     const modal = document.getElementById(idModal)
     modal.style.display = 'none'
-}
-
-/* const clearModalNewTask = () => {
-    const numberField = document.getElementById('number')
-    const descriptionField = document.getElementById('description')
-    const dateField = document.getElementById('date')
-    const select = document.querySelector('#selectStatus');
-
-    numberField.value = ''
-    descriptionField.value = ''
-    dateField.value = ''
-
-    select.options[0].selected = true
-    closeModal('modalNewTask')
-} */
-
-/* TASKS' FUNCTIONS */
-const renderTasks = (tasks) => {
-    const tasksContent = document.getElementById('tbody-content')
-    tasksContent.innerHTML = ''
-    tasks.forEach((task) => {
-        const date = new Date(task.date)
-        const dateFormated = date.toLocaleDateString("pt-BR", {timeZone: 'UTC'})
-        if(task.status === 'Concluído'){
-            task.description = `<del>${task.description}</del>`
-        } else if(inDay > dateFormated && task.status !== 'Concluído'){//make a function that filter all tha tasks and put the warning in the screen
-            task.status = 'Atrasado'
-            warningLateTask()
-        }
-        
-        tasksContent.innerHTML = tasksContent.innerHTML + `<tr class='text-center'>
-        <td scope="row">${task.number}</td>
-        <td>${task.description}</td>
-        <td>${dateFormated}</td>
-        <td class="${task.status.replace(" ", "-")}">${task.status}</td>
-        <td>
-          <span><i class="fa-solid fa-pen-to-square iconTable fa-xl" onclick="editTask(${task.id})"></i>
-          </span>
-          <span><i class="fa-solid fa-trash iconTable fa-xl" onclick="confirmDelete(${task.id})"></i>
-          </span>
-        </td>
-      </tr>`
-    })
-}
-
-/* const getTasksRender = async () => {
-    const tasksResponse = await fetch(`http://localhost:3000/tasks?owner_like=${currentOwner}&_limit=10`)//
-    const tasks = await tasksResponse.json()
-    renderTasks(tasks)
-}
-
-const getTasksReturn = async () => {//try to change all this functions to api fetchs if possible
-    const tasksResponse = await fetch(`http://localhost:3000/tasks?owner_like=${currentOwner}`)
-    const tasks = await tasksResponse.json()
-    return tasks
-}
-
-const getTask = async (id) => {
-    const taskResponse = await fetch(`http://localhost:3000/tasks/${id}`)
-    const task = await taskResponse.json()
-    return task
-} */
-
-/* 
-const saveTask = async (task) => {
-    if(currentTask === null){
-        await newTask(task)
-    } else {
-        await updateTask(currentTask.id, task)
-        currentTask = null
-    }
-    closeModal('modalNewTask') <== put the clean modal in here and change the button
-}
-
-const newTask = async (task) => {
-    await fetch('http://localhost:3000/tasks', {
-        method: "POST",
-        headers: {
-            'Accept': 'application/json, text/plain, x', <=== there's a missing palmer in here
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(task)
-    })
-}
-
-const updateTask = async (id, task) => {
-    await fetch(`http://localhost:3000/tasks/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json, text/plain, x', <=== also here
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(task)
-    })
-}
-
-const editTask = async (id) => {
-
-    const numberField = document.getElementById('number')
-    const descriptionField = document.getElementById('description')
-    const dateField = document.getElementById('date')
-
-    currentTask = await getTask(id) 
-
-    openModal('modalNewTask')
-
-    numberField.value = currentTask.number
-    descriptionField.value = currentTask.description
-    dateField.value = currentTask.date
-
-    let text = currentTask.status//change the text var name
-    let select = document.querySelector('#selectStatus');
-
-    for (let counter = 0; counter < select.options.length; counter++) {
-        if (select.options[counter].text === text) {
-            select.options[counter].selected = true
-        }
-    }
-
-    const button = document.getElementById('submitButton')
-    button.innerHTML = 'Alterar'
-}
-
-*/
-
-const confirmDelete = (idTask) =>{
-    const modal = document.getElementById('modalConfirmation')
-    modal.style.display = 'block'
-
-    const deleteTask = async (id) => {//remove this extra delete function
-        await fetch(`http://localhost:3000/tasks/${id}`, {
-        method: 'DELETE'
-    })
-    }
-    const button = document.getElementById('buttonYes')
-    button.addEventListener('click', (event) => {
-    event.preventDefault()
-    deleteTask(idTask)
-})
-}
-
-const deleteTask = async (id) => {
-    await fetch(`http://localhost:3000/tasks/${id}`, {
-    method: 'DELETE'
-})
-}
-
-class Task {
-    number
-    description
-    date
-    status
-    owner
-    constructor(number, description, date, status, owner) {
-        this.number = number
-        this.description = description
-        this.date = date
-        this.status = status
-        this.owner = owner
-    }
-}
-
-/* It`s missing a function that enables the submit form button */
-
-/* get based on this */
-
- /* formNewTask.addEventListener('onchange', (event) => {
-    event.preventDefault()
-
-    const button = document.getElementById('submitButton')
-
-    const number = formNewTask.elements['number']
-    const description = formNewTask.elements['description']
-    const date = formNewTask.elements['date']
-    const status = formNewTask.elements['status']
-
-    const task = new Task(number, description, date, status)
-
-    const numberValid = hasValue(number, NUM_EMPTY)
-    const descriptionValid = hasValue(description, DESCRIPTION_EMPTY)
-    const dateValid = hasValue(date, DATE_EMPTY)
-    const statusValid = hasValue(status, STATUS_EMPTY) 
-
-    if(numberValid && descriptionValid && dateValid && statusValid) {
-        button.disabled = false
-        button.className = 'enabled'
-        saveTask(task)
-    }
-}) */
-
-/* ============================ */
-/* REPEATED FUNCTIONS */
-/* ============================ */
-
-const getTasksRender = async () => {
-    const tasksResponse = await fetch(`http://localhost:3000/tasks?_limit=10&owner_like=${currentOwner}`)
-    const tasks = await tasksResponse.json()
-    renderTasks(tasks)
-}
-
-const getTasksReturn = async () => {// decrease the number of API requests with this function
-    const tasksResponse = await fetch(`http://localhost:3000/tasks?owner_like=${currentOwner}`)
-    const tasks = await tasksResponse.json()
-    return tasks
-}
-
-const getTask = async (id) => {
-    const taskResponse = await fetch(`http://localhost:3000/tasks/${id}`)
-    const task = await taskResponse.json()
-    return task
-}
-const newTask = async (task) => {
-    await fetch('http://localhost:3000/tasks', {
-        method: "POST",
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(task)
-    })
 }
 
 const clearModalNewTask = () => {
@@ -290,6 +80,51 @@ const clearModalNewTask = () => {
     select.options[0].selected = true
 }
 
+
+/* TASKS' FUNCTIONS */
+
+const renderTasks = (tasks) => {
+    const tasksContent = document.getElementById('tbody-content')
+    tasksContent.innerHTML = ''
+    tasks.forEach((task) => {
+        const date = new Date(task.date)
+        const dateFormated = date.toLocaleDateString("pt-BR", {timeZone: 'UTC'})
+        if(task.status === 'Concluído'){
+            task.description = `<del>${task.description}</del>`
+        } else if(inDay > dateFormated && task.status !== 'Concluído'){//make a function that filter all tha tasks and put the warning in the screen
+            task.status = 'Atrasado'
+            warningLateTask()
+        }
+        tasksContent.innerHTML = tasksContent.innerHTML + `<tr class='text-center'>
+        <td scope="row">${task.number}</td>
+        <td>${task.description}</td>
+        <td>${dateFormated}</td>
+        <td class="${task.status.replace(" ", "-")}">${task.status}</td>
+        <td>
+          <span><i class="fa-solid fa-pen-to-square iconTable fa-xl" onclick="editTask(${task.id})"></i>
+          </span>
+          <span><i class="fa-solid fa-trash iconTable fa-xl" onclick="confirmDelete(${task.id})"></i>
+          </span>
+        </td>
+      </tr>`
+    })
+}
+
+const getTasksRender = async () => {
+    const tasksResponse = await fetch(`http://localhost:3000/tasks?_limit=10&owner_like=${currentOwner}`)
+    const tasks = await tasksResponse.json()
+    renderTasks(tasks)
+}
+const getTasksReturn = async () => {
+    const tasksResponse = await fetch(`http://localhost:3000/tasks?owner_like=${currentOwner}`)
+    const tasks = await tasksResponse.json()
+    return tasks
+}
+const getTask = async (id) => {
+    const taskResponse = await fetch(`http://localhost:3000/tasks/${id}`)
+    const task = await taskResponse.json()
+    return task
+}
 const saveTask = async (task) => {
     if(currentTask === null){
         await newTask(task)
@@ -298,6 +133,16 @@ const saveTask = async (task) => {
         currentTask = null
     }
     closeModal('modalNewTask')
+}
+const newTask = async (task) => {
+    await fetch('http://localhost:3000/tasks', {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(task)
+    })
 }
 const updateTask = async (id, task) => {
     await fetch(`http://localhost:3000/tasks/${id}`, {
@@ -335,8 +180,7 @@ const editTask = async (id) => {
     const button = document.getElementById('submitButton')
     button.innerHTML = 'Alterar'
 }
-
-/* class Task {
+class Task {
     number
     description
     date
@@ -349,7 +193,7 @@ const editTask = async (id) => {
         this.status = status
         this.owner = owner
     }
-} */
+}
 
 //const button = document.getElementById('submitButton')
 
@@ -367,72 +211,95 @@ formNewTask.addEventListener('submit', (event) => {
     const task = new Task(num, description, date, status, owner)
     saveTask(task)
 })
+const confirmDelete = (idTask) =>{
+    openModal('modalConfirmation')
+    const button = document.getElementById('buttonYes')
+    button.addEventListener('click', () => {
+    deleteTask(idTask)
+})
+}
+const deleteTask = async (id) => {
+    await fetch(`http://localhost:3000/tasks/${id}`, {
+    method: 'DELETE'
+})
+}
+
+/* It`s missing a function that enables the submit form button */
+
+/* get based on this */
+
+ /* formNewTask.addEventListener('onchange', (event) => {
+    event.preventDefault()
+
+    const button = document.getElementById('submitButton')
+
+    const number = formNewTask.elements['number']
+    const description = formNewTask.elements['description']
+    const date = formNewTask.elements['date']
+    const status = formNewTask.elements['status']
+
+    const task = new Task(number, description, date, status)
+
+    const numberValid = hasValue(number, NUM_EMPTY)
+    const descriptionValid = hasValue(description, DESCRIPTION_EMPTY)
+    const dateValid = hasValue(date, DATE_EMPTY)
+    const statusValid = hasValue(status, STATUS_EMPTY) 
+
+    if(numberValid && descriptionValid && dateValid && statusValid) {
+        button.disabled = false
+        button.className = 'enabled'
+        saveTask(task)
+    }
+}) */
 
 /* USERS FUNCTIONS */
 
-/* const getUsers = async () => {
+const getUsers = async () => {//put this function in the main.html
     const users = await fetch(`http://localhost:3000/users`)
     const usersResponse = await users.json()
     return usersResponse
-} */
+}
 
-/* const getUser = async () => {
+const getUser = async () => {
     const userResponse = await fetch(`http://localhost:3000/users/${currentUser}`)
     const user = await userResponse.json()
     return user
-} */
+}
 
-/* const updateUser = async (id, user) => {
+const updateUser = async (id, user) => {
     await fetch(`http://localhost:3000/users/${id}`, {
         method: 'PUT',
         headers: {
-            'Accept': 'application/json, text/plain, X', <== HERE TOO. PALMER
+            'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(user)
     })
-} */
+}
 
-/* const confirmEditUser = async () => {//how i'm going to make this function work?
-
+const confirmEditUser = async () => {//how i'm going to make this function work?
+    openModal('modalEditConfirm')
+    console.log('aqui')
     const editButton = document.getElementById('editButton')
-    const msgModalInfo = document.getElementById('textModalInfo') 
+    const msgModalInfo = document.getElementById('textModalInfo')
+    const confirmInput = document.getElementById('passwordConfirm') 
 
-    const currentUserObj = await getUser(currentUser)
+    const user = JSON.parse(sessionStorage.getItem('user'))
+    console.log(user.password)
     editButton.addEventListener('click', () => {
-        if(confirmInput.value !== currentUserObj.password){
+        if(confirmInput.value !== user.password){
             openModal('modalInfo')
-            msgModalInfo.innerHTML = 'Ocorreu um erro'
+            confirmInput.className = 'error'
+            msgModalInfo.innerHTML = 'Senha incorreta'
         }else{
             closeModal('modalEditConfirm')
-            editUser(currentUser)//put the function editUser in here!
-            editInput.value = ''
+            openModal('modalEditInfo')
+            confirmInput.value = ''
         }
     })
-} */
+}
 
-/* const editUser = async (id) => {
-    openModal('modalEditInfo')
-    const currentUserObj = await getUser(id)
-
-    const name = document.getElementById('nameEdit')
-    const city = document.getElementById('cityEdit')
-    const login = document.getElementById('loginEdit')
-    const email = document.getElementById('emailEdit')
-    const password = document.getElementById('passwordEdit')
-
-    name.value = currentUserObj.name
-    city.value = currentUserObj.city
-    login.value = currentUserObj.login
-    email.value = currentUserObj.email
-    password.value = currentUserObj.password
-
-    await updateUser(id, currentUserObj)
-    openModal('modalInfo')
-    closeModal('modalEditInfo')
-} */
-
-/* const confirmDeleteUser = async () =>{
+const confirmDeleteUser = async () =>{
     closeModal('modalHelp')
     openModal('modalDeleteConfirm')
 
@@ -448,7 +315,7 @@ formNewTask.addEventListener('submit', (event) => {
     })
     }
 
-    passwordInput.addEventListener('blur', () => {
+    passwordInput.addEventListener('input', () => {
     if(passwordInput.value.trim() !== currentUserObj.password){
         msg.innerHTML = 'Senha incorreta'
         passwordInput.className = 'error'
@@ -459,30 +326,24 @@ formNewTask.addEventListener('submit', (event) => {
     button.addEventListener('click', () => {
         if(passwordInput.value.trim() === currentUserObj.password){
             deleteUser(currentUser)
+            deleteAllTasks()
             window.location.href = '../login-page/index.html'
         }else{
             msg.innerHTML = 'Preencha esse campo corretamente'
             passwordInput.className = 'error'
         }
-    }) 
-    //how to delete all the tasks from the user account?
+    })
 })
 }
-*/
-/* create a function that deletes all the tasks from the user when the user is deleted */
-
 /* FILTER FUNCTIONS */
 
-/* const filterTasks = async (status) => { // change this
-    const tasks = await getTasksReturn()
-    const filterTasks = tasks.filter((valor) => {
-        if(valor.status === status) return true
-        return false
-    })
-    renderTasks(filterTasks)
-} */
+const filterTasks = async (status) => {
+    const tasksResponse = await fetch(`http://localhost:3000/tasks?status_like=${status}`)
+    const tasks = await tasksResponse.json()
+    renderTasks(tasks)
+}
 
-/* const lateTasks = async () => { // You can try change this one too but i dunno how to...
+const lateTasks = async () => {
     const tasks = await getTasksReturn()
 
     const tasksLate = tasks.filter((task) => { 
@@ -492,14 +353,14 @@ formNewTask.addEventListener('submit', (event) => {
         return false
     })
     renderTasks(tasksLate)
-} */
+}
 
-/* const warningLateTask = () => {// Try to implement more this one. Only if the task is in the screen that this button appears. Good, but not enough.
+const warningLateTask = () => {
     const button = document.getElementById('btnLate')
     button.className = 'lateTask'
-} */
+}
 
-/* const todayTasks = async () => { // and this one too.
+const todayTasks = async () => { // and this one too.
     const tasks = await getTasksReturn()
 
     const tasksToday = tasks.filter((task) => { 
@@ -509,8 +370,18 @@ formNewTask.addEventListener('submit', (event) => {
         return false
     })
     renderTasks(tasksToday)
-} */
+}
+searchInput.addEventListener('input', async () => {
+    const tasks = await getTasksReturn()
+    const input = searchInput.value.toUpperCase();
 
+    let taskSearch = tasks.filter((task) => {
+        let search = task.description.toUpperCase()
+    if(search.includes(input)) return true
+        return false
+    })
+    renderTasks(taskSearch)
+})
 /* searchInput.addEventListener('input', async () => { //Maybe this one too, but i love the way that this search input works...
     const tasks = await getTasksReturn()
     const input = searchInput.value.toUpperCase();
@@ -523,9 +394,17 @@ formNewTask.addEventListener('submit', (event) => {
     renderTasks(taskSearch)
 }) */
 
-/* const findTasks = async () => { //try to make this function with the api function
+const findTasks = async (search) => {
+    const tasksResponse = await fetch(`http://localhost:3000/tasks?owner_like=${currentOwner}&q=${search}&_limit=10`)
+    const tasks = await tasksResponse.json()
+    renderTasks(tasks)
+}
 
-} */
+searchInput.addEventListener('input', async () => {
+    let input = searchInput.value
+    let tasks = findTasks(input)
+    renderTasks(tasks)
+})
 
 /* PAGINATE FUNCTIONS */
 
@@ -544,12 +423,6 @@ const nextPage = async () => {
     currentPageNum(currentPage)
     loadPage(currentPage)
 }
-
-const nextPageButton = document.getElementById('nextPage')
-
-nextPageButton.addEventListener('click', () => {
-    nextPage()
-})/* PUT THIS BACK TO THE BUTTON */
 
 const previousPage = async () => {
     currentPage = currentPage - 1 < 1 ? currentPage : currentPage - 1
@@ -576,7 +449,8 @@ const tasksPagesTotal = async () => {
 
 function showMessage(input, message, type) {
     const msg = input.parentNode.querySelector('small')
-    msg.innerText = message/* WHERE IS THE CHANGING THE COLOR MESSAGE TOO? */
+    msg.innerText = message
+    msg.className = `${type ? 'successSmall' : 'errorSmall'}`
     input.className = `${input.className} ${type ? 'success' : 'error'}`
     return type
 }
@@ -627,35 +501,20 @@ const orderingTable = async (key) => {
     return conditions
 } */
 
-/* const weatherInfo = async () => {//This function needs to be redone
+const weatherInfo = async () => {
 
     const weatherName = document.getElementById('weatherName')
     const weatherCity = document.getElementById('weatherCity')
     //const weatherTemp = document.getElementById('weatherTemp')
 
-    const user = await getUsers()
-    const userIndex = user.findIndex((valor) => {
-        if(valor.id === currentUser) return true
-    })    
-    const userCity = user[userIndex].city
+    const user = JSON.parse(sessionStorage.getItem('user'))
+    const userCity = user.city
     //const userInfoWeather = await weatherSearch(userCity)
 
-    weatherName.innerHTML = `${user[userIndex].name}`
+    weatherName.innerHTML = `${user.name}`
     weatherCity.innerHTML = `${userCity}`
-    //weatherTemp.innerHTML = `${userInfoWeather[0].Temperature.Metric.Value}°C`
-} */
-
-/* SESSION AND LOCAL STORAGE FUNCTIONS */
-
-/* const contrastMode = () => {
-    if(contrast) {
-        lightMode()
-    }else {
-        darkMode()
-    }
-} */
-
-/* MAKE A LOGOUT FUNCTION!!! */
+    /* weatherTemp.innerHTML = `${userInfoWeather[0].Temperature.Metric.Value}°C` */
+}
 
 /* LIGHT THEME AND DARK THEME */
 
@@ -749,7 +608,7 @@ const lightMode = () => {
 }
 
 const darkMode = () => {
-    background.style.backgroundColor = 'var(--darkBackground)'
+    background.style.backgroundColor = 'var(--purpleBackground)'
 
     iconButton.src = "../assets/sun.svg"
     buttonBack.style.backgroundColor = 'var(--darkorange)'
@@ -793,206 +652,6 @@ const darkMode = () => {
     deleteAccountBtn.className = 'deleteAccount'
     deleteAccountBtn.style.backgroundColor = 'var(--darkblue)' */
 }
-/* THIS IS WHERE THE OLD MAIN ENDS */
-
-/* SEASON/LOCALE STORAGE FUNCTIONS */
-
-const contrastMode = () => {
-    if(contrast) {
-        lightMode()
-    }else {
-        darkMode()
-    }
-}
-
-/* WEATHER FUNCTIONS */
-
-const weatherSearch = async (user) => {
-    const locals = []
-    const conditions = []
-
-    locals.push(...(await (await fetch(`http://dataservice.accuweather.com/locations/v1/search?q=${user}&apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
-
-    const key = locals[0].Key
-    conditions.push(...(await (await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
-    return conditions
-}
-
-const weatherInfo = async () => {
-
-    const weatherName = document.getElementById('weatherName')
-    const weatherCity = document.getElementById('weatherCity')
-    const weatherTemp = document.getElementById('weatherTemp')
-    //const weatherCond = document.getElementById('weatherCond')
-
-    const user = await getUsers()
-    const userIndex = user.findIndex((valor) => {
-        if(valor.id === currentUser) return true
-    })    
-    const userCity = user[userIndex].city
-    const userInfoWeather = await weatherSearch(userCity)
-
-    weatherName.innerHTML = `${user[userIndex].name}`
-    weatherCity.innerHTML = `${userCity}`
-    weatherTemp.innerHTML = `${userInfoWeather[0].Temperature.Metric.Value}°C`
-    //weatherCond.innerHTML = `${userInfoWeather[0].WeatherText}`
-
-}//turn weather.text off
-
-/* FILTER TASKS FUNCTIONS */
-
-const filterTasks = async (status) => {
-    const tasks = await getTasksReturn()
-    const filterTasks = tasks.filter((valor) => {
-        if(valor.status === status) return true
-        return false
-    })
-    renderTasks(filterTasks)
-}
-
-const lateTasks = async () => {
-    const tasks = await getTasksReturn()
-
-    const tasksLate = tasks.filter((task) => { 
-        const date = new Date(task.date)
-        const dateFormated = date.toLocaleDateString("pt-BR", {timeZone: 'UTC'})     
-        if(inDay > dateFormated && task.status !== 'Concluído') return true
-        return false
-    })
-    renderTasks(tasksLate)
-}
-
-const warningLateTask = () => {
-    const button = document.getElementById('btnLate')
-    button.className = 'lateTask'
-}
-
-const todayTasks = async () => {
-    const tasks = await getTasksReturn()
-
-    const tasksToday = tasks.filter((task) => { 
-        const date = new Date(task.date)
-        const dateFormated = date.toLocaleDateString("pt-BR", {timeZone: 'UTC'})     
-        if(dateFormated === inDay && task.status !== 'Concluído') return true
-        return false
-    })
-    renderTasks(tasksToday)
-}
-
-searchInput.addEventListener('input', async () => {
-    const tasks = await getTasksReturn()
-    const input = searchInput.value.toUpperCase();
-
-    let taskSearch = tasks.filter((task) => {
-        let search = task.description.toUpperCase()
-    if(search.includes(input)) return true
-        return false
-    })
-    renderTasks(taskSearch)
-})
-
-/* USER FUNCTIONS */
-
-const getUsers = async () => {//put this function in the main.html
-    const users = await fetch(`http://localhost:3000/users`)
-    const usersResponse = await users.json()
-    return usersResponse
-}
-
-const getUser = async () => {
-    const userResponse = await fetch(`http://localhost:3000/users/${currentUser}`)
-    const user = await userResponse.json()
-    return user
-}
-
-const updateUser = async (id, user) => {
-    await fetch(`http://localhost:3000/users/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
-    })
-}
-
-const confirmEditUser = async () => {//how i'm going to make this function work?
-
-    const editButton = document.getElementById('editButton')
-    const msgModalInfo = document.getElementById('textModalInfo') 
-
-    const currentUserObj = await getUser(currentUser)
-    editButton.addEventListener('click', () => {
-        if(confirmInput.value !== currentUserObj.password){
-            openModal('modalInfo')
-            msgModalInfo.innerHTML = 'Ocorreu um erro'
-        }else{
-            closeModal('modalEditConfirm')
-            editUser(currentUser)
-            editInput.value = ''
-        }
-    })
-}
-
-//vou parar isso um pouquinho. Cabeça on fire
-
-const editUser = async (id) => {
-    openModal('modalEditInfo')
-    const currentUserObj = await getUser(id)
-
-    const name = document.getElementById('name')
-    const city = document.getElementById('city')
-    const login = document.getElementById('login')
-    const email = document.getElementById('email')
-    const password = document.getElementById('password')
-
-    name.value = currentUserObj.name
-    city.value = currentUserObj.city
-    login.value = currentUserObj.login
-    email.value = currentUserObj.email
-    password.value = currentUserObj.password
-
-    await updateUser(id, currentUserObj)
-    openModal('modalInfo')
-    closeModal('modalEditInfo')
-}
-
-const confirmDeleteUser = async () =>{
-    closeModal('modalHelp')
-    openModal('modalDeleteConfirm')
-
-    const button = document.getElementById('deleteButton')
-    const passwordInput = document.getElementById('passConfirmDelete')
-    const msg = passwordInput.parentNode.querySelector('small')
-    
-    const currentUserObj = await getUser(currentUser)
-
-    const deleteUser = async (id) => {
-        await fetch(`http://localhost:3000/users/${id}`, {
-        method: 'DELETE'
-    })
-    }
-
-    passwordInput.addEventListener('input', () => {
-    if(passwordInput.value.trim() !== currentUserObj.password){
-        msg.innerHTML = 'Senha incorreta'
-        passwordInput.className = 'error'
-    }else{
-        passwordInput.className = 'success'
-        msg.innerHTML = ''
-    }
-    button.addEventListener('click', () => {
-        if(passwordInput.value.trim() === currentUserObj.password){
-            deleteUser(currentUser)
-            window.location.href = '../login-page/index.html'
-        }else{
-            msg.innerHTML = 'Preencha esse campo corretamente'
-            passwordInput.className = 'error'
-        }
-    })
-    //how to delete all the tasks from the user account?
-})
-}
 
 /* STAGING AREA */
 
@@ -1005,8 +664,45 @@ const minDateToday = () => {
     }
     if (month < 10) {
         month = '0' + month;
-    }  
+    }    
     let today = year + '-' + month + '-' + day;
     document.getElementById("date").setAttribute("min", today);
 }
 
+const deleteAllTasks = async () => {
+    const tasks = await getTasksReturn()
+    tasks.forEach((task) => {
+        deleteTask(task.id)
+    })
+}
+
+const editUser = () => {
+    const user = JSON.parse(sessionStorage.getItem('user'))
+
+    console.log(user)
+
+    const name = document.getElementById('name')
+    const city = document.getElementById('city')
+    const login = document.getElementById('login')
+    const email = document.getElementById('email')
+    const password = document.getElementById('password')
+
+    name.value = user.name
+    city.value = user.city
+    login.value = user.login
+    email.value = user.email
+    password.value = user.password
+    
+    updateUser(user.id, user)
+    openModal('modalInfo')
+    closeModal('modalEditInfo')
+}
+// editUser()
+
+const editUserBtn = document.getElementById('editUserBtn')
+const formEdit = document.getElementById('formEdit')
+
+formEdit.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+})

@@ -125,7 +125,7 @@
             <br>
             <div>
               <label for="description">Descrição</label>
-              <input type="text" placeholder="Ex: ligar para Amanda" id="description" name="description"/>
+              <input type="text" placeholder="Ex: Descreva a tarefa aqui" id="description" name="description"/>
               <small>&nbsp;</small>
             </div>
             <br>
@@ -151,8 +151,9 @@
             </div>
             <br>
             <div id="modal-footer">
-              <div id="cancelButton" onclick="clearModalNewTask()">Cancelar</div>
-              <button id="submitButton" type="submit" class="disabled" disabled>Salvar</button>
+              <div id="cancelButton" onclick="
+              closeModal('modalNewTask');clearModalNewTask()">Cancelar</div>
+              <button id="submitButton" type="submit" class="disabled">Salvar</button>
           </div>
           </form>
         </div>
@@ -174,7 +175,7 @@
           </div>
           <div id="helpBody">
           <div>
-            <button onclick="openModal('modalEditConfirm');closeModal('modalHelp')">Dados da minha conta</button>
+            <button onclick="confirmEditUser();closeModal('modalHelp')">Dados da minha conta</button>
           </div>
           <div>
             <button class="deleteAccount" onclick="confirmDeleteUser();closeModal('modalHelp')">Excluir minha conta</button>
@@ -187,10 +188,10 @@
         <div id="modalEditConfirmContent" class="classModal upToDownAnimation">
           <span class="closeButton" onclick="closeModal('modalEditConfirm')">&times;</span>
           <h4 class="mt-4">Alteração de Informação da Conta:</h4>
-          <label class="mb-2" id="passwordConfirm" for="passwordConfirm">Por favor, insira sua senha</label>
+          <label class="mb-2" for="passwordConfirm">Por favor, insira sua senha</label><!-- removed the id passwordConfirm -->
           <input id="passwordConfirm" name="passwordConfirm" type="password">
           <small>&nbsp;</small>
-          <button id="editButton" class="disabled" disabled>Alterar</button>
+          <button id="editButton" class="disabled">Alterar</button>
         </div>
       </div>
       <div id="modalEditInfo" class="modalMain">
@@ -218,7 +219,7 @@
                     <input id="password" name="password" type="password">
                 </div>
                 <div class="d-flex flex-column">
-                    <button type="submit" disabled class="disabled mt-3">Alterar</button>
+                    <button type="submit" id="editUserBtn" class="disabled mt-3">Alterar</button>
                 </div>
             </form>
         </div>

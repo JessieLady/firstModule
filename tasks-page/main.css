@@ -38,6 +38,7 @@
     --greypurple: #AB9EA2;
 
     --darkorange: #c77b17;
+    --purpleBackground: #0b0716;
 }
 
 /* BACKGROUND */
@@ -178,11 +179,11 @@ small {
 }
 .deleteAccount{
     color: #f18b8b !important;
-    border-color: #f18b8b;
+    border-color: #f18b8b !important;
 }
 .deleteAccount:hover{
     color: var(--purple) !important;
-    background-color: #f18b8b;
+    background-color: #f18b8b !important;
 }
 .classModal{
     background-color: var(--background);
@@ -237,7 +238,7 @@ small {
     position: relative;
 }
 #modalInfo{
-    display: block;
+    display: none;
     position: fixed;
     width: 30vw;
     height: 20vh;
@@ -360,7 +361,7 @@ small {
 }
 .dark-button{
     border: 1px solid var(--purple);
-    background-color: var(--darkBackground);
+    background-color: var(--purpleBackground);
     color: var(--background) !important;
     font-size: 13px !important;
     padding: 7px 25px;
