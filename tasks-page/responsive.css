@@ -1,0 +1,107 @@
+@media only screen and (max-width: 320px) {
+    body{
+        width: 100vw;
+    }
+    #div-orange{
+        display: none;
+    }
+    #tableHeader{
+        width: 90vw;
+        overflow-x: scroll;
+        left: 20px;
+    }
+    #buttonsFilter>button{
+        padding: 3px 14px;
+    }
+    #content{
+        left: 24px;
+        width: 90%;
+    }
+    th{
+        font-size: 12px;
+    }
+    tr{
+        font-size: 11px;
+    }
+    #footerHelp{
+        width: 100%;
+        text-align: center;
+    }
+    #buttonsPaging{
+        bottom: 30px;
+        width: 100%;
+        font-size: 15px;
+        left: -25px;
+    }
+    #modalNewTaskContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 63vh;
+    }
+    #modalConfirmationContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 25vh;
+        text-align: center;
+    }
+    #modalHelpContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditConfirmContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditInfoContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalDeleteConfirmContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 65vh;
+    }
+    #modalInfo{
+        margin-top: 40%;
+        width: 100vw;
+        height: 10vh;
+        font-size: 13px;
+    }
+    #textModalInfo{
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    input[type="date"]{
+        width: 70%;
+    }
+    select{
+        width: 70%;
+    }
+    #logoArnia{
+        width: 140px;
+        position: relative;
+        bottom: 15px;
+        right: 30px;
+    }
+    #weather{
+        right: -6px;
+        top: 211px;
+        left: 75px;
+        height: unset;
+    }
+    #firstLine{
+        font-size: 20px;
+    }
+    #secondLine{
+        font-size: 16px;
+    }
+    #page-title {
+        top: 75px;
+    }
+    #page-title>button {
+        margin-top: 10px;
+    }
+  }
