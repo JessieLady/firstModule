@@ -491,7 +491,7 @@ const weatherInfo = async () => {
     const weatherName = document.getElementById('weatherName')
     const weatherCity = document.getElementById('weatherCity')
     const weatherTemp = document.getElementById('weatherTemp')
-    const weatherCond = document.getElementById('weatherCond')
+    //const weatherCond = document.getElementById('weatherCond')
 
     const user = await getUsers()
     const userIndex = user.findIndex((valor) => {
@@ -503,7 +503,7 @@ const weatherInfo = async () => {
     weatherName.innerHTML = `${user[userIndex].name}`
     weatherCity.innerHTML = `${userCity}`
     weatherTemp.innerHTML = `${userInfoWeather[0].Temperature.Metric.Value}°C`
-    weatherCond.innerHTML = `${userInfoWeather[0].WeatherText}`
+    //weatherCond.innerHTML = `${userInfoWeather[0].WeatherText}`
 
 }//turn weather.text off
 
