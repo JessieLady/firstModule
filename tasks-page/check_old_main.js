@@ -140,7 +140,7 @@ const updateTask = async (id, task) => {
     await fetch(`http://localhost:3000/tasks/${id}`, {
         method: 'PUT',
         headers: {
-            'Accept': 'application/json, text/plain, */*',
+            'Accept': 'application/json, text/plain, x',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(task)

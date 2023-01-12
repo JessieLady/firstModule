@@ -43,10 +43,10 @@
   ],
   "tasks": [
     {
-      "number": 2,
-      "description": "tarefa da jessica 2",
+      "number": 18,
+      "description": "Jogar My Little Pony",
       "date": "2023-01-20",
-      "status": "Em pausa",
+      "status": "Em progresso",
       "owner": "jessica",
       "id": 2
     },
@@ -141,7 +141,7 @@
       "number": 4,
       "description": "tarefa da isabelle 4",
       "date": "2023-01-19",
-      "status": "Concluído",
+      "status": "Em pausa",
       "owner": "isabelle",
       "id": 14
     },
@@ -262,6 +262,30 @@
       "status": "Em progresso",
       "owner": "jessica",
       "id": 29
+    },
+    {
+      "number": 21,
+      "description": "Consertar Ar condicionado",
+      "date": "2023-01-20",
+      "status": "Em progresso",
+      "owner": "jessica",
+      "id": 30
+    },
+    {
+      "number": 1,
+      "description": "tarefa da isabelle 1",
+      "date": "2023-01-27",
+      "status": "Em progresso",
+      "owner": "isabelle",
+      "id": 31
+    },
+    {
+      "number": 6,
+      "description": "Tarefa da isabelle",
+      "date": "2023-01-20",
+      "status": "Em pausa",
+      "owner": "isabelle",
+      "id": 32
     }
   ]
 }

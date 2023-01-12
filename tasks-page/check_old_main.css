@@ -136,7 +136,7 @@ small {
 
 /* PSEUDO BOOTSTRAP CLASSES */
 
-/* is this classes being used? */
+/* this classes are being used? */
 
 .text-purple{
     color: var(--purple) !important;
