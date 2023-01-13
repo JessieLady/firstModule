@@ -51,6 +51,14 @@
   ],
   "tasks": [
     {
+      "number": 18,
+      "description": "Jogar My Little Pony",
+      "date": "2023-01-20",
+      "status": "Em progresso",
+      "owner": "jessica",
+      "id": 2
+    },
+    {
       "number": 3,
       "description": "tarefa da jessica 3",
       "date": "2023-01-14",
@@ -302,22 +310,6 @@
       "status": "Em progresso",
       "owner": "jessica",
       "id": 34
-    },
-    {
-      "number": 25,
-      "description": "terminar esse projeto",
-      "date": "2023-01-14",
-      "status": "Concluído",
-      "owner": "jessica",
-      "id": 35
-    },
-    {
-      "number": 1,
-      "description": "Assistir Abracadabra 2",
-      "date": "2023-01-20",
-      "status": "Concluído",
-      "owner": "jessica",
-      "id": 36
     }
   ]
 }

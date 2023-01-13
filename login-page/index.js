@@ -113,7 +113,7 @@ const newUser = async (user) => {
         },
         body: JSON.stringify(user)
     })
-    /* .then( () => {
+    .then( () => {
         modalInfo.style.display = 'block'
         modalRegistration.style.display = 'none'
     })
@@ -122,7 +122,7 @@ const newUser = async (user) => {
         modalRegistration.style.display = 'none'
         modalError.style.display = 'block'
         modalErrorTxt.innerHTML = "Erro:" + error
-    }) */
+    })
 }
 
 class User {
@@ -183,6 +183,14 @@ formNewUser.addEventListener("submit", (event) => {
     let user = new User(name, city, login, email, password)
     newUser(user)
 })
+
+/* submitButton.addEventListener('click', () => {
+    console.log('clickou')
+})
+
+const clicou = () => {
+    console.log('clickou')
+} */
 
 /* LOGIN USER */ 
 

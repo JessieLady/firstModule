@@ -116,7 +116,7 @@
         <div id="modalNewTaskContent" class="classModal modalBack-light upToDownAnimation">
           <h5 class="mb-3 h5style">Adicionar nova tarefa</h5>
           <div class="closeButton" onclick="closeModal('modalNewTask')">&times;</div>
-          <form id="formNewTask" onchange="newTaskFields()">
+          <form id="formNewTask">
             <div>
               <label for="number">Número</label><br />
               <input type="number" min="1" id="number" name="number"/>
@@ -140,7 +140,7 @@
               <label for="status">Status</label>
               <br>
               <select id="selectStatus" name="status">
-                <option value="notAnOption" disabled selected>
+                <option disabled selected>
                   Escolha uma opção
                 </option>
                 <option value="Em progresso">Em progresso</option>
@@ -151,8 +151,9 @@
             </div>
             <br>
             <div id="modal-footer">
-              <div id="cancelButton" onclick="closeModal('modalNewTask');clearModalNewTask()">Cancelar</div>
-              <button id="submitButton" type="submit" disabled class="disabled">Salvar</button>
+              <div id="cancelButton" onclick="
+              closeModal('modalNewTask');clearModalNewTask()">Cancelar</div>
+              <button id="submitButton" type="submit" class="disabled">Salvar</button>
           </div>
           </form>
         </div>
