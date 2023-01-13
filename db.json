@@ -9,14 +9,6 @@
       "id": 1
     },
     {
-      "name": "yllana",
-      "city": "Nova Iguaçu",
-      "login": "yllana",
-      "email": "jessie.moura19@gmail.com",
-      "password": "290502",
-      "id": 2
-    },
-    {
       "name": "Isabelle",
       "city": "Nova Iguaçu",
       "login": "isabelle",
@@ -39,6 +31,14 @@
       "email": "jasmine@gmail.com",
       "password": "123456",
       "id": 5
+    },
+    {
+      "name": "Rapunzel",
+      "city": "Vila dos magos",
+      "login": "pascal",
+      "email": "rapunzel@legal.com",
+      "password": "123456",
+      "id": 6
     }
   ],
   "tasks": [
@@ -77,7 +77,7 @@
     {
       "number": 1,
       "description": "tarefa da yllana 1",
-      "date": "2023-01-18",
+      "date": "2023-01-19",
       "status": "Em progresso",
       "owner": "yllana",
       "id": 6
