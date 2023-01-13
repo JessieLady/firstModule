@@ -80,7 +80,6 @@ const clearModalNewTask = () => {
     select.options[0].selected = true
 }
 
-
 /* TASKS' FUNCTIONS */
 
 const renderTasks = (tasks) => {
@@ -91,7 +90,7 @@ const renderTasks = (tasks) => {
         const dateFormated = date.toLocaleDateString("pt-BR", {timeZone: 'UTC'})
         if(task.status === 'Concluído'){
             task.description = `<del>${task.description}</del>`
-        } else if(inDay > dateFormated && task.status !== 'Concluído'){//make a function that filter all tha tasks and put the warning in the screen
+        } else if(inDay > dateFormated && task.status !== 'Concluído'){
             task.status = 'Atrasado'
             warningLateTask()
         }
@@ -195,7 +194,27 @@ class Task {
     }
 }
 
-//const button = document.getElementById('submitButton')
+const newTaskFields = () => {
+    const number = document.getElementById('number')
+    const description = document.getElementById('description')
+    const date = document.getElementById('date')
+    const status = document.querySelector('#selectStatus')
+    const button = document.getElementById('submitButton')
+
+    let numberValid = hasValue(number, NUM_EMPTY)
+    let descriptionValid = hasValue(description, DESCRIPTION_EMPTY)
+    let dateValid = hasValue(date, DATE_EMPTY)
+    let statusValid = validateStatus(status, STATUS_EMPTY)
+
+    if(numberValid && descriptionValid && dateValid && statusValid){
+        button.disabled = false
+        button.classList.remove('disabled')
+        button.classList.add('enabled')
+    } else{
+        button.disabled = true
+        button.classList.add('disabled')
+    }
+}
 
 formNewTask.addEventListener('submit', (event) => {
     event.preventDefault()
@@ -211,6 +230,7 @@ formNewTask.addEventListener('submit', (event) => {
     const task = new Task(num, description, date, status, owner)
     saveTask(task)
 })
+
 const confirmDelete = (idTask) =>{
     openModal('modalConfirmation')
     const button = document.getElementById('buttonYes')
@@ -223,34 +243,6 @@ const deleteTask = async (id) => {
     method: 'DELETE'
 })
 }
-
-/* It`s missing a function that enables the submit form button */
-
-/* get based on this */
-
- /* formNewTask.addEventListener('onchange', (event) => {
-    event.preventDefault()
-
-    const button = document.getElementById('submitButton')
-
-    const number = formNewTask.elements['number']
-    const description = formNewTask.elements['description']
-    const date = formNewTask.elements['date']
-    const status = formNewTask.elements['status']
-
-    const task = new Task(number, description, date, status)
-
-    const numberValid = hasValue(number, NUM_EMPTY)
-    const descriptionValid = hasValue(description, DESCRIPTION_EMPTY)
-    const dateValid = hasValue(date, DATE_EMPTY)
-    const statusValid = hasValue(status, STATUS_EMPTY) 
-
-    if(numberValid && descriptionValid && dateValid && statusValid) {
-        button.disabled = false
-        button.className = 'enabled'
-        saveTask(task)
-    }
-}) */
 
 /* USERS FUNCTIONS */
 
@@ -382,17 +374,6 @@ searchInput.addEventListener('input', async () => {
     })
     renderTasks(taskSearch)
 })
-/* searchInput.addEventListener('input', async () => { //Maybe this one too, but i love the way that this search input works...
-    const tasks = await getTasksReturn()
-    const input = searchInput.value.toUpperCase();
-
-    let taskSearch = tasks.filter((task) => {
-        let search = task.description.toUpperCase()
-    if(search.includes(input)) return true
-        return false
-    })
-    renderTasks(taskSearch)
-}) */
 
 const findTasks = async (search) => {
     const tasksResponse = await fetch(`http://localhost:3000/tasks?owner_like=${currentOwner}&q=${search}&_limit=10`)
@@ -432,8 +413,8 @@ const previousPage = async () => {
 }
 
 const currentPageNum = (page) => {
-const spanPage = document.getElementById('currentPage')
-spanPage.innerHTML = `${page}`
+    const spanPage = document.getElementById('currentPage')
+    spanPage.innerHTML = `${page}`
 }
 
 const tasksPagesTotal = async () => {
@@ -450,7 +431,6 @@ const tasksPagesTotal = async () => {
 function showMessage(input, message, type) {
     const msg = input.parentNode.querySelector('small')
     msg.innerText = message
-    msg.className = `${type ? 'successSmall' : 'errorSmall'}`
     input.className = `${input.className} ${type ? 'success' : 'error'}`
     return type
 }
@@ -464,7 +444,15 @@ function showSuccess(input) {
 }
 
 function hasValue(input, message) {
-    if(input.value.trim() === '' || input.value === 'Escolha uma opção') {
+    if(input.value.trim() === '') {
+        return showError(input, message)
+    } else{
+        return showSuccess(input)
+    }
+}
+
+const validateStatus = (input, message) => {
+    if(input.options[0].selected) {
         return showError(input, message)
     } else{
         return showSuccess(input)
@@ -706,3 +694,4 @@ formEdit.addEventListener('submit', (event) => {
     event.preventDefault()
 
 })
+
