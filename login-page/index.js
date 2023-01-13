@@ -12,6 +12,7 @@ const NAME_REQUIRED = 'Por favor, insira o seu nome'
 const CITY_REQUIRED = 'Por favor, insira o sua cidade'
 const CITY_INVALID = 'Cidade inválida'
 const LOGIN_REQUIRED = 'Por favor, insira um login'
+const LOGIN_INVALID = 'Login não disponível'
 const EMAIL_REQUIRED = 'Por favor, insira um email'
 const EMAIL_INVALID = 'Email inválido'
 const PASS_REQUIRED = 'Por favor, insira sua senha'
@@ -91,11 +92,36 @@ const validateCity = async (input, required, invalid) => {
 
     const cityFound = locals[0]
     
-    if(!cityFound) return showError(input, invalid)
-
+    if(!cityFound) {
+        input.className = 'error'
+        return showError(input, invalid)
+    }
     return true
 }
 
+const validateLogin = async (input, required, invalid) => {
+    const login = input.value.trim()
+    const users = await getUsers()
+
+    if (!hasValue(input, required)) return false
+
+    let loginFound = users.find((user) => {
+        if(user.login === login) return true
+        return false
+    })
+
+    if(loginFound){
+        input.className = 'error'
+        return showError(input, invalid)
+    } else{
+        const msg = input.parentNode.querySelector('small')
+        msg.className = 'successSmall'
+        msg.innerText = 'Login disponível'
+        input.className = 'success'
+    }
+    
+    return true
+}
 /* USER'S FUNCTIONS */
 
 const getUsers = async () => {
@@ -148,7 +174,7 @@ const deleteUser = async (id) => {
 
 /* REGISTER NEW USER  */ 
 
-const newUserFields = () => {/* Fix this to be in just one input or in the last input */
+const newUserFields = () => {
     const name = document.getElementById('nameUser')
     const city = document.getElementById('cityUser')
     const login = document.getElementById('loginUser')
@@ -158,7 +184,7 @@ const newUserFields = () => {/* Fix this to be in just one input or in the last 
 
     let nameValid = hasValue(name, NAME_REQUIRED)
     let cityValid = validateCity(city, CITY_REQUIRED, CITY_INVALID)
-    let loginValid = hasValue(login, LOGIN_REQUIRED)
+    let loginValid = validateLogin(login, LOGIN_REQUIRED, LOGIN_INVALID)
     let emailValid = validateEmail(email, EMAIL_REQUIRED, EMAIL_INVALID)
     let passwordValid = validatePassword(password, PASS_REQUIRED, PASS_LENGTH)
 
@@ -188,7 +214,7 @@ formNewUser.addEventListener("submit", (event) => {
 
 /* There's a missing function that enables the login button */
 
-formLogin.addEventListener('submit', async (event) => {
+formLogin.addEventListener('change', async (event) => {
     event.preventDefault()
 
     let login = formLogin.elements['nameLogin']

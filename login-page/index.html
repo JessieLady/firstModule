@@ -354,7 +354,7 @@
                             <label for="signIn"> Continuar conectado?</label>
                         </div>
                         <div>
-                            <button id="buttonLogin" class="enabled">Entrar</button><!-- disable this button -->
+                            <button id="buttonLogin" disabled class="disabled">Entrar</button>
                         </div>
                     </form>
 
@@ -362,7 +362,7 @@
     </div>
     <div id="modalRegistration">
         <div id="modalRegistrationContent" class="downToUpAnimation col-md-6 col-lg-5 col-xl-5 col-xxl-5">
-            <span class="closeButton" onclick="closeModal('modalRegistration')">&times;</span> <!-- try changing this to the same as the modal login content -->
+            <span class="closeButton" onclick="closeModal('modalRegistration')">&times;</span>
             <h3>Crie sua conta!</h3>
             <form id="formNewUser" onchange="newUserFields()">
                 <div class="divSpecial mt-3">
@@ -407,7 +407,7 @@
             <div onclick="closeModal('modalInfo')" class="closeButtonFooter col-1">&times;</div>
         </div>
     </div>
-    <div id="modalError" class="upToDownAnimation col-12 col-lg-5 col-xxl-6"><!-- make one modal and change the inner html with js -->
+    <div id="modalError" class="upToDownAnimation col-12 col-lg-5 col-xxl-6">
         <div id="modalErrorContent" class="col-12 col-md-12 col-lg-12 col-xxl-12">
             <div>
                 <h3 class="modalTitle">❌ Ocorreu um erro!</h3>

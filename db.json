@@ -1,11 +1,11 @@
 {
   "users": [
     {
-      "name": "Jessica",
+      "name": "Jessie",
       "city": "Nova Iguaçu",
       "login": "jessica",
       "email": "jessie.moura19@gmail.com",
-      "password": "123456",
+      "password": "150399",
       "id": 1
     },
     {
@@ -49,12 +49,20 @@
       "id": 6
     },
     {
-      "name": "peter",
-      "city": "Brasilia",
-      "login": "pedrinho",
-      "email": "pedro.remos@gmail.com",
+      "name": "Talento",
+      "city": "New York",
+      "login": "tomb",
+      "email": "teste@gmail.com",
       "password": "123456",
       "id": 7
+    },
+    {
+      "name": "Carol",
+      "city": "New York",
+      "login": "carol123",
+      "email": "carol@hotmail.com",
+      "password": "123456",
+      "id": 8
     }
   ],
   "tasks": [
@@ -358,6 +366,78 @@
       "status": "Concluído",
       "owner": "pedrinho",
       "id": 39
+    },
+    {
+      "number": 5,
+      "description": "Procurar bugs",
+      "date": "2023-01-14",
+      "status": "Concluído",
+      "owner": "pedrinho",
+      "id": 40
+    },
+    {
+      "number": 1,
+      "description": "Seja lindaaa",
+      "date": "2023-01-20",
+      "status": "Concluído",
+      "owner": "teste",
+      "id": 41
+    },
+    {
+      "number": 2,
+      "description": "Linda mesmo",
+      "date": "2023-01-14",
+      "status": "Concluído",
+      "owner": "teste",
+      "id": 42
+    },
+    {
+      "number": 1,
+      "description": "task do talento 1",
+      "date": "2023-01-14",
+      "status": "Em progresso",
+      "owner": "tomb",
+      "id": 43
+    },
+    {
+      "number": 2,
+      "description": "task do talento 3",
+      "date": "2023-01-14",
+      "status": "Em pausa",
+      "owner": "tomb",
+      "id": 44
+    },
+    {
+      "number": 3,
+      "description": "task do talento 3",
+      "date": "2023-01-14",
+      "status": "Concluído",
+      "owner": "tomb",
+      "id": 45
+    },
+    {
+      "number": 4,
+      "description": "task do talento 4",
+      "date": "2023-01-20",
+      "status": "Em progresso",
+      "owner": "tomb",
+      "id": 46
+    },
+    {
+      "number": 5,
+      "description": "task do talento 5",
+      "date": "2023-01-20",
+      "status": "Concluído",
+      "owner": "tomb",
+      "id": 47
+    },
+    {
+      "number": 6,
+      "description": "teste",
+      "date": "2023-02-02",
+      "status": "Em progresso",
+      "owner": "tomb",
+      "id": 48
     }
   ]
 }

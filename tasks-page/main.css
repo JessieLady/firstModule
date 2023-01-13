@@ -171,7 +171,7 @@ small {
 .lateTask{
     color: #f18b8b !important;
     background-color: unset;
-    border-color: #f18b8b;
+    border-color: #f18b8b;/* criar uma var */
 }
 .lateTask:hover{
     color: var(--purple) !important;
@@ -184,6 +184,12 @@ small {
 .deleteAccount:hover{
     color: var(--purple) !important;
     background-color: #f18b8b !important;
+}
+.successSmall{
+    color: var(--greenStatus);
+}
+.errorSmall{
+    color: var(--redStatus);
 }
 .classModal{
     background-color: var(--background);
@@ -225,7 +231,7 @@ small {
     position: relative;
 }
 #modalEditConfirmContent{
-    width: 35vw;
+    width: 25vw;
     height: 250px;
     margin: 300px auto;
     padding: 15px;
@@ -293,7 +299,7 @@ small {
 
     text-align: center;
 
-    width: 40%;
+    width: 30%;
     height: 50%;
     padding: 10px;
     margin: 200px auto;
@@ -311,7 +317,7 @@ small {
     background-color: var(--background);
     color: var(--purple);
     width: 25%;
-    height: 55%;
+    height: 65%;
     padding: 10px;
     margin: 170px auto;
     border-radius: 10px;

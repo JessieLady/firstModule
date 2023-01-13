@@ -188,38 +188,43 @@
         <div id="modalEditConfirmContent" class="classModal upToDownAnimation">
           <span class="closeButton" onclick="closeModal('modalEditConfirm')">&times;</span>
           <h4 class="mt-4">Alteração de Informação da Conta:</h4>
-          <label class="mb-2" for="passwordConfirm">Por favor, insira sua senha</label><!-- removed the id passwordConfirm -->
+          <label class="mb-2" for="passwordConfirm">Por favor, insira sua senha</label>
           <input id="passwordConfirm" name="passwordConfirm" type="password">
           <small>&nbsp;</small>
-          <button id="editButton" class="disabled">Alterar</button>
+          <button id="editButton" class="disabled" disabled onclick="editUser();closeModal('modalEditConfirm')">Alterar</button>
         </div>
       </div>
       <div id="modalEditInfo" class="modalMain">
         <div id="modalEditInfoContent" class="classModal upToDownAnimation">
             <span class="closeButton" onclick="closeModal('modalEditInfo')">&times;</span>
-            <form id="formEdit">
+            <form id="formEdit" onchange="editUserFields()">
                 <div class="d-flex flex-column mt-3">
                     <label for="name">Nome</label>
                     <input id="name" name="name" type="text">
+                    <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
                     <label for="city">Cidade</label>
                     <input id="city" name="city" type="text">
+                    <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
                     <label for="login">Login</label>
-                    <input id="login" name="login" type="text">
+                    <input disabled id="login" name="login" type="text">
+                    <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
                     <label for="email">Email</label>
                     <input id="email" name="email" type="email">
+                    <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
                     <label for="password">Senha</label>
                     <input id="password" name="password" type="password">
+                    <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column">
-                    <button type="submit" id="editUserBtn" class="disabled mt-3">Alterar</button>
+                    <button type="submit" id="editUserBtn" disabled class="disabled mt-3">Alterar</button>
                 </div>
             </form>
         </div>
@@ -233,7 +238,7 @@
           <label class="mb-2" for="passConfirmDelete">Sua senha</label>
           <input id="passConfirmDelete" name="passConfirmDelete" type="password">
           <small>&nbsp;</small>
-          <button id="deleteButton">Confirmar Exclusão</button>
+          <button id="deleteButton" disabled class="disabled">Confirmar Exclusão</button>
           <button onclick="closeModal('modalDeleteConfirm')">Cancelar</button>
         </div>
       </div>
