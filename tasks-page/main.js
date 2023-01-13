@@ -111,24 +111,18 @@ const renderTasks = (tasks) => {
 
 const getTasksRender = async () => {
 
-    const tasksResponse = await fetch(`https://json-server-first-module-production.up.railway.app/tasks?_limit=10&owner_like=${currentOwner}`)
+    const tasksResponse = await fetch(`http://localhost:3000/tasks?_limit=10&owner_like=${currentOwner}`)
     const tasks = await tasksResponse.json()
     renderTasks(tasks)
 }
 const getTasksReturn = async () => {
-    const tasksResponse = await fetch(`https://json-server-first-module-production.up.railway.app/tasks?owner_like=${currentOwner}`)
-    const tasksResponse = await fetch(`https://json-server-first-module-production.up.railway.app/tasks?owner_like=${currentOwner}&_limit=10`)//
+    const tasksResponse = await fetch(`http://localhost:3000/tasks?owner_like=${currentOwner}`)
     const tasks = await tasksResponse.json()
     renderTasks(tasks)
 }
 
-const getTasksReturn = async () => {//try to change all this functions to api fetchs if possible
-    const tasksResponse = await fetch(`https://json-server-first-module-production.up.railway.app/tasks?owner_like=${currentOwner}`)
-    const tasks = await tasksResponse.json()
-    return tasks
-}
 const getTask = async (id) => {
-    const taskResponse = await fetch(`https://json-server-first-module-production.up.railway.app/tasks/${id}`)
+    const taskResponse = await fetch(`http://localhost:3000/tasks/${id}`)
     const task = await taskResponse.json()
     return task
 }
@@ -272,7 +266,7 @@ const getUser = async () => {
 }
 
 const updateUser = async (id, user) => {
-    await fetch(`https://json-server-first-module-production.up.railway.app/users/${id}`, {
+    await fetch(`http://localhost:3000/users/${id}`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -315,7 +309,7 @@ const confirmDeleteUser = async () =>{
     const currentUserObj = await getUser(currentUser)
 
     const deleteUser = async (id) => {
-        await fetch(`https://json-server-first-module-production.up.railway.app/users/${id}`, {
+        await fetch(`http://localhost:3000/users/${id}`, {
         method: 'DELETE'
     })
     }
@@ -346,7 +340,7 @@ const confirmDeleteUser = async () =>{
 /* FILTER FUNCTIONS */
 
 const filterTasks = async (status) => {
-    const tasksResponse = await fetch(`https://json-server-first-module-production.up.railway.app/tasks?status_like=${status}`)
+    const tasksResponse = await fetch(`http://localhost:3000/tasks?status_like=${status}`)
     const tasks = await tasksResponse.json()
     renderTasks(tasks)
 }
@@ -392,7 +386,7 @@ searchInput.addEventListener('input', async () => {
 })
 
 const findTasks = async (search) => {
-    const tasksResponse = await fetch(`https://json-server-first-module-production.up.railway.app/tasks?owner_like=${currentOwner}&q=${search}&_limit=10`)
+    const tasksResponse = await fetch(`http://localhost:3000/tasks?owner_like=${currentOwner}&q=${search}&_limit=10`)
     const tasks = await tasksResponse.json()
     renderTasks(tasks)
 }
@@ -406,7 +400,7 @@ searchInput.addEventListener('input', async () => {
 /* PAGINATE FUNCTIONS */
 
 const loadPage = async (pageNum) => {
-    const tasksResponse = await fetch(`https://json-server-first-module-production.up.railway.app/tasks?_limit=10&_page=${pageNum}&owner_like=${currentOwner}`)
+    const tasksResponse = await fetch(`http://localhost:3000/tasks?_limit=10&_page=${pageNum}&owner_like=${currentOwner}`)
     const tasks = await tasksResponse.json()
     renderTasks(tasks)
 }
@@ -481,18 +475,14 @@ const orderingTable = async (key) => {
 
     if(ordering) {
 
-        const ascMode = await fetch(`https://json-server-first-module-production.up.railway.app/tasks?owner_like=${currentOwner}&_sort=${key}&_order=asc`)
-
-        const ascMode = await fetch(`https://json-server-first-module-production.up.railway.app/tasks?_limit=10&_sort=${key}&_order=asc`)
+        const ascMode = await fetch(`http://localhost:3000/tasks?owner_like=${currentOwner}&_sort=${key}&_order=asc`)
 
         const ascTasks = await ascMode.json()
         renderTasks(ascTasks)
         ordering = false
     }else{
 
-        const descMode = await fetch(`https://json-server-first-module-production.up.railway.app/tasks?owner_like=${currentOwner}&_sort=${key}&_order=desc`)
-
-        const descMode = await fetch(`https://json-server-first-module-production.up.railway.app/tasks?_limit=10&_sort=${key}&_order=desc`)
+        const descMode = await fetch(`http://localhost:3000/tasks?owner_like=${currentOwner}&_sort=${key}&_order=desc`)
 
         const descTasks = await descMode.json()
         renderTasks(descTasks)
@@ -718,4 +708,4 @@ formEdit.addEventListener('submit', (event) => {
     event.preventDefault()
 
 })
-
+}

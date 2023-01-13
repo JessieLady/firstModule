@@ -100,13 +100,13 @@ const validatePassword = (input, required, invalid) => {
 /* USER'S FUNCTIONS */
 
 const getUsers = async () => {
-    const users = await fetch(`https://vercel-json-server-bice.vercel.app/users`)
+    const users = await fetch(`http://localhost:3000/users`)
     const usersResponse = await users.json()
     return usersResponse
 }
 
 const newUser = async (user) => {
-    await fetch('https://vercel-json-server-bice.vercel.app/users', {
+    await fetch('http://localhost:3000/users', {
         method: "POST",
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -142,7 +142,7 @@ class User {
 }
 
 const deleteUser = async (id) => {
-    await fetch(`https://vercel-json-server-bice.vercel.app/users/${id}`, {
+    await fetch(`http://localhost:3000/users/${id}`, {
     method: 'DELETE'
 })
 }
@@ -204,7 +204,7 @@ formLogin.addEventListener('submit', async (event) => {
             showError(password, PASS_WRONG)
             modalError.style.display = 'block'
         } else{
-            window.location.href = 'https://projeto-arnia-jessica-moura.vercel.app/main.html'
+            window.location.href = '../tasks-page/main.html'
                 if(checkbox){
                     localStorage.setItem('keepUser', JSON.stringify(userFound))
                     sessionStorage.setItem('user', JSON.stringify(userFound))

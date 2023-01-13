@@ -1,0 +1,52 @@
+const newTaskFields = () => {
+    const number = document.getElementById('number')
+    const description = document.getElementById('description')
+    const date = document.getElementById('date')
+    const status = document.querySelector('#selectStatus')
+    const button = document.getElementById('submitButton')
+
+    let numberValid = hasValue(number, NUM_EMPTY)
+    let descriptionValid = hasValue(description, DESCRIPTION_EMPTY)
+    let dateValid = hasValue(date, DATE_EMPTY)
+    let statusValid = validateStatus(status, STATUS_EMPTY)
+
+    if(numberValid && descriptionValid && dateValid && statusValid){
+        button.disabled = false
+        button.classList.remove('disabled')
+        button.classList.add('enabled')
+    } else{
+        button.disabled = true
+        button.classList.add('disabled')
+    }
+}
+
+formNewTask.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    const number = formNewTask.elements['number'].value
+    const description = formNewTask.elements['description'].value
+    const date = formNewTask.elements['date'].value
+    const status = formNewTask.elements['status'].value
+    const owner = currentOwner
+
+    const num = Number(number)
+
+    const task = new Task(num, description, date, status, owner)
+    saveTask(task)
+})
+
+function hasValue(input, message) {
+    if(input.value.trim() === '') {
+        return showError(input, message)
+    } else{
+        return showSuccess(input)
+    }
+}
+
+const validateStatus = (input, message) => {
+    if(input.options[0].selected) {
+        return showError(input, message)
+    } else{
+        return showSuccess(input)
+    }
+}
