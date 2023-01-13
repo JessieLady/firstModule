@@ -1,0 +1,653 @@
+  @media (min-width: 319px) and (max-width: 320px) {
+    body{
+        width: 100vw;
+    }
+    #div-orange{
+        display: none;
+    }
+
+    /* HEADER */
+
+    #logoArnia{
+        width: 140px;
+        position: relative;
+        bottom: 15px;
+        right: 30px;
+    }
+    #weather{
+        right: -6px;
+        top: 211px;
+        left: 75px;
+        height: unset;
+    }
+    #firstLine{
+        font-size: 20px;
+    }
+    #secondLine{
+        font-size: 16px;
+    }
+    #page-title {
+        top: 75px;
+    }
+    #page-title>button {
+        margin-top: 10px;
+    }
+    /* TABLE HEADER / FILTER BUTTONS */
+
+    #tableHeader{
+        width: 90vw;
+        overflow-x: scroll;
+        left: 20px;
+    }
+    #buttonsFilter>button{
+        padding: 3px 14px;
+    }
+
+    #searchTasks{
+        max-width: 90%;
+    }
+    #searchTasks>input{
+        width: unset;
+    }
+    #searchField{
+        width: unset;
+    }
+
+    /* TABLE */
+
+    #content{
+        left: 24px;
+        width: 90%;
+    }
+    th{
+        font-size: 12px;
+    }
+    tr{
+        font-size: 11px;
+    }
+
+    /* FOOTER */
+
+    #footerHelp{
+        width: 100%;
+        text-align: center;
+    }
+    #buttonsPaginate{
+        bottom: 30px;
+        width: 100%;
+        font-size: 15px;
+        left: -25px;
+    }
+
+    /* MODALS */
+
+    #modalNewTaskContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 63vh;
+    }
+    #modalConfirmationContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 25vh;
+        text-align: center;
+    }
+    #modalHelpContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditConfirmContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditInfoContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalDeleteConfirmContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 65vh;
+    }
+    #modalInfo{
+        margin-top: 40%;
+        width: 100vw;
+        height: 10vh;
+        font-size: 13px;
+    }
+    #textModalInfo{
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    input[type="date"]{
+        width: 70%;
+    }
+    select{
+        width: 70%;
+    }
+
+  }
+  @media (min-width: 374px) and (max-width: 375px) {
+    #div-orange{
+        display: none;
+    }
+
+    /* HEADER */
+
+    #logoArnia{
+        width: 150px;
+        position: relative;
+        bottom: 30px;
+        right: 30px;
+    }
+    #weather{
+        right: -6px;
+        top: 211px;
+        left: 100px;
+        height: unset;
+    }
+    #firstLine{
+        font-size: 20px;
+    }
+    #secondLine{
+        font-size: 16px;
+    }
+    #page-title {
+        top: 69px;
+        margin: 50px 70px;
+    }
+    #page-title>button {
+        margin-top: 15px;
+    }
+    /* TABLE HEADER / FILTER BUTTONS */
+
+    #tableHeader{
+        width: 90vw;
+        overflow-x: scroll;
+        left: 20px;
+    }
+    #buttonsFilter>button{
+        padding: 3px 14px;
+    }
+
+    #searchTasks{
+        max-width: 90%;
+    }
+    #searchTasks>input{
+        width: unset;
+    }
+    #searchField{
+        width: unset;
+    }
+
+    /* TABLE */
+
+    #content{
+        left: 24px;
+        width: 90%;
+    }
+    th{
+        font-size: 12px;
+    }
+    tr{
+        font-size: 11px;
+    }
+
+    /* FOOTER */
+
+    #footerHelp{
+        width: 100%;
+        text-align: center;
+    }
+    #buttonsPaginate{
+        bottom: 30px;
+        width: 100%;
+        font-size: 15px;
+        left: -52px;
+    }
+
+    /* MODALS */
+
+    #modalNewTaskContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 63vh;
+    }
+    #modalConfirmationContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 25vh;
+        text-align: center;
+    }
+    #modalHelpContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditConfirmContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditInfoContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalDeleteConfirmContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 65vh;
+    }
+    #modalInfo{
+        margin-top: 40%;
+        width: 100vw;
+        height: 10vh;
+        font-size: 13px;
+    }
+    #textModalInfo{
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    input[type="date"]{
+        width: 70%;
+    }
+    select{
+        width: 70%;
+    }
+  }
+  @media (min-width: 424px) and (max-width: 425px) {
+    #div-orange{
+        display: none;
+    }
+
+    /* HEADER */
+
+    #logoArnia{
+        width: 150px;
+        position: relative;
+        bottom: 30px;
+        right: 30px;
+    }
+    #weather{
+        right: -6px;
+        top: 211px;
+        left: 118px;
+        height: unset;
+    }
+    #firstLine{
+        font-size: 20px;
+    }
+    #secondLine{
+        font-size: 16px;
+    }
+    #page-title {
+        top: 69px;
+        margin: 50px 90px;
+    }
+    #page-title>button {
+        margin-top: 15px;
+    }
+    /* TABLE HEADER / FILTER BUTTONS */
+
+    #tableHeader{
+        width: 90vw;
+        overflow-x: scroll;
+        left: 20px;
+    }
+    #buttonsFilter>button{
+        padding: 3px 14px;
+    }
+
+    #searchTasks{
+        max-width: 90%;
+    }
+    #searchTasks>input{
+        width: unset;
+    }
+    #searchField{
+        width: unset;
+    }
+
+    /* TABLE */
+
+    #content{
+        left: 24px;
+        width: 90%;
+    }
+    th{
+        font-size: 12px;
+    }
+    tr{
+        font-size: 11px;
+    }
+
+    /* FOOTER */
+
+    #footerHelp{
+        width: 100%;
+        text-align: center;
+    }
+    #buttonsPaginate{
+        bottom: 30px;
+        width: 100%;
+        font-size: 15px;
+        left: -83px;
+    }
+
+    /* MODALS */
+
+    #modalNewTaskContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 63vh;
+    }
+    #modalConfirmationContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 25vh;
+        text-align: center;
+    }
+    #modalHelpContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditConfirmContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalEditInfoContent{
+        margin-top: 70%;
+        width: 100vw;
+        height: 35vh;
+    }
+    #modalDeleteConfirmContent{
+        margin-top: 40%;
+        width: 100vw;
+        height: 65vh;
+    }
+    #modalInfo{
+        margin-top: 40%;
+        width: 100vw;
+        height: 10vh;
+        font-size: 13px;
+    }
+    #textModalInfo{
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    input[type="date"]{
+        width: 70%;
+    }
+    select{
+        width: 70%;
+    }
+  }
+  @media (min-width: 767px) and (max-width: 768px) {
+    
+    /* HEADER */
+
+    #logoArnia{
+        width: 150px;
+        position: relative;
+        bottom: 30px;
+        right: 30px;
+    }
+    #weather{
+        right: -6px;
+        top: 144px;
+        left: 480px;
+        height: unset;
+    }
+    #firstLine{
+        font-size: 28px;
+    }
+    #secondLine{
+        font-size: 16px;
+    }
+    #page-title {
+        top: 104px;
+        margin: 50px 90px;
+    }
+    #page-title>button {
+        margin-top: 15px;
+    }
+    /* TABLE HEADER / FILTER BUTTONS */
+
+    #tableHeader{
+        width: 90vw;
+        overflow-x: scroll;
+        left: 40px;
+    }
+    #buttonsFilter>button{
+        padding: 3px 14px;
+    }
+
+    #searchTasks{
+        max-width: 90%;
+    }
+    #searchTasks>input{
+        width: unset;
+    }
+    #searchField{
+        width: unset;
+    }
+
+    /* TABLE */
+
+    #content{
+        left: 44px;
+        width: 90%;
+    }
+    th{
+        font-size: 14px;
+    }
+    tr{
+        font-size: 13px;
+    }
+
+    /* FOOTER */
+
+    #footerHelp{
+        width: 100%;
+        text-align: center;
+    }
+    #buttonsPaginate{
+        bottom: 30px;
+        width: 100%;
+        font-size: 15px;
+        left: -247px;
+    }
+
+    /* MODALS */
+
+    #modalNewTaskContent{
+        margin-top: 30%;
+        width: 90vw;
+        height: 50vh;
+    }
+    #modalConfirmationContent{
+        margin-top: 35%;
+        width: 50vw;
+        height: 25vh;
+        text-align: center;
+    }
+    #modalHelpContent{
+        margin-top: 35%;
+        width: 70vw;
+        height: 35vh;
+    }
+    #modalEditConfirmContent{
+        margin-top: 35%;
+        width: 70vw;
+        height: 35vh;
+    }
+    #modalEditInfoContent{
+        margin-top: 20%;
+        width: 50vw;
+        height: 60vh;
+    }
+    #modalDeleteConfirmContent{
+        margin-top: 40%;
+        width: 70vw;
+        height: 40vh;
+    }
+    #modalInfo{
+        margin-top: 40%;
+        width: 100vw;
+        height: 10vh;
+        font-size: 13px;
+    }
+    #closeModalInfo{
+        top: -67px;
+        right: -61px;
+    }
+    #textModalInfo{
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    input[type="date"]{
+        width: 70%;
+    }
+    select{
+        width: 70%;
+    }
+  }
+  @media (min-width: 1023px) and (max-width: 1024px) {
+    
+    /* HEADER */
+
+    #logoArnia{
+        width: 150px;
+        position: relative;
+        bottom: 30px;
+        right: 30px;
+    }
+    #weather{
+        right: -6px;
+        top: 144px;
+        left: 664px;
+        height: unset;
+    }
+    #firstLine{
+        font-size: 41px;
+    }
+    #secondLine{
+        font-size: 25px;
+    }
+    #page-title {
+        top: 104px;
+        margin: 50px 90px;
+    }
+    #page-title>button {
+        margin-top: 15px;
+    }
+    #page-title>span{
+        font-size: 25px;
+    }
+    #page-title>i{
+        font-size: 28px;
+    }
+    /* TABLE HEADER / FILTER BUTTONS */
+
+    #tableHeader{
+        width: 90vw;
+        overflow-x: scroll;
+        left: 50px;
+    }
+    #buttonsFilter>button{
+        padding: 3px 14px;
+    }
+
+    #searchTasks{
+        width: 300px;
+    }
+    #searchTasks>input{
+        width: unset;
+    }
+    
+
+    /* TABLE */
+
+    #content{
+        left: 54px;
+        width: 90%;
+    }
+    th{
+        font-size: 14px;
+    }
+    tr{
+        font-size: 13px;
+    }
+    /* FOOTER */
+
+    #footerHelp{
+        width: 100%;
+        text-align: center;
+    }
+    #buttonsPaginate{
+        bottom: 30px;
+        width: 100%;
+        font-size: 15px;
+        left: -374px;
+    }
+
+    /* MODALS */
+
+    #modalNewTaskContent{
+        margin-top: 20%;
+        width: 90vw;
+        height: 64vh;
+    }
+    #modalConfirmationContent{
+        margin-top: 35%;
+        width: 50vw;
+        height: 25vh;
+        text-align: center;
+    }
+    #modalHelpContent{
+        margin-top: 35%;
+        width: 70vw;
+        height: 35vh;
+    }
+    #modalEditConfirmContent{
+        margin-top: 35%;
+        width: 70vw;
+        height: 35vh;
+    }
+    #modalEditInfoContent{
+        margin-top: 20%;
+        width: 50vw;
+        height: 60vh;
+    }
+    #modalDeleteConfirmContent{
+        margin-top: 20%;
+        width: 70vw;
+        height: 55vh;
+    }
+    #modalInfo{
+        margin-top: 40%;
+        width: 100vw;
+        height: 10vh;
+        font-size: 13px;
+    }
+    #closeModalInfo{
+        top: -67px;
+        right: -61px;
+    }
+    #textModalInfo{
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    input[type="date"]{
+        width: 70%;
+    }
+    select{
+        width: 70%;
+    }
+  }

@@ -7,6 +7,7 @@ const formNewUser = document.getElementById('formNewUser')
 const formLogin = document.getElementById('formLogin')
 const modalError = document.getElementById('modalError')
 const inputLogin = document.getElementById('nameLogin')
+const submitButton = document.getElementById('submitButton')
 
 const NAME_REQUIRED = 'Por favor, insira o seu nome'
 const CITY_REQUIRED = 'Por favor, insira o sua cidade'
@@ -81,7 +82,7 @@ const validatePassword = (input, required, invalid) => {
     return true 
 }
 
-const validateCity = async (input, required, invalid) => {
+/* const validateCity = async (input, required, invalid) => {
     const city = input.value.trim()
     const locals = []
     
@@ -94,7 +95,7 @@ const validateCity = async (input, required, invalid) => {
     if(!cityFound) return showError(input, invalid)
 
     return true
-}
+} */
 
 /* USER'S FUNCTIONS */
 
@@ -157,17 +158,18 @@ const newUserFields = () => {/* Fix this to be in just one input or in the last 
     const button = document.getElementById('submitButton')
 
     let nameValid = hasValue(name, NAME_REQUIRED)
-    let cityValid = validateCity(city, CITY_REQUIRED, CITY_INVALID)
+    let cityValid = hasValue(city, CITY_REQUIRED)//validateCity CITY_INVALID
     let loginValid = hasValue(login, LOGIN_REQUIRED)
     let emailValid = validateEmail(email, EMAIL_REQUIRED, EMAIL_INVALID)
     let passwordValid = validatePassword(password, PASS_REQUIRED, PASS_LENGTH)
 
     if(nameValid && cityValid && loginValid && emailValid && passwordValid){
         button.disabled = false
-        button.className = 'mt-3 enabled'
+        button.classList.remove('disabled')
+        // button.classList.add('enabled')
     } else{
         button.disabled = true
-        button.className = 'mt-3 disabled'
+        button.classList.add('disabled')
     }
 }
 
@@ -183,6 +185,14 @@ formNewUser.addEventListener("submit", (event) => {
     let user = new User(name, city, login, email, password)
     newUser(user)
 })
+
+/* submitButton.addEventListener('click', () => {
+    console.log('clickou')
+})
+
+const clicou = () => {
+    console.log('clickou')
+} */
 
 /* LOGIN USER */ 
 
