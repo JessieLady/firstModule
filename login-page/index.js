@@ -7,7 +7,6 @@ const formNewUser = document.getElementById('formNewUser')
 const formLogin = document.getElementById('formLogin')
 const modalError = document.getElementById('modalError')
 const inputLogin = document.getElementById('nameLogin')
-const submitButton = document.getElementById('submitButton')
 
 const NAME_REQUIRED = 'Por favor, insira o seu nome'
 const CITY_REQUIRED = 'Por favor, insira o sua cidade'
@@ -82,7 +81,7 @@ const validatePassword = (input, required, invalid) => {
     return true 
 }
 
-/* const validateCity = async (input, required, invalid) => {
+const validateCity = async (input, required, invalid) => {
     const city = input.value.trim()
     const locals = []
     
@@ -95,7 +94,7 @@ const validatePassword = (input, required, invalid) => {
     if(!cityFound) return showError(input, invalid)
 
     return true
-} */
+}
 
 /* USER'S FUNCTIONS */
 
@@ -158,18 +157,17 @@ const newUserFields = () => {/* Fix this to be in just one input or in the last 
     const button = document.getElementById('submitButton')
 
     let nameValid = hasValue(name, NAME_REQUIRED)
-    let cityValid = hasValue(city, CITY_REQUIRED)//validateCity CITY_INVALID
+    let cityValid = validateCity(city, CITY_REQUIRED, CITY_INVALID)
     let loginValid = hasValue(login, LOGIN_REQUIRED)
     let emailValid = validateEmail(email, EMAIL_REQUIRED, EMAIL_INVALID)
     let passwordValid = validatePassword(password, PASS_REQUIRED, PASS_LENGTH)
 
     if(nameValid && cityValid && loginValid && emailValid && passwordValid){
         button.disabled = false
-        button.classList.remove('disabled')
-        // button.classList.add('enabled')
+        button.className = 'mt-3 enabled'
     } else{
         button.disabled = true
-        button.classList.add('disabled')
+        button.className = 'mt-3 disabled'
     }
 }
 

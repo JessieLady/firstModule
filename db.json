@@ -33,11 +33,11 @@
       "id": 4
     },
     {
-      "name": "Jasmine",
-      "city": "Qatar",
-      "login": "princess",
-      "email": "jasmine@gmail.com",
-      "password": "123456",
+      "name": "Jessica",
+      "city": "Nova Iguaçu",
+      "login": "pastel",
+      "email": "jessie.moura19@gmail.com",
+      "password": "pastel",
       "id": 5
     },
     {
@@ -125,7 +125,7 @@
       "number": 2,
       "description": "tarefa da isabelle 2",
       "date": "2023-01-19",
-      "status": "Concluído",
+      "status": "Em progresso",
       "owner": "isabelle",
       "id": 12
     },
@@ -154,12 +154,44 @@
       "id": 15
     },
     {
+      "number": 1,
+      "description": "tarefa da ana carolina 1",
+      "date": "2023-01-26",
+      "status": "Em pausa",
+      "owner": "anaCarolina",
+      "id": 16
+    },
+    {
+      "number": 2,
+      "description": "tarefa da ana carolina 2",
+      "date": "2023-01-24",
+      "status": "Em progresso",
+      "owner": "anaCarolina",
+      "id": 17
+    },
+    {
       "number": 3,
       "description": "tarefa da ana carolina 3",
       "date": "2023-01-27",
       "status": "Em progresso",
       "owner": "anaCarolina",
       "id": 18
+    },
+    {
+      "number": 4,
+      "description": "tarefa da ana carolina 4",
+      "date": "2023-01-25",
+      "status": "Em progresso",
+      "owner": "anaCarolina",
+      "id": 19
+    },
+    {
+      "number": 5,
+      "description": "tarefa da ana carolina 5",
+      "date": "2023-01-30",
+      "status": "Em pausa",
+      "owner": "anaCarolina",
+      "id": 20
     },
     {
       "number": "22",

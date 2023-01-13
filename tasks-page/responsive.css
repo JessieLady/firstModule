@@ -467,9 +467,9 @@
     /* MODALS */
 
     #modalNewTaskContent{
-        margin-top: 30%;
+        margin-top: 20%;
         width: 90vw;
-        height: 50vh;
+        height: 64vh;
     }
     #modalConfirmationContent{
         margin-top: 35%;
@@ -493,9 +493,9 @@
         height: 60vh;
     }
     #modalDeleteConfirmContent{
-        margin-top: 40%;
+        margin-top: 20%;
         width: 70vw;
-        height: 40vh;
+        height: 55vh;
     }
     #modalInfo{
         margin-top: 40%;
