@@ -184,14 +184,6 @@ formNewUser.addEventListener("submit", (event) => {
     newUser(user)
 })
 
-/* submitButton.addEventListener('click', () => {
-    console.log('clickou')
-})
-
-const clicou = () => {
-    console.log('clickou')
-} */
-
 /* LOGIN USER */ 
 
 /* There's a missing function that enables the login button */

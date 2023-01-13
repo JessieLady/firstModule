@@ -47,6 +47,14 @@
       "email": "jessie.moura19@gmail.com",
       "password": "pastel",
       "id": 6
+    },
+    {
+      "name": "peter",
+      "city": "Brasilia",
+      "login": "pedrinho",
+      "email": "pedro.remos@gmail.com",
+      "password": "123456",
+      "id": 7
     }
   ],
   "tasks": [
@@ -310,6 +318,46 @@
       "status": "Em progresso",
       "owner": "jessica",
       "id": 34
+    },
+    {
+      "number": 1,
+      "description": "Go to the mall",
+      "date": "2023-01-14",
+      "status": "Em progresso",
+      "owner": "pastel",
+      "id": 35
+    },
+    {
+      "number": 1,
+      "description": "teste teste teste",
+      "date": "2023-01-20",
+      "status": "Em progresso",
+      "owner": "pedrinho",
+      "id": 36
+    },
+    {
+      "number": 2,
+      "description": "Conseguir arrumar tudo",
+      "date": "2023-01-15",
+      "status": "Em progresso",
+      "owner": "pedrinho",
+      "id": 37
+    },
+    {
+      "number": 3,
+      "description": "Não esqueça do modal",
+      "date": "2023-01-14",
+      "status": "Em pausa",
+      "owner": "pedrinho",
+      "id": 38
+    },
+    {
+      "number": 4,
+      "description": "Essas tarefas",
+      "date": "2023-01-14",
+      "status": "Concluído",
+      "owner": "pedrinho",
+      "id": 39
     }
   ]
 }
