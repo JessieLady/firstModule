@@ -338,7 +338,7 @@
         <div id="modalLoginContent" class="downToUpAnimation col-12 col-md-8 col-lg-5 col-xl-5 col-xxl-5">
             <div id="closeDiv" class="closeButton" onclick="closeModal('modalLogin')">&times;</div>
             <h3>Que bom te ver de novo!</h3>
-                    <form id="formLogin"  method="get">
+                    <form id="formLogin">
                         <div>
                             <label for="login">Login</label>
                             <input onchange="loginField()" id="nameLogin" name="nameLogin" type="text"><br>
@@ -346,7 +346,7 @@
                         </div>
                         <div>
                             <label for="password">Senha</label>
-                            <input id="passwordLogin" minlength="6" name="passwordLogin" type="password"><br>
+                            <input id="passwordLogin" name="passwordLogin" type="password"><br>
                             <small>&nbsp;</small>
                         </div>
                         <div>
@@ -354,9 +354,10 @@
                             <label for="signIn"> Continuar conectado?</label>
                         </div>
                         <div>
-                            <button id="buttonLogin" disabled class="disabled" onclick="loginUser()">Entrar</button>
+                            <button id="buttonLogin" disabled class="disabled">Entrar</button>
                         </div>
                     </form>
+
         </div>
     </div>
     <div id="modalRegistration">
@@ -415,20 +416,6 @@
                 <h4 class="modalTxt" >Login ou senha errados </h4>
             </div>
             <div onclick="closeModal('modalError')" class="closeButtonFooter col-1">&times;</div>
-        </div>
-    </div>
-    <div id="modalKeepUser" class="upToDownAnimation col-12 col-lg-5 col-xxl-3">
-        <div id="modalKeepUserContent" class="col-12 col-md-12 col-lg-12 col-xxl-12">
-            <div>
-                <h3 class="modalTitle">Olá, <span id="userKeepedName"></span></h3>
-            </div>
-            <div>
-                <h4 class="modalTxt"> Você será redirecionado em <span id="timer"></span></h4>
-            </div>
-            <div>
-                <button onclick="removeKeepedUser()">Trocar de Usuário</button>
-            </div>
-            <div onclick="closeModal('modalKeepUser')" class="closeButtonFooter col-1">&times;</div>
         </div>
     </div>
 </body>

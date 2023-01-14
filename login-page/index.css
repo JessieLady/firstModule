@@ -370,6 +370,7 @@ small {
     display: none;
     position: fixed;
     bottom: 0;
+    /* right: 0;  */
     z-index: 5;
     background-color: var(--background);
     border: 5px solid var(--yellow);
@@ -390,6 +391,7 @@ small {
     display: none;
     position: fixed;
     bottom: 0;
+    /* right: 0;  */
     z-index: 5;
     background-color: var(--background);
     border: 5px solid var(--yellow);
@@ -405,24 +407,6 @@ small {
     text-align: center;
 }
 
-#modalKeepUser{
-    display: none;
-    position: fixed;
-    bottom: 0;
-    z-index: 5;
-    background-color: var(--background);
-    border: 5px solid var(--yellow);
-}
-
-#modalKeepUserContent{
-    padding: 15px 65px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 10px;
-    color: var(--indigo);
-    text-align: center;
-}
 /* FORMS */
 
 #formLogin {

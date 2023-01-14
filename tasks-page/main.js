@@ -90,7 +90,9 @@ const clearModalNewTask = () => {
   const descriptionField = document.getElementById("description");
   const dateField = document.getElementById("date");
   const select = document.querySelector("#selectStatus");
-
+  const button = document.getElementById("submitButton");
+  const title = document.getElementById('taskModalTitle')
+  
   numberField.value = "";
   descriptionField.value = "";
   dateField.value = "";
@@ -99,10 +101,10 @@ const clearModalNewTask = () => {
 
   currentTask = null
 
-  const button = document.getElementById("submitButton");
   button.classList.remove("enabled");
   button.classList.add("disabled");
   button.innerHTML = "Salvar";
+  title.innerHTML = 'Adicionar nova tarefa'
 };
 
 /* TASKS' FUNCTIONS */
@@ -131,7 +133,7 @@ const renderTasks = (tasks) => {
             task.id
           })"></i>
           </span>
-          <span><i class="fa-solid fa-trash iconTable trashIcon fa-xl" onclick="confirmDelete(${
+          <span><i class="fa-solid fa-trash iconTable fa-xl" onclick="confirmDelete(${
             task.id
           })"></i>
           </span>
@@ -193,7 +195,10 @@ const editTask = async (id) => {
   const numberField = document.getElementById("number");
   const descriptionField = document.getElementById("description");
   const dateField = document.getElementById("date");
-
+  const button = document.getElementById("submitButton");
+  const title = document.getElementById('taskModalTitle')
+  
+  title.innerHTML = 'Editar tarefa'
   currentTask = await getTask(id);
 
   openModal("modalNewTask");
@@ -211,7 +216,6 @@ const editTask = async (id) => {
     }
   }
 
-  const button = document.getElementById("submitButton");
   button.classList.remove("disabled");
   button.classList.add("enabled");
   button.innerHTML = "Alterar";
@@ -469,7 +473,6 @@ const filterTasks = async (status) => {
     `http://localhost:3000/tasks?status_like=${status}`
   );
   const tasks = await tasksResponse.json();
-  console.log(tasks.length < 1)
   renderTasks(tasks);
 };
 
@@ -477,25 +480,13 @@ const lateTasks = async () => {
   const tasks = await getTasksReturn();
 
   const tasksLate = tasks.filter((task) => {
-    const dateTask = new Date(task.date);
-    const dateFormated = dateTask.toLocaleDateString("pt-BR", { timeZone: "UTC" });
+    const date = new Date(task.date);
+    const dateFormated = date.toLocaleDateString("pt-BR", { timeZone: "UTC" });
     if (inDay > dateFormated && task.status !== "Concluído") return true;
     return false;
   });
   renderTasks(tasksLate);
 };
-
-/* const lateTasks = async () => {
-  const tasks = await getTasksReturn();
-
-  const tasksLate = tasks.filter((task) => {
-    const dateTask = new Date(task.date);
-    const dateFormated = dateTask.toLocaleDateString("pt-BR", { timeZone: "UTC" });
-    if (inDay > dateFormated && task.status !== "Concluído") return true;
-    return false;
-  });
-  renderTasks(tasksLate);
-}; */
 
 const warningLateTask = () => {
   const button = document.getElementById("btnLate");
@@ -776,10 +767,10 @@ const lightMode = () => {
   }
 
   for (let counter = 0; counter < inputs.length; counter++) {
-    inputs[counter].style.backgroundColor = "var(--background)";
+    inputs[counter].style.backgroundColor = "white";
   }
 
-  selectStatus.style.backgroundColor = "var(--background)";
+  selectStatus.style.backgroundColor = "white";
 
   searchInput.style.backgroundColor = ""; /* searchField */
 
