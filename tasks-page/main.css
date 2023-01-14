@@ -200,6 +200,9 @@ small {
 .rotateDown{
     transform: rotateZ(0deg);
 }
+.trashIcon{
+    opacity: 0.5;
+}
 /* STATUS COLORS */
 
 .Concluído{
@@ -624,7 +627,9 @@ small {
 #content{
     overflow-y: scroll;
 }
-
+#passConfirmDelete{
+    width: 50%;
+}
 /* PAGINATE BUTTONS */ 
 
 #buttonsPaginate{

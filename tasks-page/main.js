@@ -133,7 +133,7 @@ const renderTasks = (tasks) => {
             task.id
           })"></i>
           </span>
-          <span><i class="fa-solid fa-trash iconTable fa-xl" onclick="confirmDelete(${
+          <span><i class="fa-solid fa-trash iconTable trashIcon fa-xl" onclick="confirmDelete(${
             task.id
           })"></i>
           </span>
@@ -441,17 +441,21 @@ const confirmDeleteUser = async () => {
     });
   };
 
-  passwordInput.addEventListener("change", () => {
+  passwordInput.addEventListener("input", () => {
     if (passwordInput.value.trim() !== currentUserObj.password) {
       msg.innerHTML = "Senha incorreta";
       msg.classList.remove("successSmall")
       msg.classList.add("errorSmall")
       passwordInput.className = "error";
+      button.classList.replace('enabled','disabled')
+      button.disabled = true
     } else {
       passwordInput.className = "success";
       msg.classList.remove("errorSmall")
       msg.classList.add("successSmall")
       msg.innerHTML = "Senha correta";
+      button.classList.replace('disabled', 'enabled')
+      button.disabled = true
     }
     button.addEventListener("click", () => {
       if (passwordInput.value.trim() === currentUserObj.password) {
