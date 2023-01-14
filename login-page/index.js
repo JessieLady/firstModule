@@ -59,8 +59,6 @@ function hasValue(input, message) {
 
 /* VALIDATION FUNCTIONS */
 
-/* create a validateLoginName function */
-
 const validateEmail = (input, required, invalid) => {
     if (!hasValue(input, required)) return false
 
@@ -212,14 +210,12 @@ formNewUser.addEventListener("submit", (event) => {
 
 /* LOGIN USER */ 
 
-/* There's a missing function that enables the login button */
-
 formLogin.addEventListener('change', async (event) => {
     event.preventDefault()
 
     let login = formLogin.elements['nameLogin']
     let password = formLogin.elements['passwordLogin']
-    let checkbox = formLogin.elements['signIn'].checked
+    let button = document.getElementById('buttonLogin')
 
     const userFound = await searchUser(login)
 
@@ -228,13 +224,10 @@ formLogin.addEventListener('change', async (event) => {
             showError(password, PASS_WRONG)
             modalError.style.display = 'block'
         } else{
-            window.location.href = '../tasks-page/main.html'
-                if(checkbox){
-                    localStorage.setItem('keepUser', JSON.stringify(userFound))
-                    sessionStorage.setItem('user', JSON.stringify(userFound))
-                } else{
-                    sessionStorage.setItem('user', JSON.stringify(userFound))
-            }
+            button.disabled = false
+            button.classList.remove('disabled')
+            button.classList.add('enabled')
+            showSuccess(password)
         }
     } else{
         showError(password, PASS_REQUIRED)
@@ -277,3 +270,52 @@ const loginField = async () => {
         userNotFound(inputLogin)
      }
 }
+
+const loginUser = async () => {
+    let login = document.getElementById('nameLogin')
+    let checkbox = document.getElementById('signIn').checked
+
+    const userFound = await searchUser(login)
+
+    if(checkbox){
+        localStorage.setItem('keepUser', JSON.stringify(userFound))
+        sessionStorage.setItem('user', JSON.stringify(userFound))
+    } else{
+        sessionStorage.setItem('user', JSON.stringify(userFound))
+    }
+    
+    window.location.href = '../tasks-page/main.html'
+}
+
+/* function startTimer(duration, display) {
+    var timer = duration, seconds;
+    setInterval(function () {
+        seconds = parseInt(timer % 60, 10);
+        display.textContent = seconds;
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+
+const checkUserLocal = () => {
+    const userKeeped = localStorage.getItem('keepUser')
+    const userName = document.getElementById('userKeepedName')
+    const display = document.querySelector('#timer')
+    if(userKeeped){
+        userParse = JSON.parse(userKeeped) 
+        userName.innerHTML = userParse.name
+        openModal('modalKeepUser')
+        startTimer(5, display)
+        setTimeout(loginKeepedUser, 6000, userKeeped)
+    }
+}
+
+const loginKeepedUser = (user) => {
+    sessionStorage.setItem('user', user)
+    window.location.href = '../tasks-page/main.html'
+}
+
+const removeKeepedUser = () => {
+    localStorage.removeItem('keepUser')
+} */

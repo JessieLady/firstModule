@@ -16,6 +16,7 @@
     --lightpurple: #D7CAE5;
     --ice: #FBF0E2;
     --cancelButton: #828282;
+    --tableBack: #F5F5F5;
 
     /* background colors */
     --background: #F5F5F5;
@@ -67,7 +68,7 @@ body{
     width: 0.5vw;
 }
 .div-white{
-    background-color: var(--background);
+    background-color: white;/* var(--background) */
     height: 100vh;
     width: 96.5vw;
 }
@@ -194,7 +195,12 @@ small {
 .classModal{
     background-color: var(--background);
 }
-
+.rotateUp{
+    transform: rotateZ(-180deg);
+}
+.rotateDown{
+    transform: rotateZ(0deg);
+}
 /* STATUS COLORS */
 
 .Concluído{
@@ -634,7 +640,7 @@ small {
     gap: 20px;
 
     position: absolute;
-    bottom: 85px;
+    bottom: 42px;
     left: 100px;
 }
 .paginateButtons{
@@ -647,4 +653,8 @@ small {
 }
 #pagesNum{
     font-weight: 500;
+}
+
+.trashIcon{
+    opacity: 0.5;
 }

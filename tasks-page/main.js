@@ -96,6 +96,13 @@ const clearModalNewTask = () => {
   dateField.value = "";
 
   select.options[0].selected = true;
+
+  currentTask = null
+
+  const button = document.getElementById("submitButton");
+  button.classList.remove("enabled");
+  button.classList.add("disabled");
+  button.innerHTML = "Salvar";
 };
 
 /* TASKS' FUNCTIONS */
@@ -124,7 +131,7 @@ const renderTasks = (tasks) => {
             task.id
           })"></i>
           </span>
-          <span><i class="fa-solid fa-trash iconTable fa-xl" onclick="confirmDelete(${
+          <span><i class="fa-solid fa-trash iconTable trashIcon fa-xl" onclick="confirmDelete(${
             task.id
           })"></i>
           </span>
@@ -462,6 +469,7 @@ const filterTasks = async (status) => {
     `http://localhost:3000/tasks?status_like=${status}`
   );
   const tasks = await tasksResponse.json();
+  console.log(tasks.length < 1)
   renderTasks(tasks);
 };
 
@@ -469,13 +477,25 @@ const lateTasks = async () => {
   const tasks = await getTasksReturn();
 
   const tasksLate = tasks.filter((task) => {
-    const date = new Date(task.date);
-    const dateFormated = date.toLocaleDateString("pt-BR", { timeZone: "UTC" });
+    const dateTask = new Date(task.date);
+    const dateFormated = dateTask.toLocaleDateString("pt-BR", { timeZone: "UTC" });
     if (inDay > dateFormated && task.status !== "Concluído") return true;
     return false;
   });
   renderTasks(tasksLate);
 };
+
+/* const lateTasks = async () => {
+  const tasks = await getTasksReturn();
+
+  const tasksLate = tasks.filter((task) => {
+    const dateTask = new Date(task.date);
+    const dateFormated = dateTask.toLocaleDateString("pt-BR", { timeZone: "UTC" });
+    if (inDay > dateFormated && task.status !== "Concluído") return true;
+    return false;
+  });
+  renderTasks(tasksLate);
+}; */
 
 const warningLateTask = () => {
   const button = document.getElementById("btnLate");
@@ -631,7 +651,8 @@ const validateCity = async (input, required, invalid) => {
 
 /* SORTING FUNCTION */
 
-const orderingTable = async (key) => {
+const orderingTable = async (key, iconOrder) => {
+  const icon = document.getElementById(iconOrder)
   if (ordering) {
     const ascMode = await fetch(
       `http://localhost:3000/tasks?owner_like=${currentOwner}&_sort=${key}&_order=asc`
@@ -639,6 +660,8 @@ const orderingTable = async (key) => {
     const ascTasks = await ascMode.json();
     renderTasks(ascTasks);
     ordering = false;
+    icon.classList.remove('rotateDown')
+    icon.classList.add('rotateUp')
   } else {
     const descMode = await fetch(
       `http://localhost:3000/tasks?owner_like=${currentOwner}&_sort=${key}&_order=desc`
@@ -646,6 +669,8 @@ const orderingTable = async (key) => {
     const descTasks = await descMode.json();
     renderTasks(descTasks);
     ordering = true;
+    icon.classList.remove('rotateUp')
+    icon.classList.add('rotateDown')
   }
 };
 
@@ -719,14 +744,14 @@ contrast = localStorage.getItem("contrast");
 //This is double clicking the switchMode!!! Fix this...
 
 const lightMode = () => {
-  background.style.backgroundColor = "var(--background)";
+  background.style.backgroundColor = "white";
 
   iconButton.src = "../assets/moon.svg";
   buttonBack.style.backgroundColor = "var(--purple)";
 
   logo.src = "../assets/logo-purple.svg";
 
-  tableBody.className = "table-light text-purple";
+  tableBody.className = "table-light";
 
   tHead.style.color = "var(--darkpurple)";
   tHead.className = "font-weight-bold table-light";

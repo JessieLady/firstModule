@@ -63,6 +63,14 @@
       "email": "carol@hotmail.com",
       "password": "123456",
       "id": 8
+    },
+    {
+      "name": "Laura",
+      "city": "Macaé",
+      "login": "yellow",
+      "email": "lumblully@gmail.com",
+      "password": "123456",
+      "id": 9
     }
   ],
   "tasks": [
@@ -85,8 +93,8 @@
     {
       "number": 4,
       "description": "tarefa da jessica 4",
-      "date": "2023-01-10",
-      "status": "Em progresso",
+      "date": "2023-01-23",
+      "status": "Concluído",
       "owner": "jessica",
       "id": 4
     },
@@ -322,7 +330,7 @@
     {
       "number": 1,
       "description": "fazer torta",
-      "date": "2023-01-12",
+      "date": "2023-01-23",
       "status": "Em progresso",
       "owner": "jessica",
       "id": 34
@@ -438,6 +446,46 @@
       "status": "Em progresso",
       "owner": "tomb",
       "id": 48
+    },
+    {
+      "number": 1,
+      "description": "tarefa 1 da lully",
+      "date": "2023-01-15",
+      "status": "Em progresso",
+      "owner": "yellow",
+      "id": 50
+    },
+    {
+      "number": 2,
+      "description": "tarefa 2 da lully",
+      "date": "2023-01-19",
+      "status": "Em pausa",
+      "owner": "yellow",
+      "id": 51
+    },
+    {
+      "number": 3,
+      "description": "tarefa 3 da lully",
+      "date": "2023-01-14",
+      "status": "Concluído",
+      "owner": "yellow",
+      "id": 52
+    },
+    {
+      "number": 4,
+      "description": "Arrumar a mochila",
+      "date": "2023-01-19",
+      "status": "Em progresso",
+      "owner": "yellow",
+      "id": 53
+    },
+    {
+      "number": 2,
+      "description": "Consertar Ar condicionado",
+      "date": "2023-01-26",
+      "status": "Em progresso",
+      "owner": "pastel",
+      "id": 54
     }
   ]
 }
