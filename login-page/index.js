@@ -220,6 +220,7 @@ formLogin.addEventListener('change', async (event) => {
     let login = formLogin.elements['nameLogin']
     let password = formLogin.elements['passwordLogin']
     let checkbox = formLogin.elements['signIn'].checked
+    let button = document.getElementById('buttonLogin')
 
     const userFound = await searchUser(login)
 
@@ -235,11 +236,55 @@ formLogin.addEventListener('change', async (event) => {
                 } else{
                     sessionStorage.setItem('user', JSON.stringify(userFound))
             }
+            button.disabled = false
+            button.classList.remove('disabled')
+            button.classList.add('enabled')
+            showSuccess(password)
         }
     } else{
         showError(password, PASS_REQUIRED)
     }
 })
+
+/* formLogin.addEventListener('input', async (event) => {
+    event.preventDefault()
+
+    let login = formLogin.elements['nameLogin']
+    let password = formLogin.elements['passwordLogin']
+    let button = document.getElementById('buttonLogin')
+
+    const userFound = await searchUser(login)
+
+    if(password.value.trim() !== '') {
+        if(userFound.password !== password.value){
+            button.disabled = true
+            button.classList.replace('enabled', 'disabled')
+            showError(password, PASS_WRONG)
+        } else{
+            button.disabled = false
+            button.classList.replace('disabled', 'enabled')
+            showSuccess(password)
+        }
+    } else{
+        showError(password, PASS_REQUIRED)
+    }
+})
+
+const loginUser = async () => {
+    let login = document.getElementById('nameLogin').value
+    let checkbox = document.getElementById('signIn').checked
+
+    const userFound = await searchUser(login)
+
+    if(checkbox){
+        localStorage.setItem('keepUser', JSON.stringify(userFound))
+        sessionStorage.setItem('user', JSON.stringify(userFound))
+    } else{
+        sessionStorage.setItem('user', JSON.stringify(userFound))
+    }
+    console.log('logou!')
+    //window.location.href = '../tasks-page/main.html'
+} */
 
 /* LOGIN FUNCTIONS */
 
