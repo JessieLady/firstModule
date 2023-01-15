@@ -17,11 +17,9 @@
     --lightpurple: #D7CAE5;
     --ice: #FBF0E2;
     --background: #F5F5F5;
-    --cancelButton: #828282;
     --greenStatus: #27AE60;
     --orangeStatus: #F8B04E;
     --redStatus: #EB5757;
-    --blueStatus: #011379;
 }
 
 /* COOL BACKGROUND */
@@ -211,7 +209,7 @@ small {
     position: absolute;
     right: 10px;
     top: 0;
-    margin-left: 10px; /* FIX THIS. TO CLOSE THE BORDER */
+    margin-left: 10px;
 }
 
 .closeButton:hover {
@@ -284,12 +282,6 @@ small {
     color: var(--redStatus) !important;
 }
 
-/* SELECTORS BY ID NAME */
-
-#signIn {
-    width: unset;
-}
-
 /* ANIMATIONS */
 
 .downToUpAnimation {
@@ -300,7 +292,6 @@ small {
     0% {
         transform: translateY(-300px);
     }
-
     100% {
         transform: translateY(0px);
     }
@@ -309,7 +300,6 @@ small {
 /* MODALS */
 
 #modalLogin {
-    /* TURN THIS INTO A CLASS MODAL. CAREFUL WITH BOOTSTRAP */
     display: none;
     position: fixed;
     z-index: 4;
@@ -335,7 +325,6 @@ small {
     gap: 30px;
 
     position: relative;
-
     height: 36vh;
 }
 
@@ -371,7 +360,6 @@ small {
     display: none;
     position: fixed;
     bottom: 0;
-    /* right: 0;  */
     z-index: 5;
     background-color: var(--background);
     border: 5px solid var(--yellow);
@@ -386,26 +374,6 @@ small {
     color: var(--indigo);
     text-align: center;
     position: relative;
-}
-
-#modalError {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    /* right: 0;  */
-    z-index: 5;
-    background-color: var(--background);
-    border: 5px solid var(--yellow);
-}
-
-#modalErrorContent {
-    padding: 15px 65px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 10px;
-    color: var(--indigo);
-    text-align: center;
 }
 
 /* FORMS */
@@ -431,7 +399,6 @@ small {
     button {
         padding: 3px 10px;
     }
-
     #infoBodyContent {
         font-size: 8px;
     }

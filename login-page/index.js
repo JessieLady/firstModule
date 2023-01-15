@@ -3,9 +3,9 @@
 const modalLogin = document.getElementById('modalLogin')
 const modalRegistration = document.getElementById('modalRegistration')
 const modalInfo = document.getElementById('modalInfo')
+const modalInfoTxt = document.getElementById('modalInfoContent')
 const formNewUser = document.getElementById('formNewUser')
 const formLogin = document.getElementById('formLogin')
-const modalError = document.getElementById('modalError')
 const inputLogin = document.getElementById('nameLogin')
 const buttonLogin = document.getElementById('buttonLogin')
 
@@ -60,15 +60,16 @@ function hasValue(input, message) {
 
 /* VALIDATION FUNCTIONS */
 
-/* create a validateLoginName function */
-
 const validateEmail = (input, required, invalid) => {
     if (!hasValue(input, required)) return false
 
       const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       const email = input.value.trim()
 
-      if (!emailRegex.test(email)) return showError(input, invalid)
+      if (!emailRegex.test(email)){
+        input.classList.replace('success', 'error')
+        return showError(input, invalid)
+      }
     
     return true
 }
@@ -78,7 +79,10 @@ const validatePassword = (input, required, invalid) => {
     
     if (!hasValue(input, required)) return false 
      
-    if (password.length < 6) return showError(input, invalid)
+    if (password.length < 6){
+        input.classList.replace('success', 'error')
+        return showError(input, invalid)
+    } 
 
     return true 
 }
@@ -94,7 +98,7 @@ const validateCity = async (input, required, invalid) => {
     const cityFound = locals[0]
     
     if(!cityFound) {
-        input.className = 'error'
+        input.classList.replace('success', 'error')
         return showError(input, invalid)
     }
     return true
@@ -112,7 +116,7 @@ const validateLogin = async (input, required, invalid) => {
     })
 
     if(loginFound){
-        input.className = 'error'
+        input.classList.replace('success', 'error')
         return showError(input, invalid)
     } else{
         const msg = input.parentNode.querySelector('small')
@@ -120,7 +124,6 @@ const validateLogin = async (input, required, invalid) => {
         msg.innerText = 'Login disponível'
         input.className = 'success'
     }
-    
     return true
 }
 /* USER'S FUNCTIONS */
@@ -147,8 +150,8 @@ const newUser = async (user) => {
     .catch(
         (error) => {
         modalRegistration.style.display = 'none'
-        modalError.style.display = 'block'
-        modalErrorTxt.innerHTML = "Erro:" + error
+        modalInfo.style.display = 'block'
+        modalInfoTxt.innerHTML = "Erro:" + error
     })
 }
 
@@ -191,10 +194,10 @@ const newUserFields = () => {
 
     if(nameValid && cityValid && loginValid && emailValid && passwordValid){
         button.disabled = false
-        button.className = 'mt-3 enabled'
+        button.classList.replace('disabled', 'enabled')
     } else{
         button.disabled = true
-        button.className = 'mt-3 disabled'
+        button.classList.replace('enabled', 'disabled')
     }
 }
 
@@ -211,35 +214,7 @@ formNewUser.addEventListener("submit", (event) => {
     newUser(user)
 })
 
-/* LOGIN USER */ 
-
-/* There's a missing function that enables the login button */
-
-/* formLogin.addEventListener('change', async (event) => {
-    event.preventDefault()
-
-    let login = formLogin.elements['nameLogin']
-    let password = formLogin.elements['passwordLogin']
-    let button = document.getElementById('buttonLogin')
-
-    const userFound = await searchUser(login)
-
-    if(password.value.trim() !== '') {
-        if(userFound.password !== password.value){
-            showError(password, PASS_WRONG)
-            modalError.style.display = 'block'
-        } else{
-            sessionStorage.setItem('user', JSON.stringify(userFound))
-            window.location.href = '../tasks-page/main.html'
-            }
-            button.disabled = false
-            button.classList.remove('disabled')
-            button.classList.add('enabled')
-            showSuccess(password)
-    } else{
-        showError(password, PASS_REQUIRED)
-    }
-}) */
+/* LOGIN USER */
 
 formLogin.addEventListener('input', async (event) => {
     event.preventDefault()
@@ -275,7 +250,7 @@ buttonLogin.addEventListener('click', async (event) => {
 
 /* LOGIN FUNCTIONS */
 
-const searchUser = async (login) => {/* Fix this to do a fetch from the users api */
+const searchUser = async (login) => {
     const users = await getUsers()
     const findUser = await users.filter((user) => {
         if(login.value === user.login) return true
@@ -300,9 +275,7 @@ function userNotFound(input) {
 
 const loginField = async () => {
     if(inputLogin.value.trim() === '') return showError(login, LOGIN_REQUIRED)
-
     const userFound = await searchUser(inputLogin)
-
     if(userFound) {
        userFoundSuccess(inputLogin)    
      }else {
