@@ -7,6 +7,7 @@ const formNewUser = document.getElementById('formNewUser')
 const formLogin = document.getElementById('formLogin')
 const modalError = document.getElementById('modalError')
 const inputLogin = document.getElementById('nameLogin')
+const buttonLogin = document.getElementById('buttonLogin')
 
 const NAME_REQUIRED = 'Por favor, insira o seu nome'
 const CITY_REQUIRED = 'Por favor, insira o sua cidade'
@@ -214,12 +215,11 @@ formNewUser.addEventListener("submit", (event) => {
 
 /* There's a missing function that enables the login button */
 
-formLogin.addEventListener('change', async (event) => {
+/* formLogin.addEventListener('change', async (event) => {
     event.preventDefault()
 
     let login = formLogin.elements['nameLogin']
     let password = formLogin.elements['passwordLogin']
-    let checkbox = formLogin.elements['signIn'].checked
     let button = document.getElementById('buttonLogin')
 
     const userFound = await searchUser(login)
@@ -229,24 +229,19 @@ formLogin.addEventListener('change', async (event) => {
             showError(password, PASS_WRONG)
             modalError.style.display = 'block'
         } else{
+            sessionStorage.setItem('user', JSON.stringify(userFound))
             window.location.href = '../tasks-page/main.html'
-                if(checkbox){
-                    localStorage.setItem('keepUser', JSON.stringify(userFound))
-                    sessionStorage.setItem('user', JSON.stringify(userFound))
-                } else{
-                    sessionStorage.setItem('user', JSON.stringify(userFound))
             }
             button.disabled = false
             button.classList.remove('disabled')
             button.classList.add('enabled')
             showSuccess(password)
-        }
     } else{
         showError(password, PASS_REQUIRED)
     }
-})
+}) */
 
-/* formLogin.addEventListener('input', async (event) => {
+formLogin.addEventListener('input', async (event) => {
     event.preventDefault()
 
     let login = formLogin.elements['nameLogin']
@@ -270,21 +265,13 @@ formLogin.addEventListener('change', async (event) => {
     }
 })
 
-const loginUser = async () => {
-    let login = document.getElementById('nameLogin').value
-    let checkbox = document.getElementById('signIn').checked
-
+buttonLogin.addEventListener('click', async (event) => {
+    event.preventDefault()
+    let login = document.getElementById('nameLogin')
     const userFound = await searchUser(login)
-
-    if(checkbox){
-        localStorage.setItem('keepUser', JSON.stringify(userFound))
-        sessionStorage.setItem('user', JSON.stringify(userFound))
-    } else{
-        sessionStorage.setItem('user', JSON.stringify(userFound))
-    }
-    console.log('logou!')
-    //window.location.href = '../tasks-page/main.html'
-} */
+    sessionStorage.setItem('user', JSON.stringify(userFound))
+    window.location.href = '../tasks-page/main.html'
+})
 
 /* LOGIN FUNCTIONS */
 
