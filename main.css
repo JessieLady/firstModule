@@ -19,11 +19,10 @@
 
     /* background colors */
     --background: #F5F5F5;
-    --darkBackground: #161616;
-
     --darkWhite: #e2e0e0;
 
     /* status colors */
+    --lateTask: #f18b8b;
     --greenStatus: #27AE60;
     --orangeStatus: #F8B04E;
     --redStatus: #EB5757;
@@ -32,10 +31,9 @@
     
     /* Arnia Website Palet */
     --darkpurple: #1A1132;
+    --darkArnia: #1a1033;
     --darkblue: #0E1327;
     --orange: #F7AF4E;
-    --purpleple: #5F4579;
-    --greypurple: #AB9EA2;
 
     --darkorange: #c77b17;
     --purpleBackground: #0b0716;
@@ -152,43 +150,66 @@ small {
     font-size: 20px;
 }
 .disabled{
-    background-color: var(--background) !important;
     color: var(--purple) !important;
 }
 .disabled:hover{
     cursor: not-allowed !important;
+    color: var(--background) !important;
     background-color: none !important;
 }
 .enabled{
     cursor: pointer !important;
-    background-color: var(--background) !important;
     color: var(--purple) !important;
 }
 .enabled:hover{
     background-color: var(--purple) !important;
     color: var(--background) !important;
 }
+.unchangeble{
+    border-color: var(--blueStatus);
+}
+.unchangebleSmall{
+    color: var(--blueStatus);
+}
 .lateTask{
-    color: #f18b8b !important;
+    color: var(--lateTask) !important;
     background-color: unset;
-    border-color: #f18b8b;
+    border-color: var(--lateTask) !important;
 }
 .lateTask:hover{
     color: var(--purple) !important;
-    background-color: #f18b8b;
+    background-color: var(--lateTask) !important;
 }
 .deleteAccount{
-    color: #f18b8b !important;
-    border-color: #f18b8b !important;
+    color: var(--lateTask)!important;
+    border-color: var(--lateTask) !important;
 }
 .deleteAccount:hover{
     color: var(--purple) !important;
-    background-color: #f18b8b !important;
+    background-color: var(--lateTask) !important;
+}
+.successSmall{
+    color: var(--greenStatus);
+}
+.errorSmall{
+    color: var(--redStatus);
 }
 .classModal{
     background-color: var(--background);
 }
-
+.rotateUp{
+    transform: rotateZ(-180deg);
+}
+.rotateDown{
+    transform: rotateZ(0deg);
+}
+.trashIcon{
+    color: var(--purple) !important;
+    opacity: 0.5;
+}
+.trashIcon:hover{
+    opacity: 1;
+}
 /* STATUS COLORS */
 
 .Concluído{
@@ -219,14 +240,14 @@ small {
 #modalNewTaskContent{
     border-radius: 10px;
     width: 40%;
-    height: 60%;
+    height: 63vh;
     padding: 40px 40px;
     margin: 200px auto;
     position: relative;
 }
 #modalEditConfirmContent{
-    width: 35vw;
-    height: 250px;
+    width: 25vw;
+    height: 270px;
     margin: 300px auto;
     padding: 15px;
     background-color: var(--background);
@@ -293,7 +314,7 @@ small {
 
     text-align: center;
 
-    width: 40%;
+    width: 30%;
     height: 50%;
     padding: 10px;
     margin: 200px auto;
@@ -311,7 +332,7 @@ small {
     background-color: var(--background);
     color: var(--purple);
     width: 25%;
-    height: 55%;
+    height: 70%;
     padding: 10px;
     margin: 170px auto;
     border-radius: 10px;
@@ -368,7 +389,7 @@ small {
     border-radius: 12px !important;
 }
 .dark-button:hover{
-    background-color: var(--darkpurple);
+    background-color: var(--indigo);
     border: 1px solid var(--darkpurple);
     color: var(--background);
 }
@@ -505,6 +526,12 @@ small {
     top: 16px;
     right: 0;
 }
+#accountButton{
+    position: absolute; 
+    top: 16px;
+    right: 0;
+    margin-right: 155px;
+}
 
 /* WEATHER ELEMENTS */
 
@@ -593,27 +620,12 @@ small {
 
 /* MAIN/TABLE/CONTENT FOOTER */
 
-#footerHelp{
-    background-color: var(--yellow);
-    position: absolute;
-    bottom: 0px;
-    right: 0;
-    height: 30px;
-    padding: 5px;
-    margin-left: 5px;
-    font-size: 13px;
-    border-top-left-radius: 6px;
-}
-#footerHelp:hover{
-    background-color: var(--indigo) !important;
-    color: white;
-    cursor: pointer;
-}
-
 #content{
     overflow-y: scroll;
 }
-
+#passConfirmDelete{
+    width: 50%;
+}
 /* PAGINATE BUTTONS */ 
 
 #buttonsPaginate{
@@ -628,7 +640,7 @@ small {
     gap: 20px;
 
     position: absolute;
-    bottom: 85px;
+    bottom: 35px;
     left: 100px;
 }
 .paginateButtons{
