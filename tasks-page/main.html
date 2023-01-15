@@ -39,8 +39,11 @@
     <div class="div-grey" id="div-grey"></div>
     <div class="div-white" id="div-white">
       <header id="header">
+        <div id="account">
+          <button id="accountButton" onclick="openModal('modalHelp')">Opções da conta</button>
+        </div>
         <div id="logout">
-          <a href="../login-page/index.html"><button id="logoutButton" onclick="userLogout()">Sair</button></a>
+          <button id="logoutButton" onclick="userLogout()">Sair</button>
         </div>
         <div id="logo">
           <a href="https://arnia.com.br/" target="_blank"><img width="150px" id="logoArnia" src="../assets/logo-purple.svg" alt="Logo Arnia" /></a>
@@ -83,17 +86,17 @@
         </div>
       </div>
       <div id="content">
-        <table class="table table-responsive table-hover" id="table">
+        <table class="table table-responsive table-striped table-hover" id="table">
           <thead id="tHead" class="text-center font-weight-bold">
             <tr class="text-center">
-              <th scope="col">Núm <i onclick="orderingTable('number')" class="fa-solid fa-caret-down iconTable"></i></th>
-              <th scope="col">Descrição <i onclick="orderingTable('description')" class="fa-solid fa-caret-down iconTable"></i></th>
-              <th scope="col">Data de Entrega <i onclick="orderingTable('date')" class="fa-solid fa-caret-down iconTable"></i></th>
-              <th scope="col">Status <i onclick="orderingTable('status')" class="fa-solid fa-caret-down iconTable"></i></th>
+              <th scope="col">Núm <i id="numIcon" onclick="orderingTable('number', 'numIcon')" class="fa-solid fa-caret-down iconTable"></i></th>
+              <th scope="col">Descrição <i id="desIcon" onclick="orderingTable('description', 'desIcon')" class="fa-solid fa-caret-down iconTable"></i></th>
+              <th scope="col">Data de Entrega <i id="dateIcon" onclick="orderingTable('date', 'dateIcon')" class="fa-solid fa-caret-down iconTable"></i></th>
+              <th scope="col">Status <i id="statusIcon" onclick="orderingTable('status', 'statusIcon')" class="fa-solid fa-caret-down iconTable"></i></th>
               <th scope="col">Ação</th>
             </tr>
           </thead>
-          <tbody id="tbody-content" class="table-light text-purple">
+          <tbody id="tbody-content" class="table-light">
           </tbody>
         </table>
       </div>
@@ -107,16 +110,14 @@
         <div id="nextPage" class="paginateButtons" onclick="nextPage()">Próximo <i class="fa-solid fa-chevron-right"></i>
         </div>
       </div>
-      <div id="footerHelp">
-        <p id="footerHelpContent" onclick="openModal('modalHelp')">Tenho um problema com a minha conta!</p>
-      </div>
+
     <!-- MODALS SECTION -->
     
       <div id="modalNewTask" class="modalMain">
         <div id="modalNewTaskContent" class="classModal modalBack-light upToDownAnimation">
-          <h5 class="mb-3 h5style">Adicionar nova tarefa</h5>
+          <h5 id="taskModalTitle" class="mb-3 h5style">Adicionar nova tarefa</h5>
           <div class="closeButton" onclick="closeModal('modalNewTask')">&times;</div>
-          <form id="formNewTask">
+          <form id="formNewTask" onchange="newTaskFields()">
             <div>
               <label for="number">Número</label><br />
               <input type="number" min="1" id="number" name="number"/>
@@ -153,7 +154,7 @@
             <div id="modal-footer">
               <div id="cancelButton" onclick="
               closeModal('modalNewTask');clearModalNewTask()">Cancelar</div>
-              <button id="submitButton" type="submit" class="disabled">Salvar</button>
+              <button id="submitButton" type="submit" class="disabled" disabled>Salvar</button>
           </div>
           </form>
         </div>
@@ -171,14 +172,14 @@
       <div id="modalHelp" class="modalMain">
         <div id="modalHelpContent" class="classModal upToDownAnimation">
           <div id="helpTitle">
-            <h3>Tenho um problema com:</h3>
+            <h5>Tenho um problema com:</h5>
           </div>
           <div id="helpBody">
           <div>
             <button onclick="confirmEditUser();closeModal('modalHelp')">Dados da minha conta</button>
           </div>
           <div>
-            <button class="deleteAccount" onclick="confirmDeleteUser();closeModal('modalHelp')">Excluir minha conta</button>
+            <button id="deleteAccountBtn" class="deleteAccount" onclick="confirmDeleteUser();closeModal('modalHelp')">Excluir minha conta</button>
           </div>          
         </div>
         <span class="closeButton" onclick="closeModal('modalHelp')">&times;</span>
@@ -187,39 +188,44 @@
       <div id="modalEditConfirm" class="modalMain">
         <div id="modalEditConfirmContent" class="classModal upToDownAnimation">
           <span class="closeButton" onclick="closeModal('modalEditConfirm')">&times;</span>
-          <h4 class="mt-4">Alteração de Informação da Conta:</h4>
-          <label class="mb-2" for="passwordConfirm">Por favor, insira sua senha</label><!-- removed the id passwordConfirm -->
+          <h4 class="mt-4 text-center">Alteração de Informação da Conta:</h4>
+          <label class="mb-2" for="passwordConfirm">Por favor, insira sua senha</label>
           <input id="passwordConfirm" name="passwordConfirm" type="password">
           <small>&nbsp;</small>
-          <button id="editButton" class="disabled">Alterar</button>
+          <button id="editButton" class="disabled" disabled onclick="editUser();closeModal('modalEditConfirm')">Alterar</button>
         </div>
       </div>
       <div id="modalEditInfo" class="modalMain">
         <div id="modalEditInfoContent" class="classModal upToDownAnimation">
             <span class="closeButton" onclick="closeModal('modalEditInfo')">&times;</span>
-            <form id="formEdit">
+            <form id="formEdit" oninput="editUserFields()">
                 <div class="d-flex flex-column mt-3">
                     <label for="name">Nome</label>
                     <input id="name" name="name" type="text">
+                    <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
                     <label for="city">Cidade</label>
                     <input id="city" name="city" type="text">
+                    <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
                     <label for="login">Login</label>
-                    <input id="login" name="login" type="text">
+                    <input disabled id="login" name="login" type="text">
+                    <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
                     <label for="email">Email</label>
                     <input id="email" name="email" type="email">
+                    <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column mt-3">
                     <label for="password">Senha</label>
                     <input id="password" name="password" type="password">
+                    <small>&nbsp;</small>
                 </div>
                 <div class="d-flex flex-column">
-                    <button type="submit" id="editUserBtn" class="disabled mt-3">Alterar</button>
+                    <button type="submit" id="editUserBtn" disabled class="disabled mt-3">Alterar</button>
                 </div>
             </form>
         </div>
@@ -227,13 +233,13 @@
       <div id="modalDeleteConfirm" class="modalMain">
         <div id="modalDeleteConfirmContent" class="classModal upToDownAnimation">
           <span class="closeButton" onclick="closeModal('modalDeleteConfirm')">&times;</span>
-          <h2><strong>Ah! mas você já vai?</strong></h2>
-          <h4>Isso irá deletar suas tarefas e seus dados.</h4>
-          <h5>Por favor, insira sua senha para <br> confirmar a exclusão da sua conta</h5>
+          <h4><strong>Ah, você já vai!?</strong></h4>
+          <h6>Isso irá deletar suas tarefas e seus dados.</h6>
+          <h6>Por favor, insira sua senha para <br> confirmar a exclusão da sua conta</h6>
           <label class="mb-2" for="passConfirmDelete">Sua senha</label>
           <input id="passConfirmDelete" name="passConfirmDelete" type="password">
           <small>&nbsp;</small>
-          <button id="deleteButton">Confirmar Exclusão</button>
+          <button id="deleteButton" disabled class="disabled">Confirmar Exclusão</button>
           <button onclick="closeModal('modalDeleteConfirm')">Cancelar</button>
         </div>
       </div>

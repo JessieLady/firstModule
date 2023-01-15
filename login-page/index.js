@@ -3,16 +3,17 @@
 const modalLogin = document.getElementById('modalLogin')
 const modalRegistration = document.getElementById('modalRegistration')
 const modalInfo = document.getElementById('modalInfo')
+const modalInfoTxt = document.getElementById('modalInfoContent')
 const formNewUser = document.getElementById('formNewUser')
 const formLogin = document.getElementById('formLogin')
-const modalError = document.getElementById('modalError')
 const inputLogin = document.getElementById('nameLogin')
-const submitButton = document.getElementById('submitButton')
+const buttonLogin = document.getElementById('buttonLogin')
 
 const NAME_REQUIRED = 'Por favor, insira o seu nome'
 const CITY_REQUIRED = 'Por favor, insira o sua cidade'
 const CITY_INVALID = 'Cidade inválida'
 const LOGIN_REQUIRED = 'Por favor, insira um login'
+const LOGIN_INVALID = 'Login não disponível'
 const EMAIL_REQUIRED = 'Por favor, insira um email'
 const EMAIL_INVALID = 'Email inválido'
 const PASS_REQUIRED = 'Por favor, insira sua senha'
@@ -59,15 +60,16 @@ function hasValue(input, message) {
 
 /* VALIDATION FUNCTIONS */
 
-/* create a validateLoginName function */
-
 const validateEmail = (input, required, invalid) => {
     if (!hasValue(input, required)) return false
 
       const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       const email = input.value.trim()
 
-      if (!emailRegex.test(email)) return showError(input, invalid)
+      if (!emailRegex.test(email)){
+        input.classList.replace('success', 'error')
+        return showError(input, invalid)
+      }
     
     return true
 }
@@ -77,12 +79,15 @@ const validatePassword = (input, required, invalid) => {
     
     if (!hasValue(input, required)) return false 
      
-    if (password.length < 6) return showError(input, invalid)
+    if (password.length < 6){
+        input.classList.replace('success', 'error')
+        return showError(input, invalid)
+    } 
 
     return true 
 }
 
-/* const validateCity = async (input, required, invalid) => {
+const validateCity = async (input, required, invalid) => {
     const city = input.value.trim()
     const locals = []
     
@@ -92,21 +97,45 @@ const validatePassword = (input, required, invalid) => {
 
     const cityFound = locals[0]
     
-    if(!cityFound) return showError(input, invalid)
-
+    if(!cityFound) {
+        input.classList.replace('success', 'error')
+        return showError(input, invalid)
+    }
     return true
-} */
+}
 
+const validateLogin = async (input, required, invalid) => {
+    const login = input.value.trim()
+    const users = await getUsers()
+
+    if (!hasValue(input, required)) return false
+
+    let loginFound = users.find((user) => {
+        if(user.login === login) return true
+        return false
+    })
+
+    if(loginFound){
+        input.classList.replace('success', 'error')
+        return showError(input, invalid)
+    } else{
+        const msg = input.parentNode.querySelector('small')
+        msg.className = 'successSmall'
+        msg.innerText = 'Login disponível'
+        input.className = 'success'
+    }
+    return true
+}
 /* USER'S FUNCTIONS */
 
 const getUsers = async () => {
-    const users = await fetch(`https://vercel-json-server-bice.vercel.app/users`)
+    const users = await fetch(`http://localhost:3000/users`)
     const usersResponse = await users.json()
     return usersResponse
 }
 
 const newUser = async (user) => {
-    await fetch('https://vercel-json-server-bice.vercel.app/users', {
+    await fetch('http://localhost:3000/users', {
         method: "POST",
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -121,8 +150,8 @@ const newUser = async (user) => {
     .catch(
         (error) => {
         modalRegistration.style.display = 'none'
-        modalError.style.display = 'block'
-        modalErrorTxt.innerHTML = "Erro:" + error
+        modalInfo.style.display = 'block'
+        modalInfoTxt.innerHTML = "Erro:" + error
     })
 }
 
@@ -142,14 +171,14 @@ class User {
 }
 
 const deleteUser = async (id) => {
-    await fetch(`https://vercel-json-server-bice.vercel.app/users/${id}`, {
+    await fetch(`http://localhost:3000/users/${id}`, {
     method: 'DELETE'
 })
 }
 
 /* REGISTER NEW USER  */ 
 
-const newUserFields = () => {/* Fix this to be in just one input or in the last input */
+const newUserFields = () => {
     const name = document.getElementById('nameUser')
     const city = document.getElementById('cityUser')
     const login = document.getElementById('loginUser')
@@ -158,18 +187,17 @@ const newUserFields = () => {/* Fix this to be in just one input or in the last 
     const button = document.getElementById('submitButton')
 
     let nameValid = hasValue(name, NAME_REQUIRED)
-    let cityValid = hasValue(city, CITY_REQUIRED)//validateCity CITY_INVALID
-    let loginValid = hasValue(login, LOGIN_REQUIRED)
+    let cityValid = validateCity(city, CITY_REQUIRED, CITY_INVALID)
+    let loginValid = validateLogin(login, LOGIN_REQUIRED, LOGIN_INVALID)
     let emailValid = validateEmail(email, EMAIL_REQUIRED, EMAIL_INVALID)
     let passwordValid = validatePassword(password, PASS_REQUIRED, PASS_LENGTH)
 
     if(nameValid && cityValid && loginValid && emailValid && passwordValid){
         button.disabled = false
-        button.classList.remove('disabled')
-        // button.classList.add('enabled')
+        button.classList.replace('disabled', 'enabled')
     } else{
         button.disabled = true
-        button.classList.add('disabled')
+        button.classList.replace('enabled', 'disabled')
     }
 }
 
@@ -186,48 +214,43 @@ formNewUser.addEventListener("submit", (event) => {
     newUser(user)
 })
 
-/* submitButton.addEventListener('click', () => {
-    console.log('clickou')
-})
+/* LOGIN USER */
 
-const clicou = () => {
-    console.log('clickou')
-} */
-
-/* LOGIN USER */ 
-
-/* There's a missing function that enables the login button */
-
-formLogin.addEventListener('submit', async (event) => {
+formLogin.addEventListener('input', async (event) => {
     event.preventDefault()
 
     let login = formLogin.elements['nameLogin']
     let password = formLogin.elements['passwordLogin']
-    let checkbox = formLogin.elements['signIn'].checked
+    let button = document.getElementById('buttonLogin')
 
     const userFound = await searchUser(login)
 
     if(password.value.trim() !== '') {
         if(userFound.password !== password.value){
+            button.disabled = true
+            button.classList.replace('enabled', 'disabled')
             showError(password, PASS_WRONG)
-            modalError.style.display = 'block'
         } else{
-            window.location.href = 'https://projeto-arnia-jessica-moura.vercel.app/main.html'
-                if(checkbox){
-                    localStorage.setItem('keepUser', JSON.stringify(userFound))
-                    sessionStorage.setItem('user', JSON.stringify(userFound))
-                } else{
-                    sessionStorage.setItem('user', JSON.stringify(userFound))
-            }
+            button.disabled = false
+            button.classList.replace('disabled', 'enabled')
+            showSuccess(password)
         }
     } else{
         showError(password, PASS_REQUIRED)
     }
 })
 
+buttonLogin.addEventListener('click', async (event) => {
+    event.preventDefault()
+    let login = document.getElementById('nameLogin')
+    const userFound = await searchUser(login)
+    sessionStorage.setItem('user', JSON.stringify(userFound))
+    window.location.href = '../tasks-page/main.html'
+})
+
 /* LOGIN FUNCTIONS */
 
-const searchUser = async (login) => {/* Fix this to do a fetch from the users api */
+const searchUser = async (login) => {
     const users = await getUsers()
     const findUser = await users.filter((user) => {
         if(login.value === user.login) return true
@@ -252,9 +275,7 @@ function userNotFound(input) {
 
 const loginField = async () => {
     if(inputLogin.value.trim() === '') return showError(login, LOGIN_REQUIRED)
-
     const userFound = await searchUser(inputLogin)
-
     if(userFound) {
        userFoundSuccess(inputLogin)    
      }else {
