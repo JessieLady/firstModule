@@ -32,6 +32,9 @@
     #page-title>button {
         margin-top: 10px;
     }
+    #accountButton {
+        padding: 7px 17px;
+    }
     /* TABLE HEADER / FILTER BUTTONS */
 
     #tableHeader{

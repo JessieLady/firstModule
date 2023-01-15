@@ -27,7 +27,6 @@ const modalHelpUser = document.getElementById("modalHelpContent");
 const modalNewTask = document.getElementById("modalNewTaskContent");
 const modalEditUser = document.getElementById("modalEditContent");
 const modalInfoConf = document.getElementById("modalInfoContent");
-
 const modalErrorTxt = document.getElementById("modalErrorTxt");
 
 const searchInput = document.getElementById("searchField");
@@ -52,7 +51,22 @@ const loadBody = () => {
   minDateToday();
 };
 
+const minDateToday = () => {
+  let day = inDate.getDate();
+  let month = inDate.getMonth() + 1;
+  let year = inDate.getFullYear();
+  if (day < 10) {
+    day = "0" + day;
+  }
+  if (month < 10) {
+    month = "0" + month;
+  }
+  let today = year + "-" + month + "-" + day;
+  document.getElementById("date").setAttribute("min", today);
+};
+
 /* SESSION AND LOCAL STORAGE FUNCTIONS */
+
 const contrastMode = () => {
   if (contrast) {
     lightMode();
@@ -90,18 +104,28 @@ const clearModalNewTask = () => {
   const dateField = document.getElementById("date");
   const select = document.querySelector("#selectStatus");
   const button = document.getElementById("submitButton");
-  const title = document.getElementById('taskModalTitle')
+  const title = document.getElementById('taskModalTitle');
+  const inputs = document.querySelectorAll('input')
+  const smalls = document.querySelectorAll('small')
   
   numberField.value = "";
   descriptionField.value = "";
   dateField.value = "";
 
   select.options[0].selected = true;
+  select.className = ''
+  
+  for (let counter = 0; counter < 4; counter++) {
+    inputs[counter].className = ''
+  }
+
+  for (let counter = 0; counter < 4; counter++) {
+    smalls[counter].innerHTML = ''
+  }
 
   currentTask = null
 
-  button.classList.remove("enabled");
-  button.classList.add("disabled");
+  button.classList.replace("enabled", "disabled");
   button.innerHTML = "Salvar";
   title.innerHTML = 'Adicionar nova tarefa'
 };
@@ -215,8 +239,7 @@ const editTask = async (id) => {
     }
   }
 
-  button.classList.remove("disabled");
-  button.classList.add("enabled");
+  button.classList.replace("disabled", "enabled");
   button.innerHTML = "Alterar";
 };
 class Task {
@@ -248,8 +271,7 @@ const newTaskFields = () => {
 
   if (numberValid && descriptionValid && dateValid && statusValid) {
     button.disabled = false;
-    button.classList.remove("disabled");
-    button.classList.add("enabled");
+    button.classList.replace("disabled", "enabled");
   } else {
     button.disabled = true;
     button.classList.add("disabled");
@@ -326,10 +348,8 @@ const confirmEditUser = async () => {
       button.disabled = false
       msg.innerHTML = 'Senha correta';
       msg.className = 'successSmall'
-      button.classList.remove('disabled')
-      button.classList.add('enabled')
-      input.classList.remove('error')
-      input.classList.add('success');
+      button.classList.replace('disabled', 'enabled')
+      input.classList.replace('error', 'success')
     }
   });
 };
@@ -361,7 +381,7 @@ const editUser = async () => {
     const login = document.getElementById("login");
     const email = document.getElementById("email");
     const password = document.getElementById("password");
-  
+    
     name.value = user.name;
     city.value = user.city;
     login.value = user.login;
@@ -392,7 +412,7 @@ const editUserFields = () => {
     const password = document.getElementById('password')
     const button = document.getElementById("editUserBtn")
 
-    showError(login, LOGIN_WARNING)
+    showLoginInfo(login, LOGIN_WARNING)
     let nameValid = hasValue(name, NAME_REQUIRED)
     let cityValid = validateCity(city, CITY_REQUIRED, CITY_INVALID)
     let emailValid = validateEmail(email, EMAIL_REQUIRED, EMAIL_INVALID)
@@ -400,12 +420,10 @@ const editUserFields = () => {
 
     if(nameValid && cityValid && emailValid && passwordValid){
         button.disabled = false
-        button.classList.remove('disabled')
-        button.classList.add('enabled')
+        button.classList.replace('disabled', 'enabled')
     } else{
         button.disabled = true
-        button.classList.remove('enabled')
-        button.classList.add('disabled')
+        button.classList.replace('enabled', 'disabled')
     }
 }
 
@@ -417,7 +435,6 @@ formEdit.addEventListener("submit", (event) => {
     let login = formEdit.elements['login'].value
     let email = formEdit.elements['email'].value
     let password = formEdit.elements['password'].value
-    //let id = currentUser
 
     let user = {name, city, login, email, password}
     saveUser(user)
@@ -472,7 +489,7 @@ const confirmDeleteUser = async () => {
 
 const filterTasks = async (status) => {
   const tasksResponse = await fetch(
-    `http://localhost:3000/tasks?status_like=${status}`
+    `http://localhost:3000/tasks?status_like=${status}&owner_like=${currentOwner}`
   );
   const tasks = await tasksResponse.json();
   renderTasks(tasks);
@@ -506,21 +523,10 @@ const todayTasks = async () => {
   });
   renderTasks(tasksToday);
 };
-searchInput.addEventListener("input", async () => {
-  const tasks = await getTasksReturn();
-  const input = searchInput.value.toUpperCase();
-
-  let taskSearch = tasks.filter((task) => {
-    let search = task.description.toUpperCase();
-    if (search.includes(input)) return true;
-    return false;
-  });
-  renderTasks(taskSearch);
-});
 
 const findTasks = async (search) => {
   const tasksResponse = await fetch(
-    `http://localhost:3000/tasks?owner_like=${currentOwner}&q=${search}&_limit=10`
+    `http://localhost:3000/tasks?owner_like=${currentOwner}&description_like=${search}&_limit=10`
   );
   const tasks = await tasksResponse.json();
   renderTasks(tasks);
@@ -592,16 +598,27 @@ function showSuccess(input) {
 
 function hasValue(input, message) {
   if (input.value.trim() === "") {
+    input.classList.replace('success', 'error')
     return showError(input, message);
   } else {
+    input.classList.remove('error')
     return showSuccess(input);
   }
 }
 
+const showLoginInfo = (input, message) => {
+  const msg = input.parentNode.querySelector('small')
+  msg.innerHTML = message
+  msg.className = 'unchangebleSmall'
+  input.className = 'unchangeble'
+}
+
 const validateStatus = (input, message) => {
   if (input.options[0].selected) {
+    input.classList.replace('success', 'error')
     return showError(input, message);
   } else {
+    input.classList.replace('error', 'success')
     return showSuccess(input);
   }
 };
@@ -701,7 +718,7 @@ const iconButton = document.getElementById("iconMode");
 const buttonBack = document.getElementById("darkModeContent");
 const logo = document.getElementById("logoArnia");
 const tableBody = document.getElementById("tbody-content");
-const header = document.getElementById("header"); //NAME CHANGED
+const header = document.getElementById("header");
 const divPurple = document.getElementById("div-purple");
 const divGray = document.getElementById("div-grey");
 const divOrange = document.getElementById("div-orange");
@@ -712,11 +729,9 @@ const modals = document.getElementsByClassName("classModal");
 const inputs = document.querySelectorAll("input");
 const titleModalTask = document.getElementById('taskModalTitle')
 const labels = document.querySelectorAll("label");
-
-/* const trs = document.querySelectorAll("tr")// this is not working...
 const helpTitle = document.getElementById('helpTitle')
 const searchField = document.getElementById('searchField')
-const deleteAccountBtn = document.getElementById('deleteAccountButton') */
+const deleteAccountBtn = document.getElementById('deleteAccountBtn')
 
 const switchMode = () => {
   let dark = "";
@@ -735,8 +750,6 @@ const switchMode = () => {
 };
 
 contrast = localStorage.getItem("contrast");
-
-//This is double clicking the switchMode!!! Fix this...
 
 const lightMode = () => {
   background.style.backgroundColor = "white";
@@ -778,12 +791,13 @@ const lightMode = () => {
 
   selectStatus.style.backgroundColor = "white";
 
-  searchInput.style.backgroundColor = ""; /* searchField */
+  searchField.style.backgroundColor = "";
 
   titleModalTask.style.color = 'var(--purple)'
+  
+  helpTitle.style.color = 'var(--purple)'
 
-  /* helpTitle.style.color = 'var(--purple)'
-    deleteAccountBtn.className = 'deleteAccount' */
+  deleteAccountBtn.className = 'deleteAccount'
 };
 
 const darkMode = () => {
@@ -799,13 +813,13 @@ const darkMode = () => {
   tHead.style.color = "white";
   tHead.className = "font-weight-bold table-dark";
 
-  header.style.color = "var(--background)"; /* darkWhite */
+  header.style.color = "var(--darkWhite)";
 
   divPurple.style.backgroundColor = "var(--purple)";
   divGray.style.backgroundColor = "var(--lightpurple)";
   divOrange.style.backgroundColor = "var(--orange)";
 
-  buttonsPaginate.style.color = "var(--background)"; /* darkWhite */
+  buttonsPaginate.style.color = "var(--darkWhite)";
 
   for (let counter = 0; counter < buttons.length; counter++) {
     buttons[counter].classList.remove("light-button");
@@ -827,27 +841,12 @@ const darkMode = () => {
 
   selectStatus.style.backgroundColor = "var(--ice)";
 
-  searchInput.style.backgroundColor = "var(--darkpurple)"; /* searchField */
+  searchField.style.backgroundColor = "var(--darkpurple)";
 
   titleModalTask.style.color = 'var(--orange)'
 
-  /* helpTitle.style.color = 'var(--yellow)'
+  helpTitle.style.color = 'var(--yellow)'
     deleteAccountBtn.className = 'deleteAccount'
-    deleteAccountBtn.style.backgroundColor = 'var(--darkblue)' */
+    deleteAccountBtn.style.backgroundColor = 'var(--darkblue)'
 };
 
-/* STAGING AREA */
-
-const minDateToday = () => {
-  let day = inDate.getDate();
-  let month = inDate.getMonth() + 1;
-  let year = inDate.getFullYear();
-  if (day < 10) {
-    day = "0" + day;
-  }
-  if (month < 10) {
-    month = "0" + month;
-  }
-  let today = year + "-" + month + "-" + day;
-  document.getElementById("date").setAttribute("min", today);
-};

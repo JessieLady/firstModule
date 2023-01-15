@@ -179,7 +179,7 @@
             <button onclick="confirmEditUser();closeModal('modalHelp')">Dados da minha conta</button>
           </div>
           <div>
-            <button class="deleteAccount" onclick="confirmDeleteUser();closeModal('modalHelp')">Excluir minha conta</button>
+            <button id="deleteAccountBtn" class="deleteAccount" onclick="confirmDeleteUser();closeModal('modalHelp')">Excluir minha conta</button>
           </div>          
         </div>
         <span class="closeButton" onclick="closeModal('modalHelp')">&times;</span>
@@ -198,7 +198,7 @@
       <div id="modalEditInfo" class="modalMain">
         <div id="modalEditInfoContent" class="classModal upToDownAnimation">
             <span class="closeButton" onclick="closeModal('modalEditInfo')">&times;</span>
-            <form id="formEdit" onchange="editUserFields()">
+            <form id="formEdit" oninput="editUserFields()">
                 <div class="d-flex flex-column mt-3">
                     <label for="name">Nome</label>
                     <input id="name" name="name" type="text">
