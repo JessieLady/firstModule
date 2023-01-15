@@ -167,20 +167,20 @@ const renderTasks = (tasks) => {
 
 const getTasksRender = async () => {
   const tasksResponse = await fetch(
-    `http://localhost:3000/tasks?_limit=10&owner_like=${currentOwner}`
+    `https://json-server-first-module-production.up.railway.app/tasks?_limit=10&owner_like=${currentOwner}`
   );
   const tasks = await tasksResponse.json();
   renderTasks(tasks);
 };
 const getTasksReturn = async () => {
   const tasksResponse = await fetch(
-    `http://localhost:3000/tasks?owner_like=${currentOwner}`
+    `https://json-server-first-module-production.up.railway.app/tasks?owner_like=${currentOwner}`
   );
   const tasks = await tasksResponse.json();
   return tasks;
 };
 const getTask = async (id) => {
-  const taskResponse = await fetch(`http://localhost:3000/tasks/${id}`);
+  const taskResponse = await fetch(`https://json-server-first-module-production.up.railway.app/tasks/${id}`);
   const task = await taskResponse.json();
   return task;
 };
@@ -194,7 +194,7 @@ const saveTask = async (task) => {
   closeModal("modalNewTask");
 };
 const newTask = async (task) => {
-  await fetch("http://localhost:3000/tasks", {
+  await fetch("https://json-server-first-module-production.up.railway.app/tasks", {
     method: "POST",
     headers: {
       Accept: "application/json, text/plain, */*",
@@ -204,7 +204,7 @@ const newTask = async (task) => {
   });
 };
 const updateTask = async (id, task) => {
-  await fetch(`http://localhost:3000/tasks/${id}`, {
+  await fetch(`https://json-server-first-module-production.up.railway.app/tasks/${id}`, {
     method: "PUT",
     headers: {
       Accept: "application/json, text/plain, */*",
@@ -301,7 +301,7 @@ const confirmDelete = (idTask) => {
   });
 };
 const deleteTask = async (id) => {
-  await fetch(`http://localhost:3000/tasks/${id}`, {
+  await fetch(`https://json-server-first-module-production.up.railway.app/tasks/${id}`, {
     method: "DELETE",
   });
 };
@@ -316,14 +316,14 @@ const deleteAllTasks = async () => {
 /* USERS FUNCTIONS */
 
 const getUsers = async () => {
-  const users = await fetch(`http://localhost:3000/users`);
+  const users = await fetch(`https://json-server-first-module-production.up.railway.app/users`);
   const usersResponse = await users.json();
   return usersResponse;
 };
 
 const getUser = async () => {
   const userResponse = await fetch(
-    `http://localhost:3000/users/${currentUser}`
+    `https://json-server-first-module-production.up.railway.app/users/${currentUser}`
   );
   const user = await userResponse.json();
   return user;
@@ -362,7 +362,7 @@ const saveUser = async (user) => {
   };
 
 const updateUser = async (id, user) => {
-    await fetch(`http://localhost:3000/users/${id}`, {
+    await fetch(`https://json-server-first-module-production.up.railway.app/users/${id}`, {
       method: "PUT",
       headers: {
         Accept: "application/json, text/plain, */*",
@@ -452,7 +452,7 @@ const confirmDeleteUser = async () => {
   const currentUserObj = await getUser(currentUser);
 
   const deleteUser = async (id) => {
-    await fetch(`http://localhost:3000/users/${id}`, {
+    await fetch(`https://json-server-first-module-production.up.railway.app/users/${id}`, {
       method: "DELETE",
     });
   };
@@ -489,7 +489,7 @@ const confirmDeleteUser = async () => {
 
 const filterTasks = async (status) => {
   const tasksResponse = await fetch(
-    `http://localhost:3000/tasks?status_like=${status}&owner_like=${currentOwner}`
+    `https://json-server-first-module-production.up.railway.app/tasks?status_like=${status}&owner_like=${currentOwner}`
   );
   const tasks = await tasksResponse.json();
   renderTasks(tasks);
@@ -526,7 +526,7 @@ const todayTasks = async () => {
 
 const findTasks = async (search) => {
   const tasksResponse = await fetch(
-    `http://localhost:3000/tasks?owner_like=${currentOwner}&description_like=${search}&_limit=10`
+    `https://json-server-first-module-production.up.railway.app/tasks?owner_like=${currentOwner}&description_like=${search}&_limit=10`
   );
   const tasks = await tasksResponse.json();
   renderTasks(tasks);
@@ -542,7 +542,7 @@ searchInput.addEventListener("input", async () => {
 
 const loadPage = async (pageNum) => {
   const tasksResponse = await fetch(
-    `http://localhost:3000/tasks?_limit=10&_page=${pageNum}&owner_like=${currentOwner}`
+    `https://json-server-first-module-production.up.railway.app/tasks?_limit=10&_page=${pageNum}&owner_like=${currentOwner}`
   );
   const tasks = await tasksResponse.json();
   renderTasks(tasks);
@@ -665,7 +665,7 @@ const orderingTable = async (key, iconOrder) => {
   const icon = document.getElementById(iconOrder)
   if (ordering) {
     const ascMode = await fetch(
-      `http://localhost:3000/tasks?owner_like=${currentOwner}&_sort=${key}&_order=asc`
+      `https://json-server-first-module-production.up.railway.app/tasks?owner_like=${currentOwner}&_sort=${key}&_order=asc`
     );
     const ascTasks = await ascMode.json();
     renderTasks(ascTasks);
@@ -674,7 +674,7 @@ const orderingTable = async (key, iconOrder) => {
     icon.classList.add('rotateUp')
   } else {
     const descMode = await fetch(
-      `http://localhost:3000/tasks?owner_like=${currentOwner}&_sort=${key}&_order=desc`
+      `https://json-server-first-module-production.up.railway.app/tasks?owner_like=${currentOwner}&_sort=${key}&_order=desc`
     );
     const descTasks = await descMode.json();
     renderTasks(descTasks);
@@ -686,32 +686,30 @@ const orderingTable = async (key, iconOrder) => {
 
 /* WEATHER FUNCTIONS */
 
-/* const weatherSearch = async (user) => {
+const weatherSearch = async (user) => {
     const locals = []
     const conditions = []
     locals.push(...(await (await fetch(`http://dataservice.accuweather.com/locations/v1/search?q=${user}&apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
     const key = locals[0].Key
     conditions.push(...(await (await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
     return conditions
-} */
+}
 
 const weatherInfo = async () => {
   const weatherName = document.getElementById("weatherName");
   const weatherCity = document.getElementById("weatherCity");
-  //const weatherTemp = document.getElementById('weatherTemp')
+  const weatherTemp = document.getElementById('weatherTemp')
 
   const user = JSON.parse(sessionStorage.getItem("user"));
   const userCity = user.city;
-  //const userInfoWeather = await weatherSearch(userCity)
+  const userInfoWeather = await weatherSearch(userCity)
 
   weatherName.innerHTML = `${user.name}`;
   weatherCity.innerHTML = `${userCity}`;
-  /* weatherTemp.innerHTML = `${userInfoWeather[0].Temperature.Metric.Value}°C` */
+  weatherTemp.innerHTML = `${userInfoWeather[0].Temperature.Metric.Value}°C`
 };
 
 /* LIGHT THEME AND DARK THEME */
-
-/* easy, but you must redo this logic. It's too messy. */
 
 const background = document.getElementById("div-white");
 const iconButton = document.getElementById("iconMode");

@@ -129,13 +129,13 @@ const validateLogin = async (input, required, invalid) => {
 /* USER'S FUNCTIONS */
 
 const getUsers = async () => {
-    const users = await fetch(`http://localhost:3000/users`)
+    const users = await fetch(`https://json-server-first-module-production.up.railway.app/users`)
     const usersResponse = await users.json()
     return usersResponse
 }
 
 const newUser = async (user) => {
-    await fetch('http://localhost:3000/users', {
+    await fetch('https://json-server-first-module-production.up.railway.app/users', {
         method: "POST",
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -171,7 +171,7 @@ class User {
 }
 
 const deleteUser = async (id) => {
-    await fetch(`http://localhost:3000/users/${id}`, {
+    await fetch(`https://json-server-first-module-production.up.railway.app/users/${id}`, {
     method: 'DELETE'
 })
 }
