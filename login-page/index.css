@@ -13,6 +13,7 @@
     --purple: #68519D;
     --yellow: #f8b04e;
     --indigo: #2C2661;
+    --darkArnia: #1a1033;
     --lightpurple: #D7CAE5;
     --ice: #FBF0E2;
     --background: #F5F5F5;
@@ -69,7 +70,7 @@ section span {
     display: block;
     width: calc(6.25vw - 2px);
     height: calc(6.25vw - 2px);
-    background: #2C2661;
+    background: var(--darkArnia);
     z-index: 2;
 }
 

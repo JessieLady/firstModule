@@ -22,7 +22,6 @@ const EMAIL_INVALID = 'Email inválido'
 const PASS_REQUIRED = 'Por favor, insira sua senha'
 const PASS_LENGTH = 'Senha menor que 6 caracteres'
 
-const footerHelp = document.getElementById("footerHelp");
 const modalHelpUser = document.getElementById("modalHelpContent");
 
 const modalNewTask = document.getElementById("modalNewTaskContent");
@@ -322,7 +321,7 @@ const confirmEditUser = async () => {
       msg.innerHTML = "Senha incorreta";
       msg.className = 'errorSmall'
       button.disabled = true
-      button.classList.remove('enabled')
+      button.classList.replace('enabled', 'disabled')
     } else {
       button.disabled = false
       msg.innerHTML = 'Senha correta';
@@ -444,18 +443,17 @@ const confirmDeleteUser = async () => {
   passwordInput.addEventListener("input", () => {
     if (passwordInput.value.trim() !== currentUserObj.password) {
       msg.innerHTML = "Senha incorreta";
-      msg.classList.remove("successSmall")
-      msg.classList.add("errorSmall")
+      msg.classList.replace("successSmall", "errorSmall")
       passwordInput.className = "error";
       button.classList.replace('enabled','disabled')
       button.disabled = true
     } else {
-      passwordInput.className = "success";
-      msg.classList.remove("errorSmall")
-      msg.classList.add("successSmall")
       msg.innerHTML = "Senha correta";
+      msg.classList.remove("errorSmall")
+      msg.classList.add('successSmall')
+      passwordInput.className = "success";
       button.classList.replace('disabled', 'enabled')
-      button.disabled = true
+      button.disabled = false
     }
     button.addEventListener("click", () => {
       if (passwordInput.value.trim() === currentUserObj.password) {
@@ -712,6 +710,8 @@ const selectStatus = document.getElementById("selectStatus");
 const buttons = document.querySelectorAll("button");
 const modals = document.getElementsByClassName("classModal");
 const inputs = document.querySelectorAll("input");
+const titleModalTask = document.getElementById('taskModalTitle')
+const labels = document.querySelectorAll("label");
 
 /* const trs = document.querySelectorAll("tr")// this is not working...
 const helpTitle = document.getElementById('helpTitle')
@@ -742,7 +742,7 @@ const lightMode = () => {
   background.style.backgroundColor = "white";
 
   iconButton.src = "../assets/moon.svg";
-  buttonBack.style.backgroundColor = "var(--purple)";
+  buttonBack.style.backgroundColor = "var(--lightpurple)";
 
   logo.src = "../assets/logo-purple.svg";
 
@@ -759,8 +759,6 @@ const lightMode = () => {
 
   buttonsPaginate.style.color = "var(--indigo)";
 
-  footerHelp.className = "";
-
   for (let counter = 0; counter < buttons.length; counter++) {
     buttons[counter].classList.remove("dark-button");
     buttons[counter].classList.add("light-button");
@@ -774,21 +772,27 @@ const lightMode = () => {
     inputs[counter].style.backgroundColor = "white";
   }
 
+  for (let counter = 0; counter < labels.length; counter++) {
+    labels[counter].style.color = 'var(--purple)';
+  }
+
   selectStatus.style.backgroundColor = "white";
 
   searchInput.style.backgroundColor = ""; /* searchField */
+
+  titleModalTask.style.color = 'var(--purple)'
 
   /* helpTitle.style.color = 'var(--purple)'
     deleteAccountBtn.className = 'deleteAccount' */
 };
 
 const darkMode = () => {
-  background.style.backgroundColor = "var(--purpleBackground)";
+  background.style.backgroundColor = "var(--darkArnia)";
 
   iconButton.src = "../assets/sun.svg";
-  buttonBack.style.backgroundColor = "var(--darkorange)";
+  buttonBack.style.backgroundColor = "var(--orange)";
 
-  logo.src = "../assets/logo.png";
+  logo.src = "../assets/logo-white.svg";
 
   tableBody.className = "table-dark text-white";
 
@@ -797,13 +801,11 @@ const darkMode = () => {
 
   header.style.color = "var(--background)"; /* darkWhite */
 
-  divPurple.style.backgroundColor = "var(--darkpurple)";
-  divGray.style.backgroundColor = "var(--purpleple)";
-  divOrange.style.backgroundColor = "var(--darkorange)";
+  divPurple.style.backgroundColor = "var(--purple)";
+  divGray.style.backgroundColor = "var(--lightpurple)";
+  divOrange.style.backgroundColor = "var(--orange)";
 
   buttonsPaginate.style.color = "var(--background)"; /* darkWhite */
-
-  footerHelp.className = "dark-footer";
 
   for (let counter = 0; counter < buttons.length; counter++) {
     buttons[counter].classList.remove("light-button");
@@ -812,16 +814,22 @@ const darkMode = () => {
 
   for (let counter = 0; counter < modals.length; counter++) {
     modals[counter].className =
-      "classModal modalBack-dark text-purple downToUpAnimation";
+      "classModal modalBack-dark text-white downToUpAnimation";
   }
 
-  for (let counter = 0; counter < modals.length; counter++) {
-    inputs[counter].style.backgroundColor = "var(--greypurple)";
+  for (let counter = 0; counter < inputs.length; counter++) {
+    inputs[counter].style.backgroundColor = "var(--ice)";
   }
 
-  selectStatus.style.backgroundColor = "var(--greypurple)";
+  for (let counter = 0; counter < labels.length; counter++) {
+    labels[counter].style.color = 'var(--orange)';
+  }
+
+  selectStatus.style.backgroundColor = "var(--ice)";
 
   searchInput.style.backgroundColor = "var(--darkpurple)"; /* searchField */
+
+  titleModalTask.style.color = 'var(--orange)'
 
   /* helpTitle.style.color = 'var(--yellow)'
     deleteAccountBtn.className = 'deleteAccount'

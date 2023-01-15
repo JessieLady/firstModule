@@ -39,8 +39,11 @@
     <div class="div-grey" id="div-grey"></div>
     <div class="div-white" id="div-white">
       <header id="header">
+        <div id="account">
+          <button id="accountButton" onclick="openModal('modalHelp')">Opções da conta</button>
+        </div>
         <div id="logout">
-          <a href="../login-page/index.html"><button id="logoutButton" onclick="userLogout()">Sair</button></a>
+          <button id="logoutButton" onclick="userLogout()">Sair</button>
         </div>
         <div id="logo">
           <a href="https://arnia.com.br/" target="_blank"><img width="150px" id="logoArnia" src="../assets/logo-purple.svg" alt="Logo Arnia" /></a>
@@ -107,9 +110,7 @@
         <div id="nextPage" class="paginateButtons" onclick="nextPage()">Próximo <i class="fa-solid fa-chevron-right"></i>
         </div>
       </div>
-      <div id="footerHelp">
-        <p id="footerHelpContent" onclick="openModal('modalHelp')">Tenho um problema com a minha conta!</p>
-      </div>
+
     <!-- MODALS SECTION -->
     
       <div id="modalNewTask" class="modalMain">
@@ -171,7 +172,7 @@
       <div id="modalHelp" class="modalMain">
         <div id="modalHelpContent" class="classModal upToDownAnimation">
           <div id="helpTitle">
-            <h3>Tenho um problema com:</h3>
+            <h5>Tenho um problema com:</h5>
           </div>
           <div id="helpBody">
           <div>
@@ -187,7 +188,7 @@
       <div id="modalEditConfirm" class="modalMain">
         <div id="modalEditConfirmContent" class="classModal upToDownAnimation">
           <span class="closeButton" onclick="closeModal('modalEditConfirm')">&times;</span>
-          <h4 class="mt-4">Alteração de Informação da Conta:</h4>
+          <h4 class="mt-4 text-center">Alteração de Informação da Conta:</h4>
           <label class="mb-2" for="passwordConfirm">Por favor, insira sua senha</label>
           <input id="passwordConfirm" name="passwordConfirm" type="password">
           <small>&nbsp;</small>
@@ -232,9 +233,9 @@
       <div id="modalDeleteConfirm" class="modalMain">
         <div id="modalDeleteConfirmContent" class="classModal upToDownAnimation">
           <span class="closeButton" onclick="closeModal('modalDeleteConfirm')">&times;</span>
-          <h2><strong>Ah! mas você já vai?</strong></h2>
-          <h4>Isso irá deletar suas tarefas e seus dados.</h4>
-          <h5>Por favor, insira sua senha para <br> confirmar a exclusão da sua conta</h5>
+          <h4><strong>Ah, você já vai!?</strong></h4>
+          <h6>Isso irá deletar suas tarefas e seus dados.</h6>
+          <h6>Por favor, insira sua senha para <br> confirmar a exclusão da sua conta</h6>
           <label class="mb-2" for="passConfirmDelete">Sua senha</label>
           <input id="passConfirmDelete" name="passConfirmDelete" type="password">
           <small>&nbsp;</small>

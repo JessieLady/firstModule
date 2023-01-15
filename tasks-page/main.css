@@ -32,6 +32,7 @@
     
     /* Arnia Website Palet */
     --darkpurple: #1A1132;
+    --darkArnia: #1a1033;
     --darkblue: #0E1327;
     --orange: #F7AF4E;
     --purpleple: #5F4579;
@@ -201,6 +202,7 @@ small {
     transform: rotateZ(0deg);
 }
 .trashIcon{
+    color: var(--purple) !important;
     opacity: 0.5;
 }
 /* STATUS COLORS */
@@ -240,7 +242,7 @@ small {
 }
 #modalEditConfirmContent{
     width: 25vw;
-    height: 250px;
+    height: 270px;
     margin: 300px auto;
     padding: 15px;
     background-color: var(--background);
@@ -518,6 +520,12 @@ small {
     position: absolute; 
     top: 16px;
     right: 0;
+}
+#accountButton{
+    position: absolute; 
+    top: 16px;
+    right: 0;
+    margin-right: 155px;
 }
 
 /* WEATHER ELEMENTS */
