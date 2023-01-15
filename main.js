@@ -689,9 +689,9 @@ const orderingTable = async (key, iconOrder) => {
 const weatherSearch = async (user) => {
     const locals = []
     const conditions = []
-    locals.push(...(await (await fetch(`http://dataservice.accuweather.com/locations/v1/search?q=${user}&apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
+    locals.push(...(await (await fetch(`https://dataservice.accuweather.com/locations/v1/search?q=${user}&apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
     const key = locals[0].Key
-    conditions.push(...(await (await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
+    conditions.push(...(await (await fetch(`https://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
     return conditions
 }
 
