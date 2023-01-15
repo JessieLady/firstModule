@@ -84,6 +84,7 @@ const userReset = async () =>{
     const user = await getUser(currentUser)
     sessionStorage.removeItem("user")
     sessionStorage.setItem("user", JSON.stringify(user))
+    //location.reload()
 }
 
 /* MODAL'S FUNCTIONS */
@@ -363,6 +364,7 @@ const saveUser = async (user) => {
     await userReset()
     openModal("modalInfo");
     closeModal("modalEditInfo");
+    location.reload()
   };
 
 const updateUser = async (id, user) => {
@@ -374,7 +376,7 @@ const updateUser = async (id, user) => {
       },
       body: JSON.stringify(user),
     });
-    location.reload()
+    //location.reload()
 };
 
 const editUser = async () => {
