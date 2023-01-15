@@ -9,6 +9,7 @@ let currentUser = JSON.parse(sessionStorage.getItem("user")).id;
 let currentOwner = JSON.parse(sessionStorage.getItem("user")).login;
 
 const NUM_EMPTY = "Insira um número.";
+const NUM_USED = "Número já utilizado";
 const DESCRIPTION_EMPTY = "Insira uma descrição.";
 const DATE_EMPTY = "Escolha uma data.";
 const STATUS_EMPTY = "Escolha um status.";
@@ -264,7 +265,7 @@ const newTaskFields = () => {
   const status = document.querySelector("#selectStatus");
   const button = document.getElementById("submitButton");
 
-  let numberValid = hasValue(number, NUM_EMPTY);
+  let numberValid = validateNumber(number, NUM_EMPTY, NUM_USED);
   let descriptionValid = hasValue(description, DESCRIPTION_EMPTY);
   let dateValid = hasValue(date, DATE_EMPTY);
   let statusValid = validateStatus(status, STATUS_EMPTY);
@@ -613,6 +614,30 @@ const showLoginInfo = (input, message) => {
   input.className = 'unchangeble'
 }
 
+const validateNumber = async (input, required, invalid) => {
+  const number = input.value.trim()
+  const tasks = await getTasksReturn()
+  const msg = input.parentNode.querySelector('small')
+
+  if (!hasValue(input, required)) return false
+
+  let numberFound = tasks.find((task) => {
+      if(task.number == number) return true
+      return false
+  })
+
+  if(numberFound){
+      input.classList.replace('success', 'error')
+      msg.classList.replace('successSmall', 'errorSmall')
+      return showError(input, invalid)
+  } else{
+      msg.className = 'successSmall'
+      msg.innerText = 'Número disponível'
+      input.className = 'success'
+  }
+  return true
+}
+
 const validateStatus = (input, message) => {
   if (input.options[0].selected) {
     input.classList.replace('success', 'error')
@@ -798,6 +823,7 @@ const lightMode = () => {
   helpTitle.style.color = 'var(--purple)'
 
   deleteAccountBtn.className = 'deleteAccount'
+  deleteAccountBtn.style.backgroundColor = 'var(--backgroud)'
 };
 
 const darkMode = () => {
@@ -846,7 +872,7 @@ const darkMode = () => {
   titleModalTask.style.color = 'var(--orange)'
 
   helpTitle.style.color = 'var(--yellow)'
-    deleteAccountBtn.className = 'deleteAccount'
-    deleteAccountBtn.style.backgroundColor = 'var(--darkblue)'
+  deleteAccountBtn.className = 'deleteAccount'
+  deleteAccountBtn.style.backgroundColor = 'var(--darkblue)'
 };
 
