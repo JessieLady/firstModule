@@ -202,6 +202,7 @@ const newTask = async (task) => {
     },
     body: JSON.stringify(task),
   });
+  location.reload()
 };
 const updateTask = async (id, task) => {
   await fetch(`https://json-server-first-module-production.up.railway.app/tasks/${id}`, {
@@ -212,6 +213,7 @@ const updateTask = async (id, task) => {
     },
     body: JSON.stringify(task),
   });
+  location.reload()
 };
 const editTask = async (id) => {
 
@@ -300,10 +302,12 @@ const confirmDelete = (idTask) => {
     deleteTask(idTask);
   });
 };
+
 const deleteTask = async (id) => {
   await fetch(`https://json-server-first-module-production.up.railway.app/tasks/${id}`, {
     method: "DELETE",
   });
+  location.reload()
 };
 
 const deleteAllTasks = async () => {
@@ -370,6 +374,7 @@ const updateUser = async (id, user) => {
       },
       body: JSON.stringify(user),
     });
+    location.reload()
 };
 
 const editUser = async () => {
