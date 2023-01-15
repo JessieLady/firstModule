@@ -77,7 +77,7 @@ const contrastMode = () => {
 
 const userLogout = () => {
   sessionStorage.removeItem("user");
-  window.location.href = "../login-page/index.html";
+  window.location.href = "index.html";
 };
 
 const userReset = async () =>{
@@ -476,7 +476,7 @@ const confirmDeleteUser = async () => {
       if (passwordInput.value.trim() === currentUserObj.password) {
         deleteUser(currentUser);
         deleteAllTasks();
-        window.location.href = "../login-page/index.html";
+        window.location.href = "index.html";
       } else {
         msg.innerHTML = "Preencha esse campo corretamente";
         passwordInput.classList.add("error")

@@ -245,7 +245,7 @@ buttonLogin.addEventListener('click', async (event) => {
     let login = document.getElementById('nameLogin')
     const userFound = await searchUser(login)
     sessionStorage.setItem('user', JSON.stringify(userFound))
-    window.location.href = '../tasks-page/main.html'
+    window.location.href = 'main.html'
 })
 
 /* LOGIN FUNCTIONS */
