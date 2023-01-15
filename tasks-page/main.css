@@ -207,6 +207,9 @@ small {
     color: var(--purple) !important;
     opacity: 0.5;
 }
+.trashIcon:hover{
+    opacity: 1;
+}
 /* STATUS COLORS */
 
 .Concluído{
@@ -386,7 +389,7 @@ small {
     border-radius: 12px !important;
 }
 .dark-button:hover{
-    background-color: var(--darkpurple);
+    background-color: var(--indigo);
     border: 1px solid var(--darkpurple);
     color: var(--background);
 }
