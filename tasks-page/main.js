@@ -66,6 +66,23 @@ const minDateToday = () => {
   document.getElementById("date").setAttribute("min", today);
 };
 
+const formatedDate = (date) => {
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  if (day < 10) {
+    day = "0" + day;
+  }
+  if (month < 10) {
+    month = "0" + month;
+  }
+
+  const newDate = year + "-" + month + "-" + day;
+  return newDate
+}
+const inDateFormated = formatedDate(inDate)
+
 /* SESSION AND LOCAL STORAGE FUNCTIONS */
 
 const contrastMode = () => {
@@ -138,10 +155,11 @@ const renderTasks = (tasks) => {
   tasksContent.innerHTML = "";
   tasks.forEach((task) => {
     const date = new Date(task.date);
+    const dateForm = formatedDate(date)
     const dateFormated = date.toLocaleDateString("pt-BR", { timeZone: "UTC" });
     if (task.status === "Concluído") {
       task.description = `<del>${task.description}</del>`;
-    } else if (inDay > dateFormated && task.status !== "Concluído") {
+    } else if (inDateFormated > dateForm && task.status !== "Concluído") {
       task.status = "Atrasado";
       warningLateTask();
     }
