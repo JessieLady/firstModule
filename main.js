@@ -9,6 +9,7 @@ let currentUser = JSON.parse(sessionStorage.getItem("user")).id;
 let currentOwner = JSON.parse(sessionStorage.getItem("user")).login;
 
 const NUM_EMPTY = "Insira um número.";
+const NUM_USED = "Número já utilizado";
 const DESCRIPTION_EMPTY = "Insira uma descrição.";
 const DATE_EMPTY = "Escolha uma data.";
 const STATUS_EMPTY = "Escolha um status.";
@@ -65,6 +66,23 @@ const minDateToday = () => {
   document.getElementById("date").setAttribute("min", today);
 };
 
+const formatedDate = (date) => {
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  if (day < 10) {
+    day = "0" + day;
+  }
+  if (month < 10) {
+    month = "0" + month;
+  }
+
+  const newDate = year + "-" + month + "-" + day;
+  return newDate
+}
+const inDateFormated = formatedDate(inDate)
+
 /* SESSION AND LOCAL STORAGE FUNCTIONS */
 
 const contrastMode = () => {
@@ -84,7 +102,6 @@ const userReset = async () =>{
     const user = await getUser(currentUser)
     sessionStorage.removeItem("user")
     sessionStorage.setItem("user", JSON.stringify(user))
-    //location.reload()
 }
 
 /* MODAL'S FUNCTIONS */
@@ -138,10 +155,11 @@ const renderTasks = (tasks) => {
   tasksContent.innerHTML = "";
   tasks.forEach((task) => {
     const date = new Date(task.date);
+    const dateForm = formatedDate(date)
     const dateFormated = date.toLocaleDateString("pt-BR", { timeZone: "UTC" });
     if (task.status === "Concluído") {
       task.description = `<del>${task.description}</del>`;
-    } else if (inDay > dateFormated && task.status !== "Concluído") {
+    } else if (inDateFormated > dateForm && task.status !== "Concluído") {
       task.status = "Atrasado";
       warningLateTask();
     }
@@ -223,6 +241,7 @@ const editTask = async (id) => {
   const dateField = document.getElementById("date");
   const button = document.getElementById("submitButton");
   const title = document.getElementById('taskModalTitle')
+  const msgNum = numberField.parentNode.querySelector('small')
   
   title.innerHTML = 'Editar tarefa'
   currentTask = await getTask(id);
@@ -242,9 +261,16 @@ const editTask = async (id) => {
     }
   }
 
+  numberField.disabled = true
+  msgNum.style.display = 'none'
+  numberField.className = 'unchangeble'
+
+  dateField.min = false
+
   button.classList.replace("disabled", "enabled");
   button.innerHTML = "Alterar";
 };
+
 class Task {
   number;
   description;
@@ -267,7 +293,7 @@ const newTaskFields = () => {
   const status = document.querySelector("#selectStatus");
   const button = document.getElementById("submitButton");
 
-  let numberValid = hasValue(number, NUM_EMPTY);
+  let numberValid = validateNumber(number, NUM_EMPTY, NUM_USED);
   let descriptionValid = hasValue(description, DESCRIPTION_EMPTY);
   let dateValid = hasValue(date, DATE_EMPTY);
   let statusValid = validateStatus(status, STATUS_EMPTY);
@@ -303,7 +329,6 @@ const confirmDelete = (idTask) => {
     deleteTask(idTask);
   });
 };
-
 const deleteTask = async (id) => {
   await fetch(`https://json-server-first-module-production.up.railway.app/tasks/${id}`, {
     method: "DELETE",
@@ -376,7 +401,6 @@ const updateUser = async (id, user) => {
       },
       body: JSON.stringify(user),
     });
-    //location.reload()
 };
 
 const editUser = async () => {
@@ -620,6 +644,30 @@ const showLoginInfo = (input, message) => {
   input.className = 'unchangeble'
 }
 
+const validateNumber = async (input, required, invalid) => {
+  const number = input.value.trim()
+  const tasks = await getTasksReturn()
+  const msg = input.parentNode.querySelector('small')
+
+  if (!hasValue(input, required)) return false
+  
+  let numberFound = tasks.find((task) => {
+      if(task.number == number) return true
+      return false
+  })
+
+  if(numberFound){
+      input.classList.replace('success', 'error')
+      msg.classList.replace('successSmall', 'errorSmall')
+      return showError(input, invalid)
+  } else{
+      msg.className = 'successSmall'
+      msg.innerText = 'Número disponível'
+      input.className = 'success'
+  }
+  return true
+}
+
 const validateStatus = (input, message) => {
   if (input.options[0].selected) {
     input.classList.replace('success', 'error')
@@ -749,7 +797,6 @@ const switchMode = () => {
   } else {
     darkMode();
     localStorage.setItem("contrast", dark);
-    console.log("escuro");
     contrast = light;
   }
 };
@@ -803,6 +850,7 @@ const lightMode = () => {
   helpTitle.style.color = 'var(--purple)'
 
   deleteAccountBtn.className = 'deleteAccount'
+  deleteAccountBtn.style.backgroundColor = 'var(--backgroud)'
 };
 
 const darkMode = () => {
@@ -851,6 +899,6 @@ const darkMode = () => {
   titleModalTask.style.color = 'var(--orange)'
 
   helpTitle.style.color = 'var(--yellow)'
-    deleteAccountBtn.className = 'deleteAccount'
-    deleteAccountBtn.style.backgroundColor = 'var(--darkblue)'
+  deleteAccountBtn.className = 'deleteAccount'
+  deleteAccountBtn.style.backgroundColor = 'var(--darkblue)'
 };
