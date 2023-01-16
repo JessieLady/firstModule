@@ -239,6 +239,7 @@ const editTask = async (id) => {
   const dateField = document.getElementById("date");
   const button = document.getElementById("submitButton");
   const title = document.getElementById('taskModalTitle')
+  const msgNum = numberField.parentNode.querySelector('small')
   
   title.innerHTML = 'Editar tarefa'
   currentTask = await getTask(id);
@@ -258,9 +259,16 @@ const editTask = async (id) => {
     }
   }
 
+  numberField.disabled = true
+  msgNum.style.display = 'none'
+  numberField.className = 'unchangeble'
+
+  dateField.min = false
+
   button.classList.replace("disabled", "enabled");
   button.innerHTML = "Alterar";
 };
+
 class Task {
   number;
   description;
@@ -638,7 +646,7 @@ const validateNumber = async (input, required, invalid) => {
   const msg = input.parentNode.querySelector('small')
 
   if (!hasValue(input, required)) return false
-
+  
   let numberFound = tasks.find((task) => {
       if(task.number == number) return true
       return false
