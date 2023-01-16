@@ -17,7 +17,7 @@ const STATUS_EMPTY = "Escolha um status.";
 const NAME_REQUIRED = 'Por favor, insira o seu nome'
 const CITY_REQUIRED = 'Por favor, insira o sua cidade'
 const CITY_INVALID = 'Cidade inválida'
-const LOGIN_WARNING = 'Não é possivel alterar o login'
+const LOGIN_WARNING = 'Não é possível alterar o login'
 const EMAIL_REQUIRED = 'Por favor, insira um email'
 const EMAIL_INVALID = 'Email inválido'
 const PASS_REQUIRED = 'Por favor, insira sua senha'
@@ -381,7 +381,6 @@ const saveUser = async (user) => {
     await userReset()
     closeModal("modalEditInfo");
     location.reload()
-    openModal("modalInfo");
   };
 
 const updateUser = async (id, user) => {
