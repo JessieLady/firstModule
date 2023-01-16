@@ -33,7 +33,7 @@ const modalErrorTxt = document.getElementById("modalErrorTxt");
 const searchInput = document.getElementById("searchField");
 
 const inDate = new Date();
-const inDay = inDate.toLocaleDateString("pt-BR");
+const inDay = inDate.toLocaleDateString("pt-BR", { timeZone: "UTC" });
 const inToday = `${inDate.getFullYear()}-${
   inDate.getMonth() + 1
 }-${inDate.getDate()}`;
@@ -52,20 +52,6 @@ const loadBody = () => {
   minDateToday();
 };
 
-const minDateToday = () => {
-  let day = inDate.getDate();
-  let month = inDate.getMonth() + 1;
-  let year = inDate.getFullYear();
-  if (day < 10) {
-    day = "0" + day;
-  }
-  if (month < 10) {
-    month = "0" + month;
-  }
-  let today = year + "-" + month + "-" + day;
-  document.getElementById("date").setAttribute("min", today);
-};
-
 const formatedDate = (date) => {
   let day = date.getDate();
   let month = date.getMonth() + 1;
@@ -81,6 +67,12 @@ const formatedDate = (date) => {
   const newDate = year + "-" + month + "-" + day;
   return newDate
 }
+
+const minDateToday = () => {
+  let today = formatedDate(inDate)
+  document.getElementById("date").setAttribute("min", today);
+};
+
 const inDateFormated = formatedDate(inDate)
 
 /* SESSION AND LOCAL STORAGE FUNCTIONS */
@@ -159,7 +151,7 @@ const renderTasks = (tasks) => {
     const dateFormated = date.toLocaleDateString("pt-BR", { timeZone: "UTC" });
     if (task.status === "Concluído") {
       task.description = `<del>${task.description}</del>`;
-    } else if (inDateFormated > dateForm && task.status !== "Concluído") {
+    } else if (inDateFormated > dateForm && dateFormated !== inDay && task.status !== "Concluído") {
       task.status = "Atrasado";
       warningLateTask();
     }
@@ -387,9 +379,9 @@ const confirmEditUser = async () => {
 const saveUser = async (user) => {
     await updateUser(currentUser, user);
     await userReset()
-    openModal("modalInfo");
     closeModal("modalEditInfo");
     location.reload()
+    openModal("modalInfo");
   };
 
 const updateUser = async (id, user) => {
