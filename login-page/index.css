@@ -159,6 +159,7 @@ main {
     flex-direction: row;
     justify-content: center;
     gap: 14px;
+    font-size: 12px !important;
 }
 
 /* SELECTORS BY TAG NAME */
@@ -395,18 +396,101 @@ small {
 
 /* RESPONSIVENESS */
 
-@media only screen and (min-width: 320px) {
+@media only screen and (max-width: 425px) {
     button {
         padding: 3px 10px;
     }
     #infoBodyContent {
         font-size: 8px;
     }
+    #imgPrime{
+        display: none;
+    }
+    #imgPrime>img{
+        display: none;
+    }
+    section{
+        left: 0;
+    }
+    main{
+        left: unset;
+        height: unset;
+    }
+    #modalRegistrationContent{
+        margin-top: 25%;
+    }
+}
+
+@media (min-width: 767px) and (max-width: 768px) {
+    main{
+        left: unset;
+        height: unset;
+    }
+    #modalRegistrationContent{
+        margin-top: 15%;
+    }
+}
+
+@media (min-width: 1023px) and (max-width: 1024px) {
+    #modalRegistrationContent{
+        margin-top: 8%;
+    }
+    #modalLoginContent{
+        margin-top: 23%;
+    }
+    #modalInfoContent{
+        height: 17vh;
+        bottom: 30px;
+    }
+    .closeButtonFooter{
+        margin-top: 30px;
+        margin-right: 7px;
+    }
+}
+
+@media (min-width: 1439px) and (max-width: 1440px) {
+    main{
+        height: 380px;
+    }
+}
+
+@media only screen and (max-width: 1839px){
+    #imgPrime{
+        display: none;
+        z-index: -1;
+}
+button{
+    padding: 0px 20px;
+    font-size: 14px !important;
+}
+}
+@media only screen and (min-width: 1840px){/* monitor */
+    main{
+        left: 18%;
+        height: 400px;
+    }
+    #imgPrime{
+        display: block;
+        position: absolute;
+        z-index: 3;
+        left: 15vw;
+        bottom: -10px;
+    }
+    #imgPrime>img{
+        width: 75%;
+    }
+    button{
+        padding: 1px 25px;
+        font-size: 14px;
+    }
+    a>img{
+        width: 150px;
+    }
 }
 
 @media only screen and (min-width: 2560px) {
     main {
-        height: 40vh;
+        height: 40vh;   
     }
 
     #contentMain {

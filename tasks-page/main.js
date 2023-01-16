@@ -769,7 +769,6 @@ const switchMode = () => {
   } else {
     darkMode();
     localStorage.setItem("contrast", dark);
-    console.log("escuro");
     contrast = light;
   }
 };

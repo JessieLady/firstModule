@@ -1,3 +1,82 @@
+/* BROWSER CONFIGS RESPONSIVENESS */
+
+@media (min-width: 500px) and (max-width: 1000px) {
+    #div-orange{
+        display: none;
+    }
+    /* HEADER */
+
+    #logoArnia{
+        width: 180px;
+        position: relative;
+        bottom: 0;
+        right: 20px;
+    }
+    #weather{
+        right: 0;
+        top: 0;
+        margin-top: 25px;
+        margin-right: 15px;
+    }#firstLine{
+        font-size: 35px;
+    }
+    #secondLine{
+        font-size: 19px;
+    }
+    #page-title {
+        top: 135px;
+        margin-left: 100px;
+        font-size: 19px;
+        text-align: center;
+    }
+    #page-title>button {
+        margin-top: 15px;
+    }
+    /* TABLE HEADER / FILTER BUTTONS */
+    #tableHeader{
+        width: 90vw;
+        overflow-x: scroll;
+        left: 30px;
+    }
+    /* TABLE */
+    #content{
+        left: 35px;
+        width: 90%;
+    }
+    #buttonsPaginate{
+        bottom: 20px;
+        width: 100%;
+        font-size: 15px;
+        left: -100px;
+    }
+  }
+  
+  @media (min-width: 600px) and (max-width: 1000px){
+    #firstLine{
+        font-size: 45px;
+    }
+    #secondLine{
+        font-size: 25px;
+    }
+  }
+  @media (min-width: 735px) and (max-width: 1000px){
+    #weather{
+        margin-right: 150px;
+        margin-top: 60px;
+    }
+    #tableHeader{
+        width: 90vw;
+        overflow-x: scroll;
+        left: 40px;
+    }
+    #page-title {
+        margin-left: 50px;
+        margin-top: 20px;
+    }
+  }
+
+/* DEVICES CONFIGS RESPONSIVENESS */
+
   @media (min-width: 319px) and (max-width: 320px) {
     body{
         width: 100vw;
@@ -17,7 +96,7 @@
     #weather{
         right: -6px;
         top: 211px;
-        left: 75px;
+        left: 96px;
         height: unset;
     }
     #firstLine{
@@ -71,10 +150,6 @@
 
     /* FOOTER */
 
-    #footerHelp{
-        width: 100%;
-        text-align: center;
-    }
     #buttonsPaginate{
         bottom: 30px;
         width: 100%;
@@ -149,7 +224,7 @@
     #weather{
         right: -6px;
         top: 211px;
-        left: 100px;
+        left: 128px;
         height: unset;
     }
     #firstLine{
@@ -201,10 +276,6 @@
 
     /* FOOTER */
 
-    #footerHelp{
-        width: 100%;
-        text-align: center;
-    }
     #buttonsPaginate{
         bottom: 30px;
         width: 100%;
@@ -278,7 +349,7 @@
     #weather{
         right: -6px;
         top: 211px;
-        left: 118px;
+        left: 149px;
         height: unset;
     }
     #firstLine{
@@ -330,10 +401,6 @@
 
     /* FOOTER */
 
-    #footerHelp{
-        width: 100%;
-        text-align: center;
-    }
     #buttonsPaginate{
         bottom: 30px;
         width: 100%;
@@ -402,20 +469,19 @@
         right: 30px;
     }
     #weather{
-        right: -6px;
-        top: 144px;
-        left: 480px;
-        height: unset;
+        position: absolute;
+        right: 0;
+        margin-right: 75px;
     }
     #firstLine{
-        font-size: 28px;
+        font-size: 38px;
     }
     #secondLine{
         font-size: 16px;
     }
     #page-title {
         top: 104px;
-        margin: 50px 90px;
+        margin: 50px 24px;
     }
     #page-title>button {
         margin-top: 15px;
@@ -456,10 +522,6 @@
 
     /* FOOTER */
 
-    #footerHelp{
-        width: 100%;
-        text-align: center;
-    }
     #buttonsPaginate{
         bottom: 30px;
         width: 100%;
@@ -589,10 +651,6 @@
     }
     /* FOOTER */
 
-    #footerHelp{
-        width: 100%;
-        text-align: center;
-    }
     #buttonsPaginate{
         bottom: 30px;
         width: 100%;

@@ -2,7 +2,7 @@
   "users": [
     {
       "name": "Jessie",
-      "city": "Nova Iguaçu",
+      "city": "Dufftown",
       "login": "jessica",
       "email": "jessie@gmail.com",
       "password": "150399",
@@ -71,6 +71,30 @@
       "email": "lumblully@gmail.com",
       "password": "123456",
       "id": 9
+    },
+    {
+      "name": "talento",
+      "city": "Seattle",
+      "login": "pipoca",
+      "email": "jessie.moura19@gmail.com",
+      "password": "123456",
+      "id": 10
+    },
+    {
+      "name": "teste",
+      "city": "Nova Iguaçu",
+      "login": "teste2",
+      "email": "teste@gmail.com",
+      "password": "123456",
+      "id": 11
+    },
+    {
+      "name": "Harry",
+      "city": "Dufftown",
+      "login": "patronum",
+      "email": "hp_thebomb@hogwarts.com",
+      "password": "123456",
+      "id": 12
     }
   ],
   "tasks": [
@@ -510,6 +534,118 @@
       "status": "Em progresso",
       "owner": "jessica",
       "id": 59
+    },
+    {
+      "number": 1,
+      "description": "N.O.M.S",
+      "date": "2023-07-19",
+      "status": "Em progresso",
+      "owner": "patronum",
+      "id": 60
+    },
+    {
+      "number": 2,
+      "description": "Aniversário do Hagrid",
+      "date": "2023-12-06",
+      "status": "Em progresso",
+      "owner": "patronum",
+      "id": 61
+    },
+    {
+      "number": 3,
+      "description": "Aniversário da Hermione",
+      "date": "2023-09-19",
+      "status": "Em progresso",
+      "owner": "patronum",
+      "id": 62
+    },
+    {
+      "number": 4,
+      "description": "Aniversário Rony",
+      "date": "2023-03-01",
+      "status": "Em progresso",
+      "owner": "patronum",
+      "id": 63
+    },
+    {
+      "number": 5,
+      "description": "Devolver Livro de Poções",
+      "date": "2023-01-26",
+      "status": "Em progresso",
+      "owner": "patronum",
+      "id": 64
+    },
+    {
+      "number": 6,
+      "description": "Levar varinha no Olivaras",
+      "date": "2023-01-25",
+      "status": "Em progresso",
+      "owner": "patronum",
+      "id": 65
+    },
+    {
+      "number": 7,
+      "description": "Pegar o mapa do maroto de volta",
+      "date": "2023-01-18",
+      "status": "Em progresso",
+      "owner": "patronum",
+      "id": 66
+    },
+    {
+      "number": 8,
+      "description": "Reunião no Salão Comunal",
+      "date": "2023-01-21",
+      "status": "Em progresso",
+      "owner": "patronum",
+      "id": 67
+    },
+    {
+      "number": 9,
+      "description": "Treino de Quadribol",
+      "date": "2023-01-31",
+      "status": "Em progresso",
+      "owner": "patronum",
+      "id": 68
+    },
+    {
+      "number": 10,
+      "description": "Veterinãrio da Edwiges",
+      "date": "2023-01-29",
+      "status": "Em progresso",
+      "owner": "patronum",
+      "id": 69
+    },
+    {
+      "number": 11,
+      "description": "Devolver livros da professora Minerva",
+      "date": "2023-02-06",
+      "status": "Em progresso",
+      "owner": "patronum",
+      "id": 70
+    },
+    {
+      "number": 12,
+      "description": "Passeio para Hogsmeade",
+      "date": "2023-02-19",
+      "status": "Em progresso",
+      "owner": "patronum",
+      "id": 71
+    },
+    {
+      "number": 13,
+      "description": "Agradecer à Sra Weasley pelo Cachecol",
+      "date": "2023-01-18",
+      "status": "Em progresso",
+      "owner": "patronum",
+      "id": 72
+    },
+    {
+      "number": 14,
+      "description": "Pegar uniforme na tinturaria",
+      "date": "2023-01-24",
+      "status": "Em progresso",
+      "owner": "patronum",
+      "id": 73
     }
   ]
 }
