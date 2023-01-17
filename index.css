@@ -396,6 +396,91 @@ small {
 
 /* RESPONSIVENESS */
 
+@media (min-width: 319px) and (max-width: 428px){
+    #headerContent{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #titleMain{
+        width: 100%;
+    }
+    #titleMain>h2{
+        font-size: 19px;
+    }
+    #infoBodyContent{
+        height: 60vh;
+        margin-bottom: 20px;
+    }
+    #infoBodyContent>div{
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+    }
+    #buttons{
+        flex-direction: column;
+    }
+    #modalLoginContent{
+        margin-top: 0;
+        height: 100vh;
+    }
+    #modalRegistrationContent{
+        margin-top: unset;
+        height: 150vh;
+        font-size: 10px;
+        padding: 0;
+        margin: 0;
+        gap: 0;
+        justify-content: flex-start;
+    }
+    #formNewUser{
+        margin-top: unset !important;
+    }
+}
+
+@media (min-width: 374px) and (max-width: 375px){
+    #headerContent{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #titleMain{
+        width: 100%;
+    }
+    #titleMain>h2{
+        font-size: 19px;
+    }
+    #infoBodyContent{
+        height: 50vh;
+        margin-bottom: 20px;
+    }
+    
+    #infoBodyContent>div{
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+    }
+    #buttons{
+        flex-direction: column;
+    }
+    #modalLoginContent{
+        margin-top: 0;
+        height: 100vh;
+    }
+    #modalRegistrationContent{
+        margin-top: 10px;
+        height: 100vh;
+        font-size: 10px;
+        padding: 0;
+        margin: 0;
+        gap: 0;
+        justify-content: center;
+    }
+    #formNewUser{
+        margin-top: unset !important;
+    }
+}
+
 @media only screen and (max-width: 425px) {
     button {
         padding: 3px 10px;
@@ -415,9 +500,6 @@ small {
     main{
         left: unset;
         height: unset;
-    }
-    #modalRegistrationContent{
-        margin-top: 25%;
     }
 }
 
@@ -446,7 +528,48 @@ small {
         margin-top: 30px;
         margin-right: 7px;
     }
+    #imgPrime{
+        left: 7vw !important;
+    }
+    #imgPrime>img{
+        width: 45% !important;
+    }
+    main{
+        height: unset !important;
+    }
 }
+
+@media (min-width: 1023px) and (max-width: 1440px) {
+    #modalRegistrationContent{
+        margin-top: 8%;
+    }
+    #modalLoginContent{
+        margin-top: 23%;
+    }
+    #modalInfoContent{
+        height: 17vh;
+        bottom: 30px;
+    }
+    .closeButtonFooter{
+        margin-top: 30px;
+        margin-right: 7px;
+    }
+    main{
+        left: 18%;
+        height: 400px;
+    }
+    #imgPrime{
+        display: block !important;
+        position: absolute;
+        z-index: 3 !important;
+        left: 10vw;
+        bottom: -10px;
+    }
+    #imgPrime>img{
+        width: 55%;
+    }
+}
+
 
 @media (min-width: 1439px) and (max-width: 1440px) {
     main{
@@ -477,7 +600,7 @@ button{
         bottom: -10px;
     }
     #imgPrime>img{
-        width: 75%;
+        width: 65%;
     }
     button{
         padding: 1px 25px;

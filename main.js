@@ -522,8 +522,9 @@ const lateTasks = async () => {
 
   const tasksLate = tasks.filter((task) => {
     const date = new Date(task.date);
+    const dateForm = formatedDate(date)
     const dateFormated = date.toLocaleDateString("pt-BR", { timeZone: "UTC" });
-    if (inDay > dateFormated && task.status !== "Concluído") return true;
+    if (inDateFormated > dateForm && dateFormated !== inDay && task.status !== "Concluído") return true;
     return false;
   });
   renderTasks(tasksLate);
