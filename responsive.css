@@ -786,9 +786,10 @@
 
     #tableHeader{
         width: 90vw;
-        overflow-x: scroll;
-        left: 50px;
+        overflow-x: hidden;
+        left: 65px;
         justify-content: flex-start !important;
+        gap: 10px;
     }
     #buttonsFilter>button{
         padding: 3px 14px;
@@ -805,8 +806,9 @@
     /* TABLE */
 
     #content{
-        left: 54px;
+        left: 60px;
         max-width: 70vw;
+        overflow-x: hidden;
     }
     th{
         font-size: 14px;
@@ -843,7 +845,7 @@
     }
     #modalEditConfirmContent{
         margin-top: 15%;
-        width: 40vw;
+        width: 30vw;
         height: 35vh;
     }
     #modalEditInfoContent{
@@ -853,7 +855,7 @@
     }
     #modalDeleteConfirmContent{
         margin-top: 13%;
-        width: 40vw;
+        width: 35vw;
         height: 55vh;
     }
     #modalInfo{
