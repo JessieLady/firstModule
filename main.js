@@ -1,4 +1,4 @@
-/* GLOBAL CONSTS */
+/* GLOBAL VARS */
 
 let ordering = true;
 let contrast = localStorage.getItem("contrast");
