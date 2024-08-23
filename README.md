@@ -19,17 +19,17 @@ Este projeto foi o trabalho final da turma T32022 no primeiro módulo da formaç
 
 🎨 **Link para o Figma do projeto:** [Wexer Figma](<https://www.figma.com/design/KehBHfIEs2mnvSmlmHVVrH/M%C3%B3dulo-1-Atividade-Final-(Copy)?node-id=0-1&t=ouP9FhIhDBrEQtjk-0>)
 
-📢 **ATUALIZAÇÃO 2024:** [Leia Mais](#atualização-sobre-o-projeto-📢)
+📢 **ATUALIZAÇÃO 2024:** [Leia Mais](#leia-mais)
 
 ## Imagens do Projeto 📸
 
 | Home Page                                                | Nova Tarefa                                          | Tema Claro                                              |
 | -------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------- |
-| <img src="./assets/readme/index-screen.png" width=200 /> | <img src="./assets/readme/new-task.png" width=200 /> | <img src="./assets/readme/light-theme.png" width=200 /> |
+| <img src="./assets/readme/index-screen.png" width=300 /> | <img src="./assets/readme/new-task.png" width=300 /> | <img src="./assets/readme/light-theme.png" width=300 /> |
 
 | Tema Claro Responsivo                                         | Tema Escuro Responsivo                                       |
 | ------------------------------------------------------------- | ------------------------------------------------------------ |
-| <img src="./assets/readme/responsive-light.png" height=100 /> | <img src="./assets/readme/responsive-dark.png" height=100 /> |
+| <img src="./assets/readme/responsive-light.png" height=300 /> | <img src="./assets/readme/responsive-dark.png" height=300 /> |
 
 ## Tecnologias Utilizadas 🛠️
 
@@ -99,7 +99,7 @@ Este projeto está licenciado sob a [Licença MIT](https://opensource.org/licens
 
 Enquanto trabalho neste projeto, meu objetivo é entregar algo sólido e útil, que reflita o que aprendi até agora em minha jornada de desenvolvimento. Obrigada por dedicar seu tempo, e espero que você aprecie este projeto tanto quanto eu. 🚀
 
-# Atualização sobre o Projeto 📢
+## Leia Mais
 
 **ATENÇÃO!** Todos os dados e requisições do banco de dados foram mockados, então não é possível criar um usuário de fato. A API pode ser removida do ar ou o deploy pode ser desativado ao longo dos anos. Fiz isso para fins de demonstração. Deixei tudo da melhor maneira possível para que você possa testar o projeto. A situação das tarefas também está mockada, mas com o uso do Node.js, as tarefas criadas sem reiniciar a aplicação funcionarão corretamente. As tarefas podem ser excluídas e editadas como esperado.
 
