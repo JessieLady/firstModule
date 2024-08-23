@@ -7,7 +7,7 @@
 **Nome do Projeto:** Arnia Task Manager ⏰📋📌  
 **Data de Início do Desenvolvimento:** 28/11/2022 ⏩  
 **Data de Conclusão do Desenvolvimento:** 17/01/2023 🏁  
-**Status:** Concluído ✅
+**Status:** Concluído ✅ <br />
 **Aproveitamento do Projeto:** 90% 📈
 
 Bem-vindo ao **Arnia Task Manager!** Esta aplicação é uma ferramenta de gerenciamento de tarefas projetada para ajudar os usuários a criar, editar, concluir e excluir tarefas.
