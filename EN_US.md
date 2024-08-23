@@ -17,17 +17,17 @@ This project was the final assignment for class T32022 in the first module of th
 
 🎨 **Figma Project Link:** [Wexer Figma](<https://www.figma.com/design/KehBHfIEs2mnvSmlmHVVrH/M%C3%B3dulo-1-Atividade-Final-(Copy)?node-id=0-1&t=ouP9FhIhDBrEQtjk-0>)
 
-📢 **2024 UPDATE:** [Read More](#project-update-📢)
+📢 **2024 UPDATE:** [Read More](#read-more)
 
 ## Project Images 📸
 
 | Home Page                                                | New Task                                             | Light Theme                                             |
 | -------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------- |
-| <img src="./assets/readme/index-screen.png" width=200 /> | <img src="./assets/readme/new-task.png" width=200 /> | <img src="./assets/readme/light-theme.png" width=200 /> |
+| <img src="./assets/readme/index-screen.png" width=300 /> | <img src="./assets/readme/new-task.png" width=300 /> | <img src="./assets/readme/light-theme.png" width=300 /> |
 
 | Responsive Light Theme                                        | Responsive Dark Theme                                        |
 | ------------------------------------------------------------- | ------------------------------------------------------------ |
-| <img src="./assets/readme/responsive-light.png" height=100 /> | <img src="./assets/readme/responsive-dark.png" height=100 /> |
+| <img src="./assets/readme/responsive-light.png" height=300 /> | <img src="./assets/readme/responsive-dark.png" height=300 /> |
 
 ## Technologies Used 🛠️
 
@@ -97,7 +97,7 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 As I work on this project, my goal is to deliver something solid and useful that reflects what I've learned so far in my development journey. Thank you for taking the time, and I hope you enjoy this project as much as I did. 🚀
 
-# Project Update 📢
+## Read More
 
 **ATTENTION!** All data and database requests are mocked, so it’s not possible to actually create a user. The API may be taken down or the deploy disabled over the years. I did this for demonstration purposes. I’ve set everything up as best as possible so that you can test the project. Task status is also mocked, but using Node.js, tasks created without restarting the application will work correctly. Tasks can be deleted and edited as expected.
 
