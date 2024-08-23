@@ -4,16 +4,17 @@
 
 ![Arnia Kanban](./assets/readme/arnia-tasks.png)
 
+**Nome do Projeto:** Arnia Task Manager ⏰📋📌  
+**Data de Início do Desenvolvimento:** 28/11/2022 ⏩  
+**Data de Conclusão do Desenvolvimento:** 17/01/2023 🏁  
+**Status:** Concluído ✅
+**Aproveitamento do Projeto:** 90% 📈
+
 Bem-vindo ao **Arnia Task Manager!** Esta aplicação é uma ferramenta de gerenciamento de tarefas projetada para ajudar os usuários a criar, editar, concluir e excluir tarefas.
 
 Seu principal objetivo é auxiliar na organização das atividades diárias e na priorização das tarefas conforme as necessidades individuais.
 
 Este projeto foi o trabalho final da turma T32022 no primeiro módulo da formação da [Arnia - Escola de Programação]("https://arnia.com.br).
-
-**Nome do Projeto:** Arnia Task Manager ⏰📋📌  
-**Data de Início do Desenvolvimento:** 28/11/2022 ⏩  
-**Data de Conclusão do Desenvolvimento:** 17/01/2023 🏁  
-**Status:** Concluído ✅
 
 🚀 **Link de Deploy:** [Vercel Deploy](https://first-module-jessie-moura.vercel.app/)
 
@@ -101,7 +102,7 @@ Enquanto trabalho neste projeto, meu objetivo é entregar algo sólido e útil, 
 
 ## Leia Mais
 
-**ATENÇÃO!** Todos os dados e requisições do banco de dados foram mockados, então não é possível criar um usuário de fato. A API pode ser removida do ar ou o deploy pode ser desativado ao longo dos anos. Fiz isso para fins de demonstração. Deixei tudo da melhor maneira possível para que você possa testar o projeto. A situação das tarefas também está mockada, mas com o uso do Node.js, as tarefas criadas sem reiniciar a aplicação funcionarão corretamente. As tarefas podem ser excluídas e editadas como esperado.
+**ATUALIZAÇÃO 2024! 📢** Todos os dados e requisições do banco de dados foram mockados, então não é possível criar um usuário de fato. A API pode ser removida do ar ou o deploy pode ser desativado ao longo dos anos. Fiz isso para fins de demonstração. Deixei tudo da melhor maneira possível para que você possa testar o projeto. A situação das tarefas também está mockada, mas com o uso do Node.js, as tarefas criadas sem reiniciar a aplicação funcionarão corretamente. As tarefas podem ser excluídas e editadas como esperado.
 
 Lembrando que desenvolvi este projeto com apenas três meses de aprendizado em programação. Ainda que longe do ideal em termos de boas práticas, código limpo e organizado, todos começamos em algum lugar. O que importa é onde podemos chegar. 😊
 
