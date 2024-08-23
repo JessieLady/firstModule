@@ -7,9 +7,9 @@
     margin: 0;
     box-sizing: border-box;
     font-family: 'Poppins';
-  }
+}
 
-:root{
+:root {
     --purple: #68519D;
     --yellow: #f8b04e;
     --indigo: #2C2661;
@@ -28,7 +28,7 @@
     --redStatus: #EB5757;
     --blueStatus: #6e83fc;
     /* color from figma #011379 - blue status */
-    
+
     /* Arnia Website Palet */
     --darkpurple: #1A1132;
     --darkArnia: #1a1033;
@@ -41,11 +41,12 @@
 
 /* BACKGROUND */
 
-body{
+body {
     display: flex;
     flex-direction: row;
 }
-#content{
+
+#content {
     position: absolute;
     width: 65%;
     top: 300px;
@@ -54,22 +55,26 @@ body{
     max-height: 50%;
     margin-top: 40px;
 }
-.div-purple{
+
+.div-purple {
     background-color: var(--purple);
     height: 100vh;
     width: 3vw;
 }
-.div-grey{
+
+.div-grey {
     background-color: var(--lightpurple);
     height: 100vh;
     width: 0.5vw;
 }
-.div-white{
+
+.div-white {
     background-color: var(--background);
     height: 100vh;
     width: 96.5vw;
 }
-.div-orange{
+
+.div-orange {
     position: fixed;
     background-color: var(--yellow);
     height: 100vh;
@@ -80,156 +85,191 @@ body{
 }
 
 /* SELECTORS BY TAG NAME */
-span{
+span {
     margin-left: 5px;
 }
-input{
+
+input {
     width: 100%;
     padding: 7px;
     border-radius: 7px;
     border: 1px solid gray;
     background-color: unset;
 }
-input:focus{
+
+input:focus {
     outline: none;
 }
-select{
+
+select {
     margin: 5px 0px;
     width: 50%;
     padding: 7px;
     border-radius: 7px;
 }
-label{
+
+label {
     font-size: 13px;
     font-weight: 600;
     color: var(--purple);
 }
-button{
+
+button {
     border: 1px solid var(--purple);
     color: var(--purple);
     font-size: 13px !important;
     padding: 7px 25px;
     border-radius: 12px !important;
 }
-button:hover{
+
+button:hover {
     background-color: var(--purple);
     color: var(--background);
 }
-input[type="date"]{
+
+input[type="date"] {
     width: 50%;
     text-align: center;
 }
-small { 
+
+small {
     color: red;
     font-size: 9px;
 }
 
 /* PSEUDO BOOTSTRAP CLASSES */
 
-.text-purple{
+.text-purple {
     color: var(--purple) !important;
 }
-.text-white{
+
+.text-white {
     color: var(--background) !important;
 }
-.color-orange{
+
+.color-orange {
     color: var(--yellow) !important;
 }
-.color-white{
+
+.color-white {
     color: var(--background) !important;
 }
-.success{
+
+.success {
     border-color: var(--greenStatus);
 }
-.error{
+
+.error {
     border-color: var(--redStatus);
 }
-.h5style{
+
+.h5style {
     color: var(--purple);
     font-weight: 800;
     font-size: 20px;
 }
-.disabled{
+
+.disabled {
     color: var(--purple) !important;
 }
-.disabled:hover{
+
+.disabled:hover {
     cursor: not-allowed !important;
     color: var(--background) !important;
     background-color: none !important;
 }
-.enabled{
+
+.enabled {
     cursor: pointer !important;
     color: var(--purple) !important;
 }
-.enabled:hover{
+
+.enabled:hover {
     background-color: var(--purple) !important;
     color: var(--background) !important;
 }
-.unchangeble{
+
+.unchangeble {
     border-color: var(--blueStatus);
 }
-.unchangebleSmall{
+
+.unchangebleSmall {
     color: var(--blueStatus);
 }
-.lateTask{
+
+.lateTask {
     color: var(--lateTask) !important;
     background-color: unset;
     border-color: var(--lateTask) !important;
 }
-.lateTask:hover{
+
+.lateTask:hover {
     color: var(--purple) !important;
     background-color: var(--lateTask) !important;
 }
-.deleteAccount{
-    color: var(--lateTask)!important;
+
+.deleteAccount {
+    color: var(--lateTask) !important;
     border-color: var(--lateTask) !important;
 }
-.deleteAccount:hover{
+
+.deleteAccount:hover {
     color: var(--purple) !important;
     background-color: var(--lateTask) !important;
 }
-.successSmall{
+
+.successSmall {
     color: var(--greenStatus);
 }
-.errorSmall{
+
+.errorSmall {
     color: var(--redStatus);
 }
-.classModal{
+
+.classModal {
     background-color: var(--background);
 }
-.rotateUp{
+
+.rotateUp {
     transform: rotateZ(-180deg);
 }
-.rotateDown{
+
+.rotateDown {
     transform: rotateZ(0deg);
 }
-.trashIcon{
+
+.trashIcon {
     color: var(--purple) !important;
     opacity: 0.5;
 }
-.trashIcon:hover{
+
+.trashIcon:hover {
     opacity: 1;
 }
+
 /* STATUS COLORS */
 
-.Concluído{
+.Concluído {
     color: var(--greenStatus) !important;
 }
-.Em-progresso{
+
+.Em-progresso {
     color: var(--orangeStatus) !important;
 }
-.Em-pausa{
+
+.Em-pausa {
     color: var(--blueStatus) !important;
 }
-.Atrasado{
+
+.Atrasado {
     color: var(--redStatus) !important;
 }
 
 /* MODALS */
 
-.modalMain{
+.modalMain {
     display: none;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -237,15 +277,17 @@ small {
     z-index: 1;
     position: fixed;
 }
-#modalNewTaskContent{
+
+#modalNewTaskContent {
     border-radius: 10px;
     width: 40%;
-    height: 63vh;
+    /* height: 63vh; */
     padding: 40px 40px;
     margin: 200px auto;
     position: relative;
 }
-#modalEditConfirmContent{
+
+#modalEditConfirmContent {
     width: 25vw;
     height: 270px;
     margin: 300px auto;
@@ -258,7 +300,8 @@ small {
     justify-content: space-between;
     position: relative;
 }
-#modalInfo{
+
+#modalInfo {
     display: none;
     position: fixed;
     width: 30vw;
@@ -269,13 +312,15 @@ small {
     background-color: var(--background);
     border: 5px solid var(--yellow);
 }
-#modalInfoContent{
+
+#modalInfoContent {
     padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-#modalHelpContent{
+
+#modalHelpContent {
     background-color: var(--background);
     color: var(--purple);
 
@@ -295,7 +340,8 @@ small {
     gap: 10px;
     position: relative;
 }
-#modalConfirmationContent{
+
+#modalConfirmationContent {
     width: 25vw;
     height: 220px;
     margin: 300px auto;
@@ -308,7 +354,8 @@ small {
     justify-content: space-between;
     position: relative;
 }
-#modalDeleteConfirmContent{
+
+#modalDeleteConfirmContent {
     background-color: var(--background);
     color: var(--purple);
 
@@ -328,7 +375,8 @@ small {
     gap: 10px;
     position: relative;
 }
-#modalEditInfoContent{
+
+#modalEditInfoContent {
     background-color: var(--background);
     color: var(--purple);
     width: 25%;
@@ -349,13 +397,14 @@ small {
 
 /* SWITCH MODE */
 
-#darkMode{
+#darkMode {
     position: absolute;
     margin: 16px;
     top: 0;
     right: 0;
 }
-#darkModeContent{
+
+#darkModeContent {
     text-align: center;
     width: 40px;
     height: 40px;
@@ -365,22 +414,25 @@ small {
 
     background-color: var(--purple);
 }
-#darkModeContent:hover{
+
+#darkModeContent:hover {
     border-radius: 50%;
 }
 
-.light-button{
+.light-button {
     border: 1px solid var(--purple);
     color: var(--purple);
     font-size: 13px !important;
     padding: 7px 25px;
     border-radius: 12px !important;
 }
-.light-button:hover{
+
+.light-button:hover {
     background-color: var(--purple);
     color: var(--background);
 }
-.dark-button{
+
+.dark-button {
     border: 1px solid var(--purple);
     background-color: var(--purpleBackground);
     color: var(--background) !important;
@@ -388,18 +440,22 @@ small {
     padding: 7px 25px;
     border-radius: 12px !important;
 }
-.dark-button:hover{
+
+.dark-button:hover {
     background-color: var(--indigo);
     border: 1px solid var(--darkpurple);
     color: var(--background);
 }
-.modalBack-light{
+
+.modalBack-light {
     background-color: var(--background) !important;
 }
-.modalBack-dark{
+
+.modalBack-dark {
     background-color: var(--darkblue) !important;
 }
-.dark-footer{
+
+.dark-footer {
     background-color: var(--darkorange) !important;
     color: var(--indigo);
     font-weight: 400;
@@ -407,54 +463,74 @@ small {
 
 /* ANIMATIONS */
 
-.upToDownAnimation{
-    animation: upToDown 0.5s running 1;;
+.upToDownAnimation {
+    animation: upToDown 0.5s running 1;
+    ;
 }
-@keyframes upToDown{
-    0%{transform: translateY(-300px);}
-    100%{transform: translateY(0px);}
+
+@keyframes upToDown {
+    0% {
+        transform: translateY(-300px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
-.downToUpAnimation{
+
+.downToUpAnimation {
     animation: downToUp 0.5s running 1;
 }
-@keyframes downToUp{
-    0%{transform: translateY(300px);}
-    100%{transform: translateY(0px);}
+
+@keyframes downToUp {
+    0% {
+        transform: translateY(300px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 /* QUITE COMMON HERE - RANDOM BUTTONS */
 
-.iconTable:hover{
+.iconTable:hover {
     cursor: pointer;
     color: var(--darkorange);
 }
-#modal-footer{
+
+#modal-footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-#submitButton{
-    border-radius: 19px;  
+
+#submitButton {
+    border-radius: 19px;
     font-size: 13px;
 }
-#cancelButton{
+
+#cancelButton {
     border: none;
     cursor: pointer;
     padding: 5px;
     font-size: 12px;
     color: var(--cancelButton);
 }
-#cancelButton:hover{
+
+#cancelButton:hover {
     color: var(--cancelButton);
     text-decoration: underline;
 }
-#closeButton{
+
+#closeButton {
     cursor: pointer;
     position: absolute;
     top: 34%;
     right: 39%;
 }
-.closeButton{
+
+.closeButton {
     transform: scale(2, 2);
     cursor: pointer;
     position: absolute;
@@ -462,31 +538,37 @@ small {
     top: -25px;
     margin: 10%;
 }
-.closeButton:hover{
+
+.closeButton:hover {
     transform: scale(2.1, 2.1);
     color: var(--indigo);
 }
-.closeButtonDelete{
+
+.closeButtonDelete {
     transform: scale(2, 2);
     cursor: pointer;
     position: absolute;
     right: 20px;
     top: 15px;
 }
-.closeButtonDelete:hover{
+
+.closeButtonDelete:hover {
     transform: scale(2.1, 2.1);
     color: var(--indigo);
 }
-#buttonsConfirmation{
+
+#buttonsConfirmation {
     width: 100%;
     display: flex;
     justify-content: space-around;
 }
-#confirm>h3{
+
+#confirm>h3 {
     font-size: 18px;
     margin-top: 70px;
 }
-#helpBody{
+
+#helpBody {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -496,38 +578,43 @@ small {
 
 /* HEADER ELEMENTS */
 
-#header{
+#header {
     color: var(--purple);
 }
 
-#logo{
+#logo {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 70px 50px;
 }
-#logo>img{
+
+#logo>img {
     width: 150px;
 }
-#page-title{
+
+#page-title {
     position: absolute;
     top: 100px;
     margin: 50px 40px;
-    font-weight: 800;  
+    font-weight: 800;
 }
-#page-title>button{
+
+#page-title>button {
     margin-top: 20px;
 }
-#logoutButton{
-    border-radius: 19px; 
-    font-size: 13px; 
-    margin-right: 65px; 
-    position: absolute; 
+
+#logoutButton {
+    border-radius: 19px;
+    font-size: 13px;
+    margin-right: 65px;
+    position: absolute;
     top: 16px;
     right: 0;
 }
-#accountButton{
-    position: absolute; 
+
+#accountButton {
+    position: absolute;
     top: 16px;
     right: 0;
     margin-right: 155px;
@@ -535,7 +622,7 @@ small {
 
 /* WEATHER ELEMENTS */
 
-#weather{
+#weather {
     position: absolute;
     top: 50px;
     right: 180px;
@@ -547,12 +634,14 @@ small {
     justify-content: center;
     font-size: 18px;
 }
-#firstLine{
+
+#firstLine {
     font-size: 50px;
     font-weight: 650;
     text-align: center;
 }
-#secondLine{
+
+#secondLine {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -561,7 +650,7 @@ small {
 
 /* TABLE HEADER ELEMENTS */
 
-#tableHeader{
+#tableHeader {
     width: 65%;
     height: 50px;
 
@@ -576,20 +665,24 @@ small {
     top: 240px;
     left: 100px;
 }
-#buttonsFilter{
+
+#buttonsFilter {
     display: flex;
     flex-direction: row;
     gap: 3px;
 }
-#buttonsFilter>button{
+
+#buttonsFilter>button {
     color: var(--purple);
     font-size: 11px;
     padding: 5px 18px;
 }
-#buttonsFilter>button:hover{
+
+#buttonsFilter>button:hover {
     color: white;
 }
-#searchTasks{
+
+#searchTasks {
     width: 300px;
     height: 35px;
     display: flex;
@@ -598,7 +691,8 @@ small {
     border: 1px solid gray;
     border-radius: 7px;
 }
-#magnifyingGlass{
+
+#magnifyingGlass {
     width: fit-content;
     height: 33px;
     line-height: 33px;
@@ -606,7 +700,8 @@ small {
     border-radius: 7px;
     background-color: var(--yellow);
 }
-#searchField{
+
+#searchField {
     width: 264px;
     height: 32px;
     color: var(--purple);
@@ -614,21 +709,24 @@ small {
     padding: 7px;
     border: none;
 }
-#searchField:focus{
+
+#searchField:focus {
     outline: none;
 }
 
 /* MAIN/TABLE/CONTENT FOOTER */
 
-#content{
+#content {
     overflow-y: scroll;
 }
-#passConfirmDelete{
+
+#passConfirmDelete {
     width: 50%;
 }
-/* PAGINATE BUTTONS */ 
 
-#buttonsPaginate{
+/* PAGINATE BUTTONS */
+
+#buttonsPaginate {
     width: 65%;
     height: 35px;
     padding: 10px;
@@ -643,14 +741,17 @@ small {
     bottom: 35px;
     left: 100px;
 }
-.paginateButtons{
+
+.paginateButtons {
     cursor: pointer;
     padding: 5px;
     font-weight: 500;
 }
-.paginateButtons:hover{
+
+.paginateButtons:hover {
     color: var(--darkorange);
 }
-#pagesNum{
+
+#pagesNum {
     font-weight: 500;
 }

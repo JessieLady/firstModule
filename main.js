@@ -1,10 +1,71 @@
+/* DATABASE MOCKS */
+
+const user = {
+  name: "Jessie",
+  city: "Campo Grande",
+  login: "jessica",
+  email: "jessie@gmail.com",
+  password: "123456",
+  id: 1,
+};
+
+const mocktasks = [
+  {
+    number: 1,
+    description: "Texto da tarefa concluída",
+    date: "2023-01-14",
+    status: "Concluído",
+    owner: "jessica",
+    id: 1,
+  },
+  {
+    number: 2,
+    description: "Texto da tarefa em progresso",
+    date: "2028-01-23",
+    status: "Em progresso",
+    owner: "jessica",
+    id: 2,
+  },
+  {
+    number: 3,
+    description: "Texto da tarefa em pausa",
+    date: "2028-01-20",
+    status: "Em pausa",
+    owner: "jessica",
+    id: 3,
+  },
+  {
+    number: 4,
+    description: "Texto da tarefa atrasada",
+    date: "2023-01-20",
+    status: "Em progresso",
+    owner: "jessica",
+    id: 4,
+  },
+  {
+    number: 5,
+    description: "Texto da última tarefa",
+    date: "2028-01-20",
+    status: "Em progresso",
+    owner: "jessica",
+    id: 5,
+  },
+];
+
+/* THEME CONTROL */
+
+let contrast = localStorage.getItem("contrast");
+
+if (!contrast) {
+  contrast = "light";
+  localStorage.setItem("contrast", contrast);
+}
+
 /* GLOBAL VARS */
 
 let ordering = true;
-let contrast = localStorage.getItem("contrast");
 let currentTask = null;
 let currentPage = 1;
-
 let currentUser = JSON.parse(sessionStorage.getItem("user")).id;
 let currentOwner = JSON.parse(sessionStorage.getItem("user")).login;
 
@@ -14,14 +75,14 @@ const DESCRIPTION_EMPTY = "Insira uma descrição.";
 const DATE_EMPTY = "Escolha uma data.";
 const STATUS_EMPTY = "Escolha um status.";
 
-const NAME_REQUIRED = 'Por favor, insira o seu nome'
-const CITY_REQUIRED = 'Por favor, insira o sua cidade'
-const CITY_INVALID = 'Cidade inválida'
-const LOGIN_WARNING = 'Não é possível alterar o login'
-const EMAIL_REQUIRED = 'Por favor, insira um email'
-const EMAIL_INVALID = 'Email inválido'
-const PASS_REQUIRED = 'Por favor, insira sua senha'
-const PASS_LENGTH = 'Senha menor que 6 caracteres'
+const NAME_REQUIRED = "Por favor, insira o seu nome";
+const CITY_REQUIRED = "Por favor, insira o sua cidade";
+const CITY_INVALID = "Cidade inválida";
+const LOGIN_WARNING = "Não é possível alterar o login";
+const EMAIL_REQUIRED = "Por favor, insira um email";
+const EMAIL_INVALID = "Email inválido";
+const PASS_REQUIRED = "Por favor, insira sua senha";
+const PASS_LENGTH = "Senha menor que 6 caracteres";
 
 const modalHelpUser = document.getElementById("modalHelpContent");
 
@@ -65,23 +126,23 @@ const formatedDate = (date) => {
   }
 
   const newDate = year + "-" + month + "-" + day;
-  return newDate
-}
+  return newDate;
+};
 
 const minDateToday = () => {
-  let today = formatedDate(inDate)
+  let today = formatedDate(inDate);
   document.getElementById("date").setAttribute("min", today);
 };
 
-const inDateFormated = formatedDate(inDate)
+const inDateFormated = formatedDate(inDate);
 
 /* SESSION AND LOCAL STORAGE FUNCTIONS */
 
 const contrastMode = () => {
-  if (contrast) {
-    lightMode();
-  } else {
+  if (contrast === "dark") {
     darkMode();
+  } else {
+    lightMode();
   }
 };
 
@@ -90,11 +151,11 @@ const userLogout = () => {
   window.location.href = "index.html";
 };
 
-const userReset = async () =>{
-    const user = await getUser(currentUser)
-    sessionStorage.removeItem("user")
-    sessionStorage.setItem("user", JSON.stringify(user))
-}
+const userReset = async () => {
+  const user = await getUser(currentUser);
+  sessionStorage.removeItem("user");
+  sessionStorage.setItem("user", JSON.stringify(user));
+};
 
 /* MODAL'S FUNCTIONS */
 
@@ -114,30 +175,30 @@ const clearModalNewTask = () => {
   const dateField = document.getElementById("date");
   const select = document.querySelector("#selectStatus");
   const button = document.getElementById("submitButton");
-  const title = document.getElementById('taskModalTitle');
-  const inputs = document.querySelectorAll('input')
-  const smalls = document.querySelectorAll('small')
-  
+  const title = document.getElementById("taskModalTitle");
+  const inputs = document.querySelectorAll("input");
+  const smalls = document.querySelectorAll("small");
+
   numberField.value = "";
   descriptionField.value = "";
   dateField.value = "";
 
   select.options[0].selected = true;
-  select.className = ''
-  
+  select.className = "";
+
   for (let counter = 0; counter < 4; counter++) {
-    inputs[counter].className = ''
+    inputs[counter].className = "";
   }
 
   for (let counter = 0; counter < 4; counter++) {
-    smalls[counter].innerHTML = ''
+    smalls[counter].innerHTML = "";
   }
 
-  currentTask = null
+  currentTask = null;
 
   button.classList.replace("enabled", "disabled");
   button.innerHTML = "Salvar";
-  title.innerHTML = 'Adicionar nova tarefa'
+  title.innerHTML = "Adicionar nova tarefa";
 };
 
 /* TASKS' FUNCTIONS */
@@ -147,11 +208,15 @@ const renderTasks = (tasks) => {
   tasksContent.innerHTML = "";
   tasks.forEach((task) => {
     const date = new Date(task.date);
-    const dateForm = formatedDate(date)
+    const dateForm = formatedDate(date);
     const dateFormated = date.toLocaleDateString("pt-BR", { timeZone: "UTC" });
     if (task.status === "Concluído") {
       task.description = `<del>${task.description}</del>`;
-    } else if (inDateFormated > dateForm && dateFormated !== inDay && task.status !== "Concluído") {
+    } else if (
+      inDateFormated > dateForm &&
+      dateFormated !== inDay &&
+      task.status !== "Concluído"
+    ) {
       task.status = "Atrasado";
       warningLateTask();
     }
@@ -177,24 +242,27 @@ const renderTasks = (tasks) => {
 };
 
 const getTasksRender = async () => {
-  const tasksResponse = await fetch(
-    `https://json-server-first-module-production.up.railway.app/tasks?_limit=10&owner_like=${currentOwner}`
-  );
-  const tasks = await tasksResponse.json();
-  renderTasks(tasks);
+  // const tasksResponse = await fetch(
+  //   `https://json-server-first-module-production.up.railway.app/tasks?_limit=10&owner_like=${currentOwner}`
+  // );
+  // const tasks = await tasksResponse.json();
+  renderTasks(mocktasks);
 };
 const getTasksReturn = async () => {
-  const tasksResponse = await fetch(
-    `https://json-server-first-module-production.up.railway.app/tasks?owner_like=${currentOwner}`
-  );
-  const tasks = await tasksResponse.json();
-  return tasks;
+  // const tasksResponse = await fetch(
+  //   `https://json-server-first-module-production.up.railway.app/tasks?owner_like=${currentOwner}`
+  // );
+  // const tasks = await tasksResponse.json();
+  return mocktasks;
 };
 const getTask = async (id) => {
-  const taskResponse = await fetch(`https://json-server-first-module-production.up.railway.app/tasks/${id}`);
-  const task = await taskResponse.json();
-  return task;
+  // const taskResponse = await fetch(
+  //   `https://json-server-first-module-production.up.railway.app/tasks/${id}`
+  // );
+  // const task = await taskResponse.json();
+  return (task = mocktasks.find((task) => task.id === id));
 };
+
 const saveTask = async (task) => {
   if (currentTask === null) {
     await newTask(task);
@@ -204,38 +272,51 @@ const saveTask = async (task) => {
   }
   closeModal("modalNewTask");
 };
+
 const newTask = async (task) => {
-  await fetch("https://json-server-first-module-production.up.railway.app/tasks", {
-    method: "POST",
-    headers: {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(task),
-  });
-  location.reload()
+  // await fetch(
+  //   "https://json-server-first-module-production.up.railway.app/tasks",
+  //   {
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application/json, text/plain, */*",
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(task),
+  //   }
+  // );
+
+  // location.reload();
+  mocktasks.push(task);
+  renderTasks(mocktasks);
 };
+
 const updateTask = async (id, task) => {
-  await fetch(`https://json-server-first-module-production.up.railway.app/tasks/${id}`, {
-    method: "PUT",
-    headers: {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(task),
-  });
-  location.reload()
+  // await fetch(
+  //   `https://json-server-first-module-production.up.railway.app/tasks/${id}`,
+  //   {
+  //     method: "PUT",
+  //     headers: {
+  //       Accept: "application/json, text/plain, */*",
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(task),
+  //   }
+  // );
+  // location.reload();
+  const index = mocktasks.findIndex((task) => task.id === id);
+  mocktasks[index] = task;
+  renderTasks(mocktasks);
 };
 const editTask = async (id) => {
-
   const numberField = document.getElementById("number");
   const descriptionField = document.getElementById("description");
   const dateField = document.getElementById("date");
   const button = document.getElementById("submitButton");
-  const title = document.getElementById('taskModalTitle')
-  const msgNum = numberField.parentNode.querySelector('small')
-  
-  title.innerHTML = 'Editar tarefa'
+  const title = document.getElementById("taskModalTitle");
+  const msgNum = numberField.parentNode.querySelector("small");
+
+  title.innerHTML = "Editar tarefa";
   currentTask = await getTask(id);
 
   openModal("modalNewTask");
@@ -253,11 +334,11 @@ const editTask = async (id) => {
     }
   }
 
-  numberField.disabled = true
-  msgNum.style.display = 'none'
-  numberField.className = 'unchangeble'
+  numberField.disabled = true;
+  msgNum.style.display = "none";
+  numberField.className = "unchangeble";
 
-  dateField.min = false
+  dateField.min = false;
 
   button.classList.replace("disabled", "enabled");
   button.innerHTML = "Alterar";
@@ -322,32 +403,41 @@ const confirmDelete = (idTask) => {
   });
 };
 const deleteTask = async (id) => {
-  await fetch(`https://json-server-first-module-production.up.railway.app/tasks/${id}`, {
-    method: "DELETE",
-  });
-  location.reload()
+  // await fetch(
+  //   `https://json-server-first-module-production.up.railway.app/tasks/${id}`,
+  //   {
+  //     method: "DELETE",
+  //   }
+  // );
+  // location.reload();
+  const index = mocktasks.findIndex((task) => task.id === id);
+  mocktasks.splice(index, 1);
+  renderTasks(mocktasks);
+  closeModal("modalConfirmation");
 };
 
 const deleteAllTasks = async () => {
-    const tasks = await getTasksReturn();
-    tasks.forEach((task) => {
-      deleteTask(task.id);
-    });
-  };
+  const tasks = await getTasksReturn();
+  tasks.forEach((task) => {
+    deleteTask(task.id);
+  });
+};
 
 /* USERS FUNCTIONS */
 
 const getUsers = async () => {
-  const users = await fetch(`https://json-server-first-module-production.up.railway.app/users`);
-  const usersResponse = await users.json();
-  return usersResponse;
+  // const users = await fetch(
+  //   `https://json-server-first-module-production.up.railway.app/users`
+  // );
+  // const usersResponse = await users.json();
+  return user;
 };
 
 const getUser = async () => {
-  const userResponse = await fetch(
-    `https://json-server-first-module-production.up.railway.app/users/${currentUser}`
-  );
-  const user = await userResponse.json();
+  // const userResponse = await fetch(
+  //   `https://json-server-first-module-production.up.railway.app/users/${currentUser}`
+  // );
+  // const user = await userResponse.json();
   return user;
 };
 
@@ -358,110 +448,112 @@ const confirmEditUser = async () => {
   const msg = input.parentNode.querySelector("small");
 
   const user = JSON.parse(sessionStorage.getItem("user"));
-  
+
   input.addEventListener("input", () => {
     if (input.value !== user.password) {
-      input.classList.add('error');
+      input.classList.add("error");
       msg.innerHTML = "Senha incorreta";
-      msg.className = 'errorSmall'
-      button.disabled = true
-      button.classList.replace('enabled', 'disabled')
+      msg.className = "errorSmall";
+      button.disabled = true;
+      button.classList.replace("enabled", "disabled");
     } else {
-      button.disabled = false
-      msg.innerHTML = 'Senha correta';
-      msg.className = 'successSmall'
-      button.classList.replace('disabled', 'enabled')
-      input.classList.replace('error', 'success')
+      button.disabled = false;
+      msg.innerHTML = "Senha correta";
+      msg.className = "successSmall";
+      button.classList.replace("disabled", "enabled");
+      input.classList.replace("error", "success");
     }
   });
 };
 
 const saveUser = async (user) => {
-    await updateUser(currentUser, user);
-    await userReset()
-    closeModal("modalEditInfo");
-    location.reload()
-  };
+  await updateUser(currentUser, user);
+  await userReset();
+  closeModal("modalEditInfo");
+  location.reload();
+};
 
 const updateUser = async (id, user) => {
-    await fetch(`https://json-server-first-module-production.up.railway.app/users/${id}`, {
-      method: "PUT",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
+  // await fetch(
+  //   `https://json-server-first-module-production.up.railway.app/users/${id}`,
+  //   {
+  //     method: "PUT",
+  //     headers: {
+  //       Accept: "application/json, text/plain, */*",
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(user),
+  //   }
+  // );
 };
 
 const editUser = async () => {
-    openModal("modalEditInfo")
-    const user = await getUser();
-  
-    const name = document.getElementById("name");
-    const city = document.getElementById("city");
-    const login = document.getElementById("login");
-    const email = document.getElementById("email");
-    const password = document.getElementById("password");
-    
-    name.value = user.name;
-    city.value = user.city;
-    login.value = user.login;
-    email.value = user.email;
-    password.value = user.password;
+  openModal("modalEditInfo");
+  const user = await getUser();
+
+  const name = document.getElementById("name");
+  const city = document.getElementById("city");
+  const login = document.getElementById("login");
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+
+  name.value = user.name;
+  city.value = user.city;
+  login.value = user.login;
+  email.value = user.email;
+  password.value = user.password;
 };
 
 class User {
-    name
-    city
-    login
-    email
-    password
-    constructor(name, city, login, email, password) {
-        this.name = name
-        this.city = city
-        this.login = login
-        this.email = email
-        this.password = password
-    }
+  name;
+  city;
+  login;
+  email;
+  password;
+  constructor(name, city, login, email, password) {
+    this.name = name;
+    this.city = city;
+    this.login = login;
+    this.email = email;
+    this.password = password;
+  }
 }
 
 const editUserFields = () => {
-    const name = document.getElementById('name')
-    const city = document.getElementById('city')
-    const login = document.getElementById('login')
-    const email = document.getElementById('email')
-    const password = document.getElementById('password')
-    const button = document.getElementById("editUserBtn")
+  const name = document.getElementById("name");
+  const city = document.getElementById("city");
+  const login = document.getElementById("login");
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+  const button = document.getElementById("editUserBtn");
 
-    showLoginInfo(login, LOGIN_WARNING)
-    let nameValid = hasValue(name, NAME_REQUIRED)
-    let cityValid = validateCity(city, CITY_REQUIRED, CITY_INVALID)
-    let emailValid = validateEmail(email, EMAIL_REQUIRED, EMAIL_INVALID)
-    let passwordValid = validatePassword(password, PASS_REQUIRED, PASS_LENGTH)
+  showLoginInfo(login, LOGIN_WARNING);
+  let nameValid = hasValue(name, NAME_REQUIRED);
+  let cityValid = validateCity(city, CITY_REQUIRED, CITY_INVALID);
+  let emailValid = validateEmail(email, EMAIL_REQUIRED, EMAIL_INVALID);
+  let passwordValid = validatePassword(password, PASS_REQUIRED, PASS_LENGTH);
 
-    if(nameValid && cityValid && emailValid && passwordValid){
-        button.disabled = false
-        button.classList.replace('disabled', 'enabled')
-    } else{
-        button.disabled = true
-        button.classList.replace('enabled', 'disabled')
-    }
-}
+  if (nameValid && cityValid && emailValid && passwordValid) {
+    button.disabled = false;
+    button.classList.replace("disabled", "enabled");
+  } else {
+    button.disabled = true;
+    button.classList.replace("enabled", "disabled");
+  }
+};
 
 formEdit.addEventListener("submit", (event) => {
-    event.preventDefault();
-  
-    let name = formEdit.elements['name'].value
-    let city = formEdit.elements['city'].value
-    let login = formEdit.elements['login'].value
-    let email = formEdit.elements['email'].value
-    let password = formEdit.elements['password'].value
+  event.preventDefault();
 
-    let user = {name, city, login, email, password}
-    saveUser(user)
+  let name = formEdit.elements["name"].value;
+  let city = formEdit.elements["city"].value;
+  let login = formEdit.elements["login"].value;
+  let email = formEdit.elements["email"].value;
+  let password = formEdit.elements["password"].value;
+
+  let user = { name, city, login, email, password };
+  saveUser(user);
 });
-
 
 const confirmDeleteUser = async () => {
   closeModal("modalHelp");
@@ -473,26 +565,29 @@ const confirmDeleteUser = async () => {
 
   const currentUserObj = await getUser(currentUser);
 
-  const deleteUser = async (id) => {
-    await fetch(`https://json-server-first-module-production.up.railway.app/users/${id}`, {
-      method: "DELETE",
-    });
-  };
+  // const deleteUser = async (id) => {
+  //   await fetch(
+  //     `https://json-server-first-module-production.up.railway.app/users/${id}`,
+  //     {
+  //       method: "DELETE",
+  //     }
+  //   );
+  // };
 
   passwordInput.addEventListener("input", () => {
     if (passwordInput.value.trim() !== currentUserObj.password) {
       msg.innerHTML = "Senha incorreta";
-      msg.classList.replace("successSmall", "errorSmall")
+      msg.classList.replace("successSmall", "errorSmall");
       passwordInput.className = "error";
-      button.classList.replace('enabled','disabled')
-      button.disabled = true
+      button.classList.replace("enabled", "disabled");
+      button.disabled = true;
     } else {
       msg.innerHTML = "Senha correta";
-      msg.classList.remove("errorSmall")
-      msg.classList.add('successSmall')
+      msg.classList.remove("errorSmall");
+      msg.classList.add("successSmall");
       passwordInput.className = "success";
-      button.classList.replace('disabled', 'enabled')
-      button.disabled = false
+      button.classList.replace("disabled", "enabled");
+      button.disabled = false;
     }
     button.addEventListener("click", () => {
       if (passwordInput.value.trim() === currentUserObj.password) {
@@ -501,7 +596,7 @@ const confirmDeleteUser = async () => {
         window.location.href = "index.html";
       } else {
         msg.innerHTML = "Preencha esse campo corretamente";
-        passwordInput.classList.add("error")
+        passwordInput.classList.add("error");
       }
     });
   });
@@ -510,11 +605,11 @@ const confirmDeleteUser = async () => {
 /* FILTER FUNCTIONS */
 
 const filterTasks = async (status) => {
-  const tasksResponse = await fetch(
-    `https://json-server-first-module-production.up.railway.app/tasks?status_like=${status}&owner_like=${currentOwner}`
-  );
-  const tasks = await tasksResponse.json();
-  renderTasks(tasks);
+  // const tasksResponse = await fetch(
+  //   `https://json-server-first-module-production.up.railway.app/tasks?status_like=${status}&owner_like=${currentOwner}`
+  // );
+  // const tasks = await tasksResponse.json();
+  renderTasks(mocktasks);
 };
 
 const lateTasks = async () => {
@@ -522,9 +617,14 @@ const lateTasks = async () => {
 
   const tasksLate = tasks.filter((task) => {
     const date = new Date(task.date);
-    const dateForm = formatedDate(date)
+    const dateForm = formatedDate(date);
     const dateFormated = date.toLocaleDateString("pt-BR", { timeZone: "UTC" });
-    if (inDateFormated > dateForm && dateFormated !== inDay && task.status !== "Concluído") return true;
+    if (
+      inDateFormated > dateForm &&
+      dateFormated !== inDay &&
+      task.status !== "Concluído"
+    )
+      return true;
     return false;
   });
   renderTasks(tasksLate);
@@ -551,7 +651,8 @@ const findTasks = async (search) => {
   const tasksResponse = await fetch(
     `https://json-server-first-module-production.up.railway.app/tasks?owner_like=${currentOwner}&description_like=${search}&_limit=10`
   );
-  const tasks = await tasksResponse.json();
+  // const tasks = await tasksResponse.json();
+  const tasks = mocktasks;
   renderTasks(tasks);
 };
 
@@ -564,10 +665,11 @@ searchInput.addEventListener("input", async () => {
 /* PAGINATE FUNCTIONS */
 
 const loadPage = async (pageNum) => {
-  const tasksResponse = await fetch(
-    `https://json-server-first-module-production.up.railway.app/tasks?_limit=10&_page=${pageNum}&owner_like=${currentOwner}`
-  );
-  const tasks = await tasksResponse.json();
+  // const tasksResponse = await fetch(
+  //   `https://json-server-first-module-production.up.railway.app/tasks?_limit=10&_page=${pageNum}&owner_like=${currentOwner}`
+  // );
+  // const tasks = await tasksResponse.json();
+  const tasks = mocktasks;
   renderTasks(tasks);
 };
 
@@ -621,95 +723,102 @@ function showSuccess(input) {
 
 function hasValue(input, message) {
   if (input.value.trim() === "") {
-    input.classList.replace('success', 'error')
+    input.classList.replace("success", "error");
     return showError(input, message);
   } else {
-    input.classList.remove('error')
+    input.classList.remove("error");
     return showSuccess(input);
   }
 }
 
 const showLoginInfo = (input, message) => {
-  const msg = input.parentNode.querySelector('small')
-  msg.innerHTML = message
-  msg.className = 'unchangebleSmall'
-  input.className = 'unchangeble'
-}
+  const msg = input.parentNode.querySelector("small");
+  msg.innerHTML = message;
+  msg.className = "unchangebleSmall";
+  input.className = "unchangeble";
+};
 
 const validateNumber = async (input, required, invalid) => {
-  const number = input.value.trim()
-  const tasks = await getTasksReturn()
-  const msg = input.parentNode.querySelector('small')
+  const number = input.value.trim();
+  const tasks = await getTasksReturn();
+  const msg = input.parentNode.querySelector("small");
 
-  if (!hasValue(input, required)) return false
-  
+  if (!hasValue(input, required)) return false;
+
   let numberFound = tasks.find((task) => {
-      if(task.number == number) return true
-      return false
-  })
+    if (task.number == number) return true;
+    return false;
+  });
 
-  if(numberFound){
-      input.classList.replace('success', 'error')
-      msg.classList.replace('successSmall', 'errorSmall')
-      return showError(input, invalid)
-  } else{
-      msg.className = 'successSmall'
-      msg.innerText = 'Número disponível'
-      input.className = 'success'
+  if (numberFound) {
+    input.classList.replace("success", "error");
+    msg.classList.replace("successSmall", "errorSmall");
+    return showError(input, invalid);
+  } else {
+    msg.className = "successSmall";
+    msg.innerText = "Número disponível";
+    input.className = "success";
   }
-  return true
-}
+  return true;
+};
 
 const validateStatus = (input, message) => {
   if (input.options[0].selected) {
-    input.classList.replace('success', 'error')
+    input.classList.replace("success", "error");
     return showError(input, message);
   } else {
-    input.classList.replace('error', 'success')
+    input.classList.replace("error", "success");
     return showSuccess(input);
   }
 };
 
 const validateEmail = (input, required, invalid) => {
-    if (!hasValue(input, required)) return false
+  if (!hasValue(input, required)) return false;
 
-      const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      const email = input.value.trim()
+  const emailRegex =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const email = input.value.trim();
 
-      if (!emailRegex.test(email)) return showError(input, invalid)
-    
-    return true
-}
+  if (!emailRegex.test(email)) return showError(input, invalid);
+
+  return true;
+};
 
 const validatePassword = (input, required, invalid) => {
-    const password = input.value.trim()
-    
-    if (!hasValue(input, required)) return false 
-     
-    if (password.length < 6) return showError(input, invalid)
+  const password = input.value.trim();
 
-    return true 
-}
+  if (!hasValue(input, required)) return false;
+
+  if (password.length < 6) return showError(input, invalid);
+
+  return true;
+};
 
 const validateCity = async (input, required, invalid) => {
-    const city = input.value.trim()
-    const locals = []
-    
-    if (!hasValue(input, required)) return false
-    
-    locals.push(...(await (await fetch(`https://dataservice.accuweather.com/locations/v1/search?q=${city}&apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
+  const city = input.value.trim();
+  const locals = [];
 
-    const cityFound = locals[0]
-    
-    if(!cityFound) return showError(input, invalid)
+  if (!hasValue(input, required)) return false;
 
-    return true
-}
+  locals.push(
+    ...(await (
+      await fetch(
+        `https://dataservice.accuweather.com/locations/v1/search?q=${city}&apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`
+      )
+    ).json())
+  );
+
+  const cityFound = locals[0];
+
+  if (!cityFound) return showError(input, invalid);
+
+  return true;
+};
 
 /* SORTING FUNCTION */
 
 const orderingTable = async (key, iconOrder) => {
-  const icon = document.getElementById(iconOrder)
+  const icon = document.getElementById(iconOrder);
   if (ordering) {
     const ascMode = await fetch(
       `https://json-server-first-module-production.up.railway.app/tasks?owner_like=${currentOwner}&_sort=${key}&_order=asc`
@@ -717,8 +826,8 @@ const orderingTable = async (key, iconOrder) => {
     const ascTasks = await ascMode.json();
     renderTasks(ascTasks);
     ordering = false;
-    icon.classList.remove('rotateDown')
-    icon.classList.add('rotateUp')
+    icon.classList.remove("rotateDown");
+    icon.classList.add("rotateUp");
   } else {
     const descMode = await fetch(
       `https://json-server-first-module-production.up.railway.app/tasks?owner_like=${currentOwner}&_sort=${key}&_order=desc`
@@ -726,34 +835,46 @@ const orderingTable = async (key, iconOrder) => {
     const descTasks = await descMode.json();
     renderTasks(descTasks);
     ordering = true;
-    icon.classList.remove('rotateUp')
-    icon.classList.add('rotateDown')
+    icon.classList.remove("rotateUp");
+    icon.classList.add("rotateDown");
   }
 };
 
 /* WEATHER FUNCTIONS */
 
 const weatherSearch = async (user) => {
-    const locals = []
-    const conditions = []
-    locals.push(...(await (await fetch(`https://dataservice.accuweather.com/locations/v1/search?q=${user}&apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
-    const key = locals[0].Key
-    conditions.push(...(await (await fetch(`https://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`)).json()))
-    return conditions
-}
+  const locals = [];
+  const conditions = [];
+  locals.push(
+    ...(await (
+      await fetch(
+        `https://dataservice.accuweather.com/locations/v1/search?q=${user}&apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`
+      )
+    ).json())
+  );
+  const key = locals[0].Key;
+  conditions.push(
+    ...(await (
+      await fetch(
+        `https://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=rr95vjK55BycimP4YZNYXb93GkuaDEAH`
+      )
+    ).json())
+  );
+  return conditions;
+};
 
 const weatherInfo = async () => {
   const weatherName = document.getElementById("weatherName");
   const weatherCity = document.getElementById("weatherCity");
-  const weatherTemp = document.getElementById('weatherTemp')
+  const weatherTemp = document.getElementById("weatherTemp");
 
   const user = JSON.parse(sessionStorage.getItem("user"));
   const userCity = user.city;
-  const userInfoWeather = await weatherSearch(userCity)
+  const userInfoWeather = await weatherSearch(userCity);
 
   weatherName.innerHTML = `${user.name}`;
   weatherCity.innerHTML = `${userCity}`;
-  weatherTemp.innerHTML = `${userInfoWeather[0].Temperature.Metric.Value}°C`
+  weatherTemp.innerHTML = `${userInfoWeather[0].Temperature.Metric.Value}°C`;
 };
 
 /* LIGHT THEME AND DARK THEME */
@@ -772,25 +893,22 @@ const selectStatus = document.getElementById("selectStatus");
 const buttons = document.querySelectorAll("button");
 const modals = document.getElementsByClassName("classModal");
 const inputs = document.querySelectorAll("input");
-const titleModalTask = document.getElementById('taskModalTitle')
+const titleModalTask = document.getElementById("taskModalTitle");
 const labels = document.querySelectorAll("label");
-const helpTitle = document.getElementById('helpTitle')
-const searchField = document.getElementById('searchField')
-const deleteAccountBtn = document.getElementById('deleteAccountBtn')
+const helpTitle = document.getElementById("helpTitle");
+const searchField = document.getElementById("searchField");
+const deleteAccountBtn = document.getElementById("deleteAccountBtn");
 
 const switchMode = () => {
-  let dark = "";
-  let light = "light";
-
-  if (contrast) {
-    lightMode();
-    contrast = dark;
-    localStorage.setItem("contrast", light);
+  if (contrast === "light") {
+    darkMode(); // Ativa o modo escuro
+    contrast = "dark";
   } else {
-    darkMode();
-    localStorage.setItem("contrast", dark);
-    contrast = light;
+    lightMode(); // Ativa o modo claro
+    contrast = "light";
   }
+
+  localStorage.setItem("contrast", contrast); // Armazena o novo valor de "contrast"
 };
 
 contrast = localStorage.getItem("contrast");
@@ -830,19 +948,19 @@ const lightMode = () => {
   }
 
   for (let counter = 0; counter < labels.length; counter++) {
-    labels[counter].style.color = 'var(--purple)';
+    labels[counter].style.color = "var(--purple)";
   }
 
   selectStatus.style.backgroundColor = "white";
 
   searchField.style.backgroundColor = "";
 
-  titleModalTask.style.color = 'var(--purple)'
-  
-  helpTitle.style.color = 'var(--purple)'
+  titleModalTask.style.color = "var(--purple)";
 
-  deleteAccountBtn.className = 'deleteAccount'
-  deleteAccountBtn.style.backgroundColor = 'var(--backgroud)'
+  helpTitle.style.color = "var(--purple)";
+
+  deleteAccountBtn.className = "deleteAccount";
+  deleteAccountBtn.style.backgroundColor = "var(--backgroud)";
 };
 
 const darkMode = () => {
@@ -881,16 +999,16 @@ const darkMode = () => {
   }
 
   for (let counter = 0; counter < labels.length; counter++) {
-    labels[counter].style.color = 'var(--orange)';
+    labels[counter].style.color = "var(--orange)";
   }
 
   selectStatus.style.backgroundColor = "var(--ice)";
 
   searchField.style.backgroundColor = "var(--darkpurple)";
 
-  titleModalTask.style.color = 'var(--orange)'
+  titleModalTask.style.color = "var(--orange)";
 
-  helpTitle.style.color = 'var(--yellow)'
-  deleteAccountBtn.className = 'deleteAccount'
-  deleteAccountBtn.style.backgroundColor = 'var(--darkblue)'
+  helpTitle.style.color = "var(--yellow)";
+  deleteAccountBtn.className = "deleteAccount";
+  deleteAccountBtn.style.backgroundColor = "var(--darkblue)";
 };
