@@ -12,7 +12,7 @@ Welcome to **Arnia Task Manager!** This application is a task management tool de
 
 Its main goal is to assist in organizing daily activities and prioritizing tasks according to individual needs.
 
-This project was the final assignment for class T32022 in the first module of the [Arnia - School of Programming]("https://arnia.com.br).
+This project was the final assignment for class T32022 in the first module of the [Arnia - School of Programming](https://arnia.com.br).
 
 🚀 **Deploy Link:** [Vercel Deploy](https://first-module-jessie-moura.vercel.app/)
 
@@ -100,7 +100,7 @@ As I work on this project, my goal is to deliver something solid and useful that
 
 ## Read More
 
-**UPDATE 2024! 📢** All data and database requests are mocked, so it’s not possible to actually create a user. The API may be taken down or the deploy disabled over the years. I did this for demonstration purposes. I’ve set everything up as best as possible so that you can test the project. Task status is also mocked, but using Node.js, tasks created without restarting the application will work correctly. Tasks can be deleted and edited as expected.
+**UPDATE 2024! 📢** All data and requests are mocked, so you can't create a real user. The API may be taken down or the deploy disabled over the years. I did this for demonstration purposes. Mocked tasks are stored in JavaScript memory and persist during execution but are lost on restart. You can create, edit and delete tasks as expected.
 
 Keep in mind that I developed this project with only three months of programming learning. Although far from ideal in terms of best practices, clean, and organized code, we all start somewhere. What matters is where we can go. 😊
 
@@ -123,5 +123,5 @@ To log in, use the following credentials:
 login: "jessica";
 password: "123456";
 ```
-
+---
 ### Let’s change the world one task at a time 🚀🥳
