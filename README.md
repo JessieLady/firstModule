@@ -14,7 +14,7 @@ Bem-vindo ao **Arnia Task Manager!** Esta aplicação é uma ferramenta de geren
 
 Seu principal objetivo é auxiliar na organização das atividades diárias e na priorização das tarefas conforme as necessidades individuais.
 
-Este projeto foi o trabalho final da turma T32022 no primeiro módulo da formação da [Arnia - Escola de Programação]("https://arnia.com.br).
+Este projeto foi o trabalho final da turma T32022 no primeiro módulo da formação da [Arnia - Escola de Programação](https://arnia.com.br).
 
 🚀 **Link de Deploy:** [Vercel Deploy](https://first-module-jessie-moura.vercel.app/)
 
@@ -102,7 +102,7 @@ Enquanto trabalho neste projeto, meu objetivo é entregar algo sólido e útil, 
 
 ## Leia Mais
 
-**ATUALIZAÇÃO 2024! 📢** Todos os dados e requisições do banco de dados foram mockados, então não é possível criar um usuário de fato. A API pode ser removida do ar ou o deploy pode ser desativado ao longo dos anos. Fiz isso para fins de demonstração. Deixei tudo da melhor maneira possível para que você possa testar o projeto. A situação das tarefas também está mockada, mas com o uso do Node.js, as tarefas criadas sem reiniciar a aplicação funcionarão corretamente. As tarefas podem ser excluídas e editadas como esperado.
+**ATUALIZAÇÃO 2024! 📢** Todos os dados e requisições foram mockados, então não é possível criar um usuário real. A API pode ser removida do ar ou o deploy pode ser desativado ao longo dos anos. Fiz isso para fins de demonstração. As tarefas mockadas são armazenadas na memória do JavaScript e persistem durante a execução, mas são perdidas ao reiniciar. Você pode criar, editar e excluir as tarefas como esperado.
 
 Lembrando que desenvolvi este projeto com apenas três meses de aprendizado em programação. Ainda que longe do ideal em termos de boas práticas, código limpo e organizado, todos começamos em algum lugar. O que importa é onde podemos chegar. 😊
 
